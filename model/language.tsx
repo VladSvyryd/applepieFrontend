@@ -1,17 +1,13 @@
 import { Action, action } from "easy-peasy";
+import { Language } from "../types/types";
 
 export interface LanguageModel {
-  languages: string[];
   currentLanguage: Language;
   setCurrentLanguage: Action<LanguageModel, Language>;
 }
-export enum Language {
-  EN,
-  DE,
-}
+
 const language: LanguageModel = {
-  languages: ["EN", "DE"],
-  currentLanguage: Language.DE,
+  currentLanguage: Language.de,
   setCurrentLanguage: action((state, payload) => {
     state.currentLanguage = payload;
   }),

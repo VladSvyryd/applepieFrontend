@@ -1,0 +1,11 @@
+.navbar {
+  height: 100px;
+}
+.navLink {
+  margin-right: 35px;
+  padding-right: 35px;
+  &:last-child {
+    margin: 0;
+    padding: 0;
+  }
+}
