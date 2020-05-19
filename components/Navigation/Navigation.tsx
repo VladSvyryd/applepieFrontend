@@ -36,12 +36,15 @@ const Navigation: React.FC<NavProps> = (props) => {
       <div className={"smallitem"}>
         {logo && (
           <Link href="/[lang]" as={`/${Language[currentLanguage]}`}>
-            <img src={`http://localhost:1337${logo?.url}`} alt="" />
+            <img
+              src={`http://localhost:1337${logo?.url}`}
+              className="withHover"
+              alt={logo?.alternativeText}
+            />
           </Link>
         )}
       </div>
-      <div className={"smallitem alignCenter flexColumns flexEnd"}>
-        {currentLanguage}
+      <div className={"smallitem alignCenter flexColumns flexEnd indieFlower"}>
         {switchContextByLanguage(links_de, links_en, currentLanguage)?.map(
           (l: NavLink) => (
             <Link

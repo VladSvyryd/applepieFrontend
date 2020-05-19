@@ -1,11 +1,21 @@
+@import "../../global_variables.scss";
+
 .navbar {
   height: 100px;
 }
 .navLink {
+  display: flex;
+  height: 40px;
   margin-right: 35px;
   padding-right: 35px;
-  &:last-child {
+  font-size: 23px;
+  &:hover {
+    font-weight: bold;
+  }
+  &:last-of-type {
     margin: 0;
     padding: 0;
+    margin-right: 35px;
+    border-bottom: 1px dashed $accent-color;
   }
 }

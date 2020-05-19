@@ -28,16 +28,12 @@ export type HomeProps = {
 
 export type NavType = {
   title?: string;
-  logo?: Logo;
+  logo?: Picture;
   links_de?: [NavLink];
   links_en?: [NavLink];
 };
 
 export interface NavLink {
-  name: string;
-  url: string;
-}
-export interface Logo {
   name: string;
   url: string;
 }
@@ -48,17 +44,17 @@ export type HomePage = {
   services: Link[];
   known_by: Link[];
   navigation_links: Link[];
+  buttons: Button[];
 };
 
 export interface Intro {
-  picture: Picture[];
+  pictures: Picture[];
   title: string;
   description: string;
   logo: Picture;
-  buttons: Button[];
 }
 export interface Button {
-  name: string;
+  text: string;
   function: string;
 }
 export interface NavigationLinkBlock {
