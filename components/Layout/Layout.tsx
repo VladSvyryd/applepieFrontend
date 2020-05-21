@@ -26,9 +26,12 @@ const Layout: React.FC<LayoutProps> = ({
       {children}
       {horizontalFooter && !verticalFooter ? (
         <footer className={`${horizontalFooter && "fixed"} `}>
-          <div className="content-frame">
+          <div className="content-frame" style={{ height: "100%" }}>
             <h2 className="visuallyHidden">Applepie Footer</h2>
-            <section className="flexColumns alignCenter">
+            <section
+              className="flexColumns alignCenter"
+              style={{ height: "100%" }}
+            >
               <div className="smallitem ">
                 <div className={`flexColumns alignCenter`}>
                   <span className={`${layout.horizontalSpan}`}>Known by</span>

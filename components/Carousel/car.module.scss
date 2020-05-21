@@ -1,0 +1,56 @@
+@import "../../global_variables.scss";
+
+.pagination,
+.paginationBullet {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  user-select: none;
+}
+.pagination {
+  width: 100%;
+  height: 90px;
+  background-position: top 36px left 4px;
+  background-repeat: no-repeat;
+  background-size: 1540px;
+  max-width: 1540px;
+  position: relative;
+}
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90px;
+  position: absolute;
+  bottom: 100px;
+  z-index: 200;
+}
+.paginationBullet {
+  position: absolute;
+  cursor: pointer;
+  background: $accent-color;
+  width: 6px;
+  height: 6px;
+  border-radius: 20px;
+  .bullet {
+    position: absolute;
+    top: -30px;
+    left: -4px;
+  }
+}
+.active {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  bottom: -9px;
+  left: -9.5px;
+  background: rgba(64, 61, 55, 0.4);
+}
+.counter {
+  position: absolute;
+  bottom: -6px;
+  left: -5px;
+  font-size: 12px;
+}

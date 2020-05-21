@@ -19,6 +19,7 @@ export type NavProps = {
 };
 export type CarouselProps = {
   children: ReactNode;
+  paginationObject: { picture: Picture; bullets: Picture[] };
 };
 
 export type HomeProps = {
@@ -29,8 +30,8 @@ export type HomeProps = {
 export type NavType = {
   title?: string;
   logo?: Picture;
-  links_de?: [NavLink];
-  links_en?: [NavLink];
+  links_de?: NavLink[];
+  links_en?: NavLink[];
 };
 
 export interface NavLink {
