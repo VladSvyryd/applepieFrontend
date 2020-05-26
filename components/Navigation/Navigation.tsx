@@ -1,17 +1,33 @@
 import React from "react";
-import { useStoreState } from "../../hooks";
+import { useStoreState, useStoreActions } from "../../hooks";
 import Link from "next/link";
 import { Language, NavLink, NavProps } from "../../types/types";
 import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 import nav from "./nav.module.scss";
+import { getLanguage } from "../../util/translation/defineLanguage";
 
 const Navigation: React.FC<NavProps> = (props) => {
-  const { logo, links_en, links_de } = props.navigation;
-
+  const {
+    logo,
+    links_en,
+    links_de,
+    logo_inverted,
+    plane_inverted,
+    plane,
+  } = props.navigation;
+  const { activeCarouselIndex, invertedSlides } = props;
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
   );
 
+  const setCurrentLanguage = useStoreActions(
+    (actions) => actions.language.setCurrentLanguage
+  );
+  React.useEffect(() => {
+    const myLang = getLanguage();
+    setCurrentLanguage(myLang);
+    // window.location.replace(`/${Language[myLang]}`);
+  }, []);
   const switchContextByLanguage = (
     firstLang: any,
     secLang: any,
@@ -31,13 +47,18 @@ const Navigation: React.FC<NavProps> = (props) => {
     }
     return result;
   };
+
   return (
     <nav className={`${nav.navbar} flexColumns alignCenter content-frame`}>
       <div className={"smallitem"}>
         {logo && (
           <Link href="/[lang]" as={`/${Language[currentLanguage]}`}>
             <img
-              src={`http://localhost:1337${logo?.url}`}
+              src={`http://localhost:1337${
+                !invertedSlides.some((s) => s === activeCarouselIndex)
+                  ? logo?.url
+                  : logo_inverted?.url
+              }`}
               className="withHover"
               alt={logo?.alternativeText}
             />
@@ -48,15 +69,32 @@ const Navigation: React.FC<NavProps> = (props) => {
         {switchContextByLanguage(links_de, links_en, currentLanguage)?.map(
           (l: NavLink) => (
             <Link
-              key={l.url}
+              key={l.url + "nav"}
               href={`/[lang]${l.url}`}
               as={`/${Language[currentLanguage]}${l.url}`}
             >
-              <a className={nav.navLink}>{l.name}</a>
+              <a
+                className={`${nav.navLink} ${
+                  invertedSlides.some((s) => s === activeCarouselIndex)
+                    ? "invertedTextColorBySlide"
+                    : ""
+                }`}
+              >
+                {l.name}
+              </a>
             </Link>
           )
         )}
         <LanguageSwitcher />
+        <img
+          src={`http://localhost:1337${
+            !invertedSlides.some((s) => s === activeCarouselIndex)
+              ? plane?.url
+              : plane_inverted?.url
+          }`}
+          alt={plane?.alternativeText}
+          className={nav.plane}
+        />
       </div>
     </nav>
   );

@@ -27,9 +27,15 @@ export default () => {
     },
     [router]
   );
-
+  const activeCarouselIndex = useStoreState(
+    (state) => state.swiper.activeIndex
+  );
   return (
-    <form>
+    <form
+      className={`${
+        activeCarouselIndex === 3 ? "invertedTextColorBySlide" : ""
+      }`}
+    >
       <label
         style={{
           textDecoration: !currentLanguage ? `underline` : "none",

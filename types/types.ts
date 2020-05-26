@@ -13,13 +13,21 @@ export type LayoutProps = {
   children: ReactNode;
   horizontalFooter?: boolean;
   verticalFooter?: boolean;
+  known_by: Link[];
+  social_links: Link[];
+  known_by_title: string;
 };
 export type NavProps = {
   navigation: NavType;
+  activeCarouselIndex: number;
+  invertedSlides: number[];
 };
 export type CarouselProps = {
   children: ReactNode;
-  paginationObject: { picture: Picture; bullets: Picture[] };
+  paginationObject: {
+    pagination: Pagination;
+    goToSlide: void;
+  };
 };
 
 export type HomeProps = {
@@ -32,31 +40,72 @@ export type NavType = {
   logo?: Picture;
   links_de?: NavLink[];
   links_en?: NavLink[];
+  logo_inverted?: Picture;
+  plane?: Picture;
+  plane_inverted?: Picture;
 };
 
 export interface NavLink {
   name: string;
   url: string;
+  image: Picture;
 }
 
 export type HomePage = {
   intro: Intro;
+  first_section: Idea;
+  second_section: Idea;
+  third_section: Image_Grid;
+  forth_section: Idea_Image_Grid;
   social_links: Link[];
   services: Link[];
   known_by: Link[];
   navigation_links: Link[];
   buttons: Button[];
+  known_by_title: string;
+  pagination: Pagination;
 };
 
+export interface Idea_Image_Grid {
+  title: string;
+  images: Picture[];
+  content_text: string;
+  cards: Card[];
+  button: Button;
+}
+export interface Card {
+  title: string;
+  image: Picture;
+  subtitle: string;
+}
+
+export interface Image_Grid {
+  title: string;
+  images: Picture[];
+}
+export interface Idea {
+  images: Picture[];
+  title: string;
+  content_text: string;
+}
 export interface Intro {
   pictures: Picture[];
   title: string;
   description: string;
   logo: Picture;
 }
+
+export interface Pagination {
+  title?: string;
+  background?: Picture;
+  background_alternative?: Picture;
+  images: Picture[];
+  images_alternative?: Picture[];
+}
 export interface Button {
   text: string;
   function: string;
+  subtext: string;
 }
 export interface NavigationLinkBlock {
   pages: Link;
@@ -64,7 +113,8 @@ export interface NavigationLinkBlock {
 export interface Link {
   name: string;
   url: string;
-  img?: Picture;
+  image?: Picture;
+  image_alternative?: Picture;
 }
 
 export interface Picture {

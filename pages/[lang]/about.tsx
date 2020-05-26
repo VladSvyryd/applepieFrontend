@@ -5,7 +5,18 @@ import { NextPage } from "next";
 const about: NextPage<any> = (props) => {
   return (
     <Layout navigation={props.navigation}>
-      <div>ABOUT US</div>;
+      <section
+        className={true && `frameBottomTop`}
+        style={{
+          display: "flex",
+          width: "100%",
+          height: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <h1 style={{ fontSize: "10em" }}>THIS IS ALL ABOUT</h1>
+      </section>
     </Layout>
   );
 };

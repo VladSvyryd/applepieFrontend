@@ -1,3 +1,5 @@
+@import "../global_variables.scss";
+
 .introDescription {
   width: 432px;
 }
@@ -63,5 +65,118 @@
     position: absolute;
     left: 1;
     top: 49.7%;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+}
+
+.firstSection {
+  .left {
+    margin: auto 110px auto auto;
+  }
+  .right {
+    max-width: 450px;
+    margin-left: 15px;
+  }
+  .ul {
+    ul {
+      padding: 0 1.5em;
+      li {
+        margin: 15px 0;
+      }
+    }
+  }
+}
+.secondSection {
+  .left {
+    max-width: 380px;
+    margin: auto 150px auto auto;
+  }
+  .right {
+    margin: auto auto auto 110px;
+  }
+}
+
+.thirdSection {
+  display: flex;
+  background: $accent-color;
+  .clients {
+    margin: auto;
+
+    h2.header {
+      color: $invert-text-color;
+      text-align: center;
+      margin-bottom: 1.3em;
+    }
+    .imagesGrid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(70px, 1fr));
+      grid-gap: 70px 140px;
+      justify-items: center;
+      align-items: center;
+    }
+  }
+}
+.forthSection {
+  background: $invert-text-color;
+  h3 {
+    font-size: 25px;
+    color: $primary-color;
+  }
+  .instructions {
+    margin: auto;
+    .header {
+      text-align: center;
+      h2 {
+        color: $accent-color;
+      }
+      h3 {
+        margin-bottom: 1.3em;
+      }
+    }
+
+    .cardsGrid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(130px, 1fr));
+      grid-gap: 70px 10px;
+      justify-items: center;
+      align-items: flex-end;
+      text-align: center;
+      .content {
+        min-height: 95px;
+        p,
+        h3 {
+          margin: 0.5em;
+          line-height: 26px;
+        }
+      }
+    }
+    .footer {
+      display: flex;
+      flex-direction: row;
+      min-height: 150px;
+      align-items: center;
+      justify-content: flex-end;
+      > * {
+        margin: 0 57px;
+      }
+      .zebra {
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          li {
+            display: inline;
+            font-size: 36px;
+            &:first-child {
+              color: $primary-color;
+            }
+          }
+        }
+      }
+    }
   }
 }

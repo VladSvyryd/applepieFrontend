@@ -1,54 +1,55 @@
 import Swiper, { SwiperInstance } from "react-id-swiper";
-import { CarouselProps } from "../../types/types";
+import { CarouselProps, Picture } from "../../types/types";
 import { useState, useEffect } from "react";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import car from "./car.module.scss";
+import { useStoreActions, useStoreState } from "../../hooks";
 
 export const screens = [
   {
     title: "One",
     color: "#ff0055",
-    position: { left: "3px", top: "57px" },
+    position: { left: "-12px", top: "48px" },
   },
   {
     title: "Two",
     color: "#0099ff",
-    position: { left: "193px", top: "35px" },
+    position: { left: "193px", top: "26px" },
   },
   {
     title: "Threeeee",
     color: "#22cc88",
-    position: { left: "384px", top: "48px" },
+    position: { left: "384px", top: "41px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position: { left: "575px", top: "75px" },
+    position: { left: "575px", top: "65px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position: { left: "765px", top: "47px" },
+    position: { left: "765px", top: "35px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position: { left: "956px", top: "40px" },
+    position: { left: "956px", top: "30px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position: { left: "1147px", top: "62px" },
+    position: { left: "1147px", top: "55px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position: { left: "1337px", top: "74px" },
+    position: { left: "1337px", top: "64px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position: { left: "1531px", top: "56px" },
+    position: { left: "1531px", top: "46px" },
   },
 ];
 
@@ -56,6 +57,14 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
   const [swiper, setSwiper] = useState<SwiperInstance>(null);
   const [s, ses] = useState({ isBeginning: true, isEnd: false });
   const [selected, setSelected] = useState(0);
+  const [hoveredIndex, setHoveredIndex] = useState(-1);
+  const [paginationImgs, setPaginationImgs] = useState<Array<Picture> | null>(
+    null
+  );
+  const setActiveIndex = useStoreActions(
+    (actions) => actions.swiper.setActiveIndex
+  );
+  const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
   const params: any = {
     direction: "horizontal",
     slidesPerView: "auto",
@@ -64,15 +73,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
     spaceBetween: 30,
     mousewheel: true,
     roundLengths: true,
-    // pagination: {
-    //   el: ".swiper-pagination",
-    //   type: "bullets",
-    //   clickable: true,
-    // },
-    // navigation: {
-    //   nextEl: ".swiper-button-next",
-    //   prevEl: ".swiper-button-prev",
-    // },
+
     parallax: true,
     parallaxEl: {
       el: ".parallax-bg",
@@ -94,7 +95,10 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
       ses(() => {
         return { isBeginning: swiper.isBeginning, isEnd: swiper.isEnd };
       });
-    swiper !== null && setSelected(swiper.activeIndex);
+    if (swiper !== null) {
+      setSelected(swiper.activeIndex);
+      setActiveIndex(swiper.activeIndex);
+    }
   };
   useEffect(() => {
     swiper && swiper.on("slideChange", updateCarouselState);
@@ -122,7 +126,20 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
       opacity: 0,
     }),
   };
-
+  const handleBulletHover = (i: number) => {
+    setHoveredIndex(i);
+  };
+  const handleBulletHoverOut = () => {
+    setHoveredIndex(-1);
+  };
+  useEffect(() => {
+    if (!invertedSlides.some((s) => s === selected)) {
+      setPaginationImgs(paginationObject.pagination.images);
+    } else {
+      paginationObject.pagination.images_alternative &&
+        setPaginationImgs(paginationObject.pagination.images_alternative);
+    }
+  }, [selected]);
   return (
     <div className="responsiveSlide">
       <Swiper {...params}>{children}</Swiper>
@@ -153,34 +170,64 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
           <ol
             className={car.pagination}
             style={{
-              backgroundImage: `url(http://localhost:1337${paginationObject.picture.url})`,
+              backgroundImage: `url(http://localhost:1337${
+                invertedSlides.some((s) => s === selected)
+                  ? paginationObject.pagination.background_alternative?.url
+                  : paginationObject.pagination.background?.url
+              })`,
             }}
           >
-            {screens.map((_value, i) => (
-              <motion.li
-                animate
-                key={i}
-                className={`title ${i === selected && "selected"} ${
-                  car.paginationBullet
-                }`}
-                style={{
-                  left: `${screens[i].position.left}`,
-                  top: `${screens[i].position.top}`,
-                }}
-                onClick={() => setSelected(i)}
-              >
-                {i === selected && (
-                  <motion.div layoutId="underline" className={car.active} />
-                )}
-                <motion.img
-                  animate={i === selected ? "visible" : "hidden"}
-                  variants={bulletAnim}
-                  src={`http://localhost:1337${paginationObject.bullets[i].url}`}
-                  alt={paginationObject.bullets[i].alternativeText}
-                  className={car.bullet}
-                />
-              </motion.li>
-            ))}
+            {paginationImgs !== null &&
+              paginationImgs.map((paginationBullet, i) => (
+                <motion.li
+                  animate
+                  key={i}
+                  className={`title  ${car.paginationBullet}`}
+                  style={{
+                    left: `${screens[i].position.left}`,
+                    top: `${screens[i].position.top}`,
+                  }}
+                  onClick={() => setSelected(i)}
+                  onMouseOver={() => handleBulletHover(i)}
+                  onMouseLeave={() => handleBulletHoverOut()}
+                >
+                  <span
+                    className={`${car.point}  ${
+                      invertedSlides.some((s) => s === selected) &&
+                      `${car.invertedBackgroundColor}`
+                    }`}
+                    key={i + "p"}
+                  ></span>
+                  {i === selected && (
+                    <motion.div
+                      layoutId="underline"
+                      className={
+                        car.active +
+                        `${
+                          invertedSlides.some((s) => s === selected)
+                            ? " " + car.invertedBackgroundColor
+                            : ""
+                        }`
+                      }
+                    />
+                  )}
+                  <motion.img
+                    animate={
+                      i === selected || i === hoveredIndex
+                        ? "visible"
+                        : "hidden"
+                    }
+                    variants={bulletAnim}
+                    src={`http://localhost:1337${paginationBullet.url}`}
+                    alt={paginationBullet.alternativeText}
+                    className={car.bullet}
+                    style={{
+                      width: `${paginationBullet.width * 1.5}px`,
+                      height: `${paginationBullet.height * 1.5}px`,
+                    }}
+                  />
+                </motion.li>
+              ))}
             {children !== null && (
               <div className={car.counter}>
                 <span>{selected + 1}</span>

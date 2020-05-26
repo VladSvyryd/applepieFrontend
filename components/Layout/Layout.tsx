@@ -2,17 +2,26 @@ import Head from "next/head";
 import { LayoutProps } from "../../types/types";
 import Navigation from "../Navigation/Navigation";
 import layout from "./layout.module.scss";
+import { useStoreState } from "../../hooks";
 
 const Layout: React.FC<LayoutProps> = ({
   navigation,
   children,
   horizontalFooter = false,
   verticalFooter = false,
+  social_links,
+  known_by,
+  known_by_title,
 }) => {
   const layoutStyle = {
     width: "100%",
     height: "100%",
   };
+  const activeCarouselIndex = useStoreState(
+    (state) => state.swiper.activeIndex
+  );
+  const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
+
   return (
     <div style={layoutStyle}>
       <Head>
@@ -21,7 +30,11 @@ const Layout: React.FC<LayoutProps> = ({
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <header>
-        <Navigation navigation={navigation} />
+        <Navigation
+          navigation={navigation}
+          activeCarouselIndex={activeCarouselIndex}
+          invertedSlides={invertedSlides}
+        />
       </header>
       {children}
       {horizontalFooter && !verticalFooter ? (
@@ -34,16 +47,32 @@ const Layout: React.FC<LayoutProps> = ({
             >
               <div className="smallitem ">
                 <div className={`flexColumns alignCenter`}>
-                  <span className={`${layout.horizontalSpan}`}>Known by</span>
+                  <span
+                    className={`${layout.horizontalSpan} ${
+                      invertedSlides.some((e) => e === activeCarouselIndex)
+                        ? "invertedTextColorBySlide"
+                        : ""
+                    }`}
+                  >
+                    {known_by_title}
+                  </span>
                   <a href="" className={`${layout.horizontalSpan}`}>
                     <img
-                      src={`http://localhost:1337/uploads/berlin_morgenpost_d360b8d077.png`}
+                      src={`http://localhost:1337${
+                        invertedSlides.some((e) => e === activeCarouselIndex)
+                          ? known_by[0].image_alternative?.url
+                          : known_by[0].image?.url
+                      }`}
                       alt=""
                     />
                   </a>
                   <a href="" className={`${layout.horizontalSpan}`}>
                     <img
-                      src={`http://localhost:1337/uploads/award_icon_e3f50ba67b.png`}
+                      src={`http://localhost:1337${
+                        invertedSlides.some((e) => e === activeCarouselIndex)
+                          ? known_by[1].image_alternative?.url
+                          : known_by[1].image?.url
+                      }`}
                       alt=""
                     />
                   </a>
@@ -56,10 +85,13 @@ const Layout: React.FC<LayoutProps> = ({
                     className={layout.linkWithBorder}
                   >
                     <img
-                      src={
-                        "http://localhost:1337/uploads/instagram_tiny_f53a77c1d6.svg"
-                      }
+                      src={`http://localhost:1337${
+                        invertedSlides.some((e) => e === activeCarouselIndex)
+                          ? social_links[0].image_alternative?.url
+                          : social_links[0].image?.url
+                      }`}
                       alt="instagram"
+                      style={{ color: "white" }}
                     />
                   </a>
                   <a
@@ -67,9 +99,11 @@ const Layout: React.FC<LayoutProps> = ({
                     className={layout.linkWithBorder}
                   >
                     <img
-                      src={
-                        "http://localhost:1337/uploads/facebook_tiny_e6b94c53df.svg"
-                      }
+                      src={`http://localhost:1337${
+                        invertedSlides.some((e) => e === activeCarouselIndex)
+                          ? social_links[1].image_alternative?.url
+                          : social_links[1].image?.url
+                      }`}
                       alt="facebook"
                     />
                   </a>
@@ -78,9 +112,11 @@ const Layout: React.FC<LayoutProps> = ({
                     className={layout.linkWithBorder}
                   >
                     <img
-                      src={
-                        "http://localhost:1337/uploads/linkedIn_tiny_21f8889b76.svg"
-                      }
+                      src={`http://localhost:1337${
+                        invertedSlides.some((e) => e === activeCarouselIndex)
+                          ? social_links[2].image_alternative?.url
+                          : social_links[2].image?.url
+                      }`}
                       alt="linkedIn"
                     />
                   </a>
@@ -89,9 +125,11 @@ const Layout: React.FC<LayoutProps> = ({
                     className={layout.linkWithBorder}
                   >
                     <img
-                      src={
-                        "http://localhost:1337/uploads/Group_49_ed1d317067.svg"
-                      }
+                      src={`http://localhost:1337${
+                        invertedSlides.some((e) => e === activeCarouselIndex)
+                          ? social_links[3].image_alternative?.url
+                          : social_links[3].image?.url
+                      }`}
                       alt="slack"
                     />
                   </a>

@@ -52,6 +52,9 @@ h2 {
   line-height: 53px;
   margin: 0;
   font-family: "Rubik", sans-serif;
+  &.title {
+    margin-bottom: 30px;
+  }
 }
 h3 {
   font-size: 18px;
@@ -61,6 +64,7 @@ h3 {
 a {
   text-decoration: none;
   color: $accent-color;
+  transition: color 0.3s ease-in-out;
 }
 
 header {
@@ -160,7 +164,18 @@ button {
   box-shadow: 0px 9px 15px $primary-color-shadow;
   border-radius: 8px;
   padding: 11px 10px;
+  cursor: pointer;
 }
 button.medium {
   width: 236px;
+}
+
+.invertedTextColorBySlide {
+  color: white;
+  transition: color 0.3s ease-in-out;
+}
+.invertedBackgroundColor {
+  background-color: white;
+  background: white;
+  transition: color 0.3s ease-in-out;
 }
