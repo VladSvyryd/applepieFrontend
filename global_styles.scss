@@ -41,6 +41,10 @@ body {
   font-family: "Roboto", sans-serif;
   font-weight: normal;
 }
+input,
+textarea {
+  font-family: "Roboto", sans-serif;
+}
 *,
 *:before,
 *:after {
@@ -174,6 +178,10 @@ button.medium {
   color: white;
   transition: color 0.3s ease-in-out;
 }
+.invertedBorderColorBySlide {
+  border-bottom-color: white !important;
+}
+
 .invertedBackgroundColor {
   background-color: white;
   background: white;

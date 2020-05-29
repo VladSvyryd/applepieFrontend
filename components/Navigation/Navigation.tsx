@@ -67,7 +67,7 @@ const Navigation: React.FC<NavProps> = (props) => {
       </div>
       <div className={"smallitem alignCenter flexColumns flexEnd indieFlower"}>
         {switchContextByLanguage(links_de, links_en, currentLanguage)?.map(
-          (l: NavLink) => (
+          (l: NavLink, index: number) => (
             <Link
               key={l.url + "nav"}
               href={`/[lang]${l.url}`}
@@ -76,25 +76,27 @@ const Navigation: React.FC<NavProps> = (props) => {
               <a
                 className={`${nav.navLink} ${
                   invertedSlides.some((s) => s === activeCarouselIndex)
-                    ? "invertedTextColorBySlide"
+                    ? "invertedTextColorBySlide invertedBorderColorBySlide"
                     : ""
                 }`}
               >
                 {l.name}
+                {links_de && index === links_de?.length - 1 && (
+                  <img
+                    src={`http://localhost:1337${
+                      !invertedSlides.some((s) => s === activeCarouselIndex)
+                        ? plane?.url
+                        : plane_inverted?.url
+                    }`}
+                    alt={plane?.alternativeText}
+                    className={nav.plane}
+                  />
+                )}
               </a>
             </Link>
           )
         )}
         <LanguageSwitcher />
-        <img
-          src={`http://localhost:1337${
-            !invertedSlides.some((s) => s === activeCarouselIndex)
-              ? plane?.url
-              : plane_inverted?.url
-          }`}
-          alt={plane?.alternativeText}
-          className={nav.plane}
-        />
       </div>
     </nav>
   );

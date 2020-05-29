@@ -1,10 +1,23 @@
 import Layout from "../../components/Layout/Layout";
 import fetch from "isomorphic-unfetch";
 import { NextPage } from "next";
+import ReviewCarousel from "../../components/Review/ReviewCarousel";
+import Review from "../../components/Review/Review";
+import { AboutProps } from "../../types/types";
+import LanguageSwitcher from "../../components/LanguageSwitcher/LanguageSwitcher2";
 
-const about: NextPage<any> = (props) => {
+const about: NextPage<AboutProps> = (props) => {
+  const { pageFromCMS } = props;
+
   return (
-    <Layout navigation={props.navigation}>
+    <Layout
+      navigation={props.navigation}
+      {...props}
+      horizontalFooter
+      known_by={pageFromCMS.known_by}
+      social_links={pageFromCMS.social_links}
+      known_by_title={pageFromCMS.known_by_title}
+    >
       <section
         className={true && `frameBottomTop`}
         style={{
@@ -15,7 +28,13 @@ const about: NextPage<any> = (props) => {
           alignItems: "center",
         }}
       >
-        <h1 style={{ fontSize: "10em" }}>THIS IS ALL ABOUT</h1>
+        <ReviewCarousel>
+          <Review />
+          <Review />
+          <Review />
+          <Review />
+        </ReviewCarousel>
+        <LanguageSwitcher />
       </section>
     </Layout>
   );

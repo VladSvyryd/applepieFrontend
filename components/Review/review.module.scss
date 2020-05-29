@@ -1,0 +1,59 @@
+@import "../../global_variables.scss";
+
+.grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: min-content min-content min-content;
+  gap: 10px 40px;
+  grid-template-areas: "avatar content_text" "avatar name" "avatar compony";
+  max-width: 900px;
+  max-height: 400px;
+  color: $invert-text-color;
+  padding: 15px;
+}
+
+.avatar {
+  grid-area: avatar;
+  display: flex;
+  align-items: flex-start;
+  img {
+    border-radius: 50%;
+    margin: 20px;
+  }
+}
+
+.content_text {
+  margin: 100px 10px 40px 0px;
+  grid-area: content_text;
+  overflow-y: auto;
+}
+
+.name {
+  grid-area: name;
+  font-weight: bold;
+}
+
+.compony {
+  grid-area: compony;
+  color: $primary-color;
+}
+
+.verticalCarousel {
+  max-height: 400px;
+  overflow: hidden;
+}
+.swiper {
+  position: relative;
+  .pagination {
+    display: flex;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    z-index: 12;
+    cursor: pointer;
+    > div {
+      margin: 0 10px;
+    }
+  }
+}

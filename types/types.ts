@@ -26,7 +26,6 @@ export type CarouselProps = {
   children: ReactNode;
   paginationObject: {
     pagination: Pagination;
-    goToSlide: void;
   };
 };
 
@@ -34,7 +33,22 @@ export type HomeProps = {
   pageFromCMS: HomePage;
   navigation: NavType;
 };
-
+export type AboutProps = {
+  pageFromCMS: HomePage;
+  navigation: NavType;
+};
+export type ReviewProps = {
+  name?: string;
+  position?: string;
+  content_text?: string;
+  createdAt?: string;
+  avatar?: Picture;
+  id?: string;
+  index?: number;
+};
+export type SendFormProps = {
+  button: Button;
+};
 export type NavType = {
   title?: string;
   logo?: Picture;
@@ -57,6 +71,9 @@ export type HomePage = {
   second_section: Idea;
   third_section: Image_Grid;
   forth_section: Idea_Image_Grid;
+  fifth_section: Idea;
+  sixth_section: Idea;
+  seventh_section: Idea;
   social_links: Link[];
   services: Link[];
   known_by: Link[];
@@ -87,6 +104,7 @@ export interface Idea {
   images: Picture[];
   title: string;
   content_text: string;
+  button: Button;
 }
 export interface Intro {
   pictures: Picture[];

@@ -67,13 +67,13 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
   const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
   const params: any = {
     direction: "horizontal",
-    slidesPerView: "auto",
-    centeredSlides: true,
-    // freeMode: true,
+    longSwipes: false,
+    resistanceRatio: 0,
+    shortSwipes: true,
+    resistance: false,
     spaceBetween: 30,
     mousewheel: true,
     roundLengths: true,
-
     parallax: true,
     parallaxEl: {
       el: ".parallax-bg",
@@ -140,6 +140,10 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
         setPaginationImgs(paginationObject.pagination.images_alternative);
     }
   }, [selected]);
+  const handleBulletClicked = (index: number) => {
+    setSelected(index);
+    swiper && swiper.slideTo(index);
+  };
   return (
     <div className="responsiveSlide">
       <Swiper {...params}>{children}</Swiper>
@@ -187,7 +191,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
                     left: `${screens[i].position.left}`,
                     top: `${screens[i].position.top}`,
                   }}
-                  onClick={() => setSelected(i)}
+                  onClick={() => handleBulletClicked(i)}
                   onMouseOver={() => handleBulletHover(i)}
                   onMouseLeave={() => handleBulletHoverOut()}
                 >

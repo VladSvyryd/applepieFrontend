@@ -3,22 +3,20 @@ import withTranslate from "../../components/HOC/withTranslate";
 import Layout from "../../components/Layout/Layout";
 import { NextPage } from "next";
 import fetch from "isomorphic-unfetch";
-import { useStoreState } from "../../hooks";
 import { HomeProps } from "../../types/types";
 import Carousel from "../../components/Carousel/Carousel";
 import index from "../../pageStyles/index.module.scss";
 import { motion } from "framer-motion";
 import MarkdownView from "react-showdown";
+import ReviewCarousel from "../../components/Review/ReviewCarousel";
+import Review from "../../components/Review/Review";
+import SendForm from "../../components/Form/SendForm";
 const Page: NextPage<HomeProps> = (props) => {
   const { pageFromCMS } = props;
-  const currentLanguage = useStoreState(
-    (state) => state.language.currentLanguage
-  );
   const [activeServiceIndex, setIndex] = useState(0);
 
   useEffect(() => {
-    console.log(props, currentLanguage);
-    console.log(pageFromCMS.first_section.images[0].url);
+    console.log(pageFromCMS);
   }, []);
   const handleServiceHover = (index: number) => {
     setIndex(index);
@@ -27,9 +25,6 @@ const Page: NextPage<HomeProps> = (props) => {
     setIndex(0);
   };
 
-  const handleButtonClick = () => {
-    console.log("push");
-  };
   return (
     <Layout
       navigation={props.navigation}
@@ -43,7 +38,6 @@ const Page: NextPage<HomeProps> = (props) => {
       <Carousel
         paginationObject={{
           pagination: pageFromCMS.pagination,
-          goToSlide: handleButtonClick(),
         }}
       >
         <section
@@ -91,7 +85,6 @@ const Page: NextPage<HomeProps> = (props) => {
                   data-swiper-parallax-opacity="0"
                   // whileHover={{ scale: 0.9 }}
                   whileTap={{ scale: 0.9 }}
-                  onClick={() => handleButtonClick()}
                 >
                   {pageFromCMS.buttons[0].text}
                 </motion.button>
@@ -106,23 +99,25 @@ const Page: NextPage<HomeProps> = (props) => {
               className={`content-frame-rightHalf ${index.height100} ${index.rightSection}`}
             >
               <img
-                src={`http://localhost:1337${pageFromCMS.intro.pictures[1].url}`}
-                alt={pageFromCMS.intro.pictures[1].alternativeText}
+                src={`http://localhost:1337${pageFromCMS.intro?.pictures[1]?.url}`}
+                alt={pageFromCMS.intro?.pictures[1]?.alternativeText}
                 className={index.rightPie}
                 style={{
-                  marginTop: `-${pageFromCMS.intro.pictures[1].height / 2}px`,
+                  marginTop: `-${pageFromCMS.intro?.pictures[1]?.height / 2}px`,
                 }}
                 data-swiper-parallax-opacity="0"
               />
 
               <motion.img
                 animate={{ rotate: `${activeServiceIndex * 12}deg` }}
-                src={`http://localhost:1337${pageFromCMS.intro.pictures[6].url}`}
-                alt={pageFromCMS.intro.pictures[6].alternativeText}
+                src={`http://localhost:1337${pageFromCMS.intro?.pictures[6]?.url}`}
+                alt={pageFromCMS.intro?.pictures[6]?.alternativeText}
                 className={index.orbit}
                 style={{
-                  marginTop: `-${pageFromCMS.intro.pictures[6].height / 2}px`,
-                  left: `-${pageFromCMS.intro.pictures[6].width / 2}px`,
+                  marginTop: `-${
+                    pageFromCMS?.intro?.pictures[6]?.height / 2
+                  }px`,
+                  left: `-${pageFromCMS?.intro?.pictures[6]?.width / 2}px`,
                 }}
                 data-swiper-parallax-opacity="0"
                 transition={{ type: "spring", damping: 300 }}
@@ -131,7 +126,7 @@ const Page: NextPage<HomeProps> = (props) => {
                 className={`${index.introServices} + ${index.verticalMargin}`}
               >
                 <ul className={`${index.introServicesList} indieFlower`}>
-                  {pageFromCMS.services.map((service, i) => (
+                  {pageFromCMS?.services?.map((service, i) => (
                     <li
                       onMouseOver={() => handleServiceHover(i)}
                       onMouseLeave={() => handleServiceLeave()}
@@ -162,8 +157,8 @@ const Page: NextPage<HomeProps> = (props) => {
         >
           <div className={index.left}>
             <img
-              src={`http://localhost:1337${pageFromCMS.first_section.images[0]?.url}`}
-              alt={pageFromCMS.first_section.images[0]?.alternativeText}
+              src={`http://localhost:1337${pageFromCMS.first_section?.images[0]?.url}`}
+              alt={pageFromCMS.first_section?.images[0]?.alternativeText}
             />
           </div>
           <div className={index.right + " " + index.verticalMargin}>
@@ -172,11 +167,11 @@ const Page: NextPage<HomeProps> = (props) => {
               data-swiper-parallax-opacity="0"
               className="title"
             >
-              {pageFromCMS.first_section.title}
+              {pageFromCMS.first_section?.title}
             </h2>
             <div className={index.ul}>
               <MarkdownView
-                markdown={pageFromCMS.first_section.content_text}
+                markdown={pageFromCMS.first_section?.content_text}
                 options={{ tables: true, emoji: true }}
               />
             </div>
@@ -191,18 +186,18 @@ const Page: NextPage<HomeProps> = (props) => {
               data-swiper-parallax-opacity="0"
               className="title"
             >
-              {pageFromCMS.second_section.title}
+              {pageFromCMS.second_section?.title}
             </h2>
             <div className={index.ul}>
               <MarkdownView
-                markdown={pageFromCMS.second_section.content_text}
+                markdown={pageFromCMS.second_section?.content_text}
                 options={{ tables: true, emoji: true }}
               />
             </div>
           </div>
           <div className={index.right}>
             <img
-              src={`http://localhost:1337${pageFromCMS.second_section.images[0].url}`}
+              src={`http://localhost:1337${pageFromCMS.second_section?.images[0]?.url}`}
               alt={pageFromCMS.second_section.images[0].alternativeText}
             />
           </div>
@@ -216,10 +211,10 @@ const Page: NextPage<HomeProps> = (props) => {
               data-swiper-parallax-opacity="0"
               className={index.header + " title"}
             >
-              {pageFromCMS.third_section.title}
+              {pageFromCMS.third_section?.title}
             </h2>
             <div className={index.imagesGrid}>
-              {pageFromCMS.third_section.images.map((img) => (
+              {pageFromCMS.third_section?.images?.map((img) => (
                 <div key={img.name}>
                   <img
                     src={`http://localhost:1337${img.url}`}
@@ -242,18 +237,18 @@ const Page: NextPage<HomeProps> = (props) => {
           >
             <div className={index.header + " title"}>
               <h2 data-swiper-parallax="500" data-swiper-parallax-opacity="0">
-                {pageFromCMS.forth_section.title}
+                {pageFromCMS.forth_section?.title}
               </h2>
               <h3
                 className="indieFlower"
                 data-swiper-parallax="700"
                 data-swiper-parallax-opacity="0"
               >
-                {pageFromCMS.forth_section.content_text}
+                {pageFromCMS.forth_section?.content_text}
               </h3>
             </div>
             <div className={index.cardsGrid}>
-              {pageFromCMS.forth_section.cards.map((card) => (
+              {pageFromCMS.forth_section?.cards?.map((card) => (
                 <div key={card.title}>
                   <img
                     src={`http://localhost:1337${card.image.url}`}
@@ -271,13 +266,13 @@ const Page: NextPage<HomeProps> = (props) => {
             <div className={index.footer}>
               <div className={index.zebra + " indieFlower"}>
                 <MarkdownView
-                  markdown={pageFromCMS.forth_section.button.subtext}
+                  markdown={pageFromCMS.forth_section?.button?.subtext}
                   options={{ tables: true, emoji: true }}
                 />
               </div>
               <img
-                src={`http://localhost:1337${pageFromCMS.forth_section.images[0].url}`}
-                alt={pageFromCMS.forth_section.images[0].alternativeText}
+                src={`http://localhost:1337${pageFromCMS.forth_section?.images[0]?.url}`}
+                alt={pageFromCMS.forth_section?.images[0]?.alternativeText}
               />
               <motion.button
                 className={`medium ${index.start_button}`}
@@ -285,16 +280,105 @@ const Page: NextPage<HomeProps> = (props) => {
                 data-swiper-parallax-opacity="0"
                 // whileHover={{ scale: 0.9 }}
                 whileTap={{ scale: 0.9 }}
-                onClick={() => handleButtonClick()}
               >
                 {pageFromCMS.forth_section.button.text}
               </motion.button>
             </div>
           </div>
         </section>
-        <div>Slide 6</div>
-        <div>Slide 7</div>
-        <div>Slide 8</div>
+        <section
+          className={
+            index.firstSection +
+            " " +
+            index.grid +
+            " frameBottomTop " +
+            index.fifthSection
+          }
+        >
+          <div className={index.left}>
+            <img
+              src={`http://localhost:1337${pageFromCMS.fifth_section?.images[0]?.url}`}
+              alt={pageFromCMS.fifth_section?.images[0]?.alternativeText}
+            />
+          </div>
+          <div className={index.right + " " + index.verticalMargin}>
+            <h2
+              data-swiper-parallax="500"
+              data-swiper-parallax-opacity="0"
+              className="title"
+            >
+              {pageFromCMS.fifth_section?.title}
+            </h2>
+            <div className={index.ul}>
+              <MarkdownView
+                markdown={pageFromCMS.fifth_section?.content_text}
+                options={{ tables: true, emoji: true }}
+              />
+            </div>
+          </div>
+        </section>
+        <section
+          className={
+            index.thirdSection + " frameBottomTop " + index.sixthSection
+          }
+        >
+          <div
+            className="content-frame"
+            style={{
+              backgroundImage: `url(http://localhost:1337${pageFromCMS.sixth_section?.images[2]?.url}),url(http://localhost:1337${pageFromCMS.sixth_section?.images[3]?.url})`,
+              backgroundRepeat: "no-repeat",
+              width: "100%",
+              display: "flex",
+              backgroundPosition: "top 30% left 0%, bottom 30% right 0%",
+            }}
+          >
+            <div className={index.clients + " " + index.verticalMargin}>
+              <h2
+                data-swiper-parallax="500"
+                data-swiper-parallax-opacity="0"
+                className={index.header}
+              >
+                {pageFromCMS.sixth_section?.title}
+              </h2>
+              <ReviewCarousel
+                img={pageFromCMS.sixth_section?.images[1]?.url}
+                buttonImg={pageFromCMS.sixth_section?.images[0]?.url}
+              >
+                <Review />
+                <Review />
+                <Review />
+              </ReviewCarousel>
+            </div>
+          </div>
+        </section>
+        <section
+          className={
+            index.firstSection +
+            " " +
+            index.grid +
+            " frameBottomTop " +
+            index.seventhSection
+          }
+        >
+          <div className={index.left}>
+            <img
+              src={`http://localhost:1337${pageFromCMS.seventh_section?.images[0]?.url}`}
+              alt={pageFromCMS.seventh_section?.images[0]?.alternativeText}
+            />
+          </div>
+          <div className={index.right + " " + index.verticalMargin}>
+            <h2
+              data-swiper-parallax="500"
+              data-swiper-parallax-opacity="0"
+              className="title"
+            >
+              {pageFromCMS.seventh_section?.title}
+            </h2>
+            <div>
+              <SendForm button={pageFromCMS.seventh_section?.button} />
+            </div>
+          </div>
+        </section>
         <div>Slide 9</div>
       </Carousel>
     </Layout>

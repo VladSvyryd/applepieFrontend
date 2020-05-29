@@ -1,0 +1,48 @@
+@import "../../global_variables.scss";
+.form {
+  // padding: 16px;
+}
+.form::placeholder {
+  font-style: "Roboto", sans-serif !important;
+}
+
+.label {
+  display: block;
+  margin-bottom: 24px;
+  width: 100%;
+}
+.fieldRow {
+  height: 80px;
+}
+.input {
+  width: 100%;
+  // max-width: 620px;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  padding: 10px 10px 10px 0;
+  border-bottom: 1px solid $accent-color;
+}
+.input::placeholder {
+  font-style: "Roboto", sans-serif !important;
+}
+.textareaRow {
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+}
+.textfield {
+  height: 80px;
+  resize: none;
+}
+.button {
+  width: 100%;
+}
+
+.errorMessage {
+  color: $primary-color;
+  font-size: 12px;
+}

@@ -48,7 +48,7 @@ const Layout: React.FC<LayoutProps> = ({
               <div className="smallitem ">
                 <div className={`flexColumns alignCenter`}>
                   <span
-                    className={`${layout.horizontalSpan} ${
+                    className={`${layout?.horizontalSpan} ${
                       invertedSlides.some((e) => e === activeCarouselIndex)
                         ? "invertedTextColorBySlide"
                         : ""
@@ -60,8 +60,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`http://localhost:1337${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? known_by[0].image_alternative?.url
-                          : known_by[0].image?.url
+                          ? known_by[0]?.image_alternative?.url
+                          : known_by[0]?.image?.url
                       }`}
                       alt=""
                     />
@@ -70,8 +70,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`http://localhost:1337${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? known_by[1].image_alternative?.url
-                          : known_by[1].image?.url
+                          ? known_by[1]?.image_alternative?.url
+                          : known_by[1]?.image?.url
                       }`}
                       alt=""
                     />
@@ -87,8 +87,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`http://localhost:1337${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? social_links[0].image_alternative?.url
-                          : social_links[0].image?.url
+                          ? social_links[0]?.image_alternative?.url
+                          : social_links[0]?.image?.url
                       }`}
                       alt="instagram"
                       style={{ color: "white" }}
@@ -101,8 +101,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`http://localhost:1337${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? social_links[1].image_alternative?.url
-                          : social_links[1].image?.url
+                          ? social_links[1]?.image_alternative?.url
+                          : social_links[1]?.image?.url
                       }`}
                       alt="facebook"
                     />
@@ -114,8 +114,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`http://localhost:1337${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? social_links[2].image_alternative?.url
-                          : social_links[2].image?.url
+                          ? social_links[2]?.image_alternative?.url
+                          : social_links[2]?.image?.url
                       }`}
                       alt="linkedIn"
                     />
@@ -127,8 +127,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`http://localhost:1337${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? social_links[3].image_alternative?.url
-                          : social_links[3].image?.url
+                          ? social_links[3]?.image_alternative?.url
+                          : social_links[3]?.image?.url
                       }`}
                       alt="slack"
                     />

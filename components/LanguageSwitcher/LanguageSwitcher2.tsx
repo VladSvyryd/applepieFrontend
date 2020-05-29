@@ -47,20 +47,12 @@ export default () => {
         flexDirection: "column",
         alignItems: "center",
         lineHeight: "1",
-        cursor: "pointer",
-        marginTop: "8px",
       }}
     >
-      <div
-        onClick={() => setToggle(!toggle)}
-        style={{
-          textDecoration: `underline`,
-        }}
-      >
+      <div onClick={() => setToggle(!toggle)}>
         {String(Language[currentLanguage]).toUpperCase()}
       </div>
       <motion.form
-        initial="in"
         animate={!toggle ? "in" : "out"}
         variants={langAnim}
         style={{
@@ -68,8 +60,6 @@ export default () => {
           flexDirection: "column",
           alignItems: "center",
           lineHeight: "1",
-          position: "absolute",
-          bottom: "20px",
         }}
         className={`${
           invertedSlides.some((s) => s === activeCarouselIndex)
@@ -80,7 +70,7 @@ export default () => {
         {currentLanguage === 1 && (
           <label
             style={{
-              cursor: "pointer",
+              textDecoration: !currentLanguage ? `underline` : "none",
             }}
           >
             <input
@@ -97,7 +87,6 @@ export default () => {
           <label
             style={{
               textDecoration: currentLanguage ? `underline` : "none",
-              cursor: "pointer",
             }}
           >
             <input
