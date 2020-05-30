@@ -174,7 +174,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
           <ol
             className={car.pagination}
             style={{
-              backgroundImage: `url(http://localhost:1337${
+              backgroundImage: `url(${
                 invertedSlides.some((s) => s === selected)
                   ? paginationObject.pagination.background_alternative?.url
                   : paginationObject.pagination.background?.url
@@ -222,7 +222,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
                         : "hidden"
                     }
                     variants={bulletAnim}
-                    src={`http://localhost:1337${paginationBullet.url}`}
+                    src={`${paginationBullet.url}`}
                     alt={paginationBullet.alternativeText}
                     className={car.bullet}
                     style={{

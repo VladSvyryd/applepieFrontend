@@ -21,7 +21,6 @@ const Layout: React.FC<LayoutProps> = ({
     (state) => state.swiper.activeIndex
   );
   const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
-
   return (
     <div style={layoutStyle}>
       <Head>
@@ -58,7 +57,7 @@ const Layout: React.FC<LayoutProps> = ({
                   </span>
                   <a href="" className={`${layout.horizontalSpan}`}>
                     <img
-                      src={`http://localhost:1337${
+                      src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
                           ? known_by[0]?.image_alternative?.url
                           : known_by[0]?.image?.url
@@ -68,7 +67,7 @@ const Layout: React.FC<LayoutProps> = ({
                   </a>
                   <a href="" className={`${layout.horizontalSpan}`}>
                     <img
-                      src={`http://localhost:1337${
+                      src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
                           ? known_by[1]?.image_alternative?.url
                           : known_by[1]?.image?.url
@@ -85,7 +84,7 @@ const Layout: React.FC<LayoutProps> = ({
                     className={layout.linkWithBorder}
                   >
                     <img
-                      src={`http://localhost:1337${
+                      src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
                           ? social_links[0]?.image_alternative?.url
                           : social_links[0]?.image?.url
@@ -99,7 +98,7 @@ const Layout: React.FC<LayoutProps> = ({
                     className={layout.linkWithBorder}
                   >
                     <img
-                      src={`http://localhost:1337${
+                      src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
                           ? social_links[1]?.image_alternative?.url
                           : social_links[1]?.image?.url
@@ -112,7 +111,7 @@ const Layout: React.FC<LayoutProps> = ({
                     className={layout.linkWithBorder}
                   >
                     <img
-                      src={`http://localhost:1337${
+                      src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
                           ? social_links[2]?.image_alternative?.url
                           : social_links[2]?.image?.url
@@ -125,7 +124,7 @@ const Layout: React.FC<LayoutProps> = ({
                     className={layout.linkWithBorder}
                   >
                     <img
-                      src={`http://localhost:1337${
+                      src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
                           ? social_links[3]?.image_alternative?.url
                           : social_links[3]?.image?.url

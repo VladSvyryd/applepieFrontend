@@ -39,10 +39,14 @@ const about: NextPage<AboutProps> = (props) => {
     </Layout>
   );
 };
-about.getInitialProps = async () => {
-  const res = await fetch("http://localhost:1337/navigation");
+about.getInitialProps = async (ctx) => {
+  const res = await fetch(`${process.env.BACKEND_STRAPI_CMS}/navigation`);
+
   const navigationJson = await res.json();
-  const res1 = await fetch("http://localhost:1337/home-de");
+  const res1 = await fetch(
+    `${process.env.BACKEND_STRAPI_CMS}/home-${ctx.query.lang}`
+  );
+
   const pageJSON = await res1.json();
   // console.log(json);
 

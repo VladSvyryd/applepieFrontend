@@ -54,7 +54,7 @@ const Navigation: React.FC<NavProps> = (props) => {
         {logo && (
           <Link href="/[lang]" as={`/${Language[currentLanguage]}`}>
             <img
-              src={`http://localhost:1337${
+              src={`${
                 !invertedSlides.some((s) => s === activeCarouselIndex)
                   ? logo?.url
                   : logo_inverted?.url
@@ -83,7 +83,7 @@ const Navigation: React.FC<NavProps> = (props) => {
                 {l.name}
                 {links_de && index === links_de?.length - 1 && (
                   <img
-                    src={`http://localhost:1337${
+                    src={`${
                       !invertedSlides.some((s) => s === activeCarouselIndex)
                         ? plane?.url
                         : plane_inverted?.url

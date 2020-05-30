@@ -44,14 +44,14 @@ const Page: NextPage<HomeProps> = (props) => {
           className={`flexColumns alignCenter`}
           data-swiper-parallax="1500"
           style={{
-            backgroundImage: `url(http://localhost:1337${pageFromCMS.intro.pictures[18]?.url})`,
+            backgroundImage: `url(${pageFromCMS.intro.pictures[18]?.url})`,
             backgroundSize: "contain",
           }}
         >
           <div
             className={`smallitem responsiveSlide frameBottomTop`}
             style={{
-              backgroundImage: `url(http://localhost:1337${pageFromCMS.intro.pictures[4].url}), url(http://localhost:1337${pageFromCMS.intro.pictures[5].url}),url(http://localhost:1337${pageFromCMS.intro.pictures[3].url})`,
+              backgroundImage: `url(${pageFromCMS.intro.pictures[4].url}), url(${pageFromCMS.intro.pictures[5].url}),url(${pageFromCMS.intro.pictures[3].url})`,
               backgroundPosition:
                 "top 0 right 100px, left center, right 100px bottom 0",
               backgroundRepeat: "no-repeat",
@@ -71,7 +71,7 @@ const Page: NextPage<HomeProps> = (props) => {
                 </h3>
 
                 <img
-                  src={`http://localhost:1337${pageFromCMS.intro.pictures[0].url}`}
+                  src={`${pageFromCMS.intro.pictures[0].url}`}
                   alt={pageFromCMS.intro.pictures[0].alternativeText}
                   className={index.leftPie}
                   style={{
@@ -99,7 +99,7 @@ const Page: NextPage<HomeProps> = (props) => {
               className={`content-frame-rightHalf ${index.height100} ${index.rightSection}`}
             >
               <img
-                src={`http://localhost:1337${pageFromCMS.intro?.pictures[1]?.url}`}
+                src={`${pageFromCMS.intro?.pictures[1]?.url}`}
                 alt={pageFromCMS.intro?.pictures[1]?.alternativeText}
                 className={index.rightPie}
                 style={{
@@ -110,7 +110,7 @@ const Page: NextPage<HomeProps> = (props) => {
 
               <motion.img
                 animate={{ rotate: `${activeServiceIndex * 12}deg` }}
-                src={`http://localhost:1337${pageFromCMS.intro?.pictures[6]?.url}`}
+                src={`${pageFromCMS.intro?.pictures[6]?.url}`}
                 alt={pageFromCMS.intro?.pictures[6]?.alternativeText}
                 className={index.orbit}
                 style={{
@@ -157,7 +157,7 @@ const Page: NextPage<HomeProps> = (props) => {
         >
           <div className={index.left}>
             <img
-              src={`http://localhost:1337${pageFromCMS.first_section?.images[0]?.url}`}
+              src={`${pageFromCMS.first_section?.images[0]?.url}`}
               alt={pageFromCMS.first_section?.images[0]?.alternativeText}
             />
           </div>
@@ -197,7 +197,7 @@ const Page: NextPage<HomeProps> = (props) => {
           </div>
           <div className={index.right}>
             <img
-              src={`http://localhost:1337${pageFromCMS.second_section?.images[0]?.url}`}
+              src={`${pageFromCMS.second_section?.images[0]?.url}`}
               alt={pageFromCMS.second_section.images[0].alternativeText}
             />
           </div>
@@ -216,10 +216,7 @@ const Page: NextPage<HomeProps> = (props) => {
             <div className={index.imagesGrid}>
               {pageFromCMS.third_section?.images?.map((img) => (
                 <div key={img.name}>
-                  <img
-                    src={`http://localhost:1337${img.url}`}
-                    alt={img.alternativeText}
-                  />
+                  <img src={`${img.url}`} alt={img.alternativeText} />
                 </div>
               ))}
             </div>
@@ -251,7 +248,7 @@ const Page: NextPage<HomeProps> = (props) => {
               {pageFromCMS.forth_section?.cards?.map((card) => (
                 <div key={card.title}>
                   <img
-                    src={`http://localhost:1337${card.image.url}`}
+                    src={`${card.image.url}`}
                     alt={card.image.alternativeText}
                   />
                   <div className={index.content}>
@@ -271,7 +268,7 @@ const Page: NextPage<HomeProps> = (props) => {
                 />
               </div>
               <img
-                src={`http://localhost:1337${pageFromCMS.forth_section?.images[0]?.url}`}
+                src={`${pageFromCMS.forth_section?.images[0]?.url}`}
                 alt={pageFromCMS.forth_section?.images[0]?.alternativeText}
               />
               <motion.button
@@ -297,7 +294,7 @@ const Page: NextPage<HomeProps> = (props) => {
         >
           <div className={index.left}>
             <img
-              src={`http://localhost:1337${pageFromCMS.fifth_section?.images[0]?.url}`}
+              src={`${pageFromCMS.fifth_section?.images[0]?.url}`}
               alt={pageFromCMS.fifth_section?.images[0]?.alternativeText}
             />
           </div>
@@ -325,7 +322,7 @@ const Page: NextPage<HomeProps> = (props) => {
           <div
             className="content-frame"
             style={{
-              backgroundImage: `url(http://localhost:1337${pageFromCMS.sixth_section?.images[2]?.url}),url(http://localhost:1337${pageFromCMS.sixth_section?.images[3]?.url})`,
+              backgroundImage: `url(${pageFromCMS.sixth_section?.images[2]?.url}),url(${pageFromCMS.sixth_section?.images[3]?.url})`,
               backgroundRepeat: "no-repeat",
               width: "100%",
               display: "flex",
@@ -362,7 +359,7 @@ const Page: NextPage<HomeProps> = (props) => {
         >
           <div className={index.left}>
             <img
-              src={`http://localhost:1337${pageFromCMS.seventh_section?.images[0]?.url}`}
+              src={`${pageFromCMS.seventh_section?.images[0]?.url}`}
               alt={pageFromCMS.seventh_section?.images[0]?.alternativeText}
             />
           </div>
@@ -385,9 +382,11 @@ const Page: NextPage<HomeProps> = (props) => {
   );
 };
 Page.getInitialProps = async (ctx) => {
-  const res = await fetch("http://localhost:1337/navigation");
+  const res = await fetch(`${process.env.BACKEND_STRAPI_CMS}/navigation`);
   const navigationJson = await res.json();
-  const res1 = await fetch(`http://localhost:1337/home-${ctx.query.lang}`);
+  const res1 = await fetch(
+    `${process.env.BACKEND_STRAPI_CMS}/home-${ctx.query.lang}`
+  );
   const pageJSON = await res1.json();
   // console.log(json);
 

@@ -62,7 +62,7 @@ const ReviewCarousel: React.FC<any> = ({ children, img, buttonImg }) => {
     <div
       className={review.swiper}
       style={{
-        backgroundImage: `url(http://localhost:1337${img})`,
+        backgroundImage: `url(${img})`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "top 0% left 28%",
       }}
@@ -75,10 +75,7 @@ const ReviewCarousel: React.FC<any> = ({ children, img, buttonImg }) => {
           onClick={() => goPrev()}
           animate={swiper !== null && 0 === activeIndex ? "off" : "on"}
         >
-          <img
-            src={`http://localhost:1337${buttonImg}`}
-            style={{ transform: "rotate(180deg)" }}
-          />
+          <img src={`${buttonImg}`} style={{ transform: "rotate(180deg)" }} />
         </motion.div>
         <motion.div
           whileTap={{ scale: 0.9 }}
@@ -90,7 +87,7 @@ const ReviewCarousel: React.FC<any> = ({ children, img, buttonImg }) => {
               : "on"
           }
         >
-          <img src={`http://localhost:1337${buttonImg}`} />
+          <img src={`${buttonImg}`} />
         </motion.div>
       </div>
     </div>
