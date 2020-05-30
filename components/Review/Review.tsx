@@ -26,12 +26,12 @@ const Review: React.FC<ReviewProps> = (props) => {
       opacity: 1,
     },
   };
-  const imgAnim = {
-    hidden: { scale: 0 },
-    visible: {
-      scale: 1,
-    },
-  };
+  // const imgAnim = {
+  //   hidden: { scale: 0 },
+  //   visible: {
+  //     scale: 1,
+  //   },
+  // };
 
   const activeIndex = useStoreState((state) => state.swiper.reviewIndex);
 
@@ -44,11 +44,11 @@ const Review: React.FC<ReviewProps> = (props) => {
         className={`${review.grid}`}
       >
         <motion.div className={review.avatar}>
-          <motion.img
+          {/* <motion.img
             src="http://localhost:1337/uploads/ava_d1d5ee2f77.jpeg"
             variants={imgAnim}
             alt=""
-          />
+          /> */}
         </motion.div>
         <motion.div className={review.content_text} variants={vertical}>
           Working with Applepie is a blast. All the employee really work hard
