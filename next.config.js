@@ -9,6 +9,8 @@ const configs = {
   env: {
     // Reference a variable that was defined in the .env file and make it available at Build Time
     PIPEDRIVE: process.env.PIPEDRIVE_API_ACCESS_KEY,
+    BACKEND_STRAPI_CMS: process.env.BACKEND_STRAPI_CMS,
+
   },
 }
 module.exports = withFonts(configs)

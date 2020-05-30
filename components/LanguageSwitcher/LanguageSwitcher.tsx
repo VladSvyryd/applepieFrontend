@@ -56,6 +56,11 @@ export default () => {
         style={{
           textDecoration: `underline`,
         }}
+        className={`${
+          invertedSlides.some((s) => s === activeCarouselIndex)
+            ? "invertedTextColorBySlide"
+            : ""
+        }`}
       >
         {String(Language[currentLanguage]).toUpperCase()}
       </div>
