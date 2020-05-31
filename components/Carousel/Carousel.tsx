@@ -75,6 +75,8 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
     mousewheel: true,
     roundLengths: true,
     parallax: true,
+    threshold: 100,
+    touchMoveStopPropagation: true,
     parallaxEl: {
       el: ".parallax-bg",
       value: "-23%",

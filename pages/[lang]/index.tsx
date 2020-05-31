@@ -16,7 +16,7 @@ const Page: NextPage<HomeProps> = (props) => {
   const [activeServiceIndex, setIndex] = useState(0);
 
   useEffect(() => {
-    console.log(pageFromCMS);
+    // console.log(pageFromCMS);
   }, []);
   const handleServiceHover = (index: number) => {
     setIndex(index);

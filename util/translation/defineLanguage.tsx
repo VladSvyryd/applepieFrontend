@@ -11,7 +11,6 @@ export function getLanguage(): Language {
   // the language setting of the browser
   const [browserSetting] = navigator.language.split("-");
   const currentLanguage = isLocale(browserSetting);
-  console.log("from DEFIENE", currentLanguage);
   if (typeof currentLanguage !== "undefined") {
     return currentLanguage;
   }

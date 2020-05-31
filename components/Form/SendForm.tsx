@@ -40,8 +40,7 @@ const SendForm: React.FC<SendFormProps> = ({ button }) => {
 
     try {
       const res = await fetch(
-        // `https://applepie.pipedrive.com/api/v1/persons?api_token=${process.env.PIPEDRIVE}`,
-        "",
+        `https://applepie.pipedrive.com/api/v1/persons?api_token=${process.env.PIPEDRIVE}`,
         {
           method: "POST",
           body: JSON.stringify(createPersonValues),
@@ -176,14 +175,14 @@ const SendForm: React.FC<SendFormProps> = ({ button }) => {
     let errorMessage;
     if (value.length <= 0) {
       errorMessage =
-        currentLanguage === 0
+        currentLanguage === 1
           ? "This field is required"
           : "Dieses Feld ist erforderlich";
     }
     return errorMessage;
   };
   useEffect(() => {
-    console.log(response);
+    // console.log(response);
   }, [response]);
   return (
     <Formik
