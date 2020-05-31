@@ -383,6 +383,7 @@ const Page: NextPage<HomeProps> = (props) => {
 };
 Page.getInitialProps = async (ctx) => {
   const res = await fetch(`${process.env.BACKEND_STRAPI_CMS}/navigation`);
+  console.log(`${process.env.BACKEND_STRAPI_CMS}/navigation`);
   const navigationJson = await res.json();
   const res1 = await fetch(
     `${process.env.BACKEND_STRAPI_CMS}/home-${ctx.query.lang}`
