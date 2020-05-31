@@ -128,6 +128,18 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
       opacity: 0,
     }),
   };
+  const captionAnim = {
+    visible: () => ({
+      y: 0,
+      scale: 1,
+      opacity: 1,
+    }),
+    hidden: () => ({
+      y: -25,
+      scale: 0,
+      opacity: 0,
+    }),
+  };
   const handleBulletHover = (i: number) => {
     setHoveredIndex(i);
   };
@@ -232,6 +244,17 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
                       height: `${paginationBullet.height * 1.5}px`,
                     }}
                   />
+                  <motion.span
+                    animate={
+                      i === selected || i === hoveredIndex
+                        ? "visible"
+                        : "hidden"
+                    }
+                    variants={captionAnim}
+                    className={car.caption}
+                  >
+                    {paginationBullet.caption}
+                  </motion.span>
                 </motion.li>
               ))}
             {children !== null && (
