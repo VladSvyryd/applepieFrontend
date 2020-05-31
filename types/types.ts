@@ -38,13 +38,17 @@ export type AboutProps = {
   navigation: NavType;
 };
 export type ReviewProps = {
+  review: Review;
+  index?: number;
+  count: number;
+};
+export type Review = {
   name?: string;
   position?: string;
   content_text?: string;
   createdAt?: string;
   avatar?: Picture;
   id?: string;
-  index?: number;
 };
 export type SendFormProps = {
   button: Button;
@@ -81,8 +85,13 @@ export type HomePage = {
   buttons: Button[];
   known_by_title: string;
   pagination: Pagination;
+  reviews: Review[];
 };
-
+export type ReviewCarouselProps = {
+  reviews: Review[];
+  img: Picture;
+  buttonImg: Picture;
+};
 export interface Idea_Image_Grid {
   title: string;
   images: Picture[];

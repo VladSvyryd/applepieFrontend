@@ -2,7 +2,6 @@ import Layout from "../../components/Layout/Layout";
 import fetch from "isomorphic-unfetch";
 import { NextPage } from "next";
 import ReviewCarousel from "../../components/Review/ReviewCarousel";
-import Review from "../../components/Review/Review";
 import { AboutProps } from "../../types/types";
 import LanguageSwitcher from "../../components/LanguageSwitcher/LanguageSwitcher2";
 
@@ -26,14 +25,18 @@ const about: NextPage<AboutProps> = (props) => {
           height: "100%",
           justifyContent: "center",
           alignItems: "center",
+          background: "black",
         }}
       >
-        <ReviewCarousel>
-          <Review />
-          <Review />
-          <Review />
-          <Review />
-        </ReviewCarousel>
+        <ReviewCarousel
+          reviews={[
+            pageFromCMS.reviews[0],
+            pageFromCMS.reviews[0],
+            pageFromCMS.reviews[0],
+          ]}
+          img={pageFromCMS.sixth_section?.images[1]}
+          buttonImg={pageFromCMS.sixth_section?.images[0]}
+        />
         <LanguageSwitcher />
       </section>
     </Layout>

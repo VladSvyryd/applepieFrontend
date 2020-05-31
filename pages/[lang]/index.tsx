@@ -9,14 +9,13 @@ import index from "../../pageStyles/index.module.scss";
 import { motion } from "framer-motion";
 import MarkdownView from "react-showdown";
 import ReviewCarousel from "../../components/Review/ReviewCarousel";
-import Review from "../../components/Review/Review";
 import SendForm from "../../components/Form/SendForm";
 const Page: NextPage<HomeProps> = (props) => {
   const { pageFromCMS } = props;
   const [activeServiceIndex, setIndex] = useState(0);
 
   useEffect(() => {
-    // console.log(pageFromCMS);
+    console.log(pageFromCMS.reviews[0]);
   }, []);
   const handleServiceHover = (index: number) => {
     setIndex(index);
@@ -338,13 +337,10 @@ const Page: NextPage<HomeProps> = (props) => {
                 {pageFromCMS.sixth_section?.title}
               </h2>
               <ReviewCarousel
-                img={pageFromCMS.sixth_section?.images[1]?.url}
-                buttonImg={pageFromCMS.sixth_section?.images[0]?.url}
-              >
-                <Review />
-                <Review />
-                <Review />
-              </ReviewCarousel>
+                reviews={pageFromCMS.reviews}
+                img={pageFromCMS.sixth_section?.images[1]}
+                buttonImg={pageFromCMS.sixth_section?.images[0]}
+              />
             </div>
           </div>
         </section>
@@ -383,7 +379,6 @@ const Page: NextPage<HomeProps> = (props) => {
 };
 Page.getInitialProps = async (ctx) => {
   const res = await fetch(`${process.env.BACKEND_STRAPI_CMS}/navigation`);
-  console.log(`${process.env.BACKEND_STRAPI_CMS}/navigation`);
   const navigationJson = await res.json();
   const res1 = await fetch(
     `${process.env.BACKEND_STRAPI_CMS}/home-${ctx.query.lang}`
