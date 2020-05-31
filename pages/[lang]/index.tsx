@@ -382,11 +382,13 @@ const Page: NextPage<HomeProps> = (props) => {
   );
 };
 Page.getInitialProps = async (ctx) => {
-  const res = await fetch(`${process.env.BACKEND_STRAPI_CMS}/navigation`);
-  console.log(`${process.env.BACKEND_STRAPI_CMS}/navigation`);
+  const res = await fetch(
+    `${"https://alpha-applepie.herokuapp.com"}/navigation`
+  );
+  console.log(`${"https://alpha-applepie.herokuapp.com"}/navigation`);
   const navigationJson = await res.json();
   const res1 = await fetch(
-    `${process.env.BACKEND_STRAPI_CMS}/home-${ctx.query.lang}`
+    `${"https://alpha-applepie.herokuapp.com"}/home-${ctx.query.lang}`
   );
   const pageJSON = await res1.json();
   // console.log(json);
