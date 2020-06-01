@@ -28,7 +28,7 @@ const Layout: React.FC<LayoutProps> = ({
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <header>
+      <header className={layout.header}>
         <Navigation
           navigation={navigation}
           activeCarouselIndex={activeCarouselIndex}
@@ -37,7 +37,7 @@ const Layout: React.FC<LayoutProps> = ({
       </header>
       {children}
       {horizontalFooter && !verticalFooter ? (
-        <footer className={`${horizontalFooter && "fixed"} `}>
+        <footer className={`${horizontalFooter && "fixed"} ${layout.footer}`}>
           <div className="content-frame" style={{ height: "100%" }}>
             <h2 className="visuallyHidden">Applepie Footer</h2>
             <section

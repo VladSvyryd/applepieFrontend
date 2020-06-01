@@ -5,6 +5,9 @@
 }
 .introServices {
   font-size: 26px;
+  @media (max-width: 1400px) {
+    display: none;
+  }
   ul.introServicesList {
     margin-left: 342px;
     list-style: none;
@@ -31,28 +34,35 @@
 .introButton {
   margin-top: 26px;
 }
-.leftSection {
-  position: relative;
-  .leftPie {
-    position: absolute;
-    right: -16px;
-    top: 50%;
-  }
-  .leftA,
-  .bottomA,
-  .topA {
-    position: absolute;
-  }
-  .leftA {
-    left: 0;
-  }
-  .topA {
-    top: 0;
-  }
-  .bottomA {
-    bottom: 0;
+.leftSectionFrame {
+  display: flex;
+  justify-content: flex-end;
+  .leftSection {
+    position: relative;
+    min-width: 765px;
+    margin-left: 25px;
+    .leftPie {
+      position: absolute;
+      right: -16px;
+      top: 50%;
+    }
+    .leftA,
+    .bottomA,
+    .topA {
+      position: absolute;
+    }
+    .leftA {
+      left: 0;
+    }
+    .topA {
+      top: 0;
+    }
+    .bottomA {
+      bottom: 0;
+    }
   }
 }
+
 .rightSection {
   position: relative;
   overflow: hidden;

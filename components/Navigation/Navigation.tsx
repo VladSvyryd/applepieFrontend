@@ -50,7 +50,7 @@ const Navigation: React.FC<NavProps> = (props) => {
 
   return (
     <nav className={`${nav.navbar} flexColumns alignCenter content-frame`}>
-      <div className={"smallitem"}>
+      <div className={""}>
         {logo && (
           <Link href="/[lang]" as={`/${Language[currentLanguage]}`}>
             <img
@@ -65,7 +65,9 @@ const Navigation: React.FC<NavProps> = (props) => {
           </Link>
         )}
       </div>
-      <div className={"smallitem alignCenter flexColumns flexEnd indieFlower"}>
+      <div
+        className={`alignCenter flexColumns flexEnd indieFlower ${nav.mobile}`}
+      >
         {switchContextByLanguage(links_de, links_en, currentLanguage)?.map(
           (l: NavLink, index: number) => (
             <Link

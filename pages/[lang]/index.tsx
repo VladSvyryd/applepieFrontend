@@ -43,12 +43,12 @@ const Page: NextPage<HomeProps> = (props) => {
           className={`flexColumns alignCenter`}
           data-swiper-parallax="1500"
           style={{
-            backgroundImage: `url(${pageFromCMS.intro.pictures[18]?.url})`,
+            backgroundImage: `url(${pageFromCMS.intro.pictures[7]?.url})`,
             backgroundSize: "contain",
           }}
         >
           <div
-            className={`smallitem responsiveSlide frameBottomTop`}
+            className={`smallitem responsiveSlide frameBottomTop ${index.leftSectionFrame}`}
             style={{
               backgroundImage: `url(${pageFromCMS.intro.pictures[4].url}), url(${pageFromCMS.intro.pictures[5].url}),url(${pageFromCMS.intro.pictures[3].url})`,
               backgroundPosition:
@@ -384,8 +384,6 @@ Page.getInitialProps = async (ctx) => {
     `${process.env.BACKEND_STRAPI_CMS}/home-${ctx.query.lang}`
   );
   const pageJSON = await res1.json();
-  // console.log(json);
-
   return {
     navigation: navigationJson,
     pageFromCMS: pageJSON,

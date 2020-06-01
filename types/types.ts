@@ -87,6 +87,11 @@ export type HomePage = {
   pagination: Pagination;
   reviews: Review[];
 };
+export enum DEVICE {
+  MOBILE,
+  TABLET,
+  DESKTOP,
+}
 export type ReviewCarouselProps = {
   reviews: Review[];
   img: Picture;
@@ -124,10 +129,17 @@ export interface Intro {
 
 export interface Pagination {
   title?: string;
-  background?: Picture;
-  background_alternative?: Picture;
-  images: Picture[];
-  images_alternative?: Picture[];
+  background: Picture[];
+  background_alternative: Picture[];
+  icons: Image[];
+}
+export interface Image {
+  name: string;
+  alternative_name?: string;
+  alternative_text: string;
+  alternative_text_alternative?: string;
+  image: Picture;
+  image_alternative: Picture;
 }
 export interface Button {
   text: string;

@@ -1,6 +1,6 @@
 import Swiper, { SwiperInstance } from "react-id-swiper";
-import { CarouselProps, Picture } from "../../types/types";
-import { useState, useEffect } from "react";
+import { CarouselProps, Image, DEVICE } from "../../types/types";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import car from "./car.module.scss";
 import { useStoreActions, useStoreState } from "../../hooks";
@@ -9,74 +9,90 @@ export const screens = [
   {
     title: "One",
     color: "#ff0055",
-    position: { left: "-12px", top: "48px" },
+    position_desktop: { left: "-12px", top: "48px" },
+    position_tablet: { left: "-12px", top: "48px" },
+    position_mobile: { left: "-10px", top: "25px" },
   },
   {
     title: "Two",
     color: "#0099ff",
-    position: { left: "193px", top: "26px" },
+    position_desktop: { left: "193px", top: "26px" },
+    position_tablet: { left: "75px", top: "27px" },
+    position_mobile: { left: "23px", top: "4px" },
   },
   {
     title: "Threeeee",
     color: "#22cc88",
-    position: { left: "384px", top: "41px" },
+    position_desktop: { left: "384px", top: "41px" },
+    position_tablet: { left: "164px", top: "36px" },
+    position_mobile: { left: "57px", top: "16px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position: { left: "575px", top: "65px" },
+    position_desktop: { left: "575px", top: "65px" },
+    position_tablet: { left: "249px", top: "65px" },
+    position_mobile: { left: "94px", top: "43px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position: { left: "765px", top: "35px" },
+    position_desktop: { left: "765px", top: "35px" },
+    position_tablet: { left: "343px", top: "37px" },
+    position_mobile: { left: "127px", top: "13px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position: { left: "956px", top: "30px" },
+    position_desktop: { left: "956px", top: "30px" },
+    position_tablet: { left: "430px", top: "30px" },
+    position_mobile: { left: "161px", top: "7px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position: { left: "1147px", top: "55px" },
+    position_desktop: { left: "1147px", top: "55px" },
+    position_tablet: { left: "517px", top: "53px" },
+    position_mobile: { left: "195px", top: "32px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position: { left: "1337px", top: "64px" },
+    position_desktop: { left: "1337px", top: "64px" },
+    position_tablet: { left: "605px", top: "64px" },
+    position_mobile: { left: "230px", top: "42px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position: { left: "1531px", top: "46px" },
+    position_desktop: { left: "1531px", top: "46px" },
+    position_tablet: { left: "691px", top: "48px" },
+    position_mobile: { left: "260px", top: "27px" },
   },
 ];
-
 const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
   const [swiper, setSwiper] = useState<SwiperInstance>(null);
   const [s, ses] = useState({ isBeginning: true, isEnd: false });
   const [selected, setSelected] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState(-1);
-  const [paginationImgs, setPaginationImgs] = useState<Array<Picture> | null>(
-    null
-  );
+
   const setActiveIndex = useStoreActions(
     (actions) => actions.swiper.setActiveIndex
   );
   const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
   const params: any = {
     direction: "horizontal",
-    longSwipes: false,
-    resistanceRatio: 0,
-    shortSwipes: true,
-    resistance: false,
+    slidesPerView: 1,
+    // resistance: false,
     spaceBetween: 30,
+    simulateTouch: true,
+    // cssMode: true,
+    // followFinger: false,
     mousewheel: true,
     roundLengths: true,
     parallax: true,
     threshold: 100,
-    touchMoveStopPropagation: true,
+    // touchMoveStopPropagation: true,
     parallaxEl: {
       el: ".parallax-bg",
       value: "-23%",
@@ -104,6 +120,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
   };
   useEffect(() => {
     swiper && swiper.on("slideChange", updateCarouselState);
+    console.log(paginationObject.pagination);
   }, [swiper]);
   const arrowAnim = {
     active: (x: number) => ({
@@ -146,18 +163,73 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
   const handleBulletHoverOut = () => {
     setHoveredIndex(-1);
   };
-  useEffect(() => {
-    if (!invertedSlides.some((s) => s === selected)) {
-      setPaginationImgs(paginationObject.pagination.images);
-    } else {
-      paginationObject.pagination.images_alternative &&
-        setPaginationImgs(paginationObject.pagination.images_alternative);
-    }
-  }, [selected]);
   const handleBulletClicked = (index: number) => {
     setSelected(index);
     swiper && swiper.slideTo(index);
   };
+  const [paginationImg, setPaginationImg] = useState({
+    image: paginationObject.pagination.background[0],
+    image_alternative: paginationObject.pagination.background_alternative[0],
+  });
+
+  const [width, setWidth] = useState(1590);
+  const [device, setDevice] = useState<DEVICE>(1);
+  const [respScreens, setRespScreens] = useState<any>(null);
+
+  const defineBulletPositions = () => {
+    console.log("now");
+    if (device === 0) {
+      setRespScreens(screens.map((screen) => screen["position_mobile"]));
+      setPaginationImg({
+        image: paginationObject.pagination.background[2],
+        image_alternative:
+          paginationObject.pagination.background_alternative[2],
+      });
+      console.log(respScreens);
+    } else if (device === 1) {
+      setRespScreens(screens.map((screen) => screen["position_tablet"]));
+      setPaginationImg({
+        image: paginationObject.pagination.background[1],
+        image_alternative:
+          paginationObject.pagination.background_alternative[1],
+      });
+    } else if (device === 2) {
+      setRespScreens(screens.map((screen) => screen["position_desktop"]));
+      setPaginationImg({
+        image: paginationObject.pagination.background[0],
+        image_alternative:
+          paginationObject.pagination.background_alternative[0],
+      });
+    } else {
+      setRespScreens(screens.map((screen) => screen["position_desktop"]));
+      setPaginationImg({
+        image: paginationObject.pagination.background[0],
+        image_alternative:
+          paginationObject.pagination.background_alternative[0],
+      });
+    }
+  };
+  const responsiveScreens = useMemo(() => defineBulletPositions, [width]);
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  useEffect(() => {
+    if (width >= 320 && width <= 768) {
+      setDevice(0);
+    }
+    if (width > 768 && width <= 1580) {
+      setDevice(1);
+    }
+    if (width > 1580) {
+      setDevice(2);
+    }
+    console.log(device);
+    responsiveScreens();
+  }, [width]);
   return (
     <div className="responsiveSlide">
       <Swiper {...params}>{children}</Swiper>
@@ -189,85 +261,88 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
             className={car.pagination}
             style={{
               backgroundImage: `url(${
-                invertedSlides.some((s) => s === selected)
-                  ? paginationObject.pagination.background_alternative?.url
-                  : paginationObject.pagination.background?.url
+                paginationObject && invertedSlides.some((s) => s === selected)
+                  ? paginationImg.image_alternative.url
+                  : paginationImg.image.url
               })`,
             }}
           >
-            {paginationImgs !== null &&
-              paginationImgs.map((paginationBullet, i) => (
-                <motion.li
-                  animate
-                  key={i}
-                  className={`title  ${car.paginationBullet}`}
-                  style={{
-                    left: `${screens[i].position.left}`,
-                    top: `${screens[i].position.top}`,
-                  }}
-                  onClick={() => handleBulletClicked(i)}
-                  onMouseOver={() => handleBulletHover(i)}
-                  onMouseLeave={() => handleBulletHoverOut()}
-                >
-                  <span
-                    className={`${car.point}  ${
-                      invertedSlides.some((s) => s === selected) &&
-                      `${car.invertedBackgroundColor}`
-                    }`}
-                    key={i + "p"}
-                  ></span>
-                  {i === selected && (
+            {paginationObject.pagination.icons !== null &&
+              paginationObject.pagination.icons.map(
+                (paginationBullet: Image, i) => (
+                  <motion.li
+                    animate
+                    key={"my_slide-" + i}
+                    className={`title  ${car.paginationBullet}`}
+                    style={{
+                      left: `${respScreens !== null && respScreens[i].left}`,
+                      top: `${respScreens !== null && respScreens[i].top}`,
+                    }}
+                    onClick={() => handleBulletClicked(i)}
+                    onMouseOver={() => handleBulletHover(i)}
+                    onMouseLeave={() => handleBulletHoverOut()}
+                  >
+                    <span
+                      className={`${car.point}  ${
+                        invertedSlides.some((s) => s === selected) &&
+                        `${car.invertedBackgroundColor}`
+                      }`}
+                      key={i + "p"}
+                    ></span>
+                    {i === selected && (
+                      <motion.div
+                        layoutId="underline"
+                        className={
+                          car.active +
+                          `${
+                            invertedSlides.some((s) => s === selected)
+                              ? " " + car.invertedBackgroundColor
+                              : ""
+                          }`
+                        }
+                      />
+                    )}
+                    <motion.img
+                      key={"my_slide-image" + i}
+                      animate={
+                        i === selected || i === hoveredIndex
+                          ? "visible"
+                          : "hidden"
+                      }
+                      variants={bulletAnim}
+                      src={`${
+                        invertedSlides.some((s) => s === selected)
+                          ? paginationBullet.image_alternative?.url
+                          : paginationBullet.image?.url
+                      }`}
+                      alt={paginationBullet.image?.alternativeText}
+                      className={car.bullet}
+                      style={{
+                        width: `${paginationBullet.image?.width * 1.5}px`,
+                        height: `${paginationBullet.image?.height * 1.5}px`,
+                      }}
+                    />
                     <motion.div
-                      layoutId="underline"
+                      animate={
+                        i === selected || i === hoveredIndex
+                          ? "visible"
+                          : "hidden"
+                      }
+                      variants={captionAnim}
                       className={
-                        car.active +
+                        car.caption +
                         `${
                           invertedSlides.some((s) => s === selected)
-                            ? " " + car.invertedBackgroundColor
+                            ? " invertedTextColorBySlide"
                             : ""
                         }`
                       }
-                    />
-                  )}
-                  <motion.img
-                    animate={
-                      i === selected || i === hoveredIndex
-                        ? "visible"
-                        : "hidden"
-                    }
-                    variants={bulletAnim}
-                    src={`${paginationBullet.url}`}
-                    alt={paginationBullet.alternativeText}
-                    className={car.bullet}
-                    style={{
-                      width: `${paginationBullet.width * 1.5}px`,
-                      height: `${paginationBullet.height * 1.5}px`,
-                    }}
-                  />
-                  <motion.span
-                    animate={
-                      i === selected || i === hoveredIndex
-                        ? "visible"
-                        : "hidden"
-                    }
-                    variants={captionAnim}
-                    className={car.caption}
-                  >
-                    {paginationBullet.caption}
-                  </motion.span>
-                </motion.li>
-              ))}
-            {children !== null && (
-              <div className={car.counter}>
-                <span>{selected + 1}</span>
-                <span>/</span>
-                <span>
-                  {children !== null && children !== undefined
-                    ? screens.length
-                    : null}
-                </span>
-              </div>
-            )}
+                    >
+                      <span> {paginationBullet.name}</span>
+                    </motion.div>
+                  </motion.li>
+                )
+              )}
           </ol>
         </div>
       </AnimateSharedLayout>

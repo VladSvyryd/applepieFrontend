@@ -1,4 +1,11 @@
 @import "../../global_variables.scss";
+
+.header,
+.footer {
+  display: flex;
+  justify-content: center;
+}
+
 .linkWithBorder {
   border-right: 1px solid $accent-color;
   margin-right: 7px;

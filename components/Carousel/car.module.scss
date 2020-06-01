@@ -15,6 +15,16 @@
   background-size: 1537px;
   max-width: 1540px;
   position: relative;
+  @media (max-width: 1580px) {
+    max-width: 703px;
+    background-size: 703px;
+  }
+  @media (max-width: 768px) {
+    max-width: 276px;
+    background-size: 276px;
+    height: 70px;
+    background-position: center;
+  }
 }
 .paginationContainer {
   display: flex;
@@ -25,6 +35,9 @@
   position: absolute;
   bottom: 100px;
   z-index: 200;
+  @media (max-width: 768px) {
+    height: 70px;
+  }
 }
 .paginationBullet {
   position: absolute;
@@ -34,12 +47,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 768px) {
+    width: 25px;
+    height: 25px;
+  }
   .point {
     display: block;
     width: 10px;
     height: 10px;
     border-radius: 20px;
     background: $accent-color;
+    @media (max-width: 768px) {
+      width: 5px;
+      height: 5px;
+    }
     &.invertedBackgroundColor {
       background: white;
     }
@@ -53,10 +74,21 @@
   }
   .caption {
     position: absolute;
-    bottom: -30px;
+    bottom: -40px;
     left: 0;
     right: 0;
     margin: auto;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+    @media (max-width: 1580px) {
+      font-size: 14px;
+      bottom: -30px;
+    }
+    @media (max-width: 768px) {
+      font-size: 12px;
+      bottom: -20px;
+    }
   }
 }
 .active {

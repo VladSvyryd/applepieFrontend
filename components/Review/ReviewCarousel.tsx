@@ -19,8 +19,8 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
     direction: "vertical",
     spaceBetween: 30,
     speed: 800,
-    mousewheel: true,
     roundLengths: true,
+    allowTouchMove: false,
     containerClass: `${review.verticalCarousel}`,
     getSwiper: setSwiper,
   };
@@ -67,32 +67,40 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
           </div>
         ))}
       </Swiper>
-      <div className={review.pagination}>
-        <motion.div
-          whileTap={{
-            scale: `${swiper !== null && 0 === activeIndex ? 1 : 0.9}`,
-          }}
-          variants={variants}
-          onClick={() => goPrev()}
-          animate={swiper !== null && 0 === activeIndex ? "off" : "on"}
-        >
-          <img src={`${buttonImg}`} style={{ transform: "rotate(180deg)" }} />
-        </motion.div>
-        <motion.div
-          whileTap={{
-            scale: `${
-              swiper !== null && reviews.length - 1 === activeIndex ? 1 : 0.9
-            }`,
-          }}
-          onClick={() => goNext()}
-          variants={variants}
-          animate={
-            swiper !== null && reviews.length - 1 === activeIndex ? "off" : "on"
-          }
-        >
-          <img src={`${buttonImg}`} />
-        </motion.div>
-      </div>
+      {reviews.length > 1 && (
+        <div className={review.pagination}>
+          <motion.div
+            whileTap={{
+              scale: `${swiper !== null && 0 === activeIndex ? 1 : 0.9}`,
+            }}
+            variants={variants}
+            onClick={() => goPrev()}
+            animate={swiper !== null && 0 === activeIndex ? "off" : "on"}
+          >
+            <img
+              src={`${buttonImg?.url}`}
+              alt={buttonImg?.alternativeText}
+              style={{ transform: "rotate(180deg)" }}
+            />
+          </motion.div>
+          <motion.div
+            whileTap={{
+              scale: `${
+                swiper !== null && reviews.length - 1 === activeIndex ? 1 : 0.9
+              }`,
+            }}
+            onClick={() => goNext()}
+            variants={variants}
+            animate={
+              swiper !== null && reviews.length - 1 === activeIndex
+                ? "off"
+                : "on"
+            }
+          >
+            <img src={`${buttonImg?.url}`} alt={buttonImg?.alternativeText} />
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 };

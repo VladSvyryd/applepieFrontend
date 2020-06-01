@@ -16,9 +16,15 @@
   grid-area: avatar;
   display: flex;
   align-items: flex-start;
-  img {
-    border-radius: 50%;
+  .frame {
+    width: 100%;
+    max-width: 134px;
     margin: 20px;
+
+    img {
+      border-radius: 50%;
+      width: 100%;
+    }
   }
 }
 

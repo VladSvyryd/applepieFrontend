@@ -10,8 +10,8 @@ const Review: React.FC<ReviewProps> = (props) => {
       x: `${index >= reviewIndex ? "-350px" : "-350px"}`,
       y: `${index >= reviewIndex ? "450px" : "-450px"}`,
       transition: {
-        ease: "easeIn",
-        duration: 1,
+        ease: "easeInOut",
+        duration: 0.5,
       },
     }),
     visible: {
@@ -19,21 +19,21 @@ const Review: React.FC<ReviewProps> = (props) => {
       x: 0,
       y: 0,
       transition: {
-        ease: "easeIn",
-        duration: 1,
+        ease: "easeInOut",
+        duration: 0.5,
       },
     },
   };
-  const vertical = {
-    hidden: { x: -150, y: -150, opacity: 0 },
-    visible: {
-      x: 0,
-      y: 0,
-      opacity: 1,
-    },
-  };
+  // const vertical = {
+  //   hidden: { x: -150, y: -150, opacity: 0 },
+  //   visible: {
+  //     x: 0,
+  //     y: 0,
+  //     opacity: 1,
+  //   },
+  // };
   const imgAnim = {
-    hidden: { scale: 0 },
+    hidden: { scale: 1 },
     visible: {
       scale: 1,
     },
@@ -50,19 +50,18 @@ const Review: React.FC<ReviewProps> = (props) => {
       custom={props.index}
     >
       <motion.div className={review.avatar}>
-        <motion.img
-          src={`${props.review?.avatar?.url}`}
-          variants={imgAnim}
-          alt=""
-        />
+        <motion.div className={review.frame} variants={imgAnim}>
+          <motion.img
+            src={`${props.review?.avatar?.url}`}
+            alt={props.review?.avatar?.alternativeText}
+          />
+        </motion.div>
       </motion.div>
-      <motion.div className={review.content_text} variants={vertical}>
+      <motion.div className={review.content_text}>
         {props.review.content_text}
       </motion.div>
-      <motion.div className={review.name} variants={vertical}>
-        {props.review.name}
-      </motion.div>
-      <motion.div className={review.compony} variants={vertical}>
+      <motion.div className={review.name}>{props.review.name}</motion.div>
+      <motion.div className={review.compony}>
         {props.review.position}
       </motion.div>
     </motion.div>
