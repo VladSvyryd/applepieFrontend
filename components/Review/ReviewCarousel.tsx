@@ -62,7 +62,7 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
     >
       <Swiper {...params}>
         {reviews.map((review, index) => (
-          <div>
+          <div key={"review-" + index}>
             <Review review={review} index={index} count={reviews.length} />
           </div>
         ))}

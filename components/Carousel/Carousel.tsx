@@ -262,8 +262,8 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
             style={{
               backgroundImage: `url(${
                 paginationObject && invertedSlides.some((s) => s === selected)
-                  ? paginationImg.image_alternative.url
-                  : paginationImg.image.url
+                  ? paginationImg.image_alternative?.url
+                  : paginationImg.image?.url
               })`,
             }}
           >
