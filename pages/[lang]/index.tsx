@@ -1,28 +1,38 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import withTranslate from "../../components/HOC/withTranslate";
 import Layout from "../../components/Layout/Layout";
 import { NextPage } from "next";
 import fetch from "isomorphic-unfetch";
 import { HomeProps } from "../../types/types";
-import Carousel from "../../components/Carousel/Carousel";
+
 import index from "../../pageStyles/index.module.scss";
 import { motion } from "framer-motion";
 import MarkdownView from "react-showdown";
-import ReviewCarousel from "../../components/Review/ReviewCarousel";
 import SendForm from "../../components/Form/SendForm";
+import dynamic from "next/dynamic";
+const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
+  ssr: false,
+});
+const DeviceWatcher = dynamic(
+  () => import("../../components/DeviceWatcher/DeviceWatcher"),
+  {
+    ssr: false,
+  }
+);
+import ReviewCarousel from "../../components/Review/ReviewCarousel";
+import { useStoreState } from "easy-peasy";
+
 const Page: NextPage<HomeProps> = (props) => {
   const { pageFromCMS } = props;
   const [activeServiceIndex, setIndex] = useState(0);
 
-  useEffect(() => {
-    console.log(pageFromCMS.reviews[0]);
-  }, []);
   const handleServiceHover = (index: number) => {
     setIndex(index);
   };
   const handleServiceLeave = () => {
     setIndex(0);
   };
+  const deviceWidth = useStoreState((state) => state.device.width);
 
   return (
     <Layout
@@ -33,6 +43,7 @@ const Page: NextPage<HomeProps> = (props) => {
       social_links={pageFromCMS.social_links}
       known_by_title={pageFromCMS.known_by_title}
     >
+      <DeviceWatcher />
       <h1 className="visuallyHidden">Applepie</h1>
       <Carousel
         paginationObject={{
@@ -65,16 +76,28 @@ const Page: NextPage<HomeProps> = (props) => {
                 <h2 data-swiper-parallax="500" data-swiper-parallax-opacity="0">
                   {pageFromCMS.intro.title}
                 </h2>
-                <h3 data-swiper-parallax="800" data-swiper-parallax-opacity="0">
+                <h3
+                  data-swiper-parallax="800"
+                  data-swiper-parallax-opacity="0"
+                  className={index.descriptionDesktop}
+                >
                   {pageFromCMS.intro.description}
                 </h3>
 
                 <img
-                  src={`${pageFromCMS.intro.pictures[0].url}`}
+                  src={`${
+                    deviceWidth <= 719
+                      ? pageFromCMS.intro.pictures[8].url
+                      : pageFromCMS.intro.pictures[0].url
+                  }`}
                   alt={pageFromCMS.intro.pictures[0].alternativeText}
                   className={index.leftPie}
                   style={{
-                    marginTop: `-${pageFromCMS.intro.pictures[0].height / 2}px`,
+                    marginTop: `-${
+                      deviceWidth <= 719
+                        ? 0
+                        : pageFromCMS.intro.pictures[0].height / 2
+                    }px`,
                   }}
                   data-swiper-parallax-opacity="0"
                 />
@@ -91,12 +114,10 @@ const Page: NextPage<HomeProps> = (props) => {
             </div>
           </div>
           <div
-            className="smallitem responsiveSlide frameBottomTop"
+            className={`smallitem responsiveSlide frameBottomTop ${index.rightSection}`}
             style={{ background: "tomato" }}
           >
-            <div
-              className={`content-frame-rightHalf ${index.height100} ${index.rightSection}`}
-            >
+            <div className={`content-frame-rightHalf ${index.height100}`}>
               <img
                 src={`${pageFromCMS.intro?.pictures[1]?.url}`}
                 alt={pageFromCMS.intro?.pictures[1]?.alternativeText}

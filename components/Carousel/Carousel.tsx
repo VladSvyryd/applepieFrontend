@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo } from "react";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import car from "./car.module.scss";
 import { useStoreActions, useStoreState } from "../../hooks";
+import { useWindowWidth } from "../../util/useWindowWidth";
 
 export const screens = [
   {
@@ -120,7 +121,6 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
   };
   useEffect(() => {
     swiper && swiper.on("slideChange", updateCarouselState);
-    console.log(paginationObject.pagination);
   }, [swiper]);
   const arrowAnim = {
     active: (x: number) => ({
@@ -171,14 +171,26 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
     image: paginationObject.pagination.background[0],
     image_alternative: paginationObject.pagination.background_alternative[0],
   });
-
-  const [width, setWidth] = useState(1590);
-  const [device, setDevice] = useState<DEVICE>(1);
+  const defineDevice = (window_width: number) => {
+    if (window_width >= 320 && window_width <= 768) {
+      return DEVICE.MOBILE;
+    } else if (window_width > 768 && window_width <= 1580) {
+      return DEVICE.TABLET;
+    } else if (window_width > 1580) {
+      return DEVICE.DESKTOP;
+    }
+    return DEVICE.DESKTOP;
+  };
+  const width = useWindowWidth();
+  // const [device, setDevice] = useState<DEVICE>(defineDevice(width));
   const [respScreens, setRespScreens] = useState<any>(null);
 
   const defineBulletPositions = () => {
     console.log("now");
-    if (device === 0) {
+    const dev = defineDevice(width);
+    // setDevice(dev);
+
+    if (dev === 0) {
       setRespScreens(screens.map((screen) => screen["position_mobile"]));
       setPaginationImg({
         image: paginationObject.pagination.background[2],
@@ -186,14 +198,14 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
           paginationObject.pagination.background_alternative[2],
       });
       console.log(respScreens);
-    } else if (device === 1) {
+    } else if (dev === 1) {
       setRespScreens(screens.map((screen) => screen["position_tablet"]));
       setPaginationImg({
         image: paginationObject.pagination.background[1],
         image_alternative:
           paginationObject.pagination.background_alternative[1],
       });
-    } else if (device === 2) {
+    } else if (dev === 2) {
       setRespScreens(screens.map((screen) => screen["position_desktop"]));
       setPaginationImg({
         image: paginationObject.pagination.background[0],
@@ -210,24 +222,8 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
     }
   };
   const responsiveScreens = useMemo(() => defineBulletPositions, [width]);
+
   useEffect(() => {
-    const handleResize = () => setWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-  useEffect(() => {
-    if (width >= 320 && width <= 768) {
-      setDevice(0);
-    }
-    if (width > 768 && width <= 1580) {
-      setDevice(1);
-    }
-    if (width > 1580) {
-      setDevice(2);
-    }
-    console.log(device);
     responsiveScreens();
   }, [width]);
   return (

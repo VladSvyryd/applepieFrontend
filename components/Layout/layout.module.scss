@@ -29,3 +29,9 @@
   padding-right: 7px;
   font-size: 15px;
 }
+
+.footer {
+  @media (max-width: 1110px) {
+    display: none;
+  }
+}

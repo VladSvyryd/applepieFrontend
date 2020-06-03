@@ -59,6 +59,14 @@ h2 {
   &.title {
     margin-bottom: 30px;
   }
+  @media (max-width: 719px) {
+    font-size: 32px;
+    line-height: 39px;
+  }
+  @media (max-width: 450px) {
+    font-size: 22px;
+    line-height: 29px;
+  }
 }
 h3 {
   font-size: 18px;
@@ -104,7 +112,6 @@ footer.fixed {
 }
 .content-frame-leftHalf {
   max-width: 765px;
-  margin-left: auto;
 }
 .content-frame-rightHalf {
   max-width: 765px;
@@ -173,6 +180,11 @@ button {
 }
 button.medium {
   width: 236px;
+  @media (max-width: 719px) {
+    width: 170px;
+    padding: 9px 10px;
+    font-size: 14px;
+  }
 }
 
 .invertedTextColorBySlide {

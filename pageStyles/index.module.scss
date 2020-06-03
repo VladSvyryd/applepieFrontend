@@ -1,7 +1,15 @@
 @import "../global_variables.scss";
 
 .introDescription {
-  width: 432px;
+  max-width: 432px;
+  @media (max-width: 719px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    margin: auto !important;
+  }
 }
 .introServices {
   font-size: 26px;
@@ -34,17 +42,46 @@
 .introButton {
   margin-top: 26px;
 }
+.descriptionDesktop {
+  @media (max-width: 719px) {
+    display: none;
+  }
+}
 .leftSectionFrame {
   display: flex;
   justify-content: flex-end;
+  @media (max-width: 719px) {
+    flex-direction: column;
+  }
   .leftSection {
     position: relative;
     min-width: 765px;
     margin-left: 25px;
+    @media (max-width: 790px) {
+      padding: 0 15px;
+      min-width: 100%;
+    }
+    @media (max-width: 719px) {
+      margin-left: 0px;
+      min-width: 100%;
+      text-align: center;
+      h2 {
+        max-width: 321px;
+      }
+    }
     .leftPie {
       position: absolute;
       right: -16px;
       top: 50%;
+      margin: auto;
+      max-width: 350px !important;
+      @media (max-width: 719px) {
+        position: initial;
+        right: 0;
+        top: 0;
+        max-width: 100%;
+        height: auto;
+      }
     }
     .leftA,
     .bottomA,
@@ -66,6 +103,10 @@
 .rightSection {
   position: relative;
   overflow: hidden;
+  @media (max-width: 790px) {
+    display: none;
+    flex: 10 0;
+  }
   .rightPie {
     position: absolute;
     left: 0;
@@ -81,11 +122,18 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    justify-items: center;
+  }
 }
 
 .firstSection {
   .left {
     margin: auto 110px auto auto;
+    @media (max-width: 1000px) {
+      margin: auto;
+    }
   }
   .right {
     max-width: 450px;
@@ -201,6 +249,7 @@
 }
 
 .sixthSection {
+  justify-content: center;
   h2 {
     max-width: 900px;
     text-align: center;
