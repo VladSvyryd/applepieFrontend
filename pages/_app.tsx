@@ -7,7 +7,7 @@ import { ApolloClient } from "apollo-client";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 export const link = createHttpLink({
-  uri: "http://localhost:1337/graphql",
+  uri: process.env.BACKEND_STRAPI_CMS,
 });
 
 export const client = new ApolloClient({
