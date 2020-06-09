@@ -27,25 +27,6 @@ const Navigation: React.FC<NavProps> = (props) => {
     setCurrentLanguage(myLang);
     // window.location.replace(`/${Language[myLang]}`);
   }, []);
-  const switchContextByLanguage = (
-    firstLang: any,
-    secLang: any,
-    currentLanguage: Language
-  ) => {
-    let result = firstLang;
-    switch (currentLanguage) {
-      case Language.de:
-        result = firstLang;
-        break;
-      case Language.en:
-        result = secLang;
-        break;
-      default:
-        result = firstLang;
-        break;
-    }
-    return result;
-  };
 
   return (
     <nav className={`${nav.navbar} flexColumns alignCenter content-frame`}>

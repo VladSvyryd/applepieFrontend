@@ -13,7 +13,7 @@ import { AboutProps, HomePage, NavType } from "../../types/types";
 // import gql from "graphql-tag";
 
 const about: NextPage<AboutProps> = (props) => {
-  const { pageFromCMS, navigation } = props;
+  const { pageFromCMS } = props;
   console.log(pageFromCMS);
   return (
     <Layout

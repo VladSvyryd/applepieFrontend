@@ -79,7 +79,11 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
   const setActiveIndex = useStoreActions(
     (actions) => actions.swiper.setActiveIndex
   );
+
   const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
+  const activeIndexHistory = useStoreState(
+    (state) => state.swiper.activeIndexHistory
+  );
   const params: any = {
     direction: "horizontal",
     slidesPerView: 1,
@@ -301,7 +305,8 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
                     <motion.img
                       key={"my_slide-image" + i}
                       animate={
-                        i === selected || i === hoveredIndex
+                        activeIndexHistory.findIndex((li) => li == i) != -1 ||
+                        i === hoveredIndex
                           ? "visible"
                           : "hidden"
                       }
@@ -320,7 +325,8 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
                     />
                     <motion.div
                       animate={
-                        i === selected || i === hoveredIndex
+                        activeIndexHistory.findIndex((li) => li == i) != -1 ||
+                        i === hoveredIndex
                           ? "visible"
                           : "hidden"
                       }
