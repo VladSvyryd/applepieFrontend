@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout/Layout";
 import { NextPage, GetServerSideProps, GetServerSidePropsContext } from "next";
-// import ReviewCarousel from "../../components/Review/ReviewCarousel";
+import ReviewCarousel from "../../components/Review/ReviewCarousel";
 import LanguageSwitcher from "../../components/LanguageSwitcher/LanguageSwitcher2";
 import { client } from "../_app";
 import {
@@ -10,7 +10,6 @@ import {
   navigation_en,
 } from "../../queries/queries";
 import { AboutProps, HomePage, NavType } from "../../types/types";
-// import gql from "graphql-tag";
 
 const about: NextPage<AboutProps> = (props) => {
   const { pageFromCMS } = props;
@@ -35,7 +34,7 @@ const about: NextPage<AboutProps> = (props) => {
           background: "lightblue",
         }}
       >
-        {/* <ReviewCarousel
+        <ReviewCarousel
           reviews={[
             pageFromCMS.reviews[0],
             pageFromCMS.reviews[0],
@@ -43,7 +42,7 @@ const about: NextPage<AboutProps> = (props) => {
           ]}
           img={pageFromCMS.sixth_section?.images[1]}
           buttonImg={pageFromCMS.sixth_section?.images[0]}
-        /> */}
+        />
         <LanguageSwitcher />
       </section>
     </Layout>
