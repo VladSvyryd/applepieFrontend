@@ -9,8 +9,7 @@ import { getLanguage } from "../../util/translation/defineLanguage";
 const Navigation: React.FC<NavProps> = (props) => {
   const {
     logo,
-    links_en,
-    links_de,
+    links,
     logo_inverted,
     plane_inverted,
     plane,
@@ -68,36 +67,34 @@ const Navigation: React.FC<NavProps> = (props) => {
       <div
         className={`alignCenter flexColumns flexEnd indieFlower ${nav.mobile}`}
       >
-        {switchContextByLanguage(links_de, links_en, currentLanguage)?.map(
-          (l: NavLink, index: number) => (
-            <Link
-              key={l.url + "nav"}
-              href={`/[lang]${l.url}`}
-              as={`/${Language[currentLanguage]}${l.url}`}
+        {links?.map((l: NavLink, index: number) => (
+          <Link
+            key={l.url + "nav"}
+            href={`/[lang]${l.url}`}
+            as={`/${Language[currentLanguage]}${l.url}`}
+          >
+            <a
+              className={`${nav.navLink} ${
+                invertedSlides.some((s) => s === activeCarouselIndex)
+                  ? "invertedTextColorBySlide invertedBorderColorBySlide"
+                  : ""
+              }`}
             >
-              <a
-                className={`${nav.navLink} ${
-                  invertedSlides.some((s) => s === activeCarouselIndex)
-                    ? "invertedTextColorBySlide invertedBorderColorBySlide"
-                    : ""
-                }`}
-              >
-                {l.name}
-                {links_de && index === links_de?.length - 1 && (
-                  <img
-                    src={`${
-                      !invertedSlides.some((s) => s === activeCarouselIndex)
-                        ? plane?.url
-                        : plane_inverted?.url
-                    }`}
-                    alt={plane?.alternativeText}
-                    className={nav.plane}
-                  />
-                )}
-              </a>
-            </Link>
-          )
-        )}
+              {l.name}
+              {links && index === links?.length - 1 && (
+                <img
+                  src={`${
+                    !invertedSlides.some((s) => s === activeCarouselIndex)
+                      ? plane?.url
+                      : plane_inverted?.url
+                  }`}
+                  alt={plane?.alternativeText}
+                  className={nav.plane}
+                />
+              )}
+            </a>
+          </Link>
+        ))}
         <LanguageSwitcher />
       </div>
     </nav>

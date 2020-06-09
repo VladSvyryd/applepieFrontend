@@ -4,7 +4,6 @@ import { useState, useEffect, useMemo } from "react";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import car from "./car.module.scss";
 import { useStoreActions, useStoreState } from "../../hooks";
-import { useWindowWidth } from "../../util/useWindowWidth";
 
 export const screens = [
   {
@@ -181,7 +180,8 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
     }
     return DEVICE.DESKTOP;
   };
-  const width = useWindowWidth();
+  const width = useStoreState((state) => state.device.width);
+
   // const [device, setDevice] = useState<DEVICE>(defineDevice(width));
   const [respScreens, setRespScreens] = useState<any>(null);
 

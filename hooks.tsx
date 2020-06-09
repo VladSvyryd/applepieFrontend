@@ -48,3 +48,29 @@ export const useEventListener = (
     [eventName, element] // Re-run if eventName or element changes
   );
 };
+
+export async function fetchAPI(
+  query: string,
+  { variables, preview }: any = {}
+) {
+  const res = await fetch(
+    "http://localhost:1337/graphql" + (preview ? "/preview" : ""),
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query,
+        variables,
+      }),
+    }
+  );
+
+  const json = await res.json();
+  if (json.errors) {
+    console.error(json.errors);
+    throw new Error("Failed to fetch API");
+  }
+  return json.data;
+}

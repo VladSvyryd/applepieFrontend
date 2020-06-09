@@ -1,13 +1,20 @@
 import Layout from "../../components/Layout/Layout";
-import fetch from "isomorphic-unfetch";
-import { NextPage } from "next";
-import ReviewCarousel from "../../components/Review/ReviewCarousel";
-import { AboutProps } from "../../types/types";
+import { NextPage, GetServerSideProps, GetServerSidePropsContext } from "next";
+// import ReviewCarousel from "../../components/Review/ReviewCarousel";
 import LanguageSwitcher from "../../components/LanguageSwitcher/LanguageSwitcher2";
+import { client } from "../_app";
+import {
+  landing_de,
+  landing_en,
+  navigation_de,
+  navigation_en,
+} from "../../queries/queries";
+import { AboutProps, HomePage, NavType } from "../../types/types";
+// import gql from "graphql-tag";
 
 const about: NextPage<AboutProps> = (props) => {
-  const { pageFromCMS } = props;
-
+  const { pageFromCMS, navigation } = props;
+  console.log(pageFromCMS);
   return (
     <Layout
       navigation={props.navigation}
@@ -25,10 +32,10 @@ const about: NextPage<AboutProps> = (props) => {
           height: "100%",
           justifyContent: "center",
           alignItems: "center",
-          background: "black",
+          background: "lightblue",
         }}
       >
-        <ReviewCarousel
+        {/* <ReviewCarousel
           reviews={[
             pageFromCMS.reviews[0],
             pageFromCMS.reviews[0],
@@ -36,26 +43,39 @@ const about: NextPage<AboutProps> = (props) => {
           ]}
           img={pageFromCMS.sixth_section?.images[1]}
           buttonImg={pageFromCMS.sixth_section?.images[0]}
-        />
+        /> */}
         <LanguageSwitcher />
       </section>
     </Layout>
   );
 };
-about.getInitialProps = async (ctx) => {
-  const res = await fetch(`${process.env.BACKEND_STRAPI_CMS}/navigation`);
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  // const res = await fetch(`${process.env.BACKEND_STRAPI_CMS}/navigation`);
 
-  const navigationJson = await res.json();
-  const res1 = await fetch(
-    `${process.env.BACKEND_STRAPI_CMS}/home-${ctx.query.lang}`
-  );
+  // const navigationJson = await res.json();
+  // const res1 = await fetch(
+  //   `${process.env.BACKEND_STRAPI_CMS}/home-${ctx.query.lang}`
+  // );
+  let response;
+  let response1;
+  if (context.query.lang === "de") {
+    response = await client.query({ query: landing_de });
+    response1 = await client.query({ query: navigation_de });
+  } else {
+    response = await client.query({ query: landing_en });
+    response1 = await client.query({ query: navigation_en });
+  }
 
-  const pageJSON = await res1.json();
+  // const pageJSON = await res1.json();
   // console.log(json);
-
+  console.log({ response });
   return {
-    navigation: navigationJson,
-    pageFromCMS: pageJSON,
+    props: {
+      navigation: response1.data.navigation as NavType,
+      pageFromCMS: response.data.homeDe as HomePage,
+    },
   };
 };
 export default about;

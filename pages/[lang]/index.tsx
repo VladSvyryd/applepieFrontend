@@ -1,9 +1,8 @@
 import { useState } from "react";
 import withTranslate from "../../components/HOC/withTranslate";
 import Layout from "../../components/Layout/Layout";
-import { NextPage } from "next";
-import fetch from "isomorphic-unfetch";
-import { HomeProps } from "../../types/types";
+import { NextPage, NextPageContext } from "next";
+import { HomeProps, NavType, HomePage } from "../../types/types";
 
 import index from "../../pageStyles/index.module.scss";
 import { motion } from "framer-motion";
@@ -11,7 +10,7 @@ import MarkdownView from "react-showdown";
 import SendForm from "../../components/Form/SendForm";
 import dynamic from "next/dynamic";
 const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
-  ssr: false,
+  ssr: true,
 });
 const DeviceWatcher = dynamic(
   () => import("../../components/DeviceWatcher/DeviceWatcher"),
@@ -21,11 +20,17 @@ const DeviceWatcher = dynamic(
 );
 import ReviewCarousel from "../../components/Review/ReviewCarousel";
 import { useStoreState } from "easy-peasy";
+import {
+  landing_de,
+  landing_en,
+  navigation_de,
+  navigation_en,
+} from "../../queries/queries";
+import { client } from "../_app";
 
 const Page: NextPage<HomeProps> = (props) => {
   const { pageFromCMS } = props;
   const [activeServiceIndex, setIndex] = useState(0);
-
   const handleServiceHover = (index: number) => {
     setIndex(index);
   };
@@ -34,7 +39,7 @@ const Page: NextPage<HomeProps> = (props) => {
   };
   const deviceWidth = useStoreState((state) => state.device.width);
 
-  return (
+  return pageFromCMS ? (
     <Layout
       navigation={props.navigation}
       {...props}
@@ -54,14 +59,22 @@ const Page: NextPage<HomeProps> = (props) => {
           className={`flexColumns alignCenter`}
           data-swiper-parallax="1500"
           style={{
-            backgroundImage: `url(${pageFromCMS.intro.pictures[7]?.url})`,
+            backgroundImage: `url(${
+              pageFromCMS.intro.pictures && pageFromCMS.intro.pictures[7]?.url
+            })`,
             backgroundSize: "contain",
           }}
         >
           <div
             className={`smallitem responsiveSlide frameBottomTop ${index.leftSectionFrame}`}
             style={{
-              backgroundImage: `url(${pageFromCMS.intro.pictures[4].url}), url(${pageFromCMS.intro.pictures[5].url}),url(${pageFromCMS.intro.pictures[3].url})`,
+              backgroundImage: `url(${
+                pageFromCMS.intro.pictures && pageFromCMS.intro.pictures[4]?.url
+              }), url(${
+                pageFromCMS.intro.pictures && pageFromCMS.intro.pictures[5]?.url
+              }),url(${
+                pageFromCMS.intro.pictures && pageFromCMS.intro.pictures[3]?.url
+              })`,
               backgroundPosition:
                 "top 0 right 100px, left center, right 100px bottom 0",
               backgroundRepeat: "no-repeat",
@@ -87,16 +100,22 @@ const Page: NextPage<HomeProps> = (props) => {
                 <img
                   src={`${
                     deviceWidth <= 719
-                      ? pageFromCMS.intro.pictures[8].url
-                      : pageFromCMS.intro.pictures[0].url
+                      ? pageFromCMS.intro.pictures &&
+                        pageFromCMS.intro.pictures[8]?.url
+                      : pageFromCMS.intro.pictures &&
+                        pageFromCMS.intro.pictures[0]?.url
                   }`}
-                  alt={pageFromCMS.intro.pictures[0].alternativeText}
+                  alt={
+                    pageFromCMS.intro.pictures &&
+                    pageFromCMS.intro.pictures[0]?.alternativeText
+                  }
                   className={index.leftPie}
                   style={{
                     marginTop: `-${
                       deviceWidth <= 719
                         ? 0
-                        : pageFromCMS.intro.pictures[0].height / 2
+                        : pageFromCMS.intro.pictures &&
+                          pageFromCMS.intro.pictures[0]?.height / 2
                     }px`,
                   }}
                   data-swiper-parallax-opacity="0"
@@ -119,25 +138,44 @@ const Page: NextPage<HomeProps> = (props) => {
           >
             <div className={`content-frame-rightHalf ${index.height100}`}>
               <img
-                src={`${pageFromCMS.intro?.pictures[1]?.url}`}
-                alt={pageFromCMS.intro?.pictures[1]?.alternativeText}
+                src={`${
+                  pageFromCMS.intro.pictures &&
+                  pageFromCMS.intro?.pictures[1]?.url
+                }`}
+                alt={
+                  pageFromCMS.intro.pictures &&
+                  pageFromCMS.intro?.pictures[1]?.alternativeText
+                }
                 className={index.rightPie}
                 style={{
-                  marginTop: `-${pageFromCMS.intro?.pictures[1]?.height / 2}px`,
+                  marginTop: `-${
+                    pageFromCMS.intro.pictures &&
+                    pageFromCMS.intro?.pictures[1]?.height / 2
+                  }px`,
                 }}
                 data-swiper-parallax-opacity="0"
               />
 
               <motion.img
                 animate={{ rotate: `${activeServiceIndex * 12}deg` }}
-                src={`${pageFromCMS.intro?.pictures[6]?.url}`}
-                alt={pageFromCMS.intro?.pictures[6]?.alternativeText}
+                src={`${
+                  pageFromCMS.intro.pictures &&
+                  pageFromCMS.intro?.pictures[6]?.url
+                }`}
+                alt={
+                  pageFromCMS.intro.pictures &&
+                  pageFromCMS.intro?.pictures[6]?.alternativeText
+                }
                 className={index.orbit}
                 style={{
                   marginTop: `-${
+                    pageFromCMS.intro.pictures &&
                     pageFromCMS?.intro?.pictures[6]?.height / 2
                   }px`,
-                  left: `-${pageFromCMS?.intro?.pictures[6]?.width / 2}px`,
+                  left: `-${
+                    pageFromCMS.intro.pictures &&
+                    pageFromCMS?.intro?.pictures[6]?.width / 2
+                  }px`,
                 }}
                 data-swiper-parallax-opacity="0"
                 transition={{ type: "spring", damping: 300 }}
@@ -265,20 +303,21 @@ const Page: NextPage<HomeProps> = (props) => {
               </h3>
             </div>
             <div className={index.cardsGrid}>
-              {pageFromCMS.forth_section?.cards?.map((card) => (
-                <div key={card.title}>
-                  <img
-                    src={`${card.image.url}`}
-                    alt={card.image.alternativeText}
-                  />
-                  <div className={index.content}>
-                    <h3 className={index.title + " indieFlower"}>
-                      {card.title}
-                    </h3>
-                    <p>{card.subtitle}</p>
+              {pageFromCMS.forth_section.cards.length > 0 &&
+                pageFromCMS.forth_section?.cards?.map((card) => (
+                  <div key={card.title}>
+                    <img
+                      src={`${card.image?.url}`}
+                      alt={card.image?.alternativeText}
+                    />
+                    <div className={index.content}>
+                      <h3 className={index.title + " indieFlower"}>
+                        {card.title}
+                      </h3>
+                      <p>{card.subtitle}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
             <div className={index.footer}>
               <div className={index.zebra + " indieFlower"}>
@@ -396,18 +435,25 @@ const Page: NextPage<HomeProps> = (props) => {
         <div>Slide 9</div>
       </Carousel>
     </Layout>
-  );
+  ) : null;
 };
-Page.getInitialProps = async (ctx) => {
-  const res = await fetch(`${process.env.BACKEND_STRAPI_CMS}/navigation`);
-  const navigationJson = await res.json();
-  const res1 = await fetch(
-    `${process.env.BACKEND_STRAPI_CMS}/home-${ctx.query.lang}`
-  );
-  const pageJSON = await res1.json();
+Page.getInitialProps = async (context: NextPageContext) => {
+  let response;
+  let response1;
+  if (context.query.lang === "de") {
+    response = await client.query({ query: landing_de });
+    response1 = await client.query({ query: navigation_de });
+  } else {
+    response = await client.query({ query: landing_en });
+    response1 = await client.query({ query: navigation_en });
+  }
+
+  // const pageJSON = await res1.json();
+  // console.log(json);
+  console.log({ response });
   return {
-    navigation: navigationJson,
-    pageFromCMS: pageJSON,
+    navigation: response1.data.navigation as NavType,
+    pageFromCMS: response.data.homeDe as HomePage,
   };
 };
 export default withTranslate(Page); // <- component is wrapped with a HOC

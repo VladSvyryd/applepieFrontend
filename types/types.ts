@@ -58,6 +58,7 @@ export type NavType = {
   logo?: Picture;
   links_de?: NavLink[];
   links_en?: NavLink[];
+  links?: NavLink[];
   logo_inverted?: Picture;
   plane?: Picture;
   plane_inverted?: Picture;
@@ -121,7 +122,7 @@ export interface Idea {
   button: Button;
 }
 export interface Intro {
-  pictures: Picture[];
+  pictures?: Picture[];
   title: string;
   description: string;
   logo: Picture;
