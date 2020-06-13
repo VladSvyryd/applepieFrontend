@@ -12,12 +12,7 @@ import dynamic from "next/dynamic";
 const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
   ssr: true,
 });
-const DeviceWatcher = dynamic(
-  () => import("../../components/DeviceWatcher/DeviceWatcher"),
-  {
-    ssr: false,
-  }
-);
+
 import ReviewCarousel from "../../components/Review/ReviewCarousel";
 import { useStoreState } from "easy-peasy";
 import {
@@ -42,13 +37,11 @@ const Page: NextPage<HomeProps> = (props) => {
   return pageFromCMS ? (
     <Layout
       navigation={props.navigation}
-      {...props}
       horizontalFooter
       known_by={pageFromCMS.known_by}
       social_links={pageFromCMS.social_links}
       known_by_title={pageFromCMS.known_by_title}
     >
-      <DeviceWatcher />
       <h1 className="visuallyHidden">Applepie</h1>
       <Carousel
         paginationObject={{
@@ -69,11 +62,17 @@ const Page: NextPage<HomeProps> = (props) => {
             className={`smallitem responsiveSlide frameBottomTop ${index.leftSectionFrame}`}
             style={{
               backgroundImage: `url(${
-                pageFromCMS.intro.pictures && pageFromCMS.intro.pictures[4]?.url
+                pageFromCMS.intro.pictures && deviceWidth >= 1400
+                  ? pageFromCMS.intro.pictures[4]?.url
+                  : ""
               }), url(${
-                pageFromCMS.intro.pictures && pageFromCMS.intro.pictures[5]?.url
+                pageFromCMS.intro.pictures && deviceWidth >= 1580
+                  ? pageFromCMS.intro.pictures[5]?.url
+                  : ""
               }),url(${
-                pageFromCMS.intro.pictures && pageFromCMS.intro.pictures[3]?.url
+                pageFromCMS.intro.pictures && deviceWidth >= 1580
+                  ? pageFromCMS.intro.pictures[3]?.url
+                  : ""
               })`,
               backgroundPosition:
                 "top 0 right 100px, left center, right 100px bottom 0",
@@ -156,30 +155,32 @@ const Page: NextPage<HomeProps> = (props) => {
                 data-swiper-parallax-opacity="0"
               />
 
-              <motion.img
-                animate={{ rotate: `${activeServiceIndex * 12}deg` }}
-                src={`${
-                  pageFromCMS.intro.pictures &&
-                  pageFromCMS.intro?.pictures[6]?.url
-                }`}
-                alt={
-                  pageFromCMS.intro.pictures &&
-                  pageFromCMS.intro?.pictures[6]?.alternativeText
-                }
-                className={index.orbit}
-                style={{
-                  marginTop: `-${
+              {deviceWidth >= 1400 ? (
+                <motion.img
+                  animate={{ rotate: `${activeServiceIndex * 12}deg` }}
+                  src={`${
                     pageFromCMS.intro.pictures &&
-                    pageFromCMS?.intro?.pictures[6]?.height / 2
-                  }px`,
-                  left: `-${
+                    pageFromCMS.intro?.pictures[6]?.url
+                  }`}
+                  alt={
                     pageFromCMS.intro.pictures &&
-                    pageFromCMS?.intro?.pictures[6]?.width / 2
-                  }px`,
-                }}
-                data-swiper-parallax-opacity="0"
-                transition={{ type: "spring", damping: 300 }}
-              />
+                    pageFromCMS.intro?.pictures[6]?.alternativeText
+                  }
+                  className={index.orbit}
+                  style={{
+                    marginTop: `-${
+                      pageFromCMS.intro.pictures &&
+                      pageFromCMS?.intro?.pictures[6]?.height / 2
+                    }px`,
+                    left: `-${
+                      pageFromCMS.intro.pictures &&
+                      pageFromCMS?.intro?.pictures[6]?.width / 2
+                    }px`,
+                  }}
+                  data-swiper-parallax-opacity="0"
+                  transition={{ type: "spring", damping: 300 }}
+                />
+              ) : null}
               <div
                 className={`${index.introServices} + ${index.verticalMargin}`}
               >
@@ -230,7 +231,6 @@ const Page: NextPage<HomeProps> = (props) => {
             <div className={index.ul}>
               <MarkdownView
                 markdown={pageFromCMS.first_section?.content_text}
-                options={{ tables: true, emoji: true }}
               />
             </div>
           </div>
@@ -249,7 +249,6 @@ const Page: NextPage<HomeProps> = (props) => {
             <div className={index.ul}>
               <MarkdownView
                 markdown={pageFromCMS.second_section?.content_text}
-                options={{ tables: true, emoji: true }}
               />
             </div>
           </div>

@@ -1,7 +1,7 @@
 import Layout from "../../components/Layout/Layout";
 import { NextPage, GetServerSideProps, GetServerSidePropsContext } from "next";
 import ReviewCarousel from "../../components/Review/ReviewCarousel";
-import LanguageSwitcher from "../../components/LanguageSwitcher/LanguageSwitcher2";
+import { LanguageSwitcher } from "../../components/LanguageSwitcher/LanguageSwitcher";
 import { client } from "../_app";
 import {
   landing_de,
@@ -17,7 +17,6 @@ const about: NextPage<AboutProps> = (props) => {
   return (
     <Layout
       navigation={props.navigation}
-      {...props}
       horizontalFooter
       known_by={pageFromCMS.known_by}
       social_links={pageFromCMS.social_links}

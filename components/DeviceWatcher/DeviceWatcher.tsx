@@ -1,20 +1,19 @@
 import { useStoreActions } from "../../hooks";
 import { useEffect } from "react";
-import { useWindowWidth } from "../../util/useWindowWidth";
+import { useWindowProps } from "../../util/useWindowProps";
 
 export default () => {
-  const width = useWindowWidth();
-  const setCurrentDeviceWidth = useStoreActions(
-    (actions) => actions.device.setCurrentDeviceWidth
+  const { width, height } = useWindowProps();
+  const setCurrentDeviceProps = useStoreActions(
+    (actions) => actions.device.setCurrentDeviceProps
   );
-  const defineBulletPositions = () => {
-    setCurrentDeviceWidth(width);
-    console.log(width);
+  const updateWindowProps = () => {
+    setCurrentDeviceProps({ width, height });
   };
 
   useEffect(() => {
-    defineBulletPositions();
-  }, [width]);
+    updateWindowProps();
+  }, [width, height]);
 
-  return <div></div>;
+  return <></>;
 };

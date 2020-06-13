@@ -6,6 +6,13 @@ import { ApolloClient } from "apollo-client";
 // import Loading from "../components/Loading/Loading";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
+import dynamic from "next/dynamic";
+const DeviceWatcher = dynamic(
+  () => import("../components/DeviceWatcher/DeviceWatcher"),
+  {
+    ssr: false,
+  }
+);
 export const link = createHttpLink({
   uri: process.env.BACKEND_STRAPI_CMS,
 });
@@ -19,6 +26,7 @@ export default function MyApp({ Component, pageProps, router }: any) {
     <StoreProvider store={store}>
       <Component {...pageProps} key={router.route} />
       {/* <Loading /> */}
+      <DeviceWatcher />
     </StoreProvider>
   );
 }

@@ -20,6 +20,7 @@ const Layout: React.FC<LayoutProps> = ({
   const activeCarouselIndex = useStoreState(
     (state) => state.swiper.activeIndex
   );
+  console.log("double");
   const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
   return (
     <div style={layoutStyle}>
@@ -46,15 +47,13 @@ const Layout: React.FC<LayoutProps> = ({
             >
               <div className="smallitem ">
                 <div className={`flexColumns alignCenter`}>
-                  <span
+                  {/* <span
                     className={`${layout?.horizontalSpan} ${
                       invertedSlides.some((e) => e === activeCarouselIndex)
                         ? "invertedTextColorBySlide"
                         : ""
                     }`}
-                  >
-                    {known_by_title}
-                  </span>
+                  ></span> */}
                   <a href="" className={`${layout.horizontalSpan}`}>
                     <img
                       src={`${

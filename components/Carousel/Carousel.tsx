@@ -72,7 +72,6 @@ export const screens = [
 ];
 const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
   const [swiper, setSwiper] = useState<SwiperInstance>(null);
-  const [s, ses] = useState({ isBeginning: true, isEnd: false });
   const [selected, setSelected] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState(-1);
 
@@ -104,19 +103,10 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
     containerClass: "myCustomSwiper",
     getSwiper: setSwiper,
   };
-  const goNext = () => {
-    swiper && swiper.slideNext();
-  };
 
-  const goPrev = () => {
-    swiper && swiper.slidePrev();
-  };
   const updateCarouselState = () => {
     // swiper && setCarouselState(swiper.isBeginning);
-    swiper !== null &&
-      ses(() => {
-        return { isBeginning: swiper.isBeginning, isEnd: swiper.isEnd };
-      });
+
     if (swiper !== null) {
       setSelected(swiper.activeIndex);
       setActiveIndex(swiper.activeIndex);
@@ -125,16 +115,6 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
   useEffect(() => {
     swiper && swiper.on("slideChange", updateCarouselState);
   }, [swiper]);
-  const arrowAnim = {
-    active: (x: number) => ({
-      x: x,
-      transition: { duration: 0.4, yoyo: Infinity, ease: "easeIn" },
-    }),
-    passive: () => ({
-      x: 0,
-      transition: { duration: 0 },
-    }),
-  };
 
   const bulletAnim = {
     visible: () => ({
@@ -233,28 +213,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
   return (
     <div className="responsiveSlide">
       <Swiper {...params}>{children}</Swiper>
-      <motion.div
-        className={`swiper-button-prev ${
-          s.isBeginning && "swiper-button-disabled"
-        }`}
-        onClick={goPrev}
-        animate={!s.isBeginning && s.isEnd ? "active" : "passive"}
-        variants={arrowAnim}
-        custom={-5}
-      >
-        {s.isEnd && !s.isBeginning && (
-          <div className={`swiper-button-prev`}></div>
-        )}
-      </motion.div>
-      <motion.div
-        className={`swiper-button-next ${s.isEnd && "swiper-button-disabled"}`}
-        onClick={goNext}
-        animate={s.isBeginning && !s.isEnd ? "active" : "passive"}
-        variants={arrowAnim}
-        custom={5}
-      >
-        {s.isBeginning && <div className={`swiper-button-next`}></div>}
-      </motion.div>
+
       <AnimateSharedLayout>
         <div className={car.paginationContainer}>
           <ol

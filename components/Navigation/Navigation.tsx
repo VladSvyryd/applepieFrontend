@@ -1,10 +1,10 @@
 import React from "react";
-import { useStoreState, useStoreActions } from "../../hooks";
+import { useStoreState } from "../../hooks";
 import Link from "next/link";
 import { Language, NavLink, NavProps } from "../../types/types";
-import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
+import { LanguageSwitcher } from "../LanguageSwitcher/LanguageSwitcher";
 import nav from "./nav.module.scss";
-import { getLanguage } from "../../util/translation/defineLanguage";
+import { MobileNavigation } from "../mobileNavigation/Navigation";
 
 const Navigation: React.FC<NavProps> = (props) => {
   const {
@@ -18,15 +18,6 @@ const Navigation: React.FC<NavProps> = (props) => {
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
   );
-
-  const setCurrentLanguage = useStoreActions(
-    (actions) => actions.language.setCurrentLanguage
-  );
-  React.useEffect(() => {
-    const myLang = getLanguage();
-    setCurrentLanguage(myLang);
-    // window.location.replace(`/${Language[myLang]}`);
-  }, []);
 
   return (
     <nav className={`${nav.navbar} flexColumns alignCenter content-frame`}>
@@ -78,6 +69,7 @@ const Navigation: React.FC<NavProps> = (props) => {
         ))}
         <LanguageSwitcher />
       </div>
+      <MobileNavigation />
     </nav>
   );
 };

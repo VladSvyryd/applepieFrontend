@@ -1,10 +1,11 @@
 import { useStoreActions, useStoreState } from "../../hooks";
 import { useRouter } from "next/router";
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { Language, locales } from "../../types/types";
 import { motion } from "framer-motion";
+import { getLanguage } from "../../util/translation/defineLanguage";
 
-export default () => {
+export const LanguageSwitcher = () => {
   const router = useRouter();
   // const router = useRouter();
   const currentLanguage = useStoreState(
@@ -37,9 +38,15 @@ export default () => {
   const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
 
   const langAnim = {
-    in: { opacity: 0, y: +15 },
+    in: { opacity: 0, y: 25 },
     out: { opacity: 1, y: 0 },
   };
+  useEffect(() => {
+    console.log("def Lang in switcher" + String(router?.query?.lang));
+    const myLang = getLanguage(String(router?.query?.lang));
+    setCurrentLanguage(myLang);
+    console.log({ myLang });
+  }, []);
   return (
     <div
       style={{
@@ -53,16 +60,13 @@ export default () => {
     >
       <div
         onClick={() => setToggle(!toggle)}
-        style={{
-          textDecoration: `underline`,
-        }}
         className={`${
           invertedSlides.some((s) => s === activeCarouselIndex)
             ? "invertedTextColorBySlide"
             : ""
-        }`}
+        } langSwitchButton`}
       >
-        {String(Language[currentLanguage]).toUpperCase()}
+        <span> {String(Language[currentLanguage]).toUpperCase()}</span>
       </div>
       <motion.form
         initial="in"
@@ -74,7 +78,7 @@ export default () => {
           alignItems: "center",
           lineHeight: "1",
           position: "absolute",
-          bottom: "20px",
+          bottom: "6px",
         }}
         className={`${
           invertedSlides.some((s) => s === activeCarouselIndex)

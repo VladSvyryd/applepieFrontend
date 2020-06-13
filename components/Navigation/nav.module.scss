@@ -28,7 +28,7 @@
 }
 
 .mobile {
-  @media (max-width: 1110px) {
-    display: none;
+  @media (max-width: 1400px) {
+    display: none !important;
   }
 }
