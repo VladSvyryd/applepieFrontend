@@ -1,10 +1,9 @@
-import { useRef, useState, useEffect, RefObject } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useCycle } from "framer-motion";
 import { MenuToggle } from "./MenuToggle";
 import { Navigation } from "./NavigationList";
 import { useStoreState } from "easy-peasy";
 import nav from "./nav.module.scss";
-import { useOnClickOutside } from "../../hooks";
 
 export const MobileNavigation = () => {
   const width = useStoreState((state) => state.device.width);
@@ -34,7 +33,7 @@ export const MobileNavigation = () => {
         restDelta: 2,
       },
     }),
-    closed: (custom: { width: number; height: number }) => ({
+    closed: (_custom: { width: number; height: number }) => ({
       clipPath: `circle(0px at calc(100% - 52px)  40px)`,
       transition: {
         delay: 0.3,
