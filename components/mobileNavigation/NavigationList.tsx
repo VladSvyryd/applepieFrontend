@@ -40,4 +40,4 @@ export const Navigation: FC<NavigationProps> = ({ links }) => {
   );
 };
 
-const itemIds: number[] = [0, 1, 2, 3, 4];
+// const itemIds: number[] = [0, 1, 2, 3, 4];
