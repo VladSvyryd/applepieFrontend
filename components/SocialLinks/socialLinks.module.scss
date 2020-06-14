@@ -1,0 +1,23 @@
+@import "./global_variables.scss";
+
+.linkWithBorder {
+  border-right: 1px solid $accent-color;
+  margin-right: 7px;
+  padding-right: 7px;
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 1;
+  &:last-child {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+  img {
+    margin-top: 5px;
+  }
+}
+
+.container {
+  position: absolute;
+  bottom: 3%;
+}

@@ -21,6 +21,7 @@ export type NavProps = {
   navigation: NavType;
   activeCarouselIndex: number;
   invertedSlides: number[];
+  social_links: Link[];
 };
 export type CarouselProps = {
   children: ReactNode;
@@ -62,6 +63,7 @@ export type NavType = {
   logo_inverted?: Picture;
   plane?: Picture;
   plane_inverted?: Picture;
+  social_links: Link[];
 };
 
 export interface NavLink {

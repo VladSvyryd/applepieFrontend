@@ -4,11 +4,16 @@ import { MenuToggle } from "./MenuToggle";
 import { Navigation } from "./NavigationList";
 import { useStoreState } from "easy-peasy";
 import nav from "./nav.module.scss";
-import { NavLink } from "../../types/types";
+import { NavLink, Link } from "../../types/types";
+import { SocialLinks } from "../SocialLinks/SocialLinks";
 type MobileNavigationProps = {
   links: NavLink[];
+  social_links: Link[];
 };
-export const MobileNavigation: FC<MobileNavigationProps> = ({ links }) => {
+export const MobileNavigation: FC<MobileNavigationProps> = ({
+  links,
+  social_links,
+}) => {
   const width = useStoreState((state) => state.device.width);
   const height = useStoreState((state) => state.device.height);
   const [currentWindow, setCurrentWindow] = useState({
@@ -69,6 +74,7 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({ links }) => {
           custom={currentWindow}
         />
         <Navigation links={links} />
+        <SocialLinks links={social_links} />
       </motion.nav>
       <MenuToggle toggle={() => onClick()} isOpen={isOpen} />
     </>

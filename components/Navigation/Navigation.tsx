@@ -14,11 +14,10 @@ const Navigation: React.FC<NavProps> = (props) => {
     plane_inverted,
     plane,
   } = props.navigation;
-  const { activeCarouselIndex, invertedSlides } = props;
+  const { activeCarouselIndex, invertedSlides, social_links } = props;
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
   );
-
   return (
     <nav className={`${nav.navbar} flexColumns alignCenter content-frame`}>
       <div className={""}>
@@ -69,7 +68,10 @@ const Navigation: React.FC<NavProps> = (props) => {
         ))}
         <LanguageSwitcher />
       </div>
-      <MobileNavigation links={typeof links !== "undefined" ? links : []} />
+      <MobileNavigation
+        links={typeof links !== "undefined" ? links : []}
+        social_links={social_links}
+      />
     </nav>
   );
 };

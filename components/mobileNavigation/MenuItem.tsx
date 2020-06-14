@@ -19,10 +19,10 @@ const variants = {
   },
 };
 
-const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"];
+// const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"];
 type MenuItemProps = { index: number };
 export const MenuItem: FC<MenuItemProps> = (props) => {
-  const style = { border: `2px solid ${colors[props.index]}` };
+  // const style = { border: `2px solid ${colors[props.index]}` };
   return (
     <motion.li
       variants={variants}
@@ -30,10 +30,7 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
       whileTap={{ scale: 0.95 }}
       className={nav.li}
     >
-      <div className={nav.icon} style={style} />
-      <div className={nav.text} style={style}>
-        {props.children}
-      </div>
+      <div className={nav.text}>{props.children}</div>
     </motion.li>
   );
 };

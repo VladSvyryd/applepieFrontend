@@ -19,7 +19,6 @@ const Layout: React.FC<LayoutProps> = ({
   const activeCarouselIndex = useStoreState(
     (state) => state.swiper.activeIndex
   );
-  console.log("double");
   const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
   return (
     <div style={layoutStyle}>
@@ -33,6 +32,7 @@ const Layout: React.FC<LayoutProps> = ({
           navigation={navigation}
           activeCarouselIndex={activeCarouselIndex}
           invertedSlides={invertedSlides}
+          social_links={social_links}
         />
       </header>
       {children}
