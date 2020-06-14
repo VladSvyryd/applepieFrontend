@@ -47,22 +47,27 @@ export const MobileNavigation = () => {
     setCurrentWindow({ width: width, height: height });
     console.log({ currentWindow });
   }, [width, height]);
-
+  const reveal = {
+    open: { display: "flex" },
+    closed: { display: "none", transition: { when: "afterChildren" } },
+  };
   return (
-    <motion.nav
-      initial={false}
-      animate={isOpen ? "open" : "closed"}
-      custom={currentWindow}
-      className={nav.nav}
-      ref={node}
-    >
-      <motion.div
-        variants={sidebar}
-        className={nav.background}
-        custom={currentWindow}
-      />
-      <Navigation />
+    <>
+      <motion.nav
+        className={nav.nav + " " + nav.onMobile}
+        initial={false}
+        animate={isOpen ? "open" : "closed"}
+        variants={reveal}
+        ref={node}
+      >
+        <motion.div
+          variants={sidebar}
+          className={nav.background}
+          custom={currentWindow}
+        />
+        <Navigation />
+      </motion.nav>
       <MenuToggle toggle={() => onClick()} isOpen={isOpen} />
-    </motion.nav>
+    </>
   );
 };

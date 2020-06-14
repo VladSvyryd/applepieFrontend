@@ -62,7 +62,7 @@
     }
 
     @media (max-width: 500px) {
-      padding: 0 15px;
+      padding: 0;
       min-width: 100%;
     }
     @media (max-width: 719px) {
@@ -85,6 +85,9 @@
         top: 0;
         max-width: 100%;
         height: auto;
+      }
+      @media (max-width: 500px) {
+        max-width: 300px !important;
       }
     }
     .leftA,
