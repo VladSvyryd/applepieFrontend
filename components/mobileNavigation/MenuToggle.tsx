@@ -16,10 +16,14 @@ type MenuToggleProps = {
   isOpen: boolean;
 };
 export const MenuToggle: FC<MenuToggleProps> = ({ toggle, isOpen }) => (
-  <div onClick={toggle} className={nav.button + " " + nav.onMobile}>
+  <motion.div
+    onClick={toggle}
+    className={nav.button + " " + nav.onMobile}
+    initial={false}
+    animate={isOpen ? "open" : "closed"}
+  >
     <svg width="23" height="23" viewBox="0 0 23 23">
       <Path
-        d="M 2 2.5 L 20 2.5"
         variants={{
           closed: { d: "M 2 2.5 L 20 2.5" },
           open: { d: "M 3 16.5 L 17 2.5" },
@@ -36,7 +40,7 @@ export const MenuToggle: FC<MenuToggleProps> = ({ toggle, isOpen }) => (
         transition={{ duration: 0.1 }}
       />
       <Path
-        d="M 2 16.346 L 20 16.346"
+        initial={{ d: "M 2 16.346 L 20 16.346" }}
         variants={{
           closed: {
             d: "M 2 16.346 L 20 16.346",
@@ -46,5 +50,5 @@ export const MenuToggle: FC<MenuToggleProps> = ({ toggle, isOpen }) => (
         isOpen={isOpen}
       />
     </svg>
-  </div>
+  </motion.div>
 );
