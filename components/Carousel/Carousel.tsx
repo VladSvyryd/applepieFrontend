@@ -83,6 +83,9 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
   const activeIndexHistory = useStoreState(
     (state) => state.swiper.activeIndexHistory
   );
+  const width = useStoreState((state) => state.device.width);
+
+  const [respScreens, setRespScreens] = useState<any>(null);
   const params: any = {
     direction: "horizontal",
     slidesPerView: 1,
@@ -94,7 +97,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
     mousewheel: true,
     roundLengths: true,
     parallax: true,
-    threshold: 100,
+    threshold: width >= 1000 ? 100 : 30,
     // touchMoveStopPropagation: true,
     parallaxEl: {
       el: ".parallax-bg",
@@ -164,10 +167,6 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
     }
     return DEVICE.DESKTOP;
   };
-  const width = useStoreState((state) => state.device.width);
-
-  // const [device, setDevice] = useState<DEVICE>(defineDevice(width));
-  const [respScreens, setRespScreens] = useState<any>(null);
 
   const defineBulletPositions = () => {
     console.log("now");
