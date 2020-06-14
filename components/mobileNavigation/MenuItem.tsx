@@ -31,7 +31,9 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
       className={nav.li}
     >
       <div className={nav.icon} style={style} />
-      <div className={nav.text} style={style} />
+      <div className={nav.text} style={style}>
+        {props.children}
+      </div>
     </motion.li>
   );
 };

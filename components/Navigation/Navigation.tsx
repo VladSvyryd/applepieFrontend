@@ -69,7 +69,7 @@ const Navigation: React.FC<NavProps> = (props) => {
         ))}
         <LanguageSwitcher />
       </div>
-      <MobileNavigation />
+      <MobileNavigation links={typeof links !== "undefined" ? links : []} />
     </nav>
   );
 };

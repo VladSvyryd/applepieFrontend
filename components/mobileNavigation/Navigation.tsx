@@ -1,11 +1,14 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, FC } from "react";
 import { motion, useCycle } from "framer-motion";
 import { MenuToggle } from "./MenuToggle";
 import { Navigation } from "./NavigationList";
 import { useStoreState } from "easy-peasy";
 import nav from "./nav.module.scss";
-
-export const MobileNavigation = () => {
+import { NavLink } from "../../types/types";
+type MobileNavigationProps = {
+  links: NavLink[];
+};
+export const MobileNavigation: FC<MobileNavigationProps> = ({ links }) => {
   const width = useStoreState((state) => state.device.width);
   const height = useStoreState((state) => state.device.height);
   const [currentWindow, setCurrentWindow] = useState({
@@ -65,7 +68,7 @@ export const MobileNavigation = () => {
           className={nav.background}
           custom={currentWindow}
         />
-        <Navigation />
+        <Navigation links={links} />
       </motion.nav>
       <MenuToggle toggle={() => onClick()} isOpen={isOpen} />
     </>
