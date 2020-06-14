@@ -277,8 +277,16 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
                       alt={paginationBullet.image?.alternativeText}
                       className={car.bullet}
                       style={{
-                        width: `${paginationBullet.image?.width * 1.5}px`,
-                        height: `${paginationBullet.image?.height * 1.5}px`,
+                        width: `${
+                          width >= 768
+                            ? paginationBullet.image?.width * 1.5
+                            : paginationBullet.image?.width * 0.9
+                        }px`,
+                        height: `${
+                          width >= 768
+                            ? paginationBullet.image?.height * 1.5
+                            : paginationBullet.image?.height * 0.9
+                        }px`,
                       }}
                     />
                     <motion.div
