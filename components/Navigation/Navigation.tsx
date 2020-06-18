@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Language, NavLink, NavProps } from "../../types/types";
 import { LanguageSwitcher } from "../LanguageSwitcher/LanguageSwitcher";
 import nav from "./nav.module.scss";
-import { MobileNavigation } from "../mobileNavigation/Navigation";
+import { MobileNavigation } from "../MobileNavigation/Navigation";
 
 const Navigation: React.FC<NavProps> = (props) => {
   const {
@@ -29,7 +29,7 @@ const Navigation: React.FC<NavProps> = (props) => {
                   ? logo?.url
                   : logo_inverted?.url
               }`}
-              className="withHover"
+              className={`withHover ${nav.logo}`}
               alt={logo?.alternativeText}
             />
           </Link>

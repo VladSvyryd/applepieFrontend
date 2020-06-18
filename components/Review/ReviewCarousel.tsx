@@ -54,11 +54,15 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
   return (
     <div
       className={review.swiper}
-      style={{
-        backgroundImage: `url(${img})`,
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "top 0% left 28%",
-      }}
+      style={
+        img
+          ? {
+              backgroundImage: `url(${img})`,
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "top 0% left 28%",
+            }
+          : {}
+      }
     >
       <Swiper {...params}>
         {reviews.map((review, index) => (

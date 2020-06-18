@@ -3,6 +3,12 @@
 .navbar {
   height: 100px;
   justify-content: space-between;
+  @media (max-height: 800px) {
+    height: 80px;
+  }
+  @media (max-width: 768px) {
+    height: 80px;
+  }
 }
 .navLink {
   display: flex;
@@ -30,5 +36,11 @@
 .mobile {
   @media (max-width: 1400px) {
     display: none !important;
+  }
+}
+
+.logo {
+  @media (max-width: 768px) {
+    max-width: 116px;
   }
 }

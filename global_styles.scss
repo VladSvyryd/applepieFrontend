@@ -40,6 +40,10 @@ body {
   line-height: 1.945;
   font-family: "Roboto", sans-serif;
   font-weight: normal;
+  @media (max-width: 768px) {
+    font-size: 13px;
+    line-height: 24px;
+  }
 }
 input,
 textarea {
@@ -60,6 +64,9 @@ h2 {
   font-family: "Rubik", sans-serif;
   &.title {
     margin-bottom: 30px;
+    @media (max-width: 768px) {
+      margin-bottom: 0px;
+    }
   }
   @media (max-width: 1580px) {
     font-size: 33px;
@@ -123,6 +130,9 @@ footer.fixed {
   @media (max-width: 1580px) {
     margin: 0 45px;
   }
+  @media (max-width: 768px) {
+    margin: 0 20 px;
+  }
 }
 .content-frame-leftHalf {
   max-width: 765px;
@@ -162,6 +172,12 @@ footer.fixed {
 }
 .frameBottomTop {
   padding: 100px 0;
+  @media (max-height: 800px) {
+    padding: 60px 0;
+  }
+  @media (max-width: 768px) {
+    padding: 60px 0;
+  }
 }
 // SWIPER Styles
 .myCustomSwiper {
@@ -228,4 +244,13 @@ button.medium {
 }
 .invertedTextColorBySlide.langSwitchButton:after {
   border-bottom-color: white !important;
+}
+
+.responsiveImg {
+  width: 100%;
+  height: auto;
+  @media (max-height: 800px) and (max-width: 768px) {
+    width: 70%;
+    margin: auto;
+  }
 }

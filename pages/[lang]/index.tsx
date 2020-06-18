@@ -3,16 +3,11 @@ import withTranslate from "../../components/HOC/withTranslate";
 import Layout from "../../components/Layout/Layout";
 import { NextPage, NextPageContext } from "next";
 import { HomeProps, NavType, HomePage } from "../../types/types";
-
 import index from "../../pageStyles/index.module.scss";
 import { motion } from "framer-motion";
 import MarkdownView from "react-showdown";
 import SendForm from "../../components/Form/SendForm";
 import dynamic from "next/dynamic";
-const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
-  ssr: true,
-});
-
 import ReviewCarousel from "../../components/Review/ReviewCarousel";
 import { useStoreState } from "easy-peasy";
 import {
@@ -22,6 +17,9 @@ import {
   navigation_en,
 } from "../../queries/queries";
 import { client } from "../_app";
+const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
+  ssr: true,
+});
 
 const Page: NextPage<HomeProps> = (props) => {
   const { pageFromCMS } = props;
@@ -218,6 +216,7 @@ const Page: NextPage<HomeProps> = (props) => {
             <img
               src={`${pageFromCMS.first_section?.images[0]?.url}`}
               alt={pageFromCMS.first_section?.images[0]?.alternativeText}
+              className="responsiveImg"
             />
           </div>
           <div className={index.right + " " + index.verticalMargin}>
@@ -256,6 +255,7 @@ const Page: NextPage<HomeProps> = (props) => {
             <img
               src={`${pageFromCMS.second_section?.images[0]?.url}`}
               alt={pageFromCMS.second_section.images[0].alternativeText}
+              className="responsiveImg"
             />
           </div>
         </section>
@@ -310,9 +310,7 @@ const Page: NextPage<HomeProps> = (props) => {
                       alt={card.image?.alternativeText}
                     />
                     <div className={index.content}>
-                      <h3 className={index.title + " indieFlower"}>
-                        {card.title}
-                      </h3>
+                      <h3 className={"indieFlower"}>{card.title}</h3>
                       <p>{card.subtitle}</p>
                     </div>
                   </div>
@@ -330,7 +328,7 @@ const Page: NextPage<HomeProps> = (props) => {
                 alt={pageFromCMS.forth_section?.images[0]?.alternativeText}
               />
               <motion.button
-                className={`medium ${index.start_button}`}
+                className={`medium`}
                 data-swiper-parallax="1100"
                 data-swiper-parallax-opacity="0"
                 // whileHover={{ scale: 0.9 }}
@@ -354,6 +352,7 @@ const Page: NextPage<HomeProps> = (props) => {
             <img
               src={`${pageFromCMS.fifth_section?.images[0]?.url}`}
               alt={pageFromCMS.fifth_section?.images[0]?.alternativeText}
+              className="responsiveImg"
             />
           </div>
           <div className={index.right + " " + index.verticalMargin}>
@@ -380,7 +379,9 @@ const Page: NextPage<HomeProps> = (props) => {
           <div
             className="content-frame"
             style={{
-              backgroundImage: `url(${pageFromCMS.sixth_section?.images[2]?.url}),url(${pageFromCMS.sixth_section?.images[3]?.url})`,
+              backgroundImage: `url(${
+                pageFromCMS.sixth_section?.images[2]?.url || ""
+              }),url(${pageFromCMS.sixth_section?.images[3]?.url || ""})`,
               backgroundRepeat: "no-repeat",
               width: "100%",
               display: "flex",
@@ -414,7 +415,11 @@ const Page: NextPage<HomeProps> = (props) => {
         >
           <div className={index.left}>
             <img
-              src={`${pageFromCMS.seventh_section?.images[0]?.url}`}
+              src={
+                pageFromCMS.seventh_section?.images[0]?.url
+                  ? `${pageFromCMS.seventh_section?.images[0]?.url}`
+                  : ""
+              }
               alt={pageFromCMS.seventh_section?.images[0]?.alternativeText}
             />
           </div>
