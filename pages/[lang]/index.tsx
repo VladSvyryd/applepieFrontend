@@ -275,7 +275,7 @@ const Page: NextPage<HomeProps> = (props) => {
               <AutoLineSwiper>
                 {pageFromCMS.third_section?.images
                   ?.filter((_v, i, arr) => i < arr.length / 2)
-                  .map((img, i) => (
+                  .map((img) => (
                     <div key={img.name} className={index.gridImage}>
                       <img src={`${img.url}`} alt={img.alternativeText} />
                     </div>
@@ -284,7 +284,7 @@ const Page: NextPage<HomeProps> = (props) => {
               <AutoLineSwiper rtl="rtl">
                 {pageFromCMS.third_section?.images
                   ?.filter((_v, i, arr) => i >= arr.length / 2)
-                  .map((img, i) => (
+                  .map((img) => (
                     <div key={img.name} className={index.gridImage}>
                       <img src={`${img.url}`} alt={img.alternativeText} />
                     </div>
