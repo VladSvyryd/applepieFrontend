@@ -199,6 +199,7 @@
 .thirdSection {
   display: flex;
   background: $accent-color;
+
   .clients {
     margin: auto;
 
@@ -206,13 +207,17 @@
       color: $invert-text-color;
       text-align: center;
       margin-bottom: 1.3em;
+      padding-right: 20px;
+      padding-left: 20px;
     }
     .imagesGrid {
-      display: grid;
-      grid-template-columns: repeat(5, minmax(70px, 1fr));
-      grid-gap: 70px 140px;
-      justify-items: center;
+      display: flex;
+      flex-direction: column;
       align-items: center;
+      .gridImage {
+        display: flex;
+        justify-content: center;
+      }
     }
   }
 }

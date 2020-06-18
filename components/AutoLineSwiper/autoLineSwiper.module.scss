@@ -1,0 +1,12 @@
+.mySlider {
+  width: 100%;
+  max-width: 1270px;
+  overflow: hidden;
+  & > div {
+    align-items: center;
+  }
+  margin: 45px 0;
+  @media (max-height: 600px) {
+    margin: 25px 0;
+  }
+}

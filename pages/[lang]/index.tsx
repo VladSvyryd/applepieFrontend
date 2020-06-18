@@ -17,6 +17,7 @@ import {
   navigation_en,
 } from "../../queries/queries";
 import { client } from "../_app";
+import AutoLineSwiper from "../../components/AutoLineSwiper/AutoLineSwiper";
 const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
   ssr: true,
 });
@@ -271,11 +272,24 @@ const Page: NextPage<HomeProps> = (props) => {
               {pageFromCMS.third_section?.title}
             </h2>
             <div className={index.imagesGrid}>
-              {pageFromCMS.third_section?.images?.map((img) => (
-                <div key={img.name}>
-                  <img src={`${img.url}`} alt={img.alternativeText} />
-                </div>
-              ))}
+              <AutoLineSwiper>
+                {pageFromCMS.third_section?.images
+                  ?.filter((_v, i, arr) => i < arr.length / 2)
+                  .map((img, i) => (
+                    <div key={img.name} className={index.gridImage}>
+                      <img src={`${img.url}`} alt={img.alternativeText} />
+                    </div>
+                  ))}
+              </AutoLineSwiper>
+              <AutoLineSwiper rtl="rtl">
+                {pageFromCMS.third_section?.images
+                  ?.filter((_v, i, arr) => i >= arr.length / 2)
+                  .map((img, i) => (
+                    <div key={img.name} className={index.gridImage}>
+                      <img src={`${img.url}`} alt={img.alternativeText} />
+                    </div>
+                  ))}
+              </AutoLineSwiper>
             </div>
           </div>
         </section>
