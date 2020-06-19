@@ -1,20 +1,13 @@
 import { Link } from "../../types/types";
 import { FC } from "react";
 import link from "./socialLinks.module.scss";
-import { useStoreState } from "easy-peasy";
 import { motion } from "framer-motion";
 
 type SocialLinksProps = {
   links: Link[];
-  invertedSlides?: number[];
+  inverted: boolean;
 };
-export const SocialLinks: FC<SocialLinksProps> = ({
-  links,
-  invertedSlides,
-}) => {
-  const activeCarouselIndex = useStoreState(
-    (state) => state.swiper.activeIndex
-  );
+export const SocialLinks: FC<SocialLinksProps> = ({ links, inverted }) => {
   const variants = {
     open: {
       transition: { staggerChildren: 0.07, delayChildren: 0.2 },
@@ -50,11 +43,7 @@ export const SocialLinks: FC<SocialLinksProps> = ({
         >
           <img
             src={`${
-              invertedSlides
-                ? invertedSlides.some((e) => e === activeCarouselIndex)
-                  ? value?.image_alternative?.url
-                  : value?.image?.url
-                : value?.image_alternative?.url
+              !inverted ? value?.image_alternative?.url : value?.image?.url
             }`}
             alt={value?.image?.alternativeText}
           />

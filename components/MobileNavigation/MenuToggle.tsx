@@ -6,7 +6,11 @@ const Path = (props: any) => (
   <motion.path
     fill="transparent"
     strokeWidth="2"
-    stroke={!props.isOpen ? "#403d55" : "#fff"}
+    stroke={
+      (!props.isOpen && !props.inverted) || (props.isOpen && props.inverted)
+        ? "#403d55"
+        : "#fff"
+    }
     strokeLinecap="round"
     {...props}
   />
@@ -14,8 +18,13 @@ const Path = (props: any) => (
 type MenuToggleProps = {
   toggle: () => void;
   isOpen: boolean;
+  inverted: boolean;
 };
-export const MenuToggle: FC<MenuToggleProps> = ({ toggle, isOpen }) => (
+export const MenuToggle: FC<MenuToggleProps> = ({
+  toggle,
+  isOpen,
+  inverted,
+}) => (
   <motion.div
     onClick={toggle}
     className={nav.button + " " + nav.onMobile}
@@ -29,6 +38,7 @@ export const MenuToggle: FC<MenuToggleProps> = ({ toggle, isOpen }) => (
           open: { d: "M 3 16.5 L 17 2.5" },
         }}
         isOpen={isOpen}
+        inverted={inverted}
       />
       <Path
         d="M 6 9.423 L 16 9.423"
@@ -38,6 +48,7 @@ export const MenuToggle: FC<MenuToggleProps> = ({ toggle, isOpen }) => (
         }}
         isOpen={isOpen}
         transition={{ duration: 0.1 }}
+        inverted={inverted}
       />
       <Path
         initial={{ d: "M 2 16.346 L 20 16.346" }}
@@ -48,6 +59,7 @@ export const MenuToggle: FC<MenuToggleProps> = ({ toggle, isOpen }) => (
           open: { d: "M 3 2.5 L 17 16.346" },
         }}
         isOpen={isOpen}
+        inverted={inverted}
       />
     </svg>
   </motion.div>

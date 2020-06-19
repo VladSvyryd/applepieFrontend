@@ -16,6 +16,12 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
 }) => {
   const width = useStoreState((state) => state.device.width);
   const height = useStoreState((state) => state.device.height);
+  const invertedSlidesArray = useStoreState(
+    (state) => state.swiper.invertedSlides
+  );
+  const activeIndex = useStoreState((state) => state.swiper.activeIndex);
+  const [inverted, setInverted] = useState(false);
+
   const [currentWindow, setCurrentWindow] = useState({
     width: width,
     height: height,
@@ -53,6 +59,11 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
   useEffect(() => {
     setCurrentWindow({ width: width, height: height });
   }, [width, height]);
+  useEffect(() => {
+    invertedSlidesArray.some((s: number) => s === activeIndex)
+      ? setInverted(true)
+      : setInverted(false);
+  }, [activeIndex]);
   const reveal = {
     open: { display: "flex" },
     closed: { display: "none", transition: { when: "afterChildren" } },
@@ -69,12 +80,17 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
         <motion.div
           variants={sidebar}
           className={nav.background}
+          style={inverted ? { background: "white" } : {}}
           custom={currentWindow}
         />
-        <Navigation links={links} />
-        <SocialLinks links={social_links} />
+        <Navigation links={links} inverted={inverted} />
+        <SocialLinks links={social_links} inverted={inverted} />
       </motion.nav>
-      <MenuToggle toggle={() => onClick()} isOpen={isOpen} />
+      <MenuToggle
+        toggle={() => onClick()}
+        isOpen={isOpen}
+        inverted={inverted}
+      />
     </>
   );
 };

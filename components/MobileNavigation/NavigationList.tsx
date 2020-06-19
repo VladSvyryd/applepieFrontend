@@ -16,9 +16,10 @@ const variants = {
 };
 type NavigationProps = {
   links: NavLink[];
+  inverted: boolean;
 };
 
-export const Navigation: FC<NavigationProps> = ({ links }) => {
+export const Navigation: FC<NavigationProps> = ({ links, inverted }) => {
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
   );
@@ -31,7 +32,12 @@ export const Navigation: FC<NavigationProps> = ({ links }) => {
             href={`/[lang]${l.url}`}
             as={`/${Language[currentLanguage]}${l.url}`}
           >
-            <a className={`${nav.navLink}`}>{l.name}</a>
+            <a
+              className={`${nav.navLink}`}
+              style={inverted ? { color: "#403d55" } : {}}
+            >
+              {l.name}
+            </a>
           </Link>
         </MenuItem>
       ))}
