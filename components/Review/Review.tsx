@@ -61,7 +61,7 @@ const Review: React.FC<ReviewProps> = (props) => {
         {props.review.content_text}
       </motion.div>
       <motion.div className={review.name}>{props.review.name}</motion.div>
-      <motion.div className={review.compony}>
+      <motion.div className={review.company}>
         {props.review.position}
       </motion.div>
     </motion.div>

@@ -46,6 +46,7 @@ export const SocialLinks: FC<SocialLinksProps> = ({
           href="https://www.instagram.com/?hl=de"
           className={link.linkWithBorder}
           variants={variantsOfLink}
+          key={value.name}
         >
           <img
             src={`${

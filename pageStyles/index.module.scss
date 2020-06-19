@@ -411,9 +411,21 @@
 
 .sixthSection {
   justify-content: center;
+  .backgroundLayer {
+    @media (max-width: 1300px) {
+      background-image: unset !important;
+    }
+  }
   h2 {
     max-width: 900px;
     text-align: center;
+    @media (max-width: 1300px) {
+      background-image: unset !important;
+    }
+    @media (max-width: 600px) {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
   }
 }
 

@@ -23,6 +23,12 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
     allowTouchMove: false,
     containerClass: `${review.verticalCarousel}`,
     getSwiper: setSwiper,
+    breakpoints: {
+      320: {
+        slidesPerView: 2,
+        spaceBetween: 50,
+      },
+    },
   };
   const setReviewActiveIndex = useStoreActions(
     (actions) => actions.swiper.setReviewIndex
@@ -50,16 +56,16 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
     on: { opacity: 1 },
     off: { opacity: 0.3 },
   };
-
+  console.log(buttonImg);
   return (
     <div
       className={review.swiper}
       style={
         img
           ? {
-              backgroundImage: `url(${img})`,
+              backgroundImage: `url(${img.url})`,
               backgroundRepeat: "no-repeat",
-              backgroundPosition: "top 0% left 28%",
+              backgroundPosition: "top 0% right 72%",
             }
           : {}
       }

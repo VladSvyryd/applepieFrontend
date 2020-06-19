@@ -29,7 +29,6 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
   };
   const closeMenu = () => {
     toggleOpen();
-    console.log("closeTrigered");
   };
   const node = useRef<HTMLElement>(null);
   const sidebar = {
@@ -53,7 +52,6 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
   };
   useEffect(() => {
     setCurrentWindow({ width: width, height: height });
-    console.log({ currentWindow });
   }, [width, height]);
   const reveal = {
     open: { display: "flex" },

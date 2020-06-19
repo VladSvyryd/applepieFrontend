@@ -22,7 +22,6 @@ export const Navigation: FC<NavigationProps> = ({ links }) => {
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
   );
-  console.log(links);
   return (
     <motion.ul variants={variants} className={nav.ul}>
       {links?.map((l: NavLink, i: number) => (

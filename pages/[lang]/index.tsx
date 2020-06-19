@@ -317,8 +317,12 @@ const Page: NextPage<HomeProps> = (props) => {
             </div>
             <div className={index.cardsGrid}>
               {pageFromCMS.forth_section.cards.length > 0 &&
-                pageFromCMS.forth_section?.cards?.map((card) => (
-                  <div key={card.title}>
+                pageFromCMS.forth_section?.cards?.map((card, ind) => (
+                  <div
+                    key={card.title}
+                    data-swiper-parallax={`${(ind + 1) * 70}`}
+                    data-swiper-parallax-opacity="0"
+                  >
                     <img
                       src={`${card.image?.url}`}
                       alt={card.image?.alternativeText}
@@ -391,7 +395,7 @@ const Page: NextPage<HomeProps> = (props) => {
           }
         >
           <div
-            className="content-frame"
+            className={`content-frame  ${index.backgroundLayer}`}
             style={{
               backgroundImage: `url(${
                 pageFromCMS.sixth_section?.images[2]?.url || ""
