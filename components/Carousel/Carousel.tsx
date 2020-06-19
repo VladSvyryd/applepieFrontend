@@ -291,7 +291,10 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
                     />
                     <motion.div
                       animate={
-                        activeIndexHistory.findIndex((li) => li == i) != -1 ||
+                        (width <= 768 &&
+                          i === selected &&
+                          activeIndexHistory.findIndex((li) => li == i) !=
+                            -1) ||
                         i === hoveredIndex
                           ? "visible"
                           : "hidden"
