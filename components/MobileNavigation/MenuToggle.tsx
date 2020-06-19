@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { FC } from "react";
+import { FC, RefObject } from "react";
 import nav from "./nav.module.scss";
 
 const Path = (props: any) => (

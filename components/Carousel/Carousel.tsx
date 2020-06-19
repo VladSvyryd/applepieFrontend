@@ -97,6 +97,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
     mousewheel: true,
     roundLengths: true,
     parallax: true,
+
     threshold: width >= 1000 ? 100 : 30,
     // touchMoveStopPropagation: true,
     parallaxEl: {
@@ -105,6 +106,14 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
     },
     containerClass: "myCustomSwiper",
     getSwiper: setSwiper,
+    breakpoints: {
+      320: {
+        touchStartPreventDefault: false,
+      },
+      1400: {
+        touchStartPreventDefault: true,
+      },
+    },
   };
 
   const updateCarouselState = () => {
@@ -291,11 +300,12 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
                     />
                     <motion.div
                       animate={
-                        (width <= 768 &&
-                          i === selected &&
-                          activeIndexHistory.findIndex((li) => li == i) !=
-                            -1) ||
-                        i === hoveredIndex
+                        width >= 768
+                          ? activeIndexHistory.findIndex((li) => li == i) !=
+                              -1 || i === hoveredIndex
+                            ? "visible"
+                            : "hidden"
+                          : selected === i
                           ? "visible"
                           : "hidden"
                       }

@@ -20,6 +20,7 @@ const Layout: React.FC<LayoutProps> = ({
     (state) => state.swiper.activeIndex
   );
   const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
+
   return (
     <div style={layoutStyle}>
       <Head>

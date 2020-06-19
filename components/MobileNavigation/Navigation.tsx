@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, FC } from "react";
+import { useState, useEffect, FC, RefObject, useRef } from "react";
 import { motion, useCycle } from "framer-motion";
 import { MenuToggle } from "./MenuToggle";
 import { Navigation } from "./NavigationList";
@@ -6,6 +6,7 @@ import { useStoreState } from "easy-peasy";
 import nav from "./nav.module.scss";
 import { NavLink, Link } from "../../types/types";
 import { SocialLinks } from "../SocialLinks/SocialLinks";
+import { useOnClickOutside } from "../../hooks";
 type MobileNavigationProps = {
   links: NavLink[];
   social_links: Link[];
@@ -36,7 +37,6 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
   const closeMenu = () => {
     toggleOpen();
   };
-  const node = useRef<HTMLElement>(null);
   const sidebar = {
     open: (custom: { width: number; height: number }) => ({
       clipPath: `circle(${custom.height + 700}px at calc(100% - 52px) 40px)`,
@@ -56,6 +56,8 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
       },
     }),
   };
+  const mobileMenuRef = useRef<HTMLElement>(null);
+  useOnClickOutside(mobileMenuRef, () => isOpen && closeMenu());
   useEffect(() => {
     setCurrentWindow({ width: width, height: height });
   }, [width, height]);
@@ -75,7 +77,7 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
         initial={false}
         animate={isOpen ? "open" : "closed"}
         variants={reveal}
-        ref={node}
+        ref={mobileMenuRef}
       >
         <motion.div
           variants={sidebar}
