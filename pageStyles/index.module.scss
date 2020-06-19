@@ -426,6 +426,9 @@
       padding-left: 0 !important;
       padding-right: 0 !important;
     }
+    @media (max-width: 600px) and (max-height: 700px) {
+      margin-bottom: 0 !important;
+    }
   }
 }
 
