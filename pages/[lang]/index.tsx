@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import withTranslate from "../../components/HOC/withTranslate";
 import Layout from "../../components/Layout/Layout";
 import { NextPage, NextPageContext } from "next";
