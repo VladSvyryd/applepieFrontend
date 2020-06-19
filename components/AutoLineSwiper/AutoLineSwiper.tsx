@@ -45,7 +45,7 @@ const AutoLineSwiper: React.FC<AutoLineSwiperProps> = ({
     },
   };
   return (
-    <Swiper {...params} rtl={rtl}>
+    <Swiper {...params} rtl={rtl} noSwiping={true}>
       {children}
     </Swiper>
   );
