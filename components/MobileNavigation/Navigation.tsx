@@ -1,4 +1,4 @@
-import { useState, useEffect, FC, RefObject, useRef } from "react";
+import { useState, useEffect, FC, useRef } from "react";
 import { motion, useCycle } from "framer-motion";
 import { MenuToggle } from "./MenuToggle";
 import { Navigation } from "./NavigationList";
