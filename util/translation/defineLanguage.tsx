@@ -21,7 +21,7 @@ export const getLanguage = (langFromUrl?: string): Language => {
 
 export function isLocale(tested: string): Language {
   const curLang = locales.findIndex((locale) => Language[locale] === tested);
-  if (typeof curLang !== "undefined") {
+  if (typeof curLang !== "undefined" && curLang) {
     return curLang;
   }
   return defaultLocale;
