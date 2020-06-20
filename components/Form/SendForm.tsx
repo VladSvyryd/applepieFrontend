@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import formStyles from "./form.module.scss";
 import { motion } from "framer-motion";
 import { useStoreState } from "../../hooks";
-import { SendFormProps } from "../../types/types";
+import { SendFormProps, Language } from "../../types/types";
 
 interface Person {
   name: string;
@@ -164,8 +164,9 @@ const SendForm: React.FC<SendFormProps> = ({ button }) => {
   const validate = (value: any) => {
     let errorMessage;
     if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+      console.log(currentLanguage);
       errorMessage =
-        currentLanguage === 1
+        currentLanguage !== Language.de
           ? "Invalid email address"
           : "Ungültige E-mail Address";
     }
@@ -175,7 +176,7 @@ const SendForm: React.FC<SendFormProps> = ({ button }) => {
     let errorMessage;
     if (value.length <= 0) {
       errorMessage =
-        currentLanguage === 1
+        currentLanguage !== Language.de
           ? "This field is required"
           : "Dieses Feld ist erforderlich";
     }

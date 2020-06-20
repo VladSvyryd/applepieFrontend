@@ -436,7 +436,7 @@ export const landing_en = gql`
     homeDe {
       intro {
         title: title_en
-        description: description
+        description: description_en
         pictures: pictures_en {
           url
           name
@@ -492,7 +492,7 @@ export const landing_en = gql`
           id
         }
 
-        content_text
+        content_text: content_text_en
 
         cards {
           ... on ComponentSectionsCard {
@@ -518,7 +518,7 @@ export const landing_en = gql`
           id
         }
 
-        content_text
+        content_text: content_text_en
 
         cards {
           ... on ComponentSectionsCard {
@@ -617,7 +617,7 @@ export const landing_en = gql`
         }
       }
       seventh_section {
-        title
+        title: title_en
         images {
           url
           name

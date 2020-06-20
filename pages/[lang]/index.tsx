@@ -439,6 +439,7 @@ const Page: NextPage<HomeProps> = (props) => {
                   : ""
               }
               alt={pageFromCMS.seventh_section?.images[0]?.alternativeText}
+              className="responsiveImg"
             />
           </div>
           <div className={index.right + " " + index.verticalMargin}>

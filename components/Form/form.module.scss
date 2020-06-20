@@ -13,6 +13,9 @@
 }
 .fieldRow {
   height: 80px;
+  @media (max-height: 850px) {
+    height: 60px;
+  }
 }
 .input {
   width: 100%;
@@ -33,10 +36,16 @@
   height: 110px;
   display: flex;
   flex-direction: column;
+  @media (max-height: 850px) {
+    height: 80px;
+  }
 }
 .textfield {
   height: 80px;
   resize: none;
+  @media (max-height: 850px) {
+    height: 60px;
+  }
 }
 .button {
   width: 100%;

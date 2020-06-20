@@ -1,12 +1,12 @@
 import { useState, useEffect, FC, useRef } from "react";
-import { motion, useCycle } from "framer-motion";
+import { motion } from "framer-motion";
 import { MenuToggle } from "./MenuToggle";
 import { Navigation } from "./NavigationList";
 import { useStoreState } from "easy-peasy";
 import nav from "./nav.module.scss";
 import { NavLink, Link } from "../../types/types";
 import { SocialLinks } from "../SocialLinks/SocialLinks";
-import { useOnClickOutside } from "../../hooks";
+import { useOnClickOutside, useStoreActions } from "../../hooks";
 type MobileNavigationProps = {
   links: NavLink[];
   social_links: Link[];
@@ -22,21 +22,16 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
   );
   const activeIndex = useStoreState((state) => state.swiper.activeIndex);
   const [inverted, setInverted] = useState(false);
-
+  const menuOpened = useStoreState((state) => state.device.menuOpened);
+  const tOpen = useStoreActions((actions) => actions.device.setMenuState);
   const [currentWindow, setCurrentWindow] = useState({
     width: width,
     height: height,
   });
-  const [isOpen, toggleOpen] = useCycle(false, true);
   const onClick = () => {
-    !isOpen ? openMenu() : closeMenu();
+    tOpen(!menuOpened);
   };
-  const openMenu = () => {
-    toggleOpen();
-  };
-  const closeMenu = () => {
-    toggleOpen();
-  };
+
   const sidebar = {
     open: (custom: { width: number; height: number }) => ({
       clipPath: `circle(${custom.height + 700}px at calc(100% - 52px) 40px)`,
@@ -57,7 +52,7 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
     }),
   };
   const mobileMenuRef = useRef<HTMLElement>(null);
-  useOnClickOutside(mobileMenuRef, () => isOpen && closeMenu());
+  useOnClickOutside(mobileMenuRef, () => menuOpened && tOpen(false));
   useEffect(() => {
     setCurrentWindow({ width: width, height: height });
   }, [width, height]);
@@ -75,7 +70,7 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
       <motion.nav
         className={nav.nav + " " + nav.onMobile}
         initial={false}
-        animate={isOpen ? "open" : "closed"}
+        animate={menuOpened ? "open" : "closed"}
         variants={reveal}
         ref={mobileMenuRef}
       >
@@ -90,7 +85,7 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
       </motion.nav>
       <MenuToggle
         toggle={() => onClick()}
-        isOpen={isOpen}
+        isOpen={menuOpened}
         inverted={inverted}
       />
     </>

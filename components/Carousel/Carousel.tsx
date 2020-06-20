@@ -78,6 +78,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
   const setActiveIndex = useStoreActions(
     (actions) => actions.swiper.setActiveIndex
   );
+  const menuOpened = useStoreState((state) => state.device.menuOpened);
 
   const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
   const activeIndexHistory = useStoreState(
@@ -89,33 +90,22 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
   const params: any = {
     direction: "horizontal",
     slidesPerView: 1,
-    // resistance: false,
     spaceBetween: 30,
     simulateTouch: true,
-    // cssMode: true,
-    // followFinger: false,
     mousewheel: true,
     roundLengths: true,
     parallax: true,
-
-    threshold: width >= 1000 ? 100 : 30,
-    // touchMoveStopPropagation: true,
+    threshold: width >= 1000 ? 100 : 10,
     parallaxEl: {
       el: ".parallax-bg",
       value: "-23%",
     },
     containerClass: "myCustomSwiper",
     getSwiper: setSwiper,
-    breakpoints: {
-      320: {
-        touchStartPreventDefault: false,
-      },
-      1400: {
-        touchStartPreventDefault: true,
-      },
-    },
   };
-
+  useEffect(() => {
+    swiper && menuOpened ? swiper.detachEvents() : swiper?.attachEvents();
+  }, [menuOpened]);
   const updateCarouselState = () => {
     // swiper && setCarouselState(swiper.isBeginning);
 
