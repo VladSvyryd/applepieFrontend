@@ -44,9 +44,11 @@
   }
   @media (max-width: 1110px) {
     bottom: 25px;
+    z-index: 2;
   }
   @media (max-height: 890px) {
     bottom: 20px;
+    z-index: 2;
   }
 }
 .paginationBullet {

@@ -207,6 +207,30 @@ const fragments = {
       }
     }
   `,
+  address_de: gql`
+    fragment Address_DE on ComponentTypesAddress {
+      title
+      street
+      city
+      t_number
+      content
+      day
+      time_from
+      time_till
+    }
+  `,
+  address_en: gql`
+    fragment Address_EN on ComponentTypesAddress {
+      title: title_en
+      street: street_en
+      city: city_en
+      t_number: t_number
+      content: content_en
+      day: day_en
+      time_from: time_from_en
+      time_till: time_till_en
+    }
+  `,
 };
 export const landing_de = gql`
   query {
@@ -416,6 +440,12 @@ export const landing_de = gql`
           }
         }
       }
+      contact: impressum {
+        __typename
+        ... on ComponentTypesAddress {
+          ...Address_DE
+        }
+      }
       reviews {
         ... on Review {
           ...Review
@@ -430,6 +460,7 @@ export const landing_de = gql`
   ${fragments.imageGrid_de}
   ${fragments.pagination}
   ${fragments.review}
+  ${fragments.address_de}
 `;
 export const landing_en = gql`
   query {
@@ -542,8 +573,8 @@ export const landing_en = gql`
         }
       }
       forth_section {
-        title
-        images {
+        title: title_en
+        images: images_en {
           url
           name
           alternativeText
@@ -565,9 +596,9 @@ export const landing_en = gql`
         }
       }
       fifth_section {
-        title
+        title: title_en
 
-        images {
+        images: images_en {
           url
           name
           alternativeText
@@ -591,9 +622,9 @@ export const landing_en = gql`
         }
       }
       sixth_section {
-        title
+        title: title_en
 
-        images {
+        images: images_en {
           url
           name
           alternativeText
@@ -618,7 +649,7 @@ export const landing_en = gql`
       }
       seventh_section {
         title: title_en
-        images {
+        images: images_en {
           url
           name
           alternativeText
@@ -639,6 +670,29 @@ export const landing_en = gql`
           }
         }
       }
+      eighth_section {
+        title: title_en
+        images: images_en {
+          url
+          name
+          alternativeText
+          caption
+          width
+          height
+          id
+        }
+        button {
+          ... on ComponentButtonsButton {
+            ...Button_DE
+          }
+        }
+      }
+      contact: impressum {
+        __typename
+        ... on ComponentTypesAddress {
+          ...Address_EN
+        }
+      }
       reviews {
         ... on Review {
           ...Review
@@ -653,6 +707,7 @@ export const landing_en = gql`
   ${fragments.imageGrid_en}
   ${fragments.pagination}
   ${fragments.review}
+  ${fragments.address_en}
 `;
 
 export const navigation_de = gql`

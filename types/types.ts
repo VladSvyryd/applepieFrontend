@@ -81,6 +81,8 @@ export type HomePage = {
   fifth_section: Idea;
   sixth_section: Idea;
   seventh_section: Idea;
+  eighth_section: Idea;
+  contact: Address;
   social_links: Link[];
   services: Link[];
   known_by: Link[];
@@ -112,7 +114,16 @@ export interface Card {
   image: Picture;
   subtitle: string;
 }
-
+export interface Address {
+  title: string;
+  street: string;
+  city: string;
+  t_number: string;
+  content: string;
+  time_from: string;
+  time_till: string;
+  day: string;
+}
 export interface Image_Grid {
   title: string;
   images: Picture[];

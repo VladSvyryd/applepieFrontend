@@ -32,7 +32,7 @@ const Page: NextPage<HomeProps> = (props) => {
     setIndex(0);
   };
   const deviceWidth = useStoreState((state) => state.device.width);
-
+  console.log({ pageFromCMS });
   return pageFromCMS ? (
     <Layout
       navigation={props.navigation}
@@ -455,7 +455,61 @@ const Page: NextPage<HomeProps> = (props) => {
             </div>
           </div>
         </section>
-        <div>Slide 9</div>
+        <section
+          className={
+            index.firstSection +
+            " " +
+            index.grid +
+            " frameBottomTop " +
+            index.eightSection
+          }
+        >
+          <div className={index.left}>
+            <img
+              src={
+                pageFromCMS.eighth_section?.images[0]?.url
+                  ? `${pageFromCMS.eighth_section?.images[0]?.url}`
+                  : ""
+              }
+              alt={pageFromCMS.eighth_section?.images[0]?.alternativeText}
+              className="responsiveImg"
+            />
+          </div>
+          <div className={index.right + " " + index.verticalMargin}>
+            <h2
+              data-swiper-parallax="500"
+              data-swiper-parallax-opacity="0"
+              className="title"
+            >
+              {pageFromCMS.eighth_section?.title}
+            </h2>
+            <div className={index.addressBlock}>
+              <address>
+                <h3>{pageFromCMS.contact?.title}</h3>
+                {pageFromCMS.contact?.street}
+                <br />
+                {pageFromCMS.contact?.city}
+                <br />
+                {pageFromCMS.contact?.t_number}
+              </address>
+              <div>
+                <h3>{pageFromCMS.contact?.content}</h3>
+                <span>{pageFromCMS.contact?.day}</span> <br />
+                <time>{pageFromCMS?.contact?.time_from.slice(0, 5)}</time> -
+                <time>{pageFromCMS.contact?.time_till.slice(0, 5)}</time>
+              </div>
+            </div>
+            <motion.button
+              className={`medium ${index.introButton}`}
+              data-swiper-parallax="1100"
+              data-swiper-parallax-opacity="0"
+              // whileHover={{ scale: 0.9 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              {pageFromCMS.eighth_section?.button.text}
+            </motion.button>
+          </div>
+        </section>
       </Carousel>
     </Layout>
   ) : null;
