@@ -36,6 +36,7 @@ export const SocialLinks: FC<SocialLinksProps> = ({ links, inverted }) => {
     <motion.div variants={variants} className={link.container}>
       {links?.map((value: Link) => (
         <motion.a
+          target="_blank"
           href="https://www.instagram.com/?hl=de"
           className={link.linkWithBorder}
           variants={variantsOfLink}

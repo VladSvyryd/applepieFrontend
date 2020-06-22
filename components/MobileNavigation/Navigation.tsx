@@ -42,7 +42,7 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
       },
     }),
     closed: (_custom: { width: number; height: number }) => ({
-      clipPath: `circle(0px at calc(100% - 52px)  40px)`,
+      clipPath: `circle(0px at calc(100% - 52px)  35px)`,
       transition: {
         delay: 0.3,
         type: "spring",
@@ -51,8 +51,8 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
       },
     }),
   };
-  const mobileMenuRef = useRef<HTMLElement>(null);
-  useOnClickOutside(mobileMenuRef, () => menuOpened && tOpen(false));
+  // const mobileMenuRef = useRef<HTMLElement>(null);
+  // useOnClickOutside(mobileMenuRef, () => menuOpened && tOpen(false));
   useEffect(() => {
     setCurrentWindow({ width: width, height: height });
   }, [width, height]);
@@ -65,6 +65,9 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
     open: { display: "flex" },
     closed: { display: "none", transition: { when: "afterChildren" } },
   };
+  const prevDef = (e: any) => {
+    e.stopPropagation();
+  };
   return (
     <>
       <motion.nav
@@ -72,16 +75,23 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
         initial={false}
         animate={menuOpened ? "open" : "closed"}
         variants={reveal}
-        ref={mobileMenuRef}
+        onClick={() => onClick()}
+        // ref={mobileMenuRef}
       >
         <motion.div
           variants={sidebar}
           className={nav.background}
           style={inverted ? { background: "white" } : {}}
           custom={currentWindow}
-        />
-        <Navigation links={links} inverted={inverted} />
-        <SocialLinks links={social_links} inverted={inverted} />
+          onClick={(e) => prevDef(e)}
+        >
+          <Navigation
+            links={links}
+            inverted={inverted}
+            toggleMenu={() => onClick()}
+          />
+          <SocialLinks links={social_links} inverted={inverted} />
+        </motion.div>
       </motion.nav>
       <MenuToggle
         toggle={() => onClick()}

@@ -25,7 +25,7 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
     getSwiper: setSwiper,
     breakpoints: {
       320: {
-        slidesPerView: 2,
+        slidesPerView: 1,
         spaceBetween: 50,
       },
     },

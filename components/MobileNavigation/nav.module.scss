@@ -11,17 +11,19 @@
   align-items: center;
 
   @media (max-width: 1580px) {
-    width: 90%;
+    width: 100%;
   }
 }
 .background {
   position: absolute;
   top: 0;
   right: 0;
-  width: 100%;
+  width: 90%;
   height: 100%;
   background: $accent-color;
   box-shadow: -3px -1px 20px #403d55;
+  display: flex;
+  justify-content: center;
 }
 .ul,
 .li {
@@ -30,7 +32,7 @@
 }
 
 .ul {
-  position: absolute;
+  align-self: center;
 }
 
 .li {
