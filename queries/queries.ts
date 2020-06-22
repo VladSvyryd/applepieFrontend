@@ -440,12 +440,30 @@ export const landing_de = gql`
           }
         }
       }
+      eighth_section {
+        title
+        images {
+          url
+          name
+          alternativeText
+          caption
+          width
+          height
+          id
+        }
+        button {
+          ... on ComponentButtonsButton {
+            ...Button_DE
+          }
+        }
+      }
       contact: impressum {
         __typename
         ... on ComponentTypesAddress {
           ...Address_DE
         }
       }
+
       reviews {
         ... on Review {
           ...Review
