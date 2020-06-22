@@ -1,4 +1,4 @@
-import { useState, useEffect, FC, useRef } from "react";
+import { useState, useEffect, FC } from "react";
 import { motion } from "framer-motion";
 import { MenuToggle } from "./MenuToggle";
 import { Navigation } from "./NavigationList";
@@ -6,7 +6,7 @@ import { useStoreState } from "easy-peasy";
 import nav from "./nav.module.scss";
 import { NavLink, Link } from "../../types/types";
 import { SocialLinks } from "../SocialLinks/SocialLinks";
-import { useOnClickOutside, useStoreActions } from "../../hooks";
+import { useStoreActions } from "../../hooks";
 type MobileNavigationProps = {
   links: NavLink[];
   social_links: Link[];
