@@ -19,7 +19,7 @@ const Navigation: React.FC<NavProps> = (props) => {
     (state) => state.language.currentLanguage
   );
   return (
-    <nav className={`${nav.navbar} flexColumns alignCenter content-frame`}>
+    <nav className={`${nav.navbar} flexColumns alignCenter content-frame `}>
       <div className={""}>
         {logo && (
           <Link href="/[lang]" as={`/${Language[currentLanguage]}`}>
@@ -36,7 +36,7 @@ const Navigation: React.FC<NavProps> = (props) => {
         )}
       </div>
       <div
-        className={`alignCenter flexColumns flexEnd indieFlower ${nav.mobile}`}
+        className={`alignCenter flexColumns flexEnd indieFlower ${nav.linkSection} `}
       >
         {links?.map((l: NavLink, index: number) => (
           <Link
@@ -49,7 +49,7 @@ const Navigation: React.FC<NavProps> = (props) => {
                 invertedSlides.some((s) => s === activeCarouselIndex)
                   ? "invertedTextColorBySlide invertedBorderColorBySlide"
                   : ""
-              }`}
+              } ${nav.onlyDesktop}`}
             >
               {l.name}
               {links && index === links?.length - 1 && (
@@ -66,7 +66,7 @@ const Navigation: React.FC<NavProps> = (props) => {
             </a>
           </Link>
         ))}
-        <LanguageSwitcher />
+        <LanguageSwitcher className={nav.onlyDesktop} />
       </div>
       <MobileNavigation
         links={typeof links !== "undefined" ? links : []}

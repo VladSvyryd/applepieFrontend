@@ -9,6 +9,31 @@
   @media (max-width: 768px) {
     height: 80px;
   }
+
+  .linkSection {
+    @media (max-width: 1400px) {
+      margin-bottom: 20px;
+    }
+    @media (max-height: 800px) and(max-width:700px) {
+      margin-right: 30px;
+      line-height: normal;
+    }
+    @media (max-width: 768px) {
+      margin-right: 30px;
+      margin-bottom: 0px;
+      line-height: normal;
+    }
+    @media (max-width: 600px) {
+      display: none;
+    }
+  }
+}
+.onlyDesktop {
+  &:nth-child(4) {
+    @media (max-width: 1400px) {
+      display: none !important;
+    }
+  }
 }
 .navLink {
   display: flex;
@@ -16,6 +41,18 @@
   margin-right: 35px;
   padding-right: 35px;
   font-size: 23px;
+  &.onlyDesktop {
+    &:nth-child(1) {
+      @media (max-width: 1400px) {
+        display: none !important;
+      }
+    }
+    &:nth-child(2) {
+      @media (max-width: 1400px) {
+        display: none !important;
+      }
+    }
+  }
   &:hover {
     font-weight: bold;
   }

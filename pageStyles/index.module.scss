@@ -375,9 +375,6 @@
         }
       }
       .zebra {
-        @media (max-width: 680px) {
-          display: none;
-        }
         ul {
           list-style: none;
           margin: 0;
@@ -385,6 +382,9 @@
           li {
             display: inline;
             font-size: 36px;
+            @media (max-width: 680px) {
+              font-size: 20px;
+            }
             &:first-child {
               color: $primary-color;
             }
@@ -458,6 +458,7 @@
     }
   }
   .left {
+    align-items: center;
     @media (max-width: 1300px) {
       margin: 0;
     }
@@ -508,6 +509,7 @@
     h2 {
       @media (max-width: 500px) {
         font-size: 18px;
+        line-height: normal;
       }
     }
     h3 {
@@ -516,6 +518,7 @@
       font-weight: bold;
       @media (max-width: 500px) {
         font-size: 15px;
+        line-height: normal;
       }
     }
     .introButton {

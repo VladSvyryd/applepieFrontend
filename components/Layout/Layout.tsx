@@ -11,6 +11,7 @@ const Layout: React.FC<LayoutProps> = ({
   verticalFooter = false,
   social_links,
   known_by,
+  known_by_title,
 }) => {
   const layoutStyle = {
     width: "100%",
@@ -47,19 +48,21 @@ const Layout: React.FC<LayoutProps> = ({
             >
               <div className="smallitem ">
                 <div className={`flexColumns alignCenter`}>
-                  {/* <span
+                  <span
                     className={`${layout?.horizontalSpan} ${
                       invertedSlides.some((e) => e === activeCarouselIndex)
                         ? "invertedTextColorBySlide"
                         : ""
                     }`}
-                  ></span> */}
+                  >
+                    {known_by[0].name}
+                  </span>
                   <a href="" className={`${layout.horizontalSpan}`}>
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? known_by[0]?.image_alternative?.url
-                          : known_by[0]?.image?.url
+                          ? known_by[1]?.image_alternative?.url
+                          : known_by[1]?.image?.url
                       }`}
                       alt=""
                     />
@@ -68,8 +71,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? known_by[1]?.image_alternative?.url
-                          : known_by[1]?.image?.url
+                          ? known_by[2]?.image_alternative?.url
+                          : known_by[2]?.image?.url
                       }`}
                       alt=""
                     />

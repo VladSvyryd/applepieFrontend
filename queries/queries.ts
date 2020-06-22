@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 const fragments = {
-  link: gql`
-    fragment Link on ComponentLinksLink {
+  link_de: gql`
+    fragment Link_DE on ComponentLinksLink {
       name
       url
       image {
@@ -23,9 +23,13 @@ const fragments = {
         height
         id
       }
-      name_en
-      url_en
-      image_en {
+    }
+  `,
+  link_en: gql`
+    fragment Link_EN on ComponentLinksLink {
+      name: name_en
+      url: url_en
+      image: image_en {
         url
         name
         alternativeText
@@ -34,7 +38,7 @@ const fragments = {
         height
         id
       }
-      image_alternative_en {
+      image_alternative: image_alternative_en {
         url
         name
         alternativeText
@@ -113,8 +117,57 @@ const fragments = {
       }
     }
   `,
-  pagination: gql`
-    fragment Pagination on ComponentTypesPagination {
+  pagination_en: gql`
+    fragment Pagination_EN on ComponentTypesPagination {
+      id
+      title
+      icons {
+        id
+        name: name_en
+        alternative_name
+        alternative_text
+        alternative_text_alternative
+        image {
+          url
+          name
+          alternativeText
+          caption
+          width
+          height
+          id
+        }
+        image_alternative {
+          url
+          name
+          alternativeText
+          caption
+          width
+          height
+          id
+        }
+      }
+      background {
+        url
+        name
+        alternativeText
+        caption
+        width
+        height
+        id
+      }
+      background_alternative {
+        url
+        name
+        alternativeText
+        caption
+        width
+        height
+        id
+      }
+    }
+  `,
+  pagination_de: gql`
+    fragment Pagination_DE on ComponentTypesPagination {
       id
       title
       icons {
@@ -261,13 +314,13 @@ export const landing_de = gql`
       social_links {
         __typename
         ... on ComponentLinksLink {
-          ...Link
+          ...Link_DE
         }
       }
       known_by {
         __typename
         ... on ComponentLinksLink {
-          ...Link
+          ...Link_DE
         }
       }
       buttons {
@@ -278,7 +331,7 @@ export const landing_de = gql`
       services {
         __typename
         ... on ComponentLinksLink {
-          ...Link
+          ...Link_DE
         }
       }
       first_section {
@@ -339,7 +392,7 @@ export const landing_de = gql`
       }
       pagination {
         ... on ComponentTypesPagination {
-          ...Pagination
+          ...Pagination_DE
         }
       }
       forth_section {
@@ -472,11 +525,11 @@ export const landing_de = gql`
     }
   }
 
-  ${fragments.link}
+  ${fragments.link_de}
   ${fragments.button_de}
   ${fragments.card_de}
   ${fragments.imageGrid_de}
-  ${fragments.pagination}
+  ${fragments.pagination_de}
   ${fragments.review}
   ${fragments.address_de}
 `;
@@ -509,24 +562,24 @@ export const landing_en = gql`
       social_links {
         __typename
         ... on ComponentLinksLink {
-          ...Link
+          ...Link_EN
         }
       }
       known_by {
         __typename
         ... on ComponentLinksLink {
-          ...Link
+          ...Link_EN
         }
       }
       buttons {
         ... on ComponentButtonsButton {
-          ...Button_DE
+          ...Button_EN
         }
       }
       services {
         __typename
         ... on ComponentLinksLink {
-          ...Link
+          ...Link_EN
         }
       }
       first_section {
@@ -550,7 +603,7 @@ export const landing_en = gql`
         }
         button {
           ... on ComponentButtonsButton {
-            ...Button_DE
+            ...Button_EN
           }
         }
       }
@@ -576,7 +629,7 @@ export const landing_en = gql`
         }
         button {
           ... on ComponentButtonsButton {
-            ...Button_DE
+            ...Button_EN
           }
         }
       }
@@ -587,7 +640,7 @@ export const landing_en = gql`
       }
       pagination {
         ... on ComponentTypesPagination {
-          ...Pagination
+          ...Pagination_EN
         }
       }
       forth_section {
@@ -609,7 +662,7 @@ export const landing_en = gql`
         }
         button {
           ... on ComponentButtonsButton {
-            ...Button_DE
+            ...Button_EN
           }
         }
       }
@@ -635,7 +688,7 @@ export const landing_en = gql`
         }
         button {
           ... on ComponentButtonsButton {
-            ...Button_DE
+            ...Button_EN
           }
         }
       }
@@ -661,7 +714,7 @@ export const landing_en = gql`
         }
         button {
           ... on ComponentButtonsButton {
-            ...Button_DE
+            ...Button_EN
           }
         }
       }
@@ -684,7 +737,7 @@ export const landing_en = gql`
         }
         button {
           ... on ComponentButtonsButton {
-            ...Button_DE
+            ...Button_EN
           }
         }
       }
@@ -701,7 +754,7 @@ export const landing_en = gql`
         }
         button {
           ... on ComponentButtonsButton {
-            ...Button_DE
+            ...Button_EN
           }
         }
       }
@@ -719,11 +772,11 @@ export const landing_en = gql`
     }
   }
 
-  ${fragments.link}
-  ${fragments.button_de}
+  ${fragments.link_en}
+  ${fragments.button_en}
   ${fragments.card_en}
   ${fragments.imageGrid_en}
-  ${fragments.pagination}
+  ${fragments.pagination_en}
   ${fragments.review}
   ${fragments.address_en}
 `;

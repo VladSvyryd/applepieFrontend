@@ -1,11 +1,13 @@
 import { useStoreActions, useStoreState } from "../../hooks";
 import { useRouter } from "next/router";
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect, FC } from "react";
 import { Language, locales } from "../../types/types";
 import { motion } from "framer-motion";
 import { getLanguage } from "../../util/translation/defineLanguage";
-
-export const LanguageSwitcher = () => {
+type LanguageSwitcherProps = {
+  className: any;
+};
+export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ className }) => {
   const router = useRouter();
   // const router = useRouter();
   const currentLanguage = useStoreState(
@@ -57,6 +59,7 @@ export const LanguageSwitcher = () => {
         cursor: "pointer",
         marginTop: "8px",
       }}
+      className={className}
     >
       <div
         onClick={() => setToggle(!toggle)}
