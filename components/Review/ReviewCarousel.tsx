@@ -56,7 +56,6 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
     on: { opacity: 1 },
     off: { opacity: 0.3 },
   };
-  console.log(buttonImg);
   return (
     <div
       className={review.swiper}
@@ -115,4 +114,4 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
   );
 };
 
-export default ReviewCarousel;
+export default React.memo(ReviewCarousel);

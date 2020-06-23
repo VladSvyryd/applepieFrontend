@@ -23,49 +23,49 @@ export const screens = [
   {
     title: "Threeeee",
     color: "#22cc88",
-    position_desktop: { left: "384px", top: "41px" },
+    position_desktop: { left: "384px", top: "43px" },
     position_tablet: { left: "164px", top: "36px" },
     position_mobile: { left: "57px", top: "16px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position_desktop: { left: "575px", top: "65px" },
+    position_desktop: { left: "575px", top: "63px" },
     position_tablet: { left: "249px", top: "65px" },
     position_mobile: { left: "94px", top: "43px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position_desktop: { left: "765px", top: "35px" },
+    position_desktop: { left: "765px", top: "33px" },
     position_tablet: { left: "343px", top: "37px" },
     position_mobile: { left: "127px", top: "13px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position_desktop: { left: "956px", top: "30px" },
+    position_desktop: { left: "956px", top: "32px" },
     position_tablet: { left: "430px", top: "30px" },
     position_mobile: { left: "161px", top: "7px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position_desktop: { left: "1147px", top: "55px" },
+    position_desktop: { left: "1147px", top: "59px" },
     position_tablet: { left: "517px", top: "53px" },
     position_mobile: { left: "195px", top: "32px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position_desktop: { left: "1337px", top: "64px" },
+    position_desktop: { left: "1337px", top: "62px" },
     position_tablet: { left: "605px", top: "64px" },
     position_mobile: { left: "230px", top: "42px" },
   },
   {
     title: "Four",
     color: "#ffaa00",
-    position_desktop: { left: "1531px", top: "46px" },
+    position_desktop: { left: "1469px", top: "48px" },
     position_tablet: { left: "691px", top: "48px" },
     position_mobile: { left: "260px", top: "27px" },
   },
@@ -278,12 +278,12 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
                       style={{
                         width: `${
                           width >= 768
-                            ? paginationBullet.image?.width * 1.5
+                            ? paginationBullet.image?.width * 1.2
                             : paginationBullet.image?.width * 0.9
                         }px`,
                         height: `${
                           width >= 768
-                            ? paginationBullet.image?.height * 1.5
+                            ? paginationBullet.image?.height * 1.2
                             : paginationBullet.image?.height * 0.9
                         }px`,
                       }}

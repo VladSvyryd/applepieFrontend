@@ -20,6 +20,9 @@
     margin-left: 342px;
     list-style: none;
     padding: 0;
+    @media (max-width: 1530px) {
+      margin-left: 322px;
+    }
     li {
       cursor: pointer;
       padding: 4px 0;
@@ -48,6 +51,16 @@
 .descriptionDesktop {
   @media (max-width: 719px) {
     display: none;
+  }
+}
+.intro {
+  background-size: 60% 100%;
+  background-position: left center;
+  background-repeat: no-repeat;
+
+  @media (max-width: 1530px) {
+    background-size: contain;
+    background-repeat: repeat;
   }
 }
 .leftSectionFrame {
@@ -263,8 +276,11 @@
       }
       h3 {
         margin: 0.5em;
+        font-weight: bold;
+
         @media (min-width: 1530px) {
           margin-bottom: 1.3em;
+          font-weight: normal;
         }
       }
     }
@@ -319,10 +335,14 @@
 
         @media (max-width: 1530px) {
           min-height: auto;
+          max-width: 230px;
+        }
+        @media (max-width: 1200px) {
           p {
             display: none;
           }
         }
+
         @media (max-width: 680px) {
           display: flex;
           align-items: center;
@@ -339,6 +359,7 @@
         h3 {
           @media (max-width: 1530px) {
             font-size: 18px;
+            font-weight: bold;
           }
           @media (max-width: 680px) {
             margin: 0;
@@ -354,7 +375,7 @@
       align-items: center;
       justify-content: flex-end;
       @media (max-width: 1530px) {
-        justify-content: space-evenly;
+        justify-content: center;
       }
       @media (max-width: 680px) {
         min-height: auto;
@@ -369,9 +390,21 @@
           margin: 0;
         }
       }
-      img {
+
+      .zebraContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
         @media (max-width: 680px) {
-          display: none;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        img {
+          margin: 0 55px;
+          @media (max-width: 680px) {
+            margin: 0;
+            max-width: 50%;
+          }
         }
       }
       .zebra {
@@ -440,7 +473,7 @@
     justify-content: flex-start;
   }
   .right {
-    max-width: 650px;
+    max-width: 550px;
     width: 100%;
     margin-right: 15px;
     @media (max-width: 1024px) {

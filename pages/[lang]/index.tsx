@@ -32,7 +32,6 @@ const Page: NextPage<HomeProps> = (props) => {
     setIndex(0);
   };
   const deviceWidth = useStoreState((state) => state.device.width);
-  console.log({ pageFromCMS });
   return pageFromCMS ? (
     <Layout
       navigation={props.navigation}
@@ -48,13 +47,12 @@ const Page: NextPage<HomeProps> = (props) => {
         }}
       >
         <section
-          className={`flexColumns alignCenter`}
+          className={`flexColumns alignCenter ${index.intro}`}
           data-swiper-parallax="1500"
           style={{
             backgroundImage: `url(${
               pageFromCMS.intro.pictures && pageFromCMS.intro.pictures[7]?.url
             })`,
-            backgroundSize: "contain",
           }}
         >
           <div
@@ -188,7 +186,7 @@ const Page: NextPage<HomeProps> = (props) => {
                     <li
                       onMouseOver={() => handleServiceHover(i)}
                       onMouseLeave={() => handleServiceLeave()}
-                      key={service.toString() + i}
+                      key={"service_" + i}
                       data-swiper-parallax={-i * 100 + 500}
                       data-swiper-parallax-opacity="0"
                       data-middle={
@@ -335,16 +333,17 @@ const Page: NextPage<HomeProps> = (props) => {
                 ))}
             </div>
             <div className={index.footer}>
-              <div className={index.zebra + " indieFlower"}>
-                <MarkdownView
-                  markdown={pageFromCMS.forth_section?.button?.subtext}
-                  options={{ tables: true, emoji: true }}
+              <div className={index.zebraContainer}>
+                <div className={index.zebra + " indieFlower"}>
+                  <MarkdownView
+                    markdown={pageFromCMS.forth_section?.button?.subtext}
+                  />
+                </div>
+                <img
+                  src={`${pageFromCMS.forth_section?.images[0]?.url}`}
+                  alt={pageFromCMS.forth_section?.images[0]?.alternativeText}
                 />
               </div>
-              <img
-                src={`${pageFromCMS.forth_section?.images[0]?.url}`}
-                alt={pageFromCMS.forth_section?.images[0]?.alternativeText}
-              />
               <motion.button
                 className={`medium`}
                 data-swiper-parallax="1100"

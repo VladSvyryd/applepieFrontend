@@ -12,8 +12,8 @@
   height: 90px;
   background-position: top 36px left 4px;
   background-repeat: no-repeat;
-  background-size: 1537px;
-  max-width: 1540px;
+  background-size: 1490px;
+  max-width: 1490px;
   position: relative;
   @media (max-width: 1580px) {
     max-width: 703px;
@@ -79,7 +79,7 @@
   }
   .bullet {
     position: absolute;
-    top: -30px;
+    top: -26px;
     left: 0;
     right: 0;
     margin: auto;
@@ -89,7 +89,7 @@
   }
   .caption {
     position: absolute;
-    bottom: -30px;
+    bottom: -28px;
     left: 0;
     right: 0;
     margin: auto;
@@ -97,7 +97,7 @@
     justify-content: center;
     font-size: 16px;
     @media (max-width: 1580px) {
-      font-size: 14px;
+      font-size: 11px;
       bottom: -21px;
     }
     @media (max-width: 768px) {
