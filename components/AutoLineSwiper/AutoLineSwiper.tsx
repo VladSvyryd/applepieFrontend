@@ -15,6 +15,7 @@ const AutoLineSwiper: React.FC<AutoLineSwiperProps> = ({
     centeredSlides: true,
     loop: true,
     slidesPerGroup: 1,
+    allowTouchMove:false,
     autoplay: {
       delay: 2500,
       disableOnInteraction: false,

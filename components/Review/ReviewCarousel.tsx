@@ -59,16 +59,8 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
   return (
     <div
       className={review.swiper}
-      style={
-        img
-          ? {
-              backgroundImage: `url(${img.url})`,
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "top 0% right 72%",
-            }
-          : {}
-      }
     >
+      <div className={review.semi}><img src={`${img.url}`} alt={`${img.caption}`}/></div>
       <Swiper {...params}>
         {reviews.map((review, index) => (
           <div key={"review-" + index}>

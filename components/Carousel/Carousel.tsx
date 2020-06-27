@@ -102,6 +102,14 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
     },
     containerClass: "myCustomSwiper",
     getSwiper: setSwiper,
+    breakpoints: {
+      320: {
+        touchAngle: 90
+      },
+      768: {
+        touchAngle: 45
+      },
+    },
   };
   useEffect(() => {
     swiper && menuOpened ? swiper.detachEvents() : swiper?.attachEvents();
@@ -128,6 +136,10 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
       y: 25,
       scale: 0,
       opacity: 0,
+    }),
+    visibleAndHovered:() => ({
+      y: -5,
+      transition:{  yoyo: 3, duration: 0.2 }
     }),
   };
   const captionAnim = {
@@ -262,6 +274,8 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
                     <motion.img
                       key={"my_slide-image" + i}
                       animate={
+                        activeIndexHistory.findIndex((li) => li == i) != -1 &&
+                        i === hoveredIndex?"visibleAndHovered":
                         activeIndexHistory.findIndex((li) => li == i) != -1 ||
                         i === hoveredIndex
                           ? "visible"

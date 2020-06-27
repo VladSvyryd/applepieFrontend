@@ -76,6 +76,15 @@
   @media (max-width: 840px) {
     background-image: unset !important;
   }
+  .semi {
+    position: absolute;
+    top: 0;
+    left: 25%;
+    z-index: 2;
+    @media (max-width: 840px) {
+     display: none;
+    }
+  }
   .pagination {
     display: flex;
     position: absolute;

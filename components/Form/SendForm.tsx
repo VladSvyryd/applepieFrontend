@@ -167,18 +167,28 @@ const SendForm: React.FC<SendFormProps> = ({ button }) => {
       console.log(currentLanguage);
       errorMessage =
         currentLanguage !== Language.de
-          ? "Invalid email address"
-          : "Ungültige E-mail Address";
+          ? "Oops mistyped?"
+          : "Ups vertippt?";
     }
     return errorMessage;
   };
-  const isRequired = (value: any) => {
+  const isRequiredName = (value: any) => {
     let errorMessage;
     if (value.length <= 0) {
       errorMessage =
         currentLanguage !== Language.de
-          ? "This field is required"
-          : "Dieses Feld ist erforderlich";
+          ? "No name, no game."
+          : "Ohne Namen läuft nichts.";
+    }
+    return errorMessage;
+  };
+  const isRequiredMessage = (value: any) => {
+    let errorMessage;
+    if (value.length <= 0) {
+      errorMessage =
+        currentLanguage !== Language.de
+          ? "Keep calm and tell your story."
+          : "Erzähl uns ruhig worum es geht.";
     }
     return errorMessage;
   };
@@ -197,7 +207,7 @@ const SendForm: React.FC<SendFormProps> = ({ button }) => {
               type="text"
               name="name"
               placeholder="Name"
-              validate={isRequired}
+              validate={isRequiredName}
               className={formStyles.input}
             />
             <ErrorMessage name="name" component={Error} />
@@ -216,7 +226,7 @@ const SendForm: React.FC<SendFormProps> = ({ button }) => {
             <Field
               type="text"
               name="message"
-              validate={isRequired}
+              validate={isRequiredMessage}
               as="textarea"
               className={`${formStyles.input} ${formStyles.textfield}`}
               placeholder={`${
