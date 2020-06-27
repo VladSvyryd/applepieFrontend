@@ -33,6 +33,7 @@ export type CarouselProps = {
 export type HomeProps = {
   pageFromCMS: HomePage;
   navigation: NavType;
+  isMobile:boolean
 };
 export type AboutProps = {
   pageFromCMS: HomePage;

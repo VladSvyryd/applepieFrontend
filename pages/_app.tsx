@@ -22,11 +22,13 @@ export const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 export default function MyApp({ Component, pageProps, router }: any) {
+
+  
   return (
     <StoreProvider store={store}>
-      <Component {...pageProps} key={router.route} />
-      {/* <Loading /> */}
       <DeviceWatcher />
+     <Component {...pageProps} key={router.route} />
+      {/* <Loading /> */}
     </StoreProvider>
   );
 }
