@@ -28,7 +28,7 @@ const device: DeviceModel = {
   width: 0,
   height: 0,
   menuOpened: false,
-  orientation: ORIENTATION.portrait,
+  orientation: ORIENTATION.landscape,
   setDeviceType: action((state, payload) => {
     state.device = payload;
   }),

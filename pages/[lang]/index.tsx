@@ -38,7 +38,7 @@ const Page: NextPage<HomeProps> = (props) => {
   );
   console.log("mobile: ", props.isMobile)
   console.log("orientation: ", ORIENTATION[orientation])
-  return (props.isMobile && orientation ===ORIENTATION.portrait)  ? 
+  return (props.isMobile && orientation ===ORIENTATION.portrait) ||(!props.isMobile)   ? 
     <Layout
     navigation={props.navigation}
     horizontalFooter

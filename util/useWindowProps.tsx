@@ -13,10 +13,10 @@ export const useWindowProps = () => {
 
   const setScreenOrientation = () => {
     console.log(window)
-    if (window.matchMedia("(orientation: portrait)").matches) {
+    if (window.orientation===0) {
       console.log('orientation: portrait');
       setDeviceScreenOrientation(ORIENTATION.portrait)
-    }else if (window.matchMedia("(orientation: landscape)").matches) {
+    }else if (window.orientation===90) {
       console.log('orientation: landscape');
       setDeviceScreenOrientation(ORIENTATION.landscape)
     }
