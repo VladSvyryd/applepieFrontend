@@ -8,7 +8,7 @@ type WindowPayload = {
 type isOpened = boolean;
 export enum ORIENTATION {
   portrait,
-  landscape
+  landscape,
 }
 
 export interface DeviceModel {
@@ -16,9 +16,11 @@ export interface DeviceModel {
   width: number;
   height: number;
   menuOpened: boolean;
+  interactiveFormOpened: boolean;
   orientation: ORIENTATION;
   setCurrentDeviceProps: Action<DeviceModel, WindowPayload>;
   setMenuState: Action<DeviceModel, isOpened>;
+  setInterFormState: Action<DeviceModel, isOpened>;
   setDeviceOrientation: Action<DeviceModel, ORIENTATION>;
   setDeviceType: Action<DeviceModel, string>;
 }
@@ -29,6 +31,7 @@ const device: DeviceModel = {
   height: 0,
   menuOpened: false,
   orientation: ORIENTATION.landscape,
+  interactiveFormOpened: false,
   setDeviceType: action((state, payload) => {
     state.device = payload;
   }),
@@ -41,6 +44,9 @@ const device: DeviceModel = {
   }),
   setMenuState: action((state, payload) => {
     state.menuOpened = payload;
+  }),
+  setInterFormState: action((state, payload = !state.interactiveFormOpened) => {
+    state.interactiveFormOpened = payload;
   }),
 };
 

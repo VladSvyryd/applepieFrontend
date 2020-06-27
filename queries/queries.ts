@@ -52,7 +52,7 @@ const fragments = {
   button_en: gql`
     fragment Button_EN on ComponentButtonsButton {
       id
-      text_en
+      text: text_en
       subtext_en
       function_en
     }
@@ -63,6 +63,7 @@ const fragments = {
       text
       subtext
       function
+      type
     }
   `,
   card_en: gql`

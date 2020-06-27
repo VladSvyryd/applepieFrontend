@@ -4,6 +4,10 @@ export enum Language {
   en,
   de,
 }
+export enum ButtonType {
+  LINK = "LINK",
+  BUTTON = "BUTTON",
+}
 export const locales = [Language.en, Language.de] as const;
 
 export const defaultLocale = Language.de;
@@ -33,7 +37,7 @@ export type CarouselProps = {
 export type HomeProps = {
   pageFromCMS: HomePage;
   navigation: NavType;
-  isMobile:boolean
+  isMobile: boolean;
 };
 export type AboutProps = {
   pageFromCMS: HomePage;
@@ -160,6 +164,7 @@ export interface Button {
   text: string;
   function: string;
   subtext: string;
+  type: any;
 }
 export interface NavigationLinkBlock {
   pages: Link;

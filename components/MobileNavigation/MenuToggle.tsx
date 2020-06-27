@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { FC } from "react";
-import nav from "./nav.module.scss";
 
 const Path = (props: any) => (
   <motion.path
@@ -19,16 +18,14 @@ type MenuToggleProps = {
   toggle: () => void;
   isOpen: boolean;
   inverted: boolean;
+  [x: string]: any;
 };
-export const MenuToggle: FC<MenuToggleProps> = ({
-  toggle,
-  isOpen,
-  inverted,
-}) => {
+export const MenuToggle: FC<MenuToggleProps> = (props) => {
+  const { toggle, isOpen, inverted } = props;
   return (
     <motion.div
+      {...props}
       onClick={toggle}
-      className={nav.button + " " + nav.onMobile}
       initial={false}
       animate={isOpen ? "open" : "closed"}
     >

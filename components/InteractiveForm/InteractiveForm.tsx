@@ -1,20 +1,19 @@
 import { useState, useEffect, FC } from "react";
 import { motion } from "framer-motion";
-import { MenuToggle } from "./MenuToggle";
-import { Navigation } from "./NavigationList";
 import { useStoreState } from "easy-peasy";
-import nav from "./nav.module.scss";
-import { NavLink, Link } from "../../types/types";
-import { SocialLinks } from "../SocialLinks/SocialLinks";
+import interactive_form from "./interactiveForm.module.scss";
 import { useStoreActions } from "../../hooks";
-type MobileNavigationProps = {
-  links: NavLink[];
-  social_links: Link[];
-};
-export const MobileNavigation: FC<MobileNavigationProps> = ({
-  links,
-  social_links,
-}) => {
+const Path = (props: any) => (
+  <motion.path
+    fill="transparent"
+    strokeWidth="2"
+    stroke="#fff"
+    strokeLinecap="round"
+    {...props}
+  />
+);
+type InteractiveFormProps = { [x: string]: any };
+export const InteractiveForm: FC<InteractiveFormProps> = (props) => {
   const width = useStoreState((state) => state.device.width);
   const height = useStoreState((state) => state.device.height);
   const invertedSlidesArray = useStoreState(
@@ -22,14 +21,19 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
   );
   const activeIndex = useStoreState((state) => state.swiper.activeIndex);
   const [inverted, setInverted] = useState(false);
-  const menuOpened = useStoreState((state) => state.device.menuOpened);
-  const tOpen = useStoreActions((actions) => actions.device.setMenuState);
+  const interactiveFormOpened = useStoreState(
+    (state) => state.device.interactiveFormOpened
+  );
+  const setInterFormState = useStoreActions(
+    (actions) => actions.device.setInterFormState
+  );
   const [currentWindow, setCurrentWindow] = useState({
     width: width,
     height: height,
   });
   const onClick = () => {
-    tOpen(!menuOpened);
+    setInterFormState(!interactiveFormOpened);
+    console.log(inverted);
   };
 
   const sidebar = {
@@ -70,35 +74,46 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
   };
   return (
     <>
-      <motion.nav
-        className={nav.nav + " " + nav.onMobile}
+      <motion.div
+        className={interactive_form.inForm}
         initial={false}
-        animate={menuOpened ? "open" : "closed"}
+        animate={interactiveFormOpened ? "open" : "closed"}
         variants={reveal}
         onClick={() => onClick()}
         // ref={mobileMenuRef}
+        {...props}
       >
         <motion.div
           variants={sidebar}
-          className={nav.background}
+          className={interactive_form.background}
           style={inverted ? { background: "white" } : {}}
           custom={currentWindow}
           onClick={(e) => prevDef(e)}
         >
-          <Navigation
-            links={links}
-            inverted={inverted}
-            toggleMenu={() => onClick()}
-          />
-          <SocialLinks links={social_links} inverted={inverted} />
+          This is my Interaction Form
         </motion.div>
-      </motion.nav>
-      <MenuToggle
-        className={nav.button + " " + nav.onMobile}
-        toggle={() => onClick()}
-        isOpen={menuOpened}
-        inverted={inverted}
-      />
+        <motion.svg
+          width="23"
+          height="23"
+          viewBox="0 0 23 23"
+          className={interactive_form.closed}
+          variants={{
+            closed: { scale: 0 },
+            open: { scale: 1 },
+          }}
+        >
+          <Path
+            initial={{ d: "M 3 16.5 L 17 2.5" }}
+            isOpen={interactiveFormOpened}
+            inverted={inverted}
+          />
+          <Path
+            initial={{ d: "M 3 2.5 L 17 16.346" }}
+            isOpen={interactiveFormOpened}
+            inverted={inverted}
+          />
+        </motion.svg>
+      </motion.div>
     </>
   );
 };

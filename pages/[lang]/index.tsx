@@ -19,6 +19,9 @@ import {
 import { client } from "../_app";
 import AutoLineSwiper from "../../components/AutoLineSwiper/AutoLineSwiper";
 import { ORIENTATION } from "../../model/device";
+import MotionButton from "../../components/MotionButton/MotionButton";
+import { useStoreActions } from "../../hooks";
+import { InteractiveForm } from "../../components/InteractiveForm/InteractiveForm";
 const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
   ssr: true,
 });
@@ -34,8 +37,9 @@ const Page: NextPage<HomeProps> = (props) => {
   };
   const deviceWidth = useStoreState((state) => state.device.width);
   const orientation = useStoreState((state) => state.device.orientation);
-  console.log("mobile: ", props.isMobile);
-  console.log("orientation: ", ORIENTATION[orientation]);
+  const setInterFormState = useStoreActions(
+    (actions) => actions.device.setInterFormState
+  );
   return (props.isMobile && orientation === ORIENTATION.portrait) ||
     !props.isMobile ? (
     <Layout
@@ -46,6 +50,7 @@ const Page: NextPage<HomeProps> = (props) => {
       known_by_title={pageFromCMS.known_by_title}
     >
       <h1 className="visuallyHidden">Applepie</h1>
+      <InteractiveForm />
       <Carousel
         paginationObject={{
           pagination: pageFromCMS.pagination,
@@ -121,15 +126,15 @@ const Page: NextPage<HomeProps> = (props) => {
                   }}
                   data-swiper-parallax-opacity="0"
                 />
-                <motion.button
+                <MotionButton
+                  text={pageFromCMS.buttons[0].text}
+                  buttonType={pageFromCMS.buttons[0].type}
                   className={`medium ${index.introButton}`}
                   data-swiper-parallax="1100"
                   data-swiper-parallax-opacity="0"
-                  // whileHover={{ scale: 0.9 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  {pageFromCMS.buttons[0].text}
-                </motion.button>
+                  // link={pageFromCMS.buttons[0].function}
+                  onClick={() => setInterFormState(true)}
+                />
               </div>
             </div>
           </div>

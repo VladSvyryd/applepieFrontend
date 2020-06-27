@@ -1,0 +1,44 @@
+@import "./global_variables.scss";
+
+.inForm {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 210;
+
+  @media (max-width: 1580px) {
+    width: 100%;
+  }
+}
+.background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50vw;
+  height: 100%;
+  background: $primary-color;
+  box-shadow: -3px -1px 20px $primary-color;
+  display: flex;
+  justify-content: center;
+}
+.closed {
+  cursor: pointer;
+  position: absolute;
+  top: 18px;
+  right: 27px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 768px) {
+    top: 11px;
+  }
+}
