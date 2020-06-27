@@ -11,7 +11,6 @@ const Layout: React.FC<LayoutProps> = ({
   verticalFooter = false,
   social_links,
   known_by,
-  known_by_title,
 }) => {
   const layoutStyle = {
     width: "100%",
