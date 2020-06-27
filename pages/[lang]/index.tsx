@@ -24,7 +24,7 @@ const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
 });
 
 const Page: NextPage<HomeProps> = (props) => {
-  const { pageFromCMS } = props;
+  const { pageFromCMS, navigation } = props;
   const [activeServiceIndex, setIndex] = useState(0);
   const handleServiceHover = (index: number) => {
     setIndex(index);
@@ -33,20 +33,18 @@ const Page: NextPage<HomeProps> = (props) => {
     setIndex(0);
   };
   const deviceWidth = useStoreState((state) => state.device.width);
-  const orientation = useStoreState(
-    (state) => state.device.orientation
-  );
-  console.log("mobile: ", props.isMobile)
-  console.log("orientation: ", ORIENTATION[orientation])
-  return (props.isMobile && orientation ===ORIENTATION.portrait) ||(!props.isMobile)   ? 
+  const orientation = useStoreState((state) => state.device.orientation);
+  console.log("mobile: ", props.isMobile);
+  console.log("orientation: ", ORIENTATION[orientation]);
+  return (props.isMobile && orientation === ORIENTATION.portrait) ||
+    !props.isMobile ? (
     <Layout
-    navigation={props.navigation}
-    horizontalFooter
-    known_by={pageFromCMS.known_by}
-    social_links={pageFromCMS.social_links}
-    known_by_title={pageFromCMS.known_by_title}
+      navigation={props.navigation}
+      horizontalFooter
+      known_by={pageFromCMS.known_by}
+      social_links={pageFromCMS.social_links}
+      known_by_title={pageFromCMS.known_by_title}
     >
-     
       <h1 className="visuallyHidden">Applepie</h1>
       <Carousel
         paginationObject={{
@@ -518,19 +516,41 @@ const Page: NextPage<HomeProps> = (props) => {
         </section>
       </Carousel>
     </Layout>
-   :<h5>Seitlich Handy drehen text: Du bist der Erste der das Handy seitlich dreht. Dreh es mal wieder zurück bitte. applepie Funktioniert nur hochkant. :)</h5>
+  ) : (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-evenly",
+        textAlign: "center",
+        backgroundImage: `url(${
+          pageFromCMS.intro.pictures && pageFromCMS.intro.pictures[7]?.url
+        })`,
+      }}
+    >
+      <img src={`${navigation?.logo?.url}`} />
+      <h2>
+        Du bist der Erste der das Handy seitlich dreht. Dreh es mal wieder
+        zurück bitte. <br />
+        applepie Funktioniert nur hochkant.🙂
+      </h2>
+    </div>
+  );
 };
 Page.getInitialProps = async (context: NextPageContext) => {
   let userAgent;
-  if (context.req) { // if you are on the server and you get a 'req' property from your context
-    userAgent = context.req.headers['user-agent'] // get the user-agent from the headers
+  if (context.req) {
+    // if you are on the server and you get a 'req' property from your context
+    userAgent = context.req.headers["user-agent"]; // get the user-agent from the headers
   } else {
-    userAgent = navigator.userAgent // if you are on the client you can access the navigator from the window object
+    userAgent = navigator.userAgent; // if you are on the client you can access the navigator from the window object
   }
-  let isMobile = Boolean(String(userAgent).match(
-    /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-  ))
-  
+  let isMobile = Boolean(
+    String(userAgent).match(
+      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    )
+  );
+
   let response;
   let response1;
   if (context.query.lang === "de") {
@@ -547,7 +567,7 @@ Page.getInitialProps = async (context: NextPageContext) => {
   return {
     navigation: response1.data.navigation as NavType,
     pageFromCMS: response.data.homeDe as HomePage,
-    isMobile
+    isMobile,
   };
 };
 export default withTranslate(Page); // <- component is wrapped with a HOC
