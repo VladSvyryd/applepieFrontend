@@ -40,8 +40,11 @@ const Page: NextPage<HomeProps> = (props) => {
   const setInterFormState = useStoreActions(
     (actions) => actions.device.setInterFormState
   );
-  return (props.isMobile && orientation === ORIENTATION.portrait) ||
-    !props.isMobile ? (
+
+  // IF for landscape mode
+  //!props.isMobile ||
+  //(props.isMobile && orientation === ORIENTATION.portrait) ?
+  return (
     <Layout
       navigation={props.navigation}
       horizontalFooter
@@ -521,25 +524,25 @@ const Page: NextPage<HomeProps> = (props) => {
         </section>
       </Carousel>
     </Layout>
-  ) : (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-evenly",
-        textAlign: "center",
-        backgroundImage: `url(${
-          pageFromCMS.intro.pictures && pageFromCMS.intro.pictures[7]?.url
-        })`,
-      }}
-    >
-      <img src={`${navigation?.logo?.url}`} />
-      <h2>
-        Du bist der Erste der das Handy seitlich dreht. Dreh es mal wieder
-        zurück bitte. <br />
-        applepie Funktioniert nur hochkant.🙂
-      </h2>
-    </div>
+    // ) : (
+    //   <div
+    //     style={{
+    //       display: "flex",
+    //       flexDirection: "column",
+    //       justifyContent: "space-evenly",
+    //       textAlign: "center",
+    //       backgroundImage: `url(${
+    //         pageFromCMS.intro.pictures && pageFromCMS.intro.pictures[7]?.url
+    //       })`,
+    //     }}
+    //   >
+    //     <img src={`${navigation?.logo?.url}`} />
+    //     <h2>
+    //       Du bist der Erste der das Handy seitlich dreht. Dreh es mal wieder
+    //       zurück bitte. <br />
+    //       applepie Funktioniert nur hochkant.🙂
+    //     </h2>
+    //   </div>
   );
 };
 Page.getInitialProps = async (context: NextPageContext) => {

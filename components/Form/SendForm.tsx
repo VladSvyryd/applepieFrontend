@@ -166,9 +166,7 @@ const SendForm: React.FC<SendFormProps> = ({ button }) => {
     if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
       console.log(currentLanguage);
       errorMessage =
-        currentLanguage !== Language.de
-          ? "Oops mistyped?"
-          : "Ups vertippt?";
+        currentLanguage !== Language.de ? "Oops mistyped?" : "Ups vertippt?";
     }
     return errorMessage;
   };

@@ -1,8 +1,9 @@
-import { useState, useEffect, FC } from "react";
+import { useState, useEffect, FC, KeyboardEvent, useRef } from "react";
 import { motion } from "framer-motion";
 import { useStoreState } from "easy-peasy";
 import interactive_form from "./interactiveForm.module.scss";
 import { useStoreActions } from "../../hooks";
+import FormSlider from "../FormSlider/FormSlider";
 const Path = (props: any) => (
   <motion.path
     fill="transparent"
@@ -33,7 +34,6 @@ export const InteractiveForm: FC<InteractiveFormProps> = (props) => {
   });
   const onClick = () => {
     setInterFormState(!interactiveFormOpened);
-    console.log(inverted);
   };
 
   const sidebar = {
@@ -48,7 +48,7 @@ export const InteractiveForm: FC<InteractiveFormProps> = (props) => {
     closed: (_custom: { width: number; height: number }) => ({
       clipPath: `circle(0px at calc(100% - 52px)  35px)`,
       transition: {
-        delay: 0.3,
+        delay: 0.1,
         type: "spring",
         stiffness: 400,
         damping: 40,
@@ -72,6 +72,18 @@ export const InteractiveForm: FC<InteractiveFormProps> = (props) => {
   const prevDef = (e: any) => {
     e.stopPropagation();
   };
+
+  // In order to gain access to the child component instance,
+  // you need to assign it to a `ref`, so we call `useRef()` to get one
+  const childRef = useRef<any>();
+  const handlePressEnter = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (!e.shiftKey && e.key === "Enter") {
+      childRef.current.goToNext();
+    }
+    if (e.shiftKey && e.key === "Enter") {
+      childRef.current.goToPrev();
+    }
+  };
   return (
     <>
       <motion.div
@@ -82,6 +94,8 @@ export const InteractiveForm: FC<InteractiveFormProps> = (props) => {
         onClick={() => onClick()}
         // ref={mobileMenuRef}
         {...props}
+        onKeyDown={(e) => handlePressEnter(e)}
+        tabIndex={0}
       >
         <motion.div
           variants={sidebar}
@@ -90,29 +104,32 @@ export const InteractiveForm: FC<InteractiveFormProps> = (props) => {
           custom={currentWindow}
           onClick={(e) => prevDef(e)}
         >
-          This is my Interaction Form
+          <div className={interactive_form.formSlider}>
+            <FormSlider ref={childRef} />
+          </div>
         </motion.div>
-        <motion.svg
-          width="23"
-          height="23"
-          viewBox="0 0 23 23"
+        <motion.div
           className={interactive_form.closed}
           variants={{
             closed: { scale: 0 },
             open: { scale: 1 },
           }}
         >
-          <Path
-            initial={{ d: "M 3 16.5 L 17 2.5" }}
-            isOpen={interactiveFormOpened}
-            inverted={inverted}
-          />
-          <Path
-            initial={{ d: "M 3 2.5 L 17 16.346" }}
-            isOpen={interactiveFormOpened}
-            inverted={inverted}
-          />
-        </motion.svg>
+          <motion.svg width="23" height="23" viewBox="0 0 23 23">
+            <Path
+              initial={{
+                d: "M 3 16.5 L 17 2.5",
+              }}
+              isOpen={interactiveFormOpened}
+              inverted={inverted}
+            />
+            <Path
+              initial={{ d: "M 3 2.5 L 16.5 16.5" }}
+              isOpen={interactiveFormOpened}
+              inverted={inverted}
+            />
+          </motion.svg>
+        </motion.div>
       </motion.div>
     </>
   );
