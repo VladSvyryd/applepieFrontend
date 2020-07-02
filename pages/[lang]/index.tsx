@@ -18,7 +18,7 @@ import {
 } from "../../queries/queries";
 import { client } from "../_app";
 import AutoLineSwiper from "../../components/AutoLineSwiper/AutoLineSwiper";
-import { ORIENTATION } from "../../model/device";
+// import { ORIENTATION } from "../../model/device";
 import MotionButton from "../../components/MotionButton/MotionButton";
 import { useStoreActions } from "../../hooks";
 import { InteractiveForm } from "../../components/InteractiveForm/InteractiveForm";
@@ -27,7 +27,7 @@ const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
 });
 
 const Page: NextPage<HomeProps> = (props) => {
-  const { pageFromCMS, navigation } = props;
+  const { pageFromCMS } = props;
   const [activeServiceIndex, setIndex] = useState(0);
   const handleServiceHover = (index: number) => {
     setIndex(index);
@@ -36,7 +36,7 @@ const Page: NextPage<HomeProps> = (props) => {
     setIndex(0);
   };
   const deviceWidth = useStoreState((state) => state.device.width);
-  const orientation = useStoreState((state) => state.device.orientation);
+  // const orientation = useStoreState((state) => state.device.orientation);
   const setInterFormState = useStoreActions(
     (actions) => actions.device.setInterFormState
   );

@@ -22,7 +22,7 @@ const FormSlider = forwardRef((_props, ref) => {
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
   );
-  const [response, setResponse] = useState({
+  const [, setResponse] = useState({
     type: "",
     message: "",
   });
@@ -276,7 +276,7 @@ const FormSlider = forwardRef((_props, ref) => {
           initialValues={{ email: "", name: "", message: "", services: [] }}
           onSubmit={handleSubmit}
         >
-          {({ isSubmitting, values }) => (
+          {({ values }) => (
             <Form className={`${formSlider.form}  themeForm`}>
               <motion.div
                 className={`${formSlider.slide}`}
