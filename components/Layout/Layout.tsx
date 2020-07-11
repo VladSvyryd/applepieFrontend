@@ -22,7 +22,7 @@ const Layout: React.FC<LayoutProps> = ({
   const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
 
   return (
-    <div style={layoutStyle}>
+    <div style={layoutStyle} tabIndex={-1}>
       <Head>
         <title>applepie Berlin</title>
         <meta charSet="utf-8" />
@@ -56,7 +56,11 @@ const Layout: React.FC<LayoutProps> = ({
                   >
                     {known_by[0].name}
                   </span>
-                  <a href="" className={`${layout.horizontalSpan}`}>
+                  <a
+                    href=""
+                    className={`${layout.horizontalSpan}`}
+                    tabIndex={-1}
+                  >
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
@@ -66,7 +70,11 @@ const Layout: React.FC<LayoutProps> = ({
                       alt=""
                     />
                   </a>
-                  <a href="" className={`${layout.horizontalSpan}`}>
+                  <a
+                    href=""
+                    className={`${layout.horizontalSpan}`}
+                    tabIndex={-1}
+                  >
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
@@ -83,6 +91,7 @@ const Layout: React.FC<LayoutProps> = ({
                   <a
                     href="https://www.instagram.com/?hl=de"
                     className={layout.linkWithBorder}
+                    tabIndex={-1}
                   >
                     <img
                       src={`${
@@ -97,6 +106,7 @@ const Layout: React.FC<LayoutProps> = ({
                   <a
                     href="https://www.facebook.com/"
                     className={layout.linkWithBorder}
+                    tabIndex={-1}
                   >
                     <img
                       src={`${
@@ -110,6 +120,7 @@ const Layout: React.FC<LayoutProps> = ({
                   <a
                     href="https://www.instagram.com/?hl=de"
                     className={layout.linkWithBorder}
+                    tabIndex={-1}
                   >
                     <img
                       src={`${
@@ -123,6 +134,7 @@ const Layout: React.FC<LayoutProps> = ({
                   <a
                     href="https://slack.com/intl/en-de/?eu_nc=1"
                     className={layout.linkWithBorder}
+                    tabIndex={-1}
                   >
                     <img
                       src={`${

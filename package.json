@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@charlietango/use-focus-trap": "^1.2.11",
     "@types/next": "^9.0.0",
     "@types/react": "^16.9.34",
     "@types/showdown": "^1.9.3",

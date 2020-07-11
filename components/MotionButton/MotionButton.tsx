@@ -12,12 +12,12 @@ const MotionButton: FC<MotionButtonProps> = (props) => {
   const { buttonType, link, text } = props;
   console.log(buttonType);
   return buttonType === ButtonType.BUTTON ? (
-    <motion.button {...props} whileTap={{ scale: 0.9 }}>
+    <motion.button {...props} whileTap={{ scale: 0.9 }} tabIndex={-1}>
       {text}
     </motion.button>
   ) : (
-    <motion.button {...props} whileTap={{ scale: 0.9 }}>
-      <a href={link} target="_blank" style={{ color: "#ffffff" }}>
+    <motion.button {...props} whileTap={{ scale: 0.9 }} tabIndex={-1}>
+      <a href={link} target="_blank" style={{ color: "#ffffff" }} tabIndex={-1}>
         {text}
       </a>
     </motion.button>

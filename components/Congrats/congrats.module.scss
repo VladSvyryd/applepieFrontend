@@ -1,0 +1,17 @@
+.container {
+  width: 150px;
+  height: 80px;
+  display: flex;
+  place-content: center;
+  overflow: hidden;
+  // background: rgba(255, 255, 255, 0.2);
+  position: relative;
+  margin: 5px;
+}
+
+.item {
+  overflow: visible;
+  stroke: #fff;
+  stroke-width: 1;
+  stroke-linejoin: round;
+}

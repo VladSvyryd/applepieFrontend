@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useStoreState } from "easy-peasy";
 import interactive_form from "./interactiveForm.module.scss";
 import { useStoreActions } from "../../hooks";
+import useFocusTrap from "@charlietango/use-focus-trap";
 import FormSlider from "../FormSlider/FormSlider";
 const Path = (props: any) => (
   <motion.path
@@ -84,6 +85,7 @@ export const InteractiveForm: FC<InteractiveFormProps> = (props) => {
       childRef.current.goToPrev();
     }
   };
+  const ref = useFocusTrap();
   return (
     <>
       <motion.div
@@ -96,6 +98,7 @@ export const InteractiveForm: FC<InteractiveFormProps> = (props) => {
         {...props}
         onKeyDown={(e) => handlePressEnter(e)}
         tabIndex={0}
+        ref={ref}
       >
         <motion.div
           variants={sidebar}

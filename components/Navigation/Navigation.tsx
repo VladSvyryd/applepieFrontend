@@ -45,6 +45,7 @@ const Navigation: React.FC<NavProps> = (props) => {
             as={`/${Language[currentLanguage]}${l.url}`}
           >
             <a
+              tabIndex={-1}
               className={`${nav.navLink} ${
                 invertedSlides.some((s) => s === activeCarouselIndex)
                   ? "invertedTextColorBySlide invertedBorderColorBySlide"

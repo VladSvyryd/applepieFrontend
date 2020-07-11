@@ -96,6 +96,17 @@
     height: 60px;
   }
 }
+.fieldRowMultiple {
+  display: flex;
+  flex-direction: row !important;
+  > div {
+    margin-right: 20px;
+  }
+  h4 {
+    margin: 0;
+    color: white;
+  }
+}
 .input {
   width: 100%;
   // max-width: 620px;
@@ -124,6 +135,10 @@
   flex-direction: column;
   @media (max-height: 850px) {
     height: 80px;
+  }
+  h4 {
+    margin: 0;
+    color: white;
   }
 }
 .textfield {
@@ -171,11 +186,11 @@
         background-repeat: no-repeat;
         background-position: center;
         transition: all 0.3s ease-in-out;
-        transform: scale(0);
+        transform: scale(0) rotate(-45deg);
         transform-origin: bottom center;
       }
       &:checked::after {
-        transform: scale(1);
+        transform: scale(1) rotate(0);
       }
       &::before {
         content: "";

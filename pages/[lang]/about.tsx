@@ -10,8 +10,7 @@ import {
   navigation_en,
 } from "../../queries/queries";
 import { AboutProps, HomePage, NavType } from "../../types/types";
-import AutoLineSwiper from "../../components/AutoLineSwiper/AutoLineSwiper";
-import aboutStyles from "../../pageStyles/about.module.scss";
+import Congrats from "../../components/Congrats/Congrats";
 
 const about: NextPage<AboutProps> = (props) => {
   const { pageFromCMS } = props;
@@ -31,51 +30,18 @@ const about: NextPage<AboutProps> = (props) => {
           display: "flex",
           width: "100%",
           height: "100%",
-          flexDirection: "column",
+          flexDirection: "row",
           justifyContent: "center",
           alignItems: "center",
           background: "lightblue",
         }}
       >
-        <AutoLineSwiper>
-          <div className={aboutStyles.card}>
-            <img src="https://applepie-strapi.s3.eu-central-1.amazonaws.com/Cola_1b99714759.svg" />
-          </div>
-          <div className={aboutStyles.card}>
-            <img src="https://applepie-strapi.s3.eu-central-1.amazonaws.com/reply_7131e40200.svg" />
-          </div>
-          <div className={aboutStyles.card}>
-            <img src="https://applepie-strapi.s3.eu-central-1.amazonaws.com/entre_les_lignes_4195a29300.svg" />
-          </div>
-          <div className={aboutStyles.card}>
-            <img src="https://applepie-strapi.s3.eu-central-1.amazonaws.com/cierra_482ba7715b.svg" />
-          </div>
-          <div className={aboutStyles.card}>
-            <img src="https://applepie-strapi.s3.eu-central-1.amazonaws.com/Delabuu_6b68e56b54.svg" />
-          </div>
-        </AutoLineSwiper>
-        <AutoLineSwiper rtl="rtl">
-          <div className={aboutStyles.card}>
-            <img src="https://applepie-strapi.s3.eu-central-1.amazonaws.com/reply_7131e40200.svg" />
-          </div>
-
-          <div className={aboutStyles.card}>
-            <img src="https://applepie-strapi.s3.eu-central-1.amazonaws.com/cierra_482ba7715b.svg" />
-          </div>
-          <div className={aboutStyles.card}>
-            <img src="https://applepie-strapi.s3.eu-central-1.amazonaws.com/Cola_1b99714759.svg" />
-          </div>
-          <div className={aboutStyles.card}>
-            <img src="https://applepie-strapi.s3.eu-central-1.amazonaws.com/Delabuu_6b68e56b54.svg" />
-          </div>
-          <div className={aboutStyles.card}>
-            <img src="https://applepie-strapi.s3.eu-central-1.amazonaws.com/entre_les_lignes_4195a29300.svg" />
-          </div>
-        </AutoLineSwiper>
+        <Congrats />
       </section>
     </Layout>
   );
 };
+
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
