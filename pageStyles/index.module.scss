@@ -169,11 +169,11 @@
     margin: auto 110px auto auto;
     border: 1px solid red;
     height: auto;
-    line-height: 0;
+    // line-height: 0;
 
     img {
       border: 1px solid orange;
-      // line-height: 0;
+      line-height: 0;
     }
     @media (max-width: 1024px) {
       margin: 0;
