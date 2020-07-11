@@ -169,7 +169,7 @@
     margin: auto 110px auto auto;
     border: 1px solid red;
     @media (max-width: 768px) {
-      display: inline;
+      display: grid;
       line-height: 0;
     }
     img {
