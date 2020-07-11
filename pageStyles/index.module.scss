@@ -165,11 +165,14 @@
   justify-content: flex-start;
   border: 1px solid blue;
   .left {
-    display: inline;
+    display: flex;
     margin: auto 110px auto auto;
     border: 1px solid red;
     line-height: 0;
-
+    @media (max-width: 768px) {
+      display: inline;
+      line-height: 0;
+    }
     img {
       border: 1px solid orange;
     }
