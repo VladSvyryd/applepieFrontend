@@ -232,6 +232,7 @@ const Page: NextPage<HomeProps> = (props) => {
             />
           </div>
           <div className={index.right + " " + index.verticalMargin}>
+            {<span>1 versuch</span>}
             <h2
               data-swiper-parallax="500"
               data-swiper-parallax-opacity="0"
