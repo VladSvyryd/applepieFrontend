@@ -15,7 +15,7 @@ const AutoLineSwiper: React.FC<AutoLineSwiperProps> = ({
     centeredSlides: true,
     loop: true,
     slidesPerGroup: 1,
-    allowTouchMove:false,
+    allowTouchMove: false,
     autoplay: {
       delay: 2500,
       disableOnInteraction: false,
@@ -24,8 +24,9 @@ const AutoLineSwiper: React.FC<AutoLineSwiperProps> = ({
     breakpoints: {
       320: {
         slidesPerView: 2,
-        slidesPerGroup: 1,
-        spaceBetween: 50,
+        slidesPerGroup: 2,
+        spaceBetween: 0,
+        centeredSlides: false,
       },
       450: {
         slidesPerView: 2,

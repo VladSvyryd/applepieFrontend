@@ -201,14 +201,14 @@
   @media (max-width: 1024px) {
     display: flex;
     flex-direction: column-reverse;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     align-items: center;
   }
   .left {
     max-width: 380px;
     margin: auto 150px auto auto;
     @media (max-width: 1024px) {
-      margin: 0 20px;
+      margin: auto 20px;
     }
   }
   .right {
@@ -245,6 +245,11 @@
       .gridImage {
         display: flex;
         justify-content: center;
+        @media (max-width: 680px) {
+          img {
+            max-width: 50%;
+          }
+        }
       }
     }
   }
@@ -253,6 +258,9 @@
   background: $invert-text-color;
   padding-left: 20px;
   padding-right: 20px;
+  @media (max-width: 680px) {
+    padding-bottom: 100px;
+  }
   h3 {
     font-size: 25px;
     color: $primary-color;
@@ -311,6 +319,9 @@
       justify-items: center;
       align-items: flex-end;
       text-align: center;
+      @media (max-width: 680px) {
+        grid-gap: 0;
+      }
       @media (max-width: 1530px) {
         display: flex;
         flex-direction: row;
@@ -328,12 +339,9 @@
         align-items: flex-start;
         justify-content: space-evenly;
         flex-wrap: nowrap;
-        height: 60vh;
+        height: 100%;
       }
 
-      @media (max-width: 450px) {
-        height: 50vh;
-      }
       @media (max-height: 700px) and(max-width: 450px) {
         height: 100%;
       }
@@ -383,6 +391,7 @@
           @media (max-width: 680px) {
             margin: 0;
             line-height: normal;
+            text-align: left;
           }
         }
       }
@@ -402,7 +411,6 @@
       }
       @media (max-width: 450px) {
         margin-top: 10px;
-        margin-bottom: 20px;
       }
       > * {
         margin: 0 57px;
@@ -451,7 +459,7 @@
 .fifthSection {
   padding-right: 20px;
   padding-left: 20px;
-  .left {
+  justify-content:flex .left {
     display: flex;
     @media (max-width: 768px) {
       display: grid;
@@ -459,7 +467,7 @@
       margin: auto !important;
     }
     @media (max-width: 1024px) {
-      margin: 0;
+      margin: auto 20px;
     }
   }
   .right {
@@ -494,6 +502,9 @@
 }
 
 .seventhSection {
+  @media (max-width: 400px) and (max-height: 700px) {
+    padding-bottom: 100px;
+  }
   &.grid {
     justify-content: flex-start;
   }

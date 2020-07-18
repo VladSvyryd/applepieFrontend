@@ -9,7 +9,7 @@
     "start": "next start"
   },
   "keywords": [],
-  "author": "",
+  "author": "Vladyslav Svyrydonov",
   "license": "ISC",
   "dependencies": {
     "@charlietango/use-focus-trap": "^1.2.11",
