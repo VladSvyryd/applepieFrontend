@@ -87,6 +87,7 @@ const FormSlider = forwardRef((_props, ref) => {
           message: "Thank you for reaching out to us.",
         });
         resetForm({});
+        setCurrentSlide(0);
         setSubmitting(false);
 
         const deal_id =
@@ -345,6 +346,22 @@ const FormSlider = forwardRef((_props, ref) => {
   const handleNextSlideClick = () => {
     if (canIGoNext() && currentSlider >= 0 && currentSlider < 3) {
       setCurrentSlide(currentSlider + 1);
+      console.log(currentSlider + 1);
+      switch (currentSlider + 1) {
+        case 1:
+          nameRef.current.focus();
+          break;
+        case 2:
+          emailRef.current.focus();
+          break;
+        case 3:
+          geldRef.current.focus();
+          break;
+        default:
+          break;
+      }
+
+      // myRef.current.focus();
     }
     if (currentSlider === 4) {
       setInterFormState(false);
@@ -359,6 +376,7 @@ const FormSlider = forwardRef((_props, ref) => {
     active: { scale: 1.57, transition: { type: "spring", stiffness: 100 } },
     passive: { scale: 1, transition: { type: "spring", stiffness: 100 } },
   };
+
   const services = [
     { group: "services", value: SERVICE_ID_BACKEND.DESIGN, name: "Design" },
     {
@@ -392,9 +410,10 @@ const FormSlider = forwardRef((_props, ref) => {
   );
   const [formObject, setFormObject] = useState(initialFormikState);
   const [congratsName, setCongratsName] = useState("");
-  const myRef = useRef<any>();
+  const nameRef = useRef<any>();
+  const emailRef = useRef<any>();
+  const geldRef = useRef<any>();
   useEffect(() => {
-    setCurrentSlide(0);
     setCongratsName("");
   }, [interactiveFormOpened]);
   return (
@@ -465,7 +484,8 @@ const FormSlider = forwardRef((_props, ref) => {
                       placeholder="Name"
                       validate={isRequiredName}
                       className={formSlider.input}
-                      innerRef={myRef}
+                      innerRef={nameRef}
+                      autoFocus
                     />
                     <ErrorMessage name="name" component={Error} />
                   </div>
@@ -485,6 +505,7 @@ const FormSlider = forwardRef((_props, ref) => {
                       placeholder="E-mail"
                       validate={validate}
                       className={formSlider.input}
+                      innerRef={emailRef}
                     />
                     <ErrorMessage name="email" component={Error} />
                   </div>
@@ -500,30 +521,31 @@ const FormSlider = forwardRef((_props, ref) => {
                   <div
                     className={`${formSlider.textareaRow} ${formSlider.fieldRowMultiple}`}
                   >
-                    <div>
-                      <h4>Geld</h4>
-                      <Field
-                        type="text"
-                        name="value"
-                        placeholder="9999€"
-                        validate={isRequiredPrice}
-                        className={formSlider.input}
-                      />
-                      <ErrorMessage name="value" component={Error} />
-                    </div>
-                    <div>
-                      <h4>Date</h4>
-                      <Field
-                        type="text"
-                        name="date"
-                        placeholder={`${
-                          currentLanguage === 0 ? "dd.mm.yyyy" : "tt.mm.jjjj"
-                        }`}
-                        validate={isRequiredDate}
-                        className={formSlider.input}
-                      />
-                      <ErrorMessage name="date" component={Error} />
-                    </div>
+                    <h4>Geld</h4>
+                    <Field
+                      type="text"
+                      name="value"
+                      placeholder="9999€"
+                      validate={isRequiredPrice}
+                      className={formSlider.input}
+                      innerRef={geldRef}
+                    />
+                    <ErrorMessage name="value" component={Error} />
+                  </div>
+                  <div
+                    className={`${formSlider.textareaRow} ${formSlider.fieldRowMultiple}`}
+                  >
+                    <h4>Date</h4>
+                    <Field
+                      type="text"
+                      name="date"
+                      placeholder={`${
+                        currentLanguage === 0 ? "dd.mm.yyyy" : "tt.mm.jjjj"
+                      }`}
+                      validate={isRequiredDate}
+                      className={formSlider.input}
+                    />
+                    <ErrorMessage name="date" component={Error} />
                   </div>
                   <div className={formSlider.textareaRow}>
                     <h4>
