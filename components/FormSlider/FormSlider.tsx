@@ -14,6 +14,9 @@ import { useStoreState, useStoreActions } from "../../hooks";
 import { Language } from "../../types/types";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Congrats from "../Congrats/Congrats";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import DatePicker from "react-datepicker";
+
 interface Person {
   name: string;
   email: string;
@@ -70,8 +73,9 @@ const FormSlider = forwardRef((_props, ref) => {
 
     try {
       const res = await fetch(
+        "",
         // `https://anon2.pipedrive.com/api/v1/persons?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
-        `https://applepie.pipedrive.com/api/v1/persons?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
+        //`https://applepie.pipedrive.com/api/v1/persons?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
         {
           method: "POST",
           body: JSON.stringify(createPersonValues),
@@ -95,7 +99,7 @@ const FormSlider = forwardRef((_props, ref) => {
           (await createDeal(
             json.data?.id,
             `SP // ${json.data?.name}`,
-            values.value,
+            formObject.value,
             values.services,
             values.date
           ));
@@ -237,6 +241,7 @@ const FormSlider = forwardRef((_props, ref) => {
     return errorMessage;
   };
   const isRequiredPrice = (value: any) => {
+    console.log(value);
     let errorMessage;
     if (value.length <= 0) {
       errorMessage =
@@ -416,6 +421,19 @@ const FormSlider = forwardRef((_props, ref) => {
   useEffect(() => {
     setCongratsName("");
   }, [interactiveFormOpened]);
+
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
+
+  const ExampleCustomInput = ({ value, onClick }: any) => (
+    <div
+      className={formSlider.input}
+      style={{ lineHeight: "normal" }}
+      onClick={onClick}
+    >
+      {value}
+    </div>
+  );
+
   return (
     <div className={formSlider.mySlider}>
       <div className={formSlider.paginationContainer}>
@@ -520,30 +538,38 @@ const FormSlider = forwardRef((_props, ref) => {
                   </div>
                   <div
                     className={`${formSlider.textareaRow} ${formSlider.fieldRowMultiple}`}
+                    style={{
+                      height: "auto",
+                      display: "flex",
+                      flexDirection: "column",
+                      minHeight: 100,
+                      position: "relative",
+                    }}
                   >
                     <h4>Geld</h4>
                     <Field
                       type="text"
                       name="value"
-                      placeholder="9999€"
                       validate={isRequiredPrice}
                       className={formSlider.input}
                       innerRef={geldRef}
+                      placeholder="3000"
                     />
+                    <span className={formSlider.euro}>€</span>
                     <ErrorMessage name="value" component={Error} />
                   </div>
+
                   <div
                     className={`${formSlider.textareaRow} ${formSlider.fieldRowMultiple}`}
+                    style={{ marginBottom: 20 }}
                   >
                     <h4>Date</h4>
-                    <Field
-                      type="text"
-                      name="date"
-                      placeholder={`${
-                        currentLanguage === 0 ? "dd.mm.yyyy" : "tt.mm.jjjj"
-                      }`}
-                      validate={isRequiredDate}
-                      className={formSlider.input}
+                    <DatePicker
+                      selected={startDate}
+                      dateFormat="dd.MM.yyyy"
+                      popperPlacement="bottom-center"
+                      customInput={<ExampleCustomInput />}
+                      onChange={(date) => setStartDate(date)}
                     />
                     <ErrorMessage name="date" component={Error} />
                   </div>
@@ -557,14 +583,21 @@ const FormSlider = forwardRef((_props, ref) => {
                       type="text"
                       name="message"
                       validate={isRequiredMessage}
-                      as="textarea"
-                      className={`${formSlider.input} ${formSlider.textfield}`}
-                      // placeholder={`${
-                      //   currentLanguage === 0
-                      //     ? "About project"
-                      //     : "Projektbeschreibung"
-                      // }`}
-                    />
+                      as="div"
+                      className={`${formSlider.input} `}
+                    >
+                      {({ field: { value }, form: { setFieldValue } }: any) => (
+                        <TextareaAutosize
+                          aria-label="minimum height"
+                          rowsMin={3}
+                          rowsMax={11}
+                          onChange={(event) =>
+                            setFieldValue("message", event.target.value)
+                          }
+                          className={`${formSlider.textfield}`}
+                        />
+                      )}
+                    </Field>
                     <ErrorMessage name="message" component={Error} />
                   </div>
                 </motion.div>
@@ -590,23 +623,31 @@ const FormSlider = forwardRef((_props, ref) => {
               </Form>
               {currentSlider === 3 && (
                 <button
-                  style={{ zIndex: 22222 }}
                   type="button"
                   onClick={() => handleSubmit()}
                   disabled={!canIGoNext() && isSubmitting}
+                  className={`button ${formSlider.button}`}
                 >
-                  {"SEND"}
+                  {currentLanguage === Language.de ? "LOS" : "GO"}
                 </button>
               )}
             </>
           )}
         </Formik>
       </motion.div>
-      <div className={formSlider.press}>
-        {currentSlider === 4 ? "Back to page" : "Press Enter"}
-      </div>
+
       {currentSlider < 3 && (
-        <button onClick={() => handleNextSlideClick()}>Next</button>
+        <>
+          <div className={formSlider.press}>
+            {currentSlider === 4 ? "Back to page" : "Press Enter"}
+          </div>
+          <button
+            className={`button ${formSlider.button}`}
+            onClick={() => handleNextSlideClick()}
+          >
+            {currentLanguage === Language.de ? "Weiter" : "Next"}
+          </button>
+        </>
       )}
     </div>
   );

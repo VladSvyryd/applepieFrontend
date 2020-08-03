@@ -234,7 +234,7 @@ const SendForm: React.FC<SendFormProps> = ({ button }) => {
             <ErrorMessage name="message" component={Error} />
           </div>
           <motion.button
-            className={` ${formStyles.button}`}
+            className={`button ${formStyles.button}`}
             data-swiper-parallax="1100"
             data-swiper-parallax-opacity="0"
             // whileHover={{ scale: 0.9 }}

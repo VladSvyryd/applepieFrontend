@@ -132,7 +132,7 @@ const Page: NextPage<HomeProps> = (props) => {
                 <MotionButton
                   text={pageFromCMS.buttons[0].text}
                   buttonType={pageFromCMS.buttons[0].type}
-                  className={`medium ${index.introButton}`}
+                  className={`medium button ${index.introButton}`}
                   data-swiper-parallax="1100"
                   data-swiper-parallax-opacity="0"
                   // link={pageFromCMS.buttons[0].function}
@@ -358,7 +358,7 @@ const Page: NextPage<HomeProps> = (props) => {
                 />
               </div>
               <motion.button
-                className={`medium`}
+                className={`medium button`}
                 data-swiper-parallax="1100"
                 data-swiper-parallax-opacity="0"
                 // whileHover={{ scale: 0.9 }}

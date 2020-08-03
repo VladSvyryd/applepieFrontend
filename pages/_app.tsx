@@ -1,5 +1,6 @@
 import "../global_styles.scss";
 import "swiper/css/swiper.css";
+import "react-datepicker/dist/react-datepicker.css";
 import store from "../store";
 import { StoreProvider } from "easy-peasy";
 import { ApolloClient } from "apollo-client";
@@ -7,6 +8,7 @@ import { ApolloClient } from "apollo-client";
 import { createHttpLink } from "apollo-link-http";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import dynamic from "next/dynamic";
+
 const DeviceWatcher = dynamic(
   () => import("../components/DeviceWatcher/DeviceWatcher"),
   {
@@ -22,12 +24,10 @@ export const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 export default function MyApp({ Component, pageProps, router }: any) {
-
-  
   return (
     <StoreProvider store={store}>
       <DeviceWatcher />
-     <Component {...pageProps} key={router.route} />
+      <Component {...pageProps} key={router.route} />
       {/* <Loading /> */}
     </StoreProvider>
   );
