@@ -73,8 +73,7 @@ const FormSlider = forwardRef((_props, ref) => {
 
     try {
       const res = await fetch(
-        "",
-        // `https://anon2.pipedrive.com/api/v1/persons?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
+        `https://anon2.pipedrive.com/api/v1/persons?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
         //`https://applepie.pipedrive.com/api/v1/persons?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
         {
           method: "POST",
@@ -144,8 +143,8 @@ const FormSlider = forwardRef((_props, ref) => {
     deal[UNIQUE_SERVICE_DEALFIELD.toString()] = services.join(",");
     try {
       const res = await fetch(
-        // `https://anon2.pipedrive.com/api/v1/deals?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
-        `https://applepie.pipedrive.com/api/v1/deals?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
+        `https://anon2.pipedrive.com/api/v1/deals?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
+        //`https://applepie.pipedrive.com/api/v1/deals?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
         {
           method: "POST",
           body: JSON.stringify(deal),
@@ -182,8 +181,8 @@ const FormSlider = forwardRef((_props, ref) => {
     };
     try {
       const res = await fetch(
-        // `https://anon2.pipedrive.com/api/v1/activities?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
-        `https://applepie.pipedrive.com/api/v1/activities?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
+        `https://anon2.pipedrive.com/api/v1/activities?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
+        //`https://applepie.pipedrive.com/api/v1/activities?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
         {
           method: "POST",
           body: JSON.stringify(activity),
@@ -252,24 +251,6 @@ const FormSlider = forwardRef((_props, ref) => {
     } else {
       setFormObject((prev) => ({ ...prev, value }));
     }
-    return errorMessage;
-  };
-  const isRequiredDate = (value: any) => {
-    let errorMessage;
-    if (
-      !/^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/.test(
-        value
-      )
-    ) {
-      errorMessage =
-        currentLanguage !== Language.de
-          ? "Please check date format dd.mm.yyyy"
-          : "Ups vertippt? tt.mm.jjjj";
-      setFormObject((prev) => ({ ...prev, date: "" }));
-    } else {
-      setFormObject((prev) => ({ ...prev, date: value }));
-    }
-
     return errorMessage;
   };
 
@@ -365,8 +346,6 @@ const FormSlider = forwardRef((_props, ref) => {
         default:
           break;
       }
-
-      // myRef.current.focus();
     }
     if (currentSlider === 4) {
       setInterFormState(false);
@@ -586,7 +565,7 @@ const FormSlider = forwardRef((_props, ref) => {
                       as="div"
                       className={`${formSlider.input} `}
                     >
-                      {({ field: { value }, form: { setFieldValue } }: any) => (
+                      {({ form: { setFieldValue } }: any) => (
                         <TextareaAutosize
                           aria-label="minimum height"
                           rowsMin={3}

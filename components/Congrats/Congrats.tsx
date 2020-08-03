@@ -169,6 +169,7 @@ const Congrats = () => {
         width: 478,
         height: 275,
       }}
+      className={styles.root}
       // variants={ult}
       // animate={start ? "act" : "pass"}
     >

@@ -512,7 +512,7 @@ const Page: NextPage<HomeProps> = (props) => {
               </div>
             </div>
             <motion.button
-              className={`medium ${index.introButton}`}
+              className={`button medium ${index.introButton}`}
               data-swiper-parallax="1100"
               data-swiper-parallax-opacity="0"
               // whileHover={{ scale: 0.9 }}
