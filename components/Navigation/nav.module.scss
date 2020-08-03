@@ -41,7 +41,7 @@
   margin-right: 35px;
   padding-right: 35px;
   font-size: 23px;
-  transition: text-shadow .3s;
+  transition: text-shadow 0.3s;
   &.onlyDesktop {
     &:nth-child(1) {
       @media (max-width: 1400px) {
@@ -55,9 +55,10 @@
     }
   }
   &:hover {
-    text-shadow: 0 0 .65px #333, 0 0 .65px #333;
+    text-shadow: 0 0 0.65px #333, 0 0 0.65px #333;
   }
-  &:last-of-type {
+  &.planeLink {
+    cursor: pointer;
     position: relative;
     margin: 0;
     padding: 0;

@@ -73,8 +73,7 @@ const FormSlider = forwardRef((_props, ref) => {
 
     try {
       const res = await fetch(
-        `https://anon2.pipedrive.com/api/v1/persons?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
-        //`https://applepie.pipedrive.com/api/v1/persons?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
+        `https://applepie.pipedrive.com/api/v1/persons?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
         {
           method: "POST",
           body: JSON.stringify(createPersonValues),
@@ -90,7 +89,6 @@ const FormSlider = forwardRef((_props, ref) => {
           message: "Thank you for reaching out to us.",
         });
         resetForm({});
-        setCurrentSlide(0);
         setSubmitting(false);
 
         const deal_id =
@@ -106,19 +104,15 @@ const FormSlider = forwardRef((_props, ref) => {
         typeof deal_id === "number" &&
           json.data?.id &&
           createActivity(json.data?.id, deal_id, values.message);
-
-        // toggleactive();
       } else {
         setResponse({
           type: "Error",
           message: json.error,
         });
         setSubmitting(false);
-        // toggleactive();
       }
     } catch (e) {
       console.log("An error occurred", e);
-      //   toggleactive();
 
       setResponse({
         type: "error",
@@ -143,8 +137,7 @@ const FormSlider = forwardRef((_props, ref) => {
     deal[UNIQUE_SERVICE_DEALFIELD.toString()] = services.join(",");
     try {
       const res = await fetch(
-        `https://anon2.pipedrive.com/api/v1/deals?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
-        //`https://applepie.pipedrive.com/api/v1/deals?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
+        `https://applepie.pipedrive.com/api/v1/deals?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
         {
           method: "POST",
           body: JSON.stringify(deal),
@@ -157,7 +150,6 @@ const FormSlider = forwardRef((_props, ref) => {
       }
     } catch (e) {
       console.log("An error occurred", e);
-      //   toggleactive();
 
       setResponse({
         type: "error",
@@ -181,8 +173,7 @@ const FormSlider = forwardRef((_props, ref) => {
     };
     try {
       const res = await fetch(
-        `https://anon2.pipedrive.com/api/v1/activities?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
-        //`https://applepie.pipedrive.com/api/v1/activities?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
+        `https://applepie.pipedrive.com/api/v1/activities?api_token=${process.env.PIPEDRIVE_API_ACCESS_KEY}`,
         {
           method: "POST",
           body: JSON.stringify(activity),
@@ -399,6 +390,7 @@ const FormSlider = forwardRef((_props, ref) => {
   const geldRef = useRef<any>();
   useEffect(() => {
     setCongratsName("");
+    if (currentSlider === 4) setCurrentSlide(0);
   }, [interactiveFormOpened]);
 
   const [startDate, setStartDate] = useState<Date | null>(new Date());

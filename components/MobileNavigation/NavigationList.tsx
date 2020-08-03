@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { MenuItem } from "./MenuItem";
 import nav from "./nav.module.scss";
-import { NavLink, Language } from "../../types/types";
+import { Button, Language } from "../../types/types";
 import { FC } from "react";
 import Link from "next/link";
 import { useStoreState } from "easy-peasy";
+import { useStoreActions } from "../../hooks";
 
 const variants = {
   open: {
@@ -15,7 +16,7 @@ const variants = {
   },
 };
 type NavigationProps = {
-  links: NavLink[];
+  links: Button[];
   inverted: boolean;
   toggleMenu: any;
 };
@@ -28,23 +29,41 @@ export const Navigation: FC<NavigationProps> = ({
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
   );
+  console.log(links, inverted, toggleMenu, currentLanguage);
+  const setInterFormState = useStoreActions(
+    (actions) => actions.device.setInterFormState
+  );
+  const handleClickOnButton = () => {
+    toggleMenu();
+    setInterFormState(true);
+  };
   return (
     <motion.ul variants={variants} className={nav.ul}>
-      {links?.map((l: NavLink, i: number) => (
+      {links?.map((l: Button, i: number) => (
         <MenuItem index={i} key={i}>
-          <Link
-            key={l.url + "nav"}
-            href={`/[lang]${l.url}`}
-            as={`/${Language[currentLanguage]}${l.url}`}
-          >
-            <a
-              className={`${nav.navLink}`}
-              style={inverted ? { color: "#403d55" } : {}}
-              onClick={toggleMenu}
+          {l.type === "LINK" ? (
+            <Link
+              key={l.function + "nav"}
+              href={`/[lang]${l.function}`}
+              as={`/${Language[currentLanguage]}${l.function}`}
             >
-              {l.name}
-            </a>
-          </Link>
+              <a
+                className={`${nav.navLink}`}
+                style={inverted ? { color: "#403d55" } : {}}
+                onClick={toggleMenu}
+              >
+                {l.text}
+              </a>
+            </Link>
+          ) : (
+            <span
+              className={`${nav.navLink}`}
+              style={inverted ? { color: "#403d55" } : { color: "#fff" }}
+              onClick={handleClickOnButton}
+            >
+              {l.text}
+            </span>
+          )}
         </MenuItem>
       ))}
     </motion.ul>

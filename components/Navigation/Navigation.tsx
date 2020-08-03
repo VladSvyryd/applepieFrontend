@@ -1,22 +1,26 @@
 import React from "react";
-import { useStoreState } from "../../hooks";
+import { useStoreState, useStoreActions } from "../../hooks";
 import Link from "next/link";
-import { Language, NavLink, NavProps } from "../../types/types";
+import { Language, NavLink, NavProps, Button } from "../../types/types";
 import { LanguageSwitcher } from "../LanguageSwitcher/LanguageSwitcher";
 import nav from "./nav.module.scss";
 import { MobileNavigation } from "../MobileNavigation/Navigation";
+import MotionButton from "../MotionButton/MotionButton";
 
 const Navigation: React.FC<NavProps> = (props) => {
   const {
     logo,
     links,
     logo_inverted,
-    plane_inverted,
     plane,
+    plane_inverted,
   } = props.navigation;
   const { activeCarouselIndex, invertedSlides, social_links } = props;
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
+  );
+  const setInterFormState = useStoreActions(
+    (actions) => actions.device.setInterFormState
   );
   return (
     <nav className={`${nav.navbar} flexColumns alignCenter content-frame `}>
@@ -38,35 +42,70 @@ const Navigation: React.FC<NavProps> = (props) => {
       <div
         className={`alignCenter flexColumns flexEnd indieFlower ${nav.linkSection} `}
       >
-        {links?.map((l: NavLink, index: number) => (
-          <Link
-            key={l.url + "nav"}
-            href={`/[lang]${l.url}`}
-            as={`/${Language[currentLanguage]}${l.url}`}
-          >
-            <a
-              tabIndex={-1}
-              className={`${nav.navLink} ${
-                invertedSlides.some((s) => s === activeCarouselIndex)
-                  ? "invertedTextColorBySlide invertedBorderColorBySlide"
-                  : ""
-              } ${nav.onlyDesktop}`}
-            >
-              {l.name}
-              {links && index === links?.length - 1 && (
-                <img
-                  src={`${
-                    !invertedSlides.some((s) => s === activeCarouselIndex)
-                      ? plane?.url
-                      : plane_inverted?.url
-                  }`}
-                  alt={plane?.alternativeText}
-                  className={nav.plane}
-                />
-              )}
-            </a>
-          </Link>
-        ))}
+        {links?.map(
+          (l: Button, index: number) =>
+            l.type === "LINK" ? (
+              <Link
+                key={l.text + "nav"}
+                href={`/[lang]${l.function}`}
+                as={`/${Language[currentLanguage]}${l.function}`}
+              >
+                <a
+                  tabIndex={-1}
+                  className={`${nav.navLink} ${
+                    invertedSlides.some((s) => s === activeCarouselIndex)
+                      ? "invertedTextColorBySlide invertedBorderColorBySlide"
+                      : ""
+                  } ${nav.onlyDesktop}`}
+                >
+                  {l.text}
+                  {links && index === links?.length - 1 && (
+                    <img
+                      src={`${
+                        !invertedSlides.some((s) => s === activeCarouselIndex)
+                          ? plane?.url
+                          : plane_inverted?.url
+                      }`}
+                      alt={plane?.alternativeText}
+                      className={nav.plane}
+                    />
+                  )}
+                </a>
+              </Link>
+            ) : (
+              <span
+                tabIndex={-1}
+                className={`${nav.navLink} ${nav.planeLink} ${
+                  invertedSlides.some((s) => s === activeCarouselIndex)
+                    ? "invertedTextColorBySlide invertedBorderColorBySlide"
+                    : ""
+                } ${nav.onlyDesktop}`}
+                onClick={() => {
+                  !l.function && setInterFormState(true);
+                }}
+              >
+                {l.text}
+                {links && index === links?.length - 1 && (
+                  <img
+                    src={`${
+                      !invertedSlides.some((s) => s === activeCarouselIndex)
+                        ? plane?.url
+                        : plane_inverted?.url
+                    }`}
+                    alt={plane?.alternativeText}
+                    className={nav.plane}
+                  />
+                )}
+              </span>
+            )
+
+          // <MotionButton
+          //   text={l.text}
+          //   buttonType={l.type}
+          //   className={`medium button ${index}`}
+          //   onClick={() => console.log("true")}
+          // />
+        )}
         <LanguageSwitcher className={nav.onlyDesktop} />
       </div>
       <MobileNavigation

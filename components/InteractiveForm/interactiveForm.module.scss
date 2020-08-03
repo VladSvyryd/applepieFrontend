@@ -39,7 +39,10 @@
     @media (max-width: 1580px) {
       padding: 100px 60px;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 1025px) {
+      padding: 50px 100px;
+    }
+    @media (max-width: 668px) {
       padding: 50px 30px;
     }
   }
@@ -58,5 +61,6 @@
   align-items: center;
   @media (max-width: 768px) {
     top: 11px;
+    right: 10px;
   }
 }

@@ -6,21 +6,25 @@ type MotionButtonProps = {
   text: string;
   buttonType: ButtonType;
   link?: string;
+  external?: boolean;
   [x: string]: any;
 };
 const MotionButton: FC<MotionButtonProps> = (props) => {
-  const { buttonType, link, text } = props;
+  const { buttonType, link, text, external = false } = props;
   console.log(buttonType);
   return buttonType === ButtonType.BUTTON ? (
     <motion.button {...props} whileTap={{ scale: 0.9 }} tabIndex={-1}>
       {text}
     </motion.button>
   ) : (
-    <motion.button {...props} whileTap={{ scale: 0.9 }} tabIndex={-1}>
-      <a href={link} target="_blank" style={{ color: "#ffffff" }} tabIndex={-1}>
-        {text}
-      </a>
-    </motion.button>
+    <a
+      href={link}
+      target={`${external && "_blank"}`}
+      style={{ color: "#ffffff" }}
+      tabIndex={-1}
+    >
+      {text}
+    </a>
   );
 };
 

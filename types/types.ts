@@ -64,7 +64,7 @@ export type NavType = {
   logo?: Picture;
   links_de?: NavLink[];
   links_en?: NavLink[];
-  links?: NavLink[];
+  links?: Button[];
   logo_inverted?: Picture;
   plane?: Picture;
   plane_inverted?: Picture;

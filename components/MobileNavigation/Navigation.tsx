@@ -4,11 +4,11 @@ import { MenuToggle } from "./MenuToggle";
 import { Navigation } from "./NavigationList";
 import { useStoreState } from "easy-peasy";
 import nav from "./nav.module.scss";
-import { NavLink, Link } from "../../types/types";
+import { Button, Link } from "../../types/types";
 import { SocialLinks } from "../SocialLinks/SocialLinks";
 import { useStoreActions } from "../../hooks";
 type MobileNavigationProps = {
-  links: NavLink[];
+  links: Button[];
   social_links: Link[];
 };
 export const MobileNavigation: FC<MobileNavigationProps> = ({

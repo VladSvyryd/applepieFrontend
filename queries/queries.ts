@@ -785,11 +785,10 @@ export const landing_en = gql`
 export const navigation_de = gql`
   query {
     navigation {
-      links: links_de {
+      links {
         __typename
-        ... on ComponentLinksLink {
-          name
-          url
+        ... on ComponentButtonsButton {
+          ...Button_DE
         }
       }
       logo {
@@ -830,15 +829,15 @@ export const navigation_de = gql`
       }
     }
   }
+  ${fragments.button_de}
 `;
 export const navigation_en = gql`
   query {
     navigation {
-      links: links_en {
+      links {
         __typename
-        ... on ComponentLinksLink {
-          name
-          url
+        ... on ComponentButtonsButton {
+          Button_DE
         }
       }
       logo {
@@ -879,4 +878,5 @@ export const navigation_en = gql`
       }
     }
   }
+  ${fragments.button_de}
 `;
