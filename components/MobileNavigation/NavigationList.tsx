@@ -29,7 +29,6 @@ export const Navigation: FC<NavigationProps> = ({
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
   );
-  console.log(links, inverted, toggleMenu, currentLanguage);
   const setInterFormState = useStoreActions(
     (actions) => actions.device.setInterFormState
   );

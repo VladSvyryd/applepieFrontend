@@ -22,6 +22,7 @@ import AutoLineSwiper from "../../components/AutoLineSwiper/AutoLineSwiper";
 import MotionButton from "../../components/MotionButton/MotionButton";
 import { useStoreActions } from "../../hooks";
 import { InteractiveForm } from "../../components/InteractiveForm/InteractiveForm";
+import { ORIENTATION } from "../../model/device";
 const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
   ssr: true,
 });
@@ -36,15 +37,15 @@ const Page: NextPage<HomeProps> = (props) => {
     setIndex(0);
   };
   const deviceWidth = useStoreState((state) => state.device.width);
-  // const orientation = useStoreState((state) => state.device.orientation);
+  const orientation = useStoreState((state) => state.device.orientation);
   const setInterFormState = useStoreActions(
     (actions) => actions.device.setInterFormState
   );
-
+  console.log(orientation, props.isMobile);
   // IF for landscape mode
-  //!props.isMobile ||
-  //(props.isMobile && orientation === ORIENTATION.portrait) ?
-  return (
+
+  return !props.isMobile ||
+    (props.isMobile && orientation === ORIENTATION.portrait) ? (
     <Layout
       navigation={props.navigation}
       horizontalFooter
@@ -524,25 +525,25 @@ const Page: NextPage<HomeProps> = (props) => {
         </section>
       </Carousel>
     </Layout>
-    // ) : (
-    //   <div
-    //     style={{
-    //       display: "flex",
-    //       flexDirection: "column",
-    //       justifyContent: "space-evenly",
-    //       textAlign: "center",
-    //       backgroundImage: `url(${
-    //         pageFromCMS.intro.pictures && pageFromCMS.intro.pictures[7]?.url
-    //       })`,
-    //     }}
-    //   >
-    //     <img src={`${navigation?.logo?.url}`} />
-    //     <h2>
-    //       Du bist der Erste der das Handy seitlich dreht. Dreh es mal wieder
-    //       zurück bitte. <br />
-    //       applepie Funktioniert nur hochkant.🙂
-    //     </h2>
-    //   </div>
+  ) : (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-evenly",
+        textAlign: "center",
+        backgroundImage: `url(${
+          pageFromCMS.intro.pictures && pageFromCMS.intro.pictures[7]?.url
+        })`,
+      }}
+    >
+      <img src={`${props.navigation?.logo?.url}`} />
+      <h2>
+        Du bist der Erste der das Handy seitlich dreht. Dreh es mal wieder
+        zurück bitte. <br />
+        applepie Funktioniert nur hochkant.🙂
+      </h2>
+    </div>
   );
 };
 Page.getInitialProps = async (context: NextPageContext) => {

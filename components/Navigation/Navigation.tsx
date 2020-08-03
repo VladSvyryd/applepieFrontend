@@ -1,11 +1,10 @@
 import React from "react";
 import { useStoreState, useStoreActions } from "../../hooks";
 import Link from "next/link";
-import { Language, NavLink, NavProps, Button } from "../../types/types";
+import { Language, NavProps, Button } from "../../types/types";
 import { LanguageSwitcher } from "../LanguageSwitcher/LanguageSwitcher";
 import nav from "./nav.module.scss";
 import { MobileNavigation } from "../MobileNavigation/Navigation";
-import MotionButton from "../MotionButton/MotionButton";
 
 const Navigation: React.FC<NavProps> = (props) => {
   const {
