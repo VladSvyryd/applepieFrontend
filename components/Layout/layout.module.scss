@@ -50,3 +50,37 @@
     display: none;
   }
 }
+
+.footerContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.backgroundWhite {
+  background-color: white;
+}
+.logo {
+  @media (max-width: 768px) {
+    max-width: 116px;
+  }
+}
+
+.navbar {
+  height: 100px;
+  justify-content: space-between;
+  max-width: 1530px;
+  margin: 0 auto;
+  @media (max-width: 1580px) {
+    margin: 0 45px;
+  }
+  @media (max-width: 768px) {
+    margin: 0 25px;
+  }
+  @media (max-height: 800px) and(max-width:700px) {
+    height: 80px;
+  }
+  @media (max-width: 768px) {
+    height: 80px;
+  }
+}

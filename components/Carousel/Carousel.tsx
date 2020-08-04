@@ -104,10 +104,10 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
     getSwiper: setSwiper,
     breakpoints: {
       320: {
-        touchAngle: 90
+        touchAngle: 90,
       },
       768: {
-        touchAngle: 45
+        touchAngle: 45,
       },
     },
   };
@@ -137,9 +137,9 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
       scale: 0,
       opacity: 0,
     }),
-    visibleAndHovered:() => ({
+    visibleAndHovered: () => ({
       y: -5,
-      transition:{  yoyo: 3, duration: 0.2 }
+      transition: { yoyo: 3, duration: 0.2 },
     }),
   };
   const captionAnim = {
@@ -275,9 +275,10 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
                       key={"my_slide-image" + i}
                       animate={
                         activeIndexHistory.findIndex((li) => li == i) != -1 &&
-                        i === hoveredIndex?"visibleAndHovered":
-                        activeIndexHistory.findIndex((li) => li == i) != -1 ||
                         i === hoveredIndex
+                          ? "visibleAndHovered"
+                          : activeIndexHistory.findIndex((li) => li == i) !=
+                              -1 || i === hoveredIndex
                           ? "visible"
                           : "hidden"
                       }

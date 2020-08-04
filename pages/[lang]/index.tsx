@@ -2,7 +2,7 @@ import { useState } from "react";
 import withTranslate from "../../components/HOC/withTranslate";
 import Layout from "../../components/Layout/Layout";
 import { NextPage, NextPageContext } from "next";
-import { HomeProps, NavType, HomePage } from "../../types/types";
+import { HomeProps, NavType, HomePage, Language } from "../../types/types";
 import index from "../../pageStyles/index.module.scss";
 import { motion } from "framer-motion";
 import MarkdownView from "react-showdown";
@@ -23,6 +23,7 @@ import MotionButton from "../../components/MotionButton/MotionButton";
 import { useStoreActions } from "../../hooks";
 import { InteractiveForm } from "../../components/InteractiveForm/InteractiveForm";
 import { ORIENTATION } from "../../model/device";
+import Link from "next/link";
 const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
   ssr: true,
 });
@@ -36,6 +37,10 @@ const Page: NextPage<HomeProps> = (props) => {
   const handleServiceLeave = () => {
     setIndex(0);
   };
+
+  const currentLanguage = useStoreState(
+    (state) => state.language.currentLanguage
+  );
   const deviceWidth = useStoreState((state) => state.device.width);
   const orientation = useStoreState((state) => state.device.orientation);
   const setInterFormState = useStoreActions(
@@ -43,7 +48,6 @@ const Page: NextPage<HomeProps> = (props) => {
   );
   console.log(orientation, props.isMobile);
   // IF for landscape mode
-
   return !props.isMobile ||
     (props.isMobile && orientation === ORIENTATION.portrait) ? (
     <Layout
@@ -521,6 +525,33 @@ const Page: NextPage<HomeProps> = (props) => {
             >
               {pageFromCMS.eighth_section?.button.text}
             </motion.button>
+            <motion.button
+              className={`button medium ${index.legal}`}
+              // whileHover={{ scale: 0.9 }}
+              onClick={() => null}
+            >
+              Legal
+            </motion.button>
+          </div>
+        </section>
+        <section>
+          <div className={index.last + " frameBottomTop"}>
+            <ul className={index.ul}>
+              <Link
+                href={`/[lang]/agb`}
+                as={`/${Language[currentLanguage]}/agb`}
+              >
+                <a className={index.li} tabIndex={-1} target="_blank">
+                  AGB
+                </a>
+              </Link>
+              <a className={index.li} href="google.com" target="_blank">
+                Impressum
+              </a>
+              <a className={index.li} href="/" target="_blank">
+                Datenschutz
+              </a>
+            </ul>
           </div>
         </section>
       </Carousel>

@@ -20,6 +20,7 @@ export type LayoutProps = {
   known_by: Link[];
   social_links: Link[];
   known_by_title: string;
+  simple_header?: boolean;
 };
 export type NavProps = {
   navigation: NavType;

@@ -41,47 +41,20 @@ const Navigation: React.FC<NavProps> = (props) => {
       <div
         className={`alignCenter flexColumns flexEnd indieFlower ${nav.linkSection} `}
       >
-        {links?.map(
-          (l: Button, index: number) =>
-            l.type === "LINK" ? (
-              <Link
-                key={l.text + "nav"}
-                href={`/[lang]${l.function}`}
-                as={`/${Language[currentLanguage]}${l.function}`}
-              >
-                <a
-                  tabIndex={-1}
-                  className={`${nav.navLink} ${
-                    invertedSlides.some((s) => s === activeCarouselIndex)
-                      ? "invertedTextColorBySlide invertedBorderColorBySlide"
-                      : ""
-                  } ${nav.onlyDesktop}`}
-                >
-                  {l.text}
-                  {links && index === links?.length - 1 && (
-                    <img
-                      src={`${
-                        !invertedSlides.some((s) => s === activeCarouselIndex)
-                          ? plane?.url
-                          : plane_inverted?.url
-                      }`}
-                      alt={plane?.alternativeText}
-                      className={nav.plane}
-                    />
-                  )}
-                </a>
-              </Link>
-            ) : (
-              <span
+        {links?.map((l: Button, index: number) =>
+          l.type === "LINK" ? (
+            <Link
+              key={l.text + "nav"}
+              href={`/[lang]${l.function}`}
+              as={`/${Language[currentLanguage]}${l.function}`}
+            >
+              <a
                 tabIndex={-1}
-                className={`${nav.navLink} ${nav.planeLink} ${
+                className={`${nav.navLink} ${
                   invertedSlides.some((s) => s === activeCarouselIndex)
                     ? "invertedTextColorBySlide invertedBorderColorBySlide"
                     : ""
                 } ${nav.onlyDesktop}`}
-                onClick={() => {
-                  !l.function && setInterFormState(true);
-                }}
               >
                 {l.text}
                 {links && index === links?.length - 1 && (
@@ -95,15 +68,35 @@ const Navigation: React.FC<NavProps> = (props) => {
                     className={nav.plane}
                   />
                 )}
-              </span>
-            )
-
-          // <MotionButton
-          //   text={l.text}
-          //   buttonType={l.type}
-          //   className={`medium button ${index}`}
-          //   onClick={() => console.log("true")}
-          // />
+              </a>
+            </Link>
+          ) : (
+            <span
+              key={l.text + "nav"}
+              tabIndex={-1}
+              className={`${nav.navLink} ${nav.planeLink} ${
+                invertedSlides.some((s) => s === activeCarouselIndex)
+                  ? "invertedTextColorBySlide invertedBorderColorBySlide"
+                  : ""
+              } ${nav.onlyDesktop}`}
+              onClick={() => {
+                !l.function && setInterFormState(true);
+              }}
+            >
+              {l.text}
+              {links && index === links?.length - 1 && (
+                <img
+                  src={`${
+                    !invertedSlides.some((s) => s === activeCarouselIndex)
+                      ? plane?.url
+                      : plane_inverted?.url
+                  }`}
+                  alt={plane?.alternativeText}
+                  className={nav.plane}
+                />
+              )}
+            </span>
+          )
         )}
         <LanguageSwitcher className={nav.onlyDesktop} />
       </div>

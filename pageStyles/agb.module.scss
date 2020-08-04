@@ -1,0 +1,26 @@
+.section {
+  max-width: 1530px;
+  margin: 0 auto;
+  padding-top: 100px;
+  @media (max-width: 1580px) {
+    margin: 0 45px;
+  }
+  @media (max-width: 768px) {
+    margin: 0 25px;
+    padding-top: 70px;
+  }
+  a {
+    color: tomato;
+  }
+  a:link {
+    text-decoration: underline !important;
+  }
+
+  p {
+    font-size: calc(13px + 0.4vw);
+  }
+
+  h5 {
+    font-size: calc(20px + 0.4vw);
+  }
+}
