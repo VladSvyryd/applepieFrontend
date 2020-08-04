@@ -21,6 +21,7 @@ const agb: NextPage<any> = (props) => {
       known_by={pageFromCMS.known_by}
       social_links={pageFromCMS.social_links}
       known_by_title={pageFromCMS.known_by_title}
+      simple_header
     >
       <div className={`${styles.section}  `}>
         <h1>

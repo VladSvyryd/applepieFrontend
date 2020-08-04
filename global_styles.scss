@@ -24,6 +24,9 @@
   src: url("public/fonts/Indie_Flower/IndieFlower-Regular.ttf");
 }
 
+html {
+  overflow: hidden;
+}
 html,
 body,
 #__next {

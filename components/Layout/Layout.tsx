@@ -43,7 +43,7 @@ const Layout: React.FC<LayoutProps> = ({
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      {simple_header ? (
+      {!simple_header ? (
         <header className={`${layout.header}`}>
           <Navigation
             navigation={navigation}
@@ -53,7 +53,7 @@ const Layout: React.FC<LayoutProps> = ({
           />
         </header>
       ) : (
-        <header className={`${layout.header}" "${layout.backgroundWhite}`}>
+        <header className={` ${layout.backgroundWhite}`}>
           <nav className={`${layout.navbar} flexColumns  alignCenter `}>
             <Link href="/[lang]" as={`/${Language[currentLanguage]}`}>
               <img
