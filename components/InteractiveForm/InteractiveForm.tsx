@@ -5,6 +5,7 @@ import interactive_form from "./interactiveForm.module.scss";
 import { useStoreActions } from "../../hooks";
 import useFocusTrap from "@charlietango/use-focus-trap";
 import FormSlider from "../FormSlider/FormSlider";
+import React from "react";
 const Path = (props: any) => (
   <motion.path
     fill="transparent"
@@ -15,7 +16,7 @@ const Path = (props: any) => (
   />
 );
 type InteractiveFormProps = { [x: string]: any };
-export const InteractiveForm: FC<InteractiveFormProps> = (props) => {
+const InteractiveForm: FC<InteractiveFormProps> = (props) => {
   const width = useStoreState((state) => state.device.width);
   const height = useStoreState((state) => state.device.height);
   const invertedSlidesArray = useStoreState(
@@ -137,3 +138,4 @@ export const InteractiveForm: FC<InteractiveFormProps> = (props) => {
     </>
   );
 };
+export default React.memo(InteractiveForm);

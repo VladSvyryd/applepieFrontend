@@ -5,7 +5,7 @@ import { NextPage, NextPageContext } from "next";
 import { HomeProps, NavType, HomePage, Language } from "../../types/types";
 import index from "../../pageStyles/index.module.scss";
 import { motion } from "framer-motion";
-import MarkdownView from "react-showdown";
+import ReactMarkdown from "react-markdown";
 import SendForm from "../../components/Form/SendForm";
 import dynamic from "next/dynamic";
 import ReviewCarousel from "../../components/Review/ReviewCarousel";
@@ -21,7 +21,7 @@ import AutoLineSwiper from "../../components/AutoLineSwiper/AutoLineSwiper";
 // import { ORIENTATION } from "../../model/device";
 import MotionButton from "../../components/MotionButton/MotionButton";
 import { useStoreActions } from "../../hooks";
-import { InteractiveForm } from "../../components/InteractiveForm/InteractiveForm";
+import InteractiveForm from "../../components/InteractiveForm/InteractiveForm";
 import { ORIENTATION } from "../../model/device";
 import Link from "next/link";
 const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
@@ -46,7 +46,6 @@ const Page: NextPage<HomeProps> = (props) => {
   const setInterFormState = useStoreActions(
     (actions) => actions.device.setInterFormState
   );
-  console.log(orientation, props.isMobile);
   // IF for landscape mode
   return !props.isMobile ||
     (props.isMobile && orientation === ORIENTATION.portrait) ? (
@@ -245,9 +244,7 @@ const Page: NextPage<HomeProps> = (props) => {
               {pageFromCMS.first_section?.title}
             </h2>
             <div className={index.ul}>
-              <MarkdownView
-                markdown={pageFromCMS.first_section?.content_text}
-              />
+              <ReactMarkdown source={pageFromCMS.first_section?.content_text} />
             </div>
           </div>
         </section>
@@ -263,8 +260,8 @@ const Page: NextPage<HomeProps> = (props) => {
               {pageFromCMS.second_section?.title}
             </h2>
             <div className={index.ul}>
-              <MarkdownView
-                markdown={pageFromCMS.second_section?.content_text}
+              <ReactMarkdown
+                source={pageFromCMS.second_section?.content_text}
               />
             </div>
           </div>
@@ -353,8 +350,8 @@ const Page: NextPage<HomeProps> = (props) => {
             <div className={index.footer}>
               <div className={index.zebraContainer}>
                 <div className={index.zebra + " indieFlower"}>
-                  <MarkdownView
-                    markdown={pageFromCMS.forth_section?.button?.subtext}
+                  <ReactMarkdown
+                    source={pageFromCMS.forth_section?.button?.subtext}
                   />
                 </div>
                 <img
@@ -399,10 +396,7 @@ const Page: NextPage<HomeProps> = (props) => {
               {pageFromCMS.fifth_section?.title}
             </h2>
             <div className={index.ul}>
-              <MarkdownView
-                markdown={pageFromCMS.fifth_section?.content_text}
-                options={{ tables: true, emoji: true }}
-              />
+              <ReactMarkdown source={pageFromCMS.fifth_section?.content_text} />
             </div>
           </div>
         </section>
@@ -541,16 +535,26 @@ const Page: NextPage<HomeProps> = (props) => {
                 href={`/[lang]/agb`}
                 as={`/${Language[currentLanguage]}/agb`}
               >
-                <a className={index.li} tabIndex={-1} target="_blank">
+                <a className={index.li} tabIndex={-1}>
                   AGB
                 </a>
               </Link>
-              <a className={index.li} href="google.com" target="_blank">
-                Impressum
-              </a>
-              <a className={index.li} href="/" target="_blank">
-                Datenschutz
-              </a>
+              <Link
+                href={`/[lang]/impressum`}
+                as={`/${Language[currentLanguage]}/impressum`}
+              >
+                <a className={index.li} tabIndex={-1}>
+                  Impressum
+                </a>
+              </Link>
+              <Link
+                href={`/[lang]/impressum`}
+                as={`/${Language[currentLanguage]}/impressum`}
+              >
+                <a className={index.li} tabIndex={-1}>
+                  Datenschutz
+                </a>
+              </Link>
             </ul>
           </div>
         </section>
@@ -608,6 +612,7 @@ Page.getInitialProps = async (context: NextPageContext) => {
     navigation: response1.data.navigation as NavType,
     pageFromCMS: response.data.homeDe as HomePage,
     isMobile,
+    loading: response.loading,
   };
 };
 export default withTranslate(Page); // <- component is wrapped with a HOC

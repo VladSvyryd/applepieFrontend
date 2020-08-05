@@ -1,9 +1,10 @@
 import Swiper, { SwiperInstance } from "react-id-swiper";
 import { CarouselProps, Image, DEVICE } from "../../types/types";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import car from "./car.module.scss";
 import { useStoreActions, useStoreState } from "../../hooks";
+import React from "react";
 
 export const screens = [
   {
@@ -90,12 +91,12 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
   const params: any = {
     direction: "horizontal",
     slidesPerView: 1,
-    spaceBetween: 30,
+    spaceBetween: 0,
     simulateTouch: true,
     mousewheel: true,
     roundLengths: true,
     parallax: true,
-    threshold: width >= 1000 ? 100 : 10,
+    threshold: width >= 1000 ? 100 : 0,
     parallaxEl: {
       el: ".parallax-bg",
       value: "-23%",
@@ -180,7 +181,6 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
   };
 
   const defineBulletPositions = () => {
-    console.log("now");
     const dev = defineDevice(width);
     // setDevice(dev);
 
@@ -191,7 +191,6 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
         image_alternative:
           paginationObject.pagination.background_alternative[2],
       });
-      console.log(respScreens);
     } else if (dev === 1) {
       setRespScreens(screens.map((screen) => screen["position_tablet"]));
       setPaginationImg({
@@ -215,10 +214,10 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
       });
     }
   };
-  const responsiveScreens = useMemo(() => defineBulletPositions, [width]);
+  // const responsiveScreens = useMemo(() => defineBulletPositions, [width]);
 
   useEffect(() => {
-    responsiveScreens();
+    defineBulletPositions();
   }, [width]);
   return (
     <div className="responsiveSlide">
@@ -335,4 +334,4 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
     </div>
   );
 };
-export default Carousel;
+export default React.memo(Carousel);

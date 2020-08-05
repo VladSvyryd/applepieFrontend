@@ -837,7 +837,7 @@ export const navigation_en = gql`
       links {
         __typename
         ... on ComponentButtonsButton {
-          Button_DE
+          ...Button_EN
         }
       }
       logo {

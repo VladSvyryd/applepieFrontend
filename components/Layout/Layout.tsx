@@ -53,8 +53,10 @@ const Layout: React.FC<LayoutProps> = ({
           />
         </header>
       ) : (
-        <header className={` ${layout.backgroundWhite}`}>
-          <nav className={`${layout.navbar} flexColumns  alignCenter `}>
+        <header>
+          <nav
+            className={`${layout.navbar} ${layout.backgroundWhite} flexColumns  alignCenter `}
+          >
             <Link href="/[lang]" as={`/${Language[currentLanguage]}`}>
               <img
                 src={`${navigation.logo?.url}`}
