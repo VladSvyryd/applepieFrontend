@@ -33,6 +33,7 @@ export type CarouselProps = {
   paginationObject: {
     pagination: Pagination;
   };
+  isMobile: boolean;
 };
 
 export type HomeProps = {

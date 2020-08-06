@@ -71,7 +71,11 @@ export const screens = [
     position_mobile: { left: "260px", top: "27px" },
   },
 ];
-const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
+const Carousel: React.FC<CarouselProps> = ({
+  children,
+  paginationObject,
+  isMobile,
+}) => {
   const [swiper, setSwiper] = useState<SwiperInstance>(null);
   const [selected, setSelected] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState(-1);
@@ -219,6 +223,28 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
   useEffect(() => {
     defineBulletPositions();
   }, [width]);
+
+  const returnAnimateClass = (i: number) => {
+    // return i === selected &&
+    //   activeIndexHistory.findIndex((li) => li === i) != -1 &&
+    //   i === hoveredIndex
+    //   ? "visibleAndHovered"
+    //   : activeIndexHistory.findIndex((li) => li === i) != -1 ||
+    //     i === hoveredIndex
+    //   ? "visible"
+    //   : "hidden";
+    if (activeIndexHistory.findIndex((li) => li == i) != -1) {
+      if (!isMobile && i === hoveredIndex) return "visibleAndHovered";
+      return "visible";
+    }
+    console.log(i === hoveredIndex);
+    if (i === hoveredIndex) {
+      return "visible";
+    }
+
+    return "hidden";
+  };
+
   return (
     <div className="responsiveSlide">
       <Swiper {...params}>{children}</Swiper>
@@ -272,15 +298,7 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
                     )}
                     <motion.img
                       key={"my_slide-image" + i}
-                      animate={
-                        activeIndexHistory.findIndex((li) => li == i) != -1 &&
-                        i === hoveredIndex
-                          ? "visibleAndHovered"
-                          : activeIndexHistory.findIndex((li) => li == i) !=
-                              -1 || i === hoveredIndex
-                          ? "visible"
-                          : "hidden"
-                      }
+                      animate={returnAnimateClass(i)}
                       variants={bulletAnim}
                       src={`${
                         invertedSlides.some((s) => s === selected)
@@ -334,4 +352,4 @@ const Carousel: React.FC<CarouselProps> = ({ children, paginationObject }) => {
     </div>
   );
 };
-export default React.memo(Carousel);
+export default Carousel;

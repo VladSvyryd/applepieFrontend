@@ -62,6 +62,7 @@ const Page: NextPage<HomeProps> = (props) => {
         paginationObject={{
           pagination: pageFromCMS.pagination,
         }}
+        isMobile={props.isMobile}
       >
         <section
           className={`flexColumns alignCenter ${index.intro}`}
