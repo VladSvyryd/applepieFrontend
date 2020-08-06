@@ -878,5 +878,5 @@ export const navigation_en = gql`
       }
     }
   }
-  ${fragments.button_de}
+  ${fragments.button_en}
 `;

@@ -138,4 +138,4 @@ const InteractiveForm: FC<InteractiveFormProps> = (props) => {
     </>
   );
 };
-export default React.memo(InteractiveForm);
+export default InteractiveForm;
