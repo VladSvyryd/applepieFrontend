@@ -4,25 +4,12 @@ import Layout from "../../components/Layout/Layout";
 import withTranslate from "../../components/HOC/withTranslate";
 import { client } from "../_app";
 import { NextPageContext, NextPage } from "next";
-import {
-  landing_de,
-  landing_en,
-  navigation_de,
-  navigation_en,
-} from "../../queries/queries";
-import { HomePage, NavType } from "../../types/types";
+import { navigation_en, navigation_de } from "../../queries/queries";
+import { NavType } from "../../types/types";
 
 const agb: NextPage<any> = (props) => {
-  const { pageFromCMS } = props;
   return (
-    <Layout
-      navigation={props.navigation}
-      verticalFooter={true}
-      known_by={pageFromCMS.known_by}
-      social_links={pageFromCMS.social_links}
-      known_by_title={pageFromCMS.known_by_title}
-      simple_header
-    >
+    <Layout navigation={props.navigation} verticalFooter={true} simple_header>
       <div className={`${styles.section}  `}>
         <h1>
           <span style={{ fontWeight: 400 }}>
@@ -1136,22 +1123,15 @@ agb.getInitialProps = async (context: NextPageContext) => {
     )
   );
 
-  let response;
   let response1;
   if (context.query.lang === "de") {
-    response = await client.query({ query: landing_de });
     response1 = await client.query({ query: navigation_de });
   } else {
-    response = await client.query({ query: landing_en });
     response1 = await client.query({ query: navigation_en });
   }
 
-  // const pageJSON = await res1.json();
-  // console.log(json);
-  console.log({ response });
   return {
     navigation: response1.data.navigation as NavType,
-    pageFromCMS: response.data.homeDe as HomePage,
     isMobile,
   };
 };

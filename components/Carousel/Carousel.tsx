@@ -237,7 +237,6 @@ const Carousel: React.FC<CarouselProps> = ({
       if (!isMobile && i === hoveredIndex) return "visibleAndHovered";
       return "visible";
     }
-    console.log(i === hoveredIndex);
     if (i === hoveredIndex) {
       return "visible";
     }

@@ -311,19 +311,6 @@ export const landing_de = gql`
           id
         }
       }
-      known_by_title
-      social_links {
-        __typename
-        ... on ComponentLinksLink {
-          ...Link_DE
-        }
-      }
-      known_by {
-        __typename
-        ... on ComponentLinksLink {
-          ...Link_DE
-        }
-      }
       buttons {
         ... on ComponentButtonsButton {
           ...Button_DE
@@ -557,19 +544,6 @@ export const landing_en = gql`
           width
           height
           id
-        }
-      }
-      known_by_title
-      social_links {
-        __typename
-        ... on ComponentLinksLink {
-          ...Link_EN
-        }
-      }
-      known_by {
-        __typename
-        ... on ComponentLinksLink {
-          ...Link_EN
         }
       }
       buttons {
@@ -879,4 +853,138 @@ export const navigation_en = gql`
     }
   }
   ${fragments.button_en}
+`;
+
+export const footer_de = gql`
+  query {
+    footer {
+      navigation_links {
+        __typename
+        ... on ComponentLinksLink {
+          id
+          name
+          url
+        }
+      }
+      known_by {
+        __typename
+        ... on ComponentLinksLink {
+          id
+          name
+          url
+          image {
+            url
+            name
+            alternativeText
+            caption
+            width
+            height
+            id
+          }
+          image_alternative {
+            url
+            name
+            alternativeText
+            caption
+            width
+            height
+            id
+          }
+        }
+      }
+      social_links {
+        __typename
+        ... on ComponentLinksLink {
+          id
+          name
+          url
+          image {
+            url
+            name
+            alternativeText
+            caption
+            width
+            height
+            id
+          }
+          image_alternative {
+            url
+            name
+            alternativeText
+            caption
+            width
+            height
+            id
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const footer_en = gql`
+  query {
+    footer {
+      navigation_links {
+        __typename
+        ... on ComponentLinksLink {
+          id
+          name
+          url
+        }
+      }
+      known_by {
+        __typename
+        ... on ComponentLinksLink {
+          id
+          name
+          url
+          image: image_en {
+            url
+            name
+            alternativeText
+            caption
+            width
+            height
+            id
+          }
+          image_alternative: image_alternative_en {
+            url
+            name
+            alternativeText
+            caption
+            width
+            height
+            id
+          }
+        }
+      }
+      social_links {
+        __typename
+        ... on ComponentLinksLink {
+          id
+          name
+          url
+          image: image_en {
+            url
+            name
+            alternativeText
+            caption
+            width
+            height
+            id
+          }
+          image_alternative: image_alternative_en {
+            url
+            name
+            alternativeText
+            caption
+            width
+            height
+            id
+          }
+        }
+      }
+    }
+  }
 `;

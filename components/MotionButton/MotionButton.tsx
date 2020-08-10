@@ -11,7 +11,6 @@ type MotionButtonProps = {
 };
 const MotionButton: FC<MotionButtonProps> = (props) => {
   const { buttonType, link, text, external = false } = props;
-  console.log(buttonType);
   return buttonType === ButtonType.BUTTON ? (
     <motion.button {...props} whileTap={{ scale: 0.9 }} tabIndex={-1}>
       {text}

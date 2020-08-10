@@ -4,7 +4,7 @@ import link from "./socialLinks.module.scss";
 import { motion } from "framer-motion";
 
 type SocialLinksProps = {
-  links: Link[];
+  links?: Link[];
   inverted: boolean;
 };
 export const SocialLinks: FC<SocialLinksProps> = ({ links, inverted }) => {

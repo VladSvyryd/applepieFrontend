@@ -40,17 +40,15 @@ const initialFormikState = {
   date: "",
 };
 enum SERVICE_ID_BACKEND {
-  DESIGN = 28,
-  IT_SUPPORT = 29,
-  SOCIAL_MEDIA = 30,
-  PROGRAMMING = 31,
-  ONLINE_MARKETING = 32,
-  BUSINESS_CONSULTING = 33,
+  SHOP = 28,
+  GET_NEW_CLIENTS = 29,
+  CONVERSION_RATE = 30,
+  EMAIL_MARKETIN = 31,
 }
 const UNIQUE_SERVICE_DEALFIELD = "d9bd3966fcf0780f67fbca93b7d32656f6769ab0";
 // const UNIQUE_SERVICE_DEALFIELD = "146a6087ef8c0aa7f7bffe8d022eb2c1ab73542e";
 
-const FormSlider = forwardRef((_props, ref) => {
+const FormSlider = forwardRef<any>((props, ref) => {
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
   );
@@ -61,7 +59,6 @@ const FormSlider = forwardRef((_props, ref) => {
     type: "",
     message: "",
   });
-
   const handleSubmit = async (
     values: any,
     { setSubmitting, resetForm }: any
@@ -353,31 +350,25 @@ const FormSlider = forwardRef((_props, ref) => {
   };
 
   const services = [
-    { group: "services", value: SERVICE_ID_BACKEND.DESIGN, name: "Design" },
     {
       group: "services",
-      value: SERVICE_ID_BACKEND.IT_SUPPORT,
-      name: "IT-Support",
+      value: SERVICE_ID_BACKEND.SHOP,
+      name: "Shop Programmierung",
     },
     {
       group: "services",
-      value: SERVICE_ID_BACKEND.ONLINE_MARKETING,
-      name: "Social Media",
+      value: SERVICE_ID_BACKEND.GET_NEW_CLIENTS,
+      name: "Neukundengewinnung",
     },
     {
       group: "services",
-      value: SERVICE_ID_BACKEND.PROGRAMMING,
-      name: "Programming",
+      value: SERVICE_ID_BACKEND.CONVERSION_RATE,
+      name: "Conversion Optimierung",
     },
     {
       group: "services",
-      value: SERVICE_ID_BACKEND.SOCIAL_MEDIA,
-      name: "Online-Marketing",
-    },
-    {
-      group: "services",
-      value: SERVICE_ID_BACKEND.BUSINESS_CONSULTING,
-      name: "Business Consulting",
+      value: SERVICE_ID_BACKEND.EMAIL_MARKETIN,
+      name: "E-Mail-Marketing",
     },
   ];
   const interactiveFormOpened = useStoreState(
@@ -408,7 +399,12 @@ const FormSlider = forwardRef((_props, ref) => {
   return (
     <div className={formSlider.mySlider}>
       <div className={formSlider.paginationContainer}>
-        <motion.div className={formSlider.pagination}>
+        <motion.div
+          className={`${formSlider.pagination} ${
+            //@ts-ignore
+            props.inverted && formSlider.inverted
+          } `}
+        >
           {new Array(SLIDESCOUNT).fill(null).map((_bullet, i) => (
             <motion.div
               key={"ser" + i}
@@ -418,8 +414,9 @@ const FormSlider = forwardRef((_props, ref) => {
                 animate={currentSlider === i ? "active" : "passive"}
                 variants={activeBullet}
                 className={`${formSlider.bullet} ${
-                  currentSlider === i && formSlider.active
-                }`}
+                  //@ts-ignore
+                  props.inverted && formSlider.inverted
+                } ${currentSlider === i && formSlider.active}`}
               ></motion.span>
             </motion.div>
           ))}
@@ -436,17 +433,29 @@ const FormSlider = forwardRef((_props, ref) => {
                   animate={currentSlider === 0 ? "active" : "passive"}
                   variants={reveal}
                 >
-                  <div className={formSlider.header}>
+                  <div
+                    className={`${formSlider.header} ${
+                      //@ts-ignore
+                      props.inverted && formSlider.inverted
+                    }`}
+                  >
                     <h2>Which category best fits your project?</h2>
                   </div>
                   <div
-                    className={
-                      formSlider.fieldRow + " " + formSlider.checkboxContainer
-                    }
+                    className={`${formSlider.fieldRow} + " " + ${
+                      formSlider.checkboxContainer
+                    } ${
+                      //@ts-ignore
+                      props.inverted && formSlider.inverted
+                    }`}
                   >
                     <CheckboxGroup
                       checkboxArray={services}
                       setCheckboxStatus={setFormObject}
+                      inverted={
+                        //@ts-ignore
+                        props.inverted
+                      }
                     />
                     <ErrorMessage name="services" component={Error} />
                     {!canIGoNext() && (
@@ -597,7 +606,10 @@ const FormSlider = forwardRef((_props, ref) => {
                   type="button"
                   onClick={() => handleSubmit()}
                   disabled={!canIGoNext() && isSubmitting}
-                  className={`button ${formSlider.button}`}
+                  className={`button ${formSlider.button} ${
+                    //@ts-ignore
+                    props.inverted && formSlider.inverted
+                  }`}
                 >
                   {currentLanguage === Language.de ? "LOS" : "GO"}
                 </button>
@@ -609,11 +621,19 @@ const FormSlider = forwardRef((_props, ref) => {
 
       {currentSlider < 3 && (
         <>
-          <div className={formSlider.press}>
+          <div
+            className={`${formSlider.press} ${
+              //@ts-ignore
+              props.inverted && formSlider.inverted
+            }`}
+          >
             {currentSlider === 4 ? "Back to page" : "Press Enter"}
           </div>
           <button
-            className={`button ${formSlider.button}`}
+            className={`button ${formSlider.button} ${
+              //@ts-ignore
+              props.inverted && formSlider.inverted
+            }`}
             onClick={() => handleNextSlideClick()}
           >
             {currentLanguage === Language.de ? "Weiter" : "Next"}
@@ -644,10 +664,11 @@ const Error: React.FC = ({ children }) => {
 type CheckboxProps = {
   checkboxArray: { group: string; name: string; value: SERVICE_ID_BACKEND }[];
   setCheckboxStatus: Dispatch<SetStateAction<any>>;
+  inverted: boolean;
   [x: string]: any;
 };
 export const CheckboxGroup: FC<CheckboxProps> = (props) => {
-  const { checkboxArray, setCheckboxStatus } = props;
+  const { checkboxArray, setCheckboxStatus, inverted } = props;
   const updateFormikState = (form: any, field: any, service: any) => {
     if (field.value.includes(service.value)) {
       const nextValue = field.value.filter(
@@ -691,7 +712,13 @@ export const CheckboxGroup: FC<CheckboxProps> = (props) => {
                   checked={field.value.includes(service.value)}
                   onChange={() => updateFormikState(form, field, service)}
                 />
-                <div className={formSlider.labelText}>{service.name}</div>
+                <div
+                  className={`${formSlider.labelText} ${
+                    inverted && formSlider.inverted
+                  }`}
+                >
+                  {service.name}
+                </div>
               </label>
             )}
           </Field>

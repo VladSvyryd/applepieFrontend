@@ -10,7 +10,7 @@ const Path = (props: any) => (
   <motion.path
     fill="transparent"
     strokeWidth="2"
-    stroke="#fff"
+    stroke={props.inverted ? "rgb(64, 61, 85)" : "#fff"}
     strokeLinecap="round"
     {...props}
   />
@@ -103,13 +103,18 @@ const InteractiveForm: FC<InteractiveFormProps> = (props) => {
       >
         <motion.div
           variants={sidebar}
-          className={interactive_form.background}
+          className={`${interactive_form.background} ${
+            inverted && interactive_form.inverted
+          }`}
           style={inverted ? { background: "white" } : {}}
           custom={currentWindow}
           onClick={(e) => prevDef(e)}
         >
           <div className={interactive_form.formSlider}>
-            <FormSlider ref={childRef} />
+            {
+              //@ts-ignore
+              <FormSlider ref={childRef} inverted={inverted} />
+            }
           </div>
         </motion.div>
         <motion.div

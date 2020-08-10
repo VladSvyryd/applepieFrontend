@@ -2,7 +2,13 @@ import { useState } from "react";
 import withTranslate from "../../components/HOC/withTranslate";
 import Layout from "../../components/Layout/Layout";
 import { NextPage, NextPageContext } from "next";
-import { HomeProps, NavType, HomePage, Language } from "../../types/types";
+import {
+  HomeProps,
+  NavType,
+  HomePage,
+  Language,
+  Footer,
+} from "../../types/types";
 import index from "../../pageStyles/index.module.scss";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
@@ -15,6 +21,8 @@ import {
   landing_en,
   navigation_de,
   navigation_en,
+  footer_de,
+  footer_en,
 } from "../../queries/queries";
 import { client } from "../_app";
 import AutoLineSwiper from "../../components/AutoLineSwiper/AutoLineSwiper";
@@ -29,7 +37,7 @@ const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
 });
 
 const Page: NextPage<HomeProps> = (props) => {
-  const { pageFromCMS } = props;
+  const { pageFromCMS, footer } = props;
   const [activeServiceIndex, setIndex] = useState(0);
   const handleServiceHover = (index: number) => {
     setIndex(index);
@@ -49,13 +57,7 @@ const Page: NextPage<HomeProps> = (props) => {
   // IF for landscape mode
   return !props.isMobile ||
     (props.isMobile && orientation === ORIENTATION.portrait) ? (
-    <Layout
-      navigation={props.navigation}
-      horizontalFooter
-      known_by={pageFromCMS.known_by}
-      social_links={pageFromCMS.social_links}
-      known_by_title={pageFromCMS.known_by_title}
-    >
+    <Layout navigation={props.navigation} horizontalFooter footer={footer}>
       <h1 className="visuallyHidden">Applepie</h1>
       <InteractiveForm />
       <Carousel
@@ -549,7 +551,7 @@ const Page: NextPage<HomeProps> = (props) => {
                 </a>
               </Link>
               <Link
-                href={`/[lang]/impressum`}
+                href={`/[lang]/datenschutz`}
                 as={`/${Language[currentLanguage]}/impressum`}
               >
                 <a className={index.li} tabIndex={-1}>
@@ -598,22 +600,23 @@ Page.getInitialProps = async (context: NextPageContext) => {
 
   let response;
   let response1;
+  let response_footer;
+
   if (context.query.lang === "de") {
     response = await client.query({ query: landing_de });
     response1 = await client.query({ query: navigation_de });
+    response_footer = await client.query({ query: footer_de });
   } else {
     response = await client.query({ query: landing_en });
     response1 = await client.query({ query: navigation_en });
+    response_footer = await client.query({ query: footer_en });
   }
 
-  // const pageJSON = await res1.json();
-  // console.log(json);
-  console.log({ response });
   return {
     navigation: response1.data.navigation as NavType,
     pageFromCMS: response.data.homeDe as HomePage,
+    footer: response_footer.data.footer as Footer,
     isMobile,
-    loading: response.loading,
   };
 };
 export default withTranslate(Page); // <- component is wrapped with a HOC

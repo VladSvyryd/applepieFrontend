@@ -17,16 +17,21 @@ export type LayoutProps = {
   children: ReactNode;
   horizontalFooter?: boolean;
   verticalFooter?: boolean;
+  simple_header?: boolean;
+  footer?: Footer;
+};
+
+export type Footer = {
+  navigation_links: Link[];
   known_by: Link[];
   social_links: Link[];
-  known_by_title: string;
-  simple_header?: boolean;
 };
+
 export type NavProps = {
   navigation: NavType;
   activeCarouselIndex: number;
   invertedSlides: number[];
-  social_links: Link[];
+  social_links?: Link[];
 };
 export type CarouselProps = {
   children: ReactNode;
@@ -40,6 +45,7 @@ export type HomeProps = {
   pageFromCMS: HomePage;
   navigation: NavType;
   isMobile: boolean;
+  footer?: Footer;
 };
 export type AboutProps = {
   pageFromCMS: HomePage;
@@ -64,13 +70,10 @@ export type SendFormProps = {
 export type NavType = {
   title?: string;
   logo?: Picture;
-  links_de?: NavLink[];
-  links_en?: NavLink[];
   links?: Button[];
   logo_inverted?: Picture;
   plane?: Picture;
   plane_inverted?: Picture;
-  social_links: Link[];
 };
 
 export interface NavLink {

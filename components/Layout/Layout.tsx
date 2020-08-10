@@ -11,9 +11,8 @@ const Layout: React.FC<LayoutProps> = ({
   children,
   horizontalFooter = false,
   verticalFooter = false,
-  social_links,
-  known_by,
   simple_header = false,
+  footer,
 }) => {
   // const router = useRouter();
   const layoutStyle = {
@@ -27,7 +26,6 @@ const Layout: React.FC<LayoutProps> = ({
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
   );
-
   // const headerBackground = () => {
   //   console.log();
   //   const url = router.pathname.split("/").pop();
@@ -35,7 +33,7 @@ const Layout: React.FC<LayoutProps> = ({
   //     return true;
   //   return false;
   // };
-
+  console.log({ footer });
   return (
     <div style={layoutStyle} tabIndex={-1}>
       <Head>
@@ -49,14 +47,12 @@ const Layout: React.FC<LayoutProps> = ({
             navigation={navigation}
             activeCarouselIndex={activeCarouselIndex}
             invertedSlides={invertedSlides}
-            social_links={social_links}
+            social_links={footer?.social_links}
           />
         </header>
       ) : (
-        <header>
-          <nav
-            className={`${layout.navbar} ${layout.backgroundWhite} flexColumns  alignCenter `}
-          >
+        <header className={layout.backgroundWhite}>
+          <nav className={`${layout.navbar}  flexColumns  alignCenter `}>
             <Link href="/[lang]" as={`/${Language[currentLanguage]}`}>
               <img
                 src={`${navigation.logo?.url}`}
@@ -85,7 +81,7 @@ const Layout: React.FC<LayoutProps> = ({
                         : ""
                     }`}
                   >
-                    {known_by[0].name}
+                    {footer?.known_by[0].name}
                   </span>
                   <a
                     href=""
@@ -95,8 +91,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? known_by[1]?.image_alternative?.url
-                          : known_by[1]?.image?.url
+                          ? footer?.known_by[1]?.image_alternative?.url
+                          : footer?.known_by[1]?.image?.url
                       }`}
                       alt=""
                     />
@@ -109,8 +105,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? known_by[2]?.image_alternative?.url
-                          : known_by[2]?.image?.url
+                          ? footer?.known_by[2]?.image_alternative?.url
+                          : footer?.known_by[2]?.image?.url
                       }`}
                       alt=""
                     />
@@ -127,8 +123,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? social_links[0]?.image_alternative?.url
-                          : social_links[0]?.image?.url
+                          ? footer?.social_links[0]?.image_alternative?.url
+                          : footer?.social_links[0]?.image?.url
                       }`}
                       alt="instagram"
                       style={{ color: "white" }}
@@ -142,8 +138,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? social_links[1]?.image_alternative?.url
-                          : social_links[1]?.image?.url
+                          ? footer?.social_links[1]?.image_alternative?.url
+                          : footer?.social_links[1]?.image?.url
                       }`}
                       alt="facebook"
                     />
@@ -156,8 +152,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? social_links[2]?.image_alternative?.url
-                          : social_links[2]?.image?.url
+                          ? footer?.social_links[2]?.image_alternative?.url
+                          : footer?.social_links[2]?.image?.url
                       }`}
                       alt="linkedIn"
                     />
@@ -170,8 +166,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? social_links[3]?.image_alternative?.url
-                          : social_links[3]?.image?.url
+                          ? footer?.social_links[3]?.image_alternative?.url
+                          : footer?.social_links[3]?.image?.url
                       }`}
                       alt="slack"
                     />
@@ -195,7 +191,7 @@ const Layout: React.FC<LayoutProps> = ({
                         : ""
                     }`}
                   >
-                    {known_by[0].name}
+                    {footer?.known_by[0].name}
                   </span>
                   <a
                     href=""
@@ -205,8 +201,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? known_by[1]?.image_alternative?.url
-                          : known_by[1]?.image?.url
+                          ? footer?.known_by[1]?.image_alternative?.url
+                          : footer?.known_by[1]?.image?.url
                       }`}
                       alt=""
                     />
@@ -219,8 +215,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? known_by[2]?.image_alternative?.url
-                          : known_by[2]?.image?.url
+                          ? footer?.known_by[2]?.image_alternative?.url
+                          : footer?.known_by[2]?.image?.url
                       }`}
                       alt=""
                     />
@@ -237,8 +233,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? social_links[0]?.image_alternative?.url
-                          : social_links[0]?.image?.url
+                          ? footer?.social_links[0]?.image_alternative?.url
+                          : footer?.social_links[0]?.image?.url
                       }`}
                       alt="instagram"
                       style={{ color: "white" }}
@@ -252,8 +248,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? social_links[1]?.image_alternative?.url
-                          : social_links[1]?.image?.url
+                          ? footer?.social_links[1]?.image_alternative?.url
+                          : footer?.social_links[1]?.image?.url
                       }`}
                       alt="facebook"
                     />
@@ -266,8 +262,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? social_links[2]?.image_alternative?.url
-                          : social_links[2]?.image?.url
+                          ? footer?.social_links[2]?.image_alternative?.url
+                          : footer?.social_links[2]?.image?.url
                       }`}
                       alt="linkedIn"
                     />
@@ -280,8 +276,8 @@ const Layout: React.FC<LayoutProps> = ({
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? social_links[3]?.image_alternative?.url
-                          : social_links[3]?.image?.url
+                          ? footer?.social_links[3]?.image_alternative?.url
+                          : footer?.social_links[3]?.image?.url
                       }`}
                       alt="slack"
                     />

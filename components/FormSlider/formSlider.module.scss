@@ -24,10 +24,13 @@
       justify-content: space-between;
       max-width: 520px;
       background: url(../../assets/imgs/puntier.svg);
-
       background-position: center;
       height: 11px;
       align-items: center;
+      &.inverted {
+        background: url(../../assets/imgs/puntierBlue.svg);
+        background-position: center;
+      }
       .bulletContainer {
         display: flex;
         width: 13px;
@@ -41,6 +44,12 @@
           border-radius: 50%;
           &.active {
             background-color: rgba(255, 255, 255);
+          }
+          &.inverted {
+            background-color: rgba(64, 61, 85, 0.7);
+            &.active {
+              background-color: rgba(64, 61, 85);
+            }
           }
         }
       }
@@ -56,6 +65,10 @@
       color: white;
       padding-right: 20%;
       padding-bottom: 8%;
+
+      &.inverted {
+        color: $accent-color;
+      }
       @media (max-height: 1200px) {
         padding-right: 0;
       }
@@ -80,11 +93,22 @@
     @media (max-width: 768px) {
       display: none;
     }
+    &.inverted {
+      color: $accent-color;
+      background: url(../../assets/imgs/nextArrowBlue.svg);
+      background-repeat: no-repeat;
+      background-position: center right 20px;
+    }
   }
   .button {
     background-color: white;
     box-shadow: 0px 2px 15px rgba(252, 244, 243, 0.62);
     color: $accent-color;
+
+    &.inverted {
+      color: white;
+      background-color: $accent-color;
+    }
   }
 }
 
@@ -176,6 +200,25 @@
   flex-direction: column;
   color: white;
   height: auto;
+  &.inverted {
+    color: $accent-color;
+  }
+  &.inverted {
+    input {
+      &::before {
+        border: 1px solid $accent-color;
+      }
+    }
+  }
+  &.inverted {
+    input {
+      &::after {
+        background: url(../../assets/imgs/matchBlue.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+  }
   label {
     display: flex;
     flex-direction: row;
@@ -189,6 +232,7 @@
       width: 0;
       height: 0;
       cursor: pointer;
+
       &::after {
         content: "";
         position: absolute;

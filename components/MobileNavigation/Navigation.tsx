@@ -9,7 +9,7 @@ import { SocialLinks } from "../SocialLinks/SocialLinks";
 import { useStoreActions } from "../../hooks";
 type MobileNavigationProps = {
   links: Button[];
-  social_links: Link[];
+  social_links?: Link[];
 };
 export const MobileNavigation: FC<MobileNavigationProps> = ({
   links,
