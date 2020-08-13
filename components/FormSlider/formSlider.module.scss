@@ -150,14 +150,26 @@
   border-bottom: 1px solid white;
   background: $primary-color;
   color: white;
-
+  cursor: pointer;
   &::placeholder {
     font-style: "Roboto", sans-serif !important;
     color: rgba(255, 255, 255, 0.4);
   }
+  &.inverted {
+    background-color: transparent;
+    color: $accent-color;
+    border-bottom: 1px solid $accent-color;
+
+    &::placeholder {
+      color: rgba(46, 44, 65, 0.4);
+    }
+  }
 }
 .input::placeholder {
   font-style: "Roboto", sans-serif !important;
+}
+.date_input {
+  cursor: pointer;
 }
 .textareaRow {
   max-width: 510px;
@@ -167,13 +179,21 @@
     margin: 0;
     color: white;
   }
+  &.inverted h4 {
+    color: $accent-color;
+  }
 }
 .textfield {
   background-color: transparent;
   color: white;
   border: none;
   border-bottom: 1px solid white;
-
+  min-height: 53px;
+  max-width: 510px;
+  &.inverted {
+    color: $accent-color;
+    border-bottom: 1px solid $accent-color;
+  }
   &:focus {
     outline: 0;
   }
@@ -193,6 +213,9 @@
 .errorMessage {
   color: white;
   font-size: 12px;
+  &.inverted {
+    color: $accent-color;
+  }
 }
 
 .checkboxContainer {
@@ -225,7 +248,7 @@
     cursor: pointer;
     margin: 7px 0;
     .labelText {
-      margin-left: 52px;
+      margin-left: 42px;
     }
     input {
       position: relative;
@@ -237,7 +260,7 @@
         content: "";
         position: absolute;
         left: 3px;
-        top: -11px;
+        top: -7px;
         width: 30px;
         height: 30px;
         background: url(../../assets/imgs/match.svg);
@@ -254,7 +277,7 @@
         content: "";
         position: absolute;
         left: 0;
-        top: 0;
+        top: 3px;
         width: 22px;
         height: 22px;
         border: 1px solid white;

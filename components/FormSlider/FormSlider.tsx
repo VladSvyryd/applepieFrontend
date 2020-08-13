@@ -16,7 +16,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import Congrats from "../Congrats/Congrats";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import DatePicker from "react-datepicker";
-
+import { client } from "../../pages/_app";
+import {
+  services_de,
+  services_en,
+  contact_form_de,
+  contact_form_en,
+} from "../../queries/queries";
 interface Person {
   name: string;
   email: string;
@@ -39,19 +45,57 @@ const initialFormikState = {
   services: [],
   date: "",
 };
-enum SERVICE_ID_BACKEND {
-  SHOP = 28,
-  GET_NEW_CLIENTS = 29,
-  CONVERSION_RATE = 30,
-  EMAIL_MARKETIN = 31,
-}
+// enum SERVICE_ID_BACKEND {
+//   SHOP = 28,
+//   GET_NEW_CLIENTS = 29,
+//   CONVERSION_RATE = 30,
+//   EMAIL_MARKETIN = 31,
+// }
 const UNIQUE_SERVICE_DEALFIELD = "d9bd3966fcf0780f67fbca93b7d32656f6769ab0";
 // const UNIQUE_SERVICE_DEALFIELD = "146a6087ef8c0aa7f7bffe8d022eb2c1ab73542e";
-
+export type Service = {
+  group: string;
+  name: string;
+  pipedrive_id: string;
+};
+export type ContactForm = {
+  services_question: string;
+  name_question: string;
+  name: string;
+  email_question: string;
+  project_question: string;
+  budget_title: string;
+  date_title: string;
+  message_title: string;
+};
 const FormSlider = forwardRef<any>((props, ref) => {
+  const [myservices, setServices] = useState<any>(null);
+  const [contactForm, setContactForm] = useState<any>(null);
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
   );
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        let responseServices;
+        let responseContactForm;
+        if (currentLanguage === Language.de) {
+          responseServices = await client.query({ query: services_de });
+          responseContactForm = await client.query({ query: contact_form_de });
+        } else {
+          responseServices = await client.query({ query: services_en });
+          responseContactForm = await client.query({ query: contact_form_en });
+        }
+        setServices(responseServices.data.service.service as Service[]);
+        setContactForm(responseContactForm.data.contact as ContactForm);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
   const setInterFormState = useStoreActions(
     (state) => state.device.setInterFormState
   );
@@ -205,7 +249,7 @@ const FormSlider = forwardRef<any>((props, ref) => {
 
   const validate = (value: any) => {
     let errorMessage;
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$/i.test(value)) {
       errorMessage =
         currentLanguage !== Language.de ? "Oops mistyped?" : "Ups vertippt?";
       setFormObject((prev) => ({ ...prev, email: "" }));
@@ -349,28 +393,6 @@ const FormSlider = forwardRef<any>((props, ref) => {
     passive: { scale: 1, transition: { type: "spring", stiffness: 100 } },
   };
 
-  const services = [
-    {
-      group: "services",
-      value: SERVICE_ID_BACKEND.SHOP,
-      name: "Shop Programmierung",
-    },
-    {
-      group: "services",
-      value: SERVICE_ID_BACKEND.GET_NEW_CLIENTS,
-      name: "Neukundengewinnung",
-    },
-    {
-      group: "services",
-      value: SERVICE_ID_BACKEND.CONVERSION_RATE,
-      name: "Conversion Optimierung",
-    },
-    {
-      group: "services",
-      value: SERVICE_ID_BACKEND.EMAIL_MARKETIN,
-      name: "E-Mail-Marketing",
-    },
-  ];
   const interactiveFormOpened = useStoreState(
     (state) => state.device.interactiveFormOpened
   );
@@ -386,9 +408,12 @@ const FormSlider = forwardRef<any>((props, ref) => {
 
   const [startDate, setStartDate] = useState<Date | null>(new Date());
 
-  const ExampleCustomInput = ({ value, onClick }: any) => (
+  const ExampleCustomInput = ({ value, onClick, inverted }: any) => (
     <div
-      className={formSlider.input}
+      className={`${formSlider.input} ${
+        //@ts-ignore
+        inverted && formSlider.inverted
+      }`}
       style={{ lineHeight: "normal" }}
       onClick={onClick}
     >
@@ -439,7 +464,7 @@ const FormSlider = forwardRef<any>((props, ref) => {
                       props.inverted && formSlider.inverted
                     }`}
                   >
-                    <h2>Which category best fits your project?</h2>
+                    <h2>{contactForm && contactForm.services_question}</h2>
                   </div>
                   <div
                     className={`${formSlider.fieldRow} + " " + ${
@@ -450,16 +475,20 @@ const FormSlider = forwardRef<any>((props, ref) => {
                     }`}
                   >
                     <CheckboxGroup
-                      checkboxArray={services}
+                      checkboxArray={myservices && myservices}
                       setCheckboxStatus={setFormObject}
                       inverted={
                         //@ts-ignore
                         props.inverted
                       }
                     />
-                    <ErrorMessage name="services" component={Error} />
                     {!canIGoNext() && (
-                      <Error>
+                      <Error
+                        inverted={
+                          //@ts-ignore
+                          props.inverted
+                        }
+                      >
                         {currentLanguage !== Language.de
                           ? "Please pick one or more categories"
                           : "Wofür interessierst Du dich? Hacke ein oder mehr."}
@@ -472,20 +501,40 @@ const FormSlider = forwardRef<any>((props, ref) => {
                   animate={currentSlider === 1 ? "active" : "passive"}
                   variants={reveal}
                 >
-                  <div className={formSlider.header}>
-                    <h2>What's your name? </h2>
+                  <div
+                    className={`${formSlider.header} ${
+                      //@ts-ignore
+                      props.inverted && formSlider.inverted
+                    }`}
+                  >
+                    <h2>{contactForm && contactForm.name_question}</h2>
                   </div>
                   <div className={formSlider.fieldRow}>
                     <Field
                       type="text"
                       name="name"
-                      placeholder="Name"
+                      placeholder={contactForm && contactForm.name}
                       validate={isRequiredName}
-                      className={formSlider.input}
+                      className={`${formSlider.input} ${
+                        //@ts-ignore
+                        props.inverted && formSlider.inverted
+                      }`}
                       innerRef={nameRef}
                       autoFocus
                     />
-                    <ErrorMessage name="name" component={Error} />
+                    <ErrorMessage
+                      name="name"
+                      render={(msg) => (
+                        <Error
+                          inverted={
+                            //@ts-ignore
+                            props.inverted
+                          }
+                        >
+                          {msg}
+                        </Error>
+                      )}
+                    />
                   </div>
                 </motion.div>
                 <motion.div
@@ -493,8 +542,13 @@ const FormSlider = forwardRef<any>((props, ref) => {
                   animate={currentSlider === 2 ? "active" : "passive"}
                   variants={reveal}
                 >
-                  <div className={formSlider.header}>
-                    <h2>What is your email?</h2>
+                  <div
+                    className={`${formSlider.header} ${
+                      //@ts-ignore
+                      props.inverted && formSlider.inverted
+                    }`}
+                  >
+                    <h2>{contactForm && contactForm.email_question}</h2>
                   </div>
                   <div className={formSlider.fieldRow}>
                     <Field
@@ -502,10 +556,25 @@ const FormSlider = forwardRef<any>((props, ref) => {
                       name="email"
                       placeholder="E-mail"
                       validate={validate}
-                      className={formSlider.input}
+                      className={`${formSlider.input} ${
+                        //@ts-ignore
+                        props.inverted && formSlider.inverted
+                      }`}
                       innerRef={emailRef}
                     />
-                    <ErrorMessage name="email" component={Error} />
+                    <ErrorMessage
+                      name="email"
+                      render={(msg) => (
+                        <Error
+                          inverted={
+                            //@ts-ignore
+                            props.inverted
+                          }
+                        >
+                          {msg}
+                        </Error>
+                      )}
+                    />
                   </div>
                 </motion.div>
                 <motion.div
@@ -513,11 +582,21 @@ const FormSlider = forwardRef<any>((props, ref) => {
                   animate={currentSlider === 3 ? "active" : "passive"}
                   variants={reveal}
                 >
-                  <div className={formSlider.header}>
-                    <h2>Project description</h2>
+                  <div
+                    className={`${formSlider.header} ${
+                      //@ts-ignore
+                      props.inverted && formSlider.inverted
+                    }`}
+                  >
+                    <h2>{contactForm && contactForm.project_question}</h2>
                   </div>
                   <div
-                    className={`${formSlider.textareaRow} ${formSlider.fieldRowMultiple}`}
+                    className={`${formSlider.textareaRow} ${
+                      formSlider.fieldRowMultiple
+                    } ${
+                      //@ts-ignore
+                      props.inverted && formSlider.inverted
+                    }`}
                     style={{
                       height: "auto",
                       display: "flex",
@@ -526,34 +605,78 @@ const FormSlider = forwardRef<any>((props, ref) => {
                       position: "relative",
                     }}
                   >
-                    <h4>Geld</h4>
+                    <h4>{contactForm && contactForm.budget_title}</h4>
                     <Field
                       type="text"
                       name="value"
                       validate={isRequiredPrice}
-                      className={formSlider.input}
+                      className={`${formSlider.input} ${
+                        //@ts-ignore
+                        props.inverted && formSlider.inverted
+                      }`}
                       innerRef={geldRef}
                       placeholder="3000"
                     />
                     <span className={formSlider.euro}>€</span>
-                    <ErrorMessage name="value" component={Error} />
+                    <ErrorMessage
+                      name="value"
+                      render={(msg) => (
+                        <Error
+                          inverted={
+                            //@ts-ignore
+                            props.inverted
+                          }
+                        >
+                          {msg}
+                        </Error>
+                      )}
+                    />
                   </div>
 
                   <div
-                    className={`${formSlider.textareaRow} ${formSlider.fieldRowMultiple}`}
+                    className={`${formSlider.textareaRow} ${
+                      formSlider.fieldRowMultiple
+                    } ${
+                      //@ts-ignore
+                      props.inverted && formSlider.inverted
+                    }`}
                     style={{ marginBottom: 20 }}
                   >
-                    <h4>Date</h4>
+                    <h4>{contactForm && contactForm.date_title}</h4>
                     <DatePicker
                       selected={startDate}
                       dateFormat="dd.MM.yyyy"
                       popperPlacement="bottom-center"
-                      customInput={<ExampleCustomInput />}
+                      customInput={
+                        <ExampleCustomInput
+                          inverted={
+                            //@ts-ignore
+                            props.inverted
+                          }
+                        />
+                      }
                       onChange={(date) => setStartDate(date)}
                     />
-                    <ErrorMessage name="date" component={Error} />
+                    <ErrorMessage
+                      name="date"
+                      render={(msg) => (
+                        <Error
+                          inverted={
+                            //@ts-ignore
+                            props.inverted
+                          }
+                        >
+                          {msg}
+                        </Error>
+                      )}
+                    />
                   </div>
-                  <div className={formSlider.textareaRow}>
+                  <div
+                    className={`${formSlider.textareaRow} ${
+                      //@ts-ignore
+                      props.inverted && formSlider.inverted
+                    }`}
+                  >
                     <h4>
                       {currentLanguage === 0
                         ? "About project"
@@ -574,11 +697,26 @@ const FormSlider = forwardRef<any>((props, ref) => {
                           onChange={(event) =>
                             setFieldValue("message", event.target.value)
                           }
-                          className={`${formSlider.textfield}`}
+                          className={`${formSlider.textfield} ${
+                            //@ts-ignore
+                            props.inverted && formSlider.inverted
+                          }`}
                         />
                       )}
                     </Field>
-                    <ErrorMessage name="message" component={Error} />
+                    <ErrorMessage
+                      name="message"
+                      render={(msg) => (
+                        <Error
+                          inverted={
+                            //@ts-ignore
+                            props.inverted
+                          }
+                        >
+                          {msg}
+                        </Error>
+                      )}
+                    />
                   </div>
                 </motion.div>
 
@@ -588,7 +726,10 @@ const FormSlider = forwardRef<any>((props, ref) => {
                   variants={reveal}
                 >
                   <div
-                    className={formSlider.header}
+                    className={`${formSlider.header} ${
+                      //@ts-ignore
+                      props.inverted && formSlider.inverted
+                    }`}
                     style={{
                       display: "flex",
                       flexDirection: "column",
@@ -596,8 +737,17 @@ const FormSlider = forwardRef<any>((props, ref) => {
                       padding: 0,
                     }}
                   >
-                    <Congrats />
-                    <h2>Congratulations, {congratsName}!</h2>
+                    <Congrats
+                      inverted={
+                        //@ts-ignore
+                        props.inverted
+                      }
+                    />
+                    <h2 style={{ textAlign: "center" }}>
+                      {currentLanguage === Language.de
+                        ? `Glückwunsch, ${congratsName}!`
+                        : `Congratulations, ${congratsName}!`}
+                    </h2>
                   </div>
                 </motion.div>
               </Form>
@@ -644,7 +794,7 @@ const FormSlider = forwardRef<any>((props, ref) => {
   );
 });
 
-const Error: React.FC = ({ children }) => {
+const Error: React.FC<{ inverted: boolean }> = (props) => {
   const errAnim = {
     on: { opacity: 1, y: 0 },
     off: { opacity: 0, y: -30 },
@@ -655,14 +805,17 @@ const Error: React.FC = ({ children }) => {
       initial="off"
       animate="on"
       exit="off"
-      className={formSlider.errorMessage}
+      className={`${formSlider.errorMessage} ${
+        //@ts-ignore
+        props.inverted && formSlider.inverted
+      }`}
     >
-      {children}
+      {props.children}
     </motion.div>
   );
 };
 type CheckboxProps = {
-  checkboxArray: { group: string; name: string; value: SERVICE_ID_BACKEND }[];
+  checkboxArray: Service[];
   setCheckboxStatus: Dispatch<SetStateAction<any>>;
   inverted: boolean;
   [x: string]: any;
@@ -670,13 +823,13 @@ type CheckboxProps = {
 export const CheckboxGroup: FC<CheckboxProps> = (props) => {
   const { checkboxArray, setCheckboxStatus, inverted } = props;
   const updateFormikState = (form: any, field: any, service: any) => {
-    if (field.value.includes(service.value)) {
+    if (field.value.includes(service.pipedrive_id)) {
       const nextValue = field.value.filter(
-        (value: string) => value !== service.value
+        (value: string) => value !== service.pipedrive_id
       );
       form.setFieldValue(service.group, nextValue);
     } else {
-      const nextValue = field.value.concat(service.value);
+      const nextValue = field.value.concat(service.pipedrive_id);
       form.setFieldValue(service.group, nextValue);
     }
     form.setFieldError(service.group, field.value.error);
@@ -694,22 +847,18 @@ export const CheckboxGroup: FC<CheckboxProps> = (props) => {
   };
   return (
     <>
-      {checkboxArray.map(
-        (service: {
-          group: string;
-          name: string;
-          value: SERVICE_ID_BACKEND;
-        }) => (
+      {checkboxArray &&
+        checkboxArray.map((service: Service) => (
           <Field
             name={service.group}
-            key={service.name + "-" + service.value}
+            key={service.name + "-" + service.pipedrive_id}
             validate={(e: any) => validate(e)}
           >
             {({ field, form }: any) => (
               <label>
                 <input
                   type="checkbox"
-                  checked={field.value.includes(service.value)}
+                  checked={field.value.includes(service.pipedrive_id)}
                   onChange={() => updateFormikState(form, field, service)}
                 />
                 <div
@@ -722,9 +871,20 @@ export const CheckboxGroup: FC<CheckboxProps> = (props) => {
               </label>
             )}
           </Field>
-        )
-      )}
-      <ErrorMessage name="services" component={Error} />
+        ))}
+      <ErrorMessage
+        name={"services"}
+        render={(msg) => (
+          <Error
+            inverted={
+              //@ts-ignore
+              props.inverted
+            }
+          >
+            {msg}
+          </Error>
+        )}
+      />
     </>
   );
 };

@@ -33,7 +33,6 @@ const Layout: React.FC<LayoutProps> = ({
   //     return true;
   //   return false;
   // };
-  console.log({ footer });
   return (
     <div style={layoutStyle} tabIndex={-1}>
       <Head>

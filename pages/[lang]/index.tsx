@@ -23,6 +23,8 @@ import {
   navigation_en,
   footer_de,
   footer_en,
+  services_de,
+  services_en,
 } from "../../queries/queries";
 import { client } from "../_app";
 import AutoLineSwiper from "../../components/AutoLineSwiper/AutoLineSwiper";
@@ -32,12 +34,13 @@ import { useStoreActions } from "../../hooks";
 import InteractiveForm from "../../components/InteractiveForm/InteractiveForm";
 import { ORIENTATION } from "../../model/device";
 import Link from "next/link";
+import { Service } from "../../components/FormSlider/FormSlider";
 const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
   ssr: true,
 });
 
 const Page: NextPage<HomeProps> = (props) => {
-  const { pageFromCMS, footer } = props;
+  const { pageFromCMS, footer, services } = props;
   const [activeServiceIndex, setIndex] = useState(0);
   const handleServiceHover = (index: number) => {
     setIndex(index);
@@ -174,7 +177,7 @@ const Page: NextPage<HomeProps> = (props) => {
 
               {deviceWidth >= 1400 ? (
                 <motion.img
-                  animate={{ rotate: `${activeServiceIndex * 12}deg` }}
+                  animate={{ rotate: `${(activeServiceIndex + 1) * 12}deg` }}
                   src={`${
                     pageFromCMS.intro.pictures &&
                     pageFromCMS.intro?.pictures[6]?.url
@@ -202,27 +205,28 @@ const Page: NextPage<HomeProps> = (props) => {
                 className={`${index.introServices} + ${index.verticalMargin}`}
               >
                 <ul className={`${index.introServicesList} indieFlower`}>
-                  {pageFromCMS?.services?.map((service, i) => (
-                    <li
-                      onMouseOver={() => handleServiceHover(i)}
-                      onMouseLeave={() => handleServiceLeave()}
-                      key={"service_" + i}
-                      data-swiper-parallax={-i * 100 + 500}
-                      data-swiper-parallax-opacity="0"
-                      data-middle={
-                        i <= Math.floor(pageFromCMS.services.length / 2) && true
-                      }
-                      style={{
-                        paddingLeft: `${
-                          i <= Math.floor(pageFromCMS.services.length / 2) - 1
-                            ? i * 15
-                            : (pageFromCMS.services.length - i - 1) * 15
-                        }px`,
-                      }}
-                    >
-                      <a>{service.name}</a>
-                    </li>
-                  ))}
+                  {services &&
+                    services.map((service, i) => (
+                      <li
+                        onMouseOver={() => handleServiceHover(i)}
+                        onMouseLeave={() => handleServiceLeave()}
+                        key={"service_" + i}
+                        data-swiper-parallax={-i * 100 + 500}
+                        data-swiper-parallax-opacity="0"
+                        data-middle={
+                          i <= Math.floor(services.length / 2) && true
+                        }
+                        style={{
+                          paddingLeft: `${
+                            i <= Math.floor(services.length / 2) - 1
+                              ? i * 15
+                              : (services.length - i - 1) * 15
+                          }px`,
+                        }}
+                      >
+                        <a>{service.name}</a>
+                      </li>
+                    ))}
                 </ul>
               </div>
             </div>
@@ -601,15 +605,18 @@ Page.getInitialProps = async (context: NextPageContext) => {
   let response;
   let response1;
   let response_footer;
+  let responseServices;
 
   if (context.query.lang === "de") {
     response = await client.query({ query: landing_de });
     response1 = await client.query({ query: navigation_de });
     response_footer = await client.query({ query: footer_de });
+    responseServices = await client.query({ query: services_de });
   } else {
     response = await client.query({ query: landing_en });
     response1 = await client.query({ query: navigation_en });
     response_footer = await client.query({ query: footer_en });
+    responseServices = await client.query({ query: services_en });
   }
 
   return {
@@ -617,6 +624,7 @@ Page.getInitialProps = async (context: NextPageContext) => {
     pageFromCMS: response.data.homeDe as HomePage,
     footer: response_footer.data.footer as Footer,
     isMobile,
+    services: responseServices.data.service.service as Service[],
   };
 };
 export default withTranslate(Page); // <- component is wrapped with a HOC

@@ -988,3 +988,63 @@ export const footer_en = gql`
     }
   }
 `;
+
+export const services_de = gql`
+  query {
+    service {
+      service {
+        __typename
+        ... on ComponentTypesService {
+          group
+          name
+          pipedrive_id
+        }
+      }
+    }
+  }
+`;
+
+export const services_en = gql`
+  query {
+    service {
+      service {
+        __typename
+        ... on ComponentTypesService {
+          group
+          name: name_en
+          pipedrive_id
+        }
+      }
+    }
+  }
+`;
+
+export const contact_form_de = gql`
+  query {
+    contact {
+      services_question
+      name_question
+      name
+      email_question
+      project_question
+      budget_title
+      date_title
+      message_title
+    }
+  }
+`;
+
+export const contact_form_en = gql`
+  query {
+    contact {
+      services_question: services_question_en
+      name_question: name_question_en
+      name: name_en
+      email_question: email_question_en
+      project_question: project_question_en
+      budget_title: budget_title_en
+      date_title: date_title_en
+      message_title: message_title_en
+    }
+  }
+`;

@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Service } from "../components/FormSlider/FormSlider";
 
 export enum Language {
   en,
@@ -46,6 +47,7 @@ export type HomeProps = {
   navigation: NavType;
   isMobile: boolean;
   footer?: Footer;
+  services: Service[];
 };
 export type AboutProps = {
   pageFromCMS: HomePage;
