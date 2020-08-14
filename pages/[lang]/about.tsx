@@ -4,11 +4,15 @@ import { NextPage, GetServerSideProps, GetServerSidePropsContext } from "next";
 import { client } from "../_app";
 import { landing_de } from "../../queries/queries";
 import { AboutProps, HomePage } from "../../types/types";
+import { Swiper, SwiperSlide } from "swiper/react";
+import MySwiper from "../../components/Swiper/swiper";
 
 const about: NextPage<AboutProps> = (props) => {
   console.log(props);
-
-  return <div>FUCK</div>;
+  const children = new Array(5)
+    .fill(null)
+    .map((child: any, index: number) => <section>Slide{index}</section>);
+  return <MySwiper>{children}</MySwiper>;
 };
 
 export const getServerSideProps: GetServerSideProps = async (

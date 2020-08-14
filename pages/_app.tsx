@@ -1,5 +1,6 @@
 import "../global_styles.scss";
-import "swiper/css/swiper.css";
+import "swiper/swiper.scss";
+// import "swiper/css/swiper.css";
 import "react-datepicker/dist/react-datepicker.css";
 import store from "../store";
 import { StoreProvider } from "easy-peasy";

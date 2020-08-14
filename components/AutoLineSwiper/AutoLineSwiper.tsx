@@ -23,13 +23,13 @@ const AutoLineSwiper: React.FC<AutoLineSwiperProps> = ({
     containerClass: `${autoSlide.mySlider}`,
     breakpoints: {
       320: {
-        slidesPerView: 2,
-        slidesPerGroup: 2,
+        slidesPerView: 3,
+        slidesPerGroup: 3,
         spaceBetween: 0,
         centeredSlides: false,
       },
       450: {
-        slidesPerView: 2,
+        slidesPerView: 3,
       },
       640: {
         slidesPerView: 3,

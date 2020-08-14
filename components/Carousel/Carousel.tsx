@@ -92,6 +92,24 @@ const Carousel: React.FC<CarouselProps> = ({
   const width = useStoreState((state) => state.device.width);
 
   const [respScreens, setRespScreens] = useState<any>(null);
+
+  function updateCarouselState() {
+    console.log({ swiper });
+    // swiper && setCarouselState(swiper.isBeginning);
+    // console.log(
+    //   "updateCarouselState",
+    //   document.querySelector(".myCustomSwiper").swiper
+    // );
+    if (swiper !== null) {
+      setSelected(swiper.activeIndex);
+      setActiveIndex(swiper.activeIndex);
+    }
+  }
+  // React.useEffect(() => {
+  //   var mySwiper = document.querySelector(".myCustomSwiper").swiper;
+  //   mySwiper.on("slideChange", updateCarouselState);
+  //   setSwiper(mySwiper);
+  // }, []);
   const params: any = {
     direction: "horizontal",
     slidesPerView: 1,
@@ -106,7 +124,11 @@ const Carousel: React.FC<CarouselProps> = ({
       value: "-23%",
     },
     containerClass: "myCustomSwiper",
-    getSwiper: setSwiper,
+    // getSwiper: setSwiper,
+    // on: {
+    //   init: (swiper: any) => setSwiper(swiper),
+    //   slideChange: () => updateCarouselState(),
+    // },
     breakpoints: {
       320: {
         touchAngle: 90,
@@ -119,16 +141,11 @@ const Carousel: React.FC<CarouselProps> = ({
   useEffect(() => {
     swiper && menuOpened ? swiper.detachEvents() : swiper?.attachEvents();
   }, [menuOpened]);
-  const updateCarouselState = () => {
-    // swiper && setCarouselState(swiper.isBeginning);
 
-    if (swiper !== null) {
-      setSelected(swiper.activeIndex);
-      setActiveIndex(swiper.activeIndex);
-    }
-  };
   useEffect(() => {
+    console.log({ swiper });
     swiper && swiper.on("slideChange", updateCarouselState);
+    updateCarouselState();
   }, [swiper]);
 
   const bulletAnim = {
@@ -243,13 +260,29 @@ const Carousel: React.FC<CarouselProps> = ({
 
     return "hidden";
   };
-
+  useEffect(() => {
+    console.log(swiper);
+  }, []);
   return (
     <div className="responsiveSlide">
-      <Swiper {...params}>{children}</Swiper>
+      {children && (
+        <Swiper
+          {...params}
+          getSwiper={setSwiper}
+          on={{
+            slideChange: () => console.log("bla", swiper),
+          }}
+          shouldSwiperUpdate
+        >
+          {children}
+        </Swiper>
+      )}
 
       <AnimateSharedLayout>
-        <div className={car.paginationContainer}>
+        <div
+          className={car.paginationContainer}
+          onClick={() => console.log(swiper)}
+        >
           <ol
             className={car.pagination}
             style={{

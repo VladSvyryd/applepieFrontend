@@ -57,6 +57,25 @@ const Page: NextPage<HomeProps> = (props) => {
   const setInterFormState = useStoreActions(
     (actions) => actions.device.setInterFormState
   );
+  const activeCarouselIndex = useStoreState(
+    (state) => state.swiper.activeIndex
+  );
+  const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
+  const checkIfIsInverted = () => {
+    console.log(
+      "inverted: ",
+      invertedSlides.some((e: any) => e === activeCarouselIndex)
+    );
+    return invertedSlides.some((e: any) => e === activeCarouselIndex);
+  };
+
+  const backgroundAnim = {
+    on: {
+      backgroundColor: "#2e2c41",
+      transition: { duration: 2, when: "beforeChildren" },
+    },
+    off: { backgroundColor: "white", transition: { duration: 2 } },
+  };
   // IF for landscape mode
   return !props.isMobile ||
     (props.isMobile && orientation === ORIENTATION.portrait) ? (
@@ -280,7 +299,11 @@ const Page: NextPage<HomeProps> = (props) => {
             />
           </div>
         </section>
-        <section className={index.thirdSection + " frameBottomTop"}>
+        <motion.section
+          className={index.thirdSection + " frameBottomTop"}
+          animate={checkIfIsInverted() ? "on" : "off"}
+          variants={backgroundAnim}
+        >
           <div
             className={index.clients + " content-frame " + index.verticalMargin}
           >
@@ -312,7 +335,7 @@ const Page: NextPage<HomeProps> = (props) => {
               </AutoLineSwiper>
             </div>
           </div>
-        </section>
+        </motion.section>
         <section
           className={
             index.thirdSection + " frameBottomTop " + index.forthSection

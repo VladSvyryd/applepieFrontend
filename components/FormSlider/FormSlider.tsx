@@ -139,7 +139,7 @@ const FormSlider = forwardRef<any>((props, ref) => {
             `SP // ${json.data?.name}`,
             formObject.value,
             values.services,
-            values.date
+            getFormattedDate(startDate)
           ));
 
         typeof deal_id === "number" &&
@@ -420,7 +420,13 @@ const FormSlider = forwardRef<any>((props, ref) => {
       {value}
     </div>
   );
-
+  const getFormattedDate = (date: Date | null) => {
+    if (!date) return new Date().toString();
+    let year = date.getFullYear();
+    let month = (1 + date.getMonth()).toString().padStart(2, "0");
+    let day = date.getDate().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
   return (
     <div className={formSlider.mySlider}>
       <div className={formSlider.paginationContainer}>

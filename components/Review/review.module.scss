@@ -12,6 +12,7 @@
   padding: 15px;
   @media (max-width: 880px) {
     max-height: 540px;
+    margin-top: 10px;
   }
   @media (max-width: 800px) {
     grid-template-columns: auto;
@@ -33,7 +34,9 @@
       margin: 0px;
       display: flex;
     }
-
+    @media (max-width: 450px) {
+      max-width: 100px;
+    }
     img {
       border-radius: 50%;
       width: 100%;
@@ -98,9 +101,24 @@
     @media (max-width: 800px) {
       transform: rotate(90deg);
       right: -20px;
-      top: 53px;
+      top: 66px;
+      width: 135px;
+    }
+    @media (max-width: 450px) {
+      width: 97px;
+      top: 59px;
+
+      div {
+        height: 29px;
+        width: 29px;
+      }
+      img {
+        height: 29px;
+        width: 29px;
+      }
     }
     > div {
+      display: flex;
       margin: 0 10px;
     }
   }
