@@ -57,18 +57,11 @@ const about: NextPage<HomeProps> = (props) => {
   const setInterFormState = useStoreActions(
     (actions) => actions.device.setInterFormState
   );
-  const activeCarouselIndex = useStoreState(
-    (state) => state.swiper.activeIndex
-  );
-  const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
+  const [selectedSlide, setSelectedSlide] = useState(0);
+  const [activeIndexHistory, setActiveIndexHistory] = useState([0]);
   const checkIfIsInverted = () => {
-    console.log(
-      "inverted: ",
-      invertedSlides.some((e: any) => e === activeCarouselIndex)
-    );
-    return invertedSlides.some((e: any) => e === activeCarouselIndex);
+    return [3, 6, 8].some((e: any) => e === selectedSlide);
   };
-
   const backgroundAnim = {
     on: {
       backgroundColor: "#2e2c41",
@@ -87,6 +80,10 @@ const about: NextPage<HomeProps> = (props) => {
           pagination: pageFromCMS.pagination,
         }}
         isMobile={props.isMobile}
+        selected={selectedSlide}
+        setSelected={setSelectedSlide}
+        activeIndexHistory={activeIndexHistory}
+        setActiveIndexHistory={setActiveIndexHistory}
       >
         <section
           className={`flexColumns alignCenter ${index.intro}`}

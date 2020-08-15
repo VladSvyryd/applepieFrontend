@@ -5,6 +5,7 @@ import layout from "./layout.module.scss";
 import { useStoreState } from "../../hooks";
 // import { useRouter } from "next/router";
 import Link from "next/link";
+import React from "react";
 
 const Layout: React.FC<LayoutProps> = ({
   navigation,
@@ -291,4 +292,4 @@ const Layout: React.FC<LayoutProps> = ({
   );
 };
 
-export default Layout;
+export default React.memo(Layout);

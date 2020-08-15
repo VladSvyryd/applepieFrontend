@@ -95,21 +95,12 @@ const Carousel: React.FC<CarouselProps> = ({
 
   function updateCarouselState() {
     console.log({ swiper });
-    // swiper && setCarouselState(swiper.isBeginning);
-    // console.log(
-    //   "updateCarouselState",
-    //   document.querySelector(".myCustomSwiper").swiper
-    // );
+
     if (swiper !== null) {
       setSelected(swiper.activeIndex);
       setActiveIndex(swiper.activeIndex);
     }
   }
-  // React.useEffect(() => {
-  //   var mySwiper = document.querySelector(".myCustomSwiper").swiper;
-  //   mySwiper.on("slideChange", updateCarouselState);
-  //   setSwiper(mySwiper);
-  // }, []);
   const params: any = {
     direction: "horizontal",
     slidesPerView: 1,
@@ -124,11 +115,6 @@ const Carousel: React.FC<CarouselProps> = ({
       value: "-23%",
     },
     containerClass: "myCustomSwiper",
-    // getSwiper: setSwiper,
-    // on: {
-    //   init: (swiper: any) => setSwiper(swiper),
-    //   slideChange: () => updateCarouselState(),
-    // },
     breakpoints: {
       320: {
         touchAngle: 90,
@@ -242,14 +228,6 @@ const Carousel: React.FC<CarouselProps> = ({
   }, [width]);
 
   const returnAnimateClass = (i: number) => {
-    // return i === selected &&
-    //   activeIndexHistory.findIndex((li) => li === i) != -1 &&
-    //   i === hoveredIndex
-    //   ? "visibleAndHovered"
-    //   : activeIndexHistory.findIndex((li) => li === i) != -1 ||
-    //     i === hoveredIndex
-    //   ? "visible"
-    //   : "hidden";
     if (activeIndexHistory.findIndex((li) => li == i) != -1) {
       if (!isMobile && i === hoveredIndex) return "visibleAndHovered";
       return "visible";

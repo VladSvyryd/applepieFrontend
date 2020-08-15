@@ -1,7 +1,13 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Mousewheel, Parallax } from "swiper";
-import { CarouselProps, Image, DEVICE } from "../../types/types";
-import { useState, useEffect } from "react";
+import { Image, DEVICE, Pagination } from "../../types/types";
+import {
+  useState,
+  useEffect,
+  ReactNodeArray,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import car from "../Carousel/car.module.scss";
 import { useStoreState } from "../../hooks";
@@ -101,35 +107,36 @@ const captionAnim = {
   }),
 };
 SwiperCore.use([Mousewheel, Parallax]);
-
+type CarouselProps = {
+  children: ReactNodeArray;
+  paginationObject: {
+    pagination: Pagination;
+  };
+  isMobile: boolean;
+  selected: number;
+  setSelected: Dispatch<SetStateAction<number>>;
+  activeIndexHistory: number[];
+  setActiveIndexHistory: Dispatch<SetStateAction<number[]>>;
+};
 const MySwiper: React.FC<CarouselProps> = ({
   children,
   paginationObject,
   isMobile,
+  selected,
+  setSelected,
+  activeIndexHistory,
+  setActiveIndexHistory,
 }) => {
   const [swiper, setSwiper] = useState<SwiperCore>();
-  const [selected, setSelected] = useState(0);
-
   const [hoveredIndex, setHoveredIndex] = useState(-1);
-
-  // const setActiveIndex = useStoreActions(
-  //   (actions) => actions.swiper.setActiveIndex
-  // );
-  // const menuOpened = useStoreState((state) => state.device.menuOpened);
-
-  //const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
-  const [activeIndexHistory, setActiveIndexHistory] = useState([0]);
   const invertedSlides = [3, 6, 8];
   const width = useStoreState((state) => state.device.width);
-
   const [respScreens, setRespScreens] = useState<any>(null);
 
-  function updateCarouselState(swiper: any) {
-    setSelected(swiper.activeIndex);
+  function updateCarouselState(swiperIndex: number) {
+    setSelected(swiperIndex);
     setActiveIndexHistory((old) =>
-      old.includes(parseInt(swiper.activeIndex))
-        ? old
-        : [...old, swiper.activeIndex]
+      old.includes(swiperIndex) ? old : [...old, swiperIndex]
     );
   }
 
@@ -220,7 +227,7 @@ const MySwiper: React.FC<CarouselProps> = ({
         centeredSlides
         direction="horizontal"
         className="myCustomSwiper"
-        onSlideChange={(swiper) => updateCarouselState(swiper)}
+        onSlideChange={(swiper) => updateCarouselState(swiper.activeIndex)}
         slidesPerView={1}
         onSwiper={(swiper) => setSwiper(swiper)}
       >

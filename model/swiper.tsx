@@ -20,7 +20,7 @@ const swiper: CustomSwiperModel = {
   swipeTo: null,
   setActiveIndex: action((state, payload) => {
     state.activeIndex = payload;
-    state.activeIndexHistory.findIndex((index) => +index === +payload) == -1 &&
+    !state.activeIndexHistory.includes(payload) &&
       state.activeIndexHistory.push(payload);
   }),
   updateActiveIndexHistory: action((state, payload) => {

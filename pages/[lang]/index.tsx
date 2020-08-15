@@ -72,9 +72,9 @@ const Page: NextPage<HomeProps> = (props) => {
   const backgroundAnim = {
     on: {
       backgroundColor: "#2e2c41",
-      transition: { duration: 2 },
+      transition: { duration: 0.3 },
     },
-    off: { backgroundColor: "#fff", transition: { duration: 2 } },
+    off: { backgroundColor: "#fff", transition: { duration: 0.3 } },
   };
   // IF for landscape mode
   return !props.isMobile ||
@@ -430,10 +430,12 @@ const Page: NextPage<HomeProps> = (props) => {
             </div>
           </div>
         </section>
-        <section
+        <motion.section
           className={
             index.thirdSection + " frameBottomTop " + index.sixthSection
           }
+          animate={checkIfIsInverted() ? "on" : "off"}
+          variants={backgroundAnim}
         >
           <div
             className={`content-frame  ${index.backgroundLayer}`}
@@ -462,7 +464,7 @@ const Page: NextPage<HomeProps> = (props) => {
               />
             </div>
           </div>
-        </section>
+        </motion.section>
         <section
           className={
             index.firstSection +
@@ -496,7 +498,7 @@ const Page: NextPage<HomeProps> = (props) => {
             </div>
           </div>
         </section>
-        <section
+        <motion.section
           className={
             index.firstSection +
             " " +
@@ -504,6 +506,8 @@ const Page: NextPage<HomeProps> = (props) => {
             " frameBottomTop " +
             index.eightSection
           }
+          animate={checkIfIsInverted() ? "on" : "off"}
+          variants={backgroundAnim}
         >
           <div className={index.left}>
             <img
@@ -557,7 +561,7 @@ const Page: NextPage<HomeProps> = (props) => {
               Legal
             </motion.button>
           </div>
-        </section>
+        </motion.section>
         <section>
           <div className={index.last + " frameBottomTop"}>
             <ul className={index.ul}>
