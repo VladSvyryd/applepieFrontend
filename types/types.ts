@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, ReactNodeArray } from "react";
 import { Service } from "../components/FormSlider/FormSlider";
 
 export enum Language {
@@ -35,7 +35,7 @@ export type NavProps = {
   social_links?: Link[];
 };
 export type CarouselProps = {
-  children: ReactNode;
+  children: ReactNodeArray;
   paginationObject: {
     pagination: Pagination;
   };

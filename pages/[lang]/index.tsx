@@ -72,9 +72,9 @@ const Page: NextPage<HomeProps> = (props) => {
   const backgroundAnim = {
     on: {
       backgroundColor: "#2e2c41",
-      transition: { duration: 2, when: "beforeChildren" },
+      transition: { duration: 2 },
     },
-    off: { backgroundColor: "white", transition: { duration: 2 } },
+    off: { backgroundColor: "#fff", transition: { duration: 2 } },
   };
   // IF for landscape mode
   return !props.isMobile ||
