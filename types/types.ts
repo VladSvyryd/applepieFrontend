@@ -1,4 +1,4 @@
-import { ReactNode, ReactNodeArray, Dispatch, SetStateAction } from "react";
+import { ReactNode, ReactNodeArray } from "react";
 import { Service } from "../components/FormSlider/FormSlider";
 
 export enum Language {
@@ -40,10 +40,6 @@ export type CarouselProps = {
     pagination: Pagination;
   };
   isMobile: boolean;
-  selected: number;
-  setSelected: Dispatch<SetStateAction<number>>;
-  activeIndexHistory: number[];
-  setActiveIndexHistory: Dispatch<SetStateAction<number[]>>;
 };
 
 export type HomeProps = {
