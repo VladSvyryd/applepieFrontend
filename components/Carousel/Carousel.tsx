@@ -110,6 +110,7 @@ const Carousel: React.FC<CarouselProps> = ({
     roundLengths: true,
     parallax: true,
     threshold: width >= 1000 ? 100 : 0,
+    getSwiper: setSwiper,
     parallaxEl: {
       el: ".parallax-bg",
       value: "-23%",
@@ -131,7 +132,6 @@ const Carousel: React.FC<CarouselProps> = ({
   useEffect(() => {
     console.log({ swiper });
     swiper && swiper.on("slideChange", updateCarouselState);
-    updateCarouselState();
   }, [swiper]);
 
   const bulletAnim = {
@@ -238,23 +238,10 @@ const Carousel: React.FC<CarouselProps> = ({
 
     return "hidden";
   };
-  useEffect(() => {
-    console.log(swiper);
-  }, []);
+
   return (
     <div className="responsiveSlide">
-      {children && (
-        <Swiper
-          {...params}
-          getSwiper={setSwiper}
-          on={{
-            slideChange: () => console.log("bla", swiper),
-          }}
-          shouldSwiperUpdate
-        >
-          {children}
-        </Swiper>
-      )}
+      {children && <Swiper {...params}>{children}</Swiper>}
 
       <AnimateSharedLayout>
         <div

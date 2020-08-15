@@ -7,9 +7,27 @@ import nav from "./nav.module.scss";
 import { Button, Link } from "../../types/types";
 import { SocialLinks } from "../SocialLinks/SocialLinks";
 import { useStoreActions } from "../../hooks";
+import { LanguageSwitcher } from "../LanguageSwitcher/LanguageSwitcher";
 type MobileNavigationProps = {
   links: Button[];
   social_links?: Link[];
+};
+const variants = {
+  open: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      y: { stiffness: 1000, velocity: -100 },
+      delay: 0.4,
+    },
+  },
+  closed: {
+    y: 50,
+    opacity: 0,
+    transition: {
+      y: { stiffness: 1000 },
+    },
+  },
 };
 export const MobileNavigation: FC<MobileNavigationProps> = ({
   links,
@@ -51,6 +69,7 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
       },
     }),
   };
+
   // const mobileMenuRef = useRef<HTMLElement>(null);
   // useOnClickOutside(mobileMenuRef, () => menuOpened && tOpen(false));
   useEffect(() => {
@@ -90,6 +109,12 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
             inverted={inverted}
             toggleMenu={() => onClick()}
           />
+          <motion.div
+            variants={variants}
+            animate={menuOpened ? "open" : "closed"}
+          >
+            <LanguageSwitcher compact={false} />
+          </motion.div>
           <SocialLinks links={social_links} inverted={inverted} />
         </motion.div>
       </motion.nav>

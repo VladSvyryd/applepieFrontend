@@ -5,9 +5,13 @@ import { Language, locales } from "../../types/types";
 import { motion } from "framer-motion";
 import { getLanguage } from "../../util/translation/defineLanguage";
 type LanguageSwitcherProps = {
-  className: any;
+  className?: any;
+  compact?: boolean;
 };
-export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ className }) => {
+export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({
+  className,
+  compact = true,
+}) => {
   const router = useRouter();
   // const router = useRouter();
   const currentLanguage = useStoreState(
@@ -49,7 +53,54 @@ export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ className }) => {
     setCurrentLanguage(myLang);
     console.log({ myLang });
   }, []);
-  return (
+
+  return !compact ? (
+    <motion.form
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        lineHeight: "1",
+        fontSize: "1.7em",
+      }}
+      className={`${
+        !invertedSlides.some((s) => s === activeCarouselIndex)
+          ? "invertedTextColorBySlide"
+          : ""
+      }`}
+    >
+      <label
+        style={{
+          cursor: "pointer",
+        }}
+      >
+        <input
+          type="radio"
+          value="0"
+          checked={currentLanguage === 0}
+          onChange={(e) => handleChange(e)}
+          style={{ display: "none" }}
+        />
+        EN
+      </label>
+      <span style={{ margin: "0 5px" }}>|</span>
+      <label
+        style={{
+          textDecoration: currentLanguage ? `underline` : "none",
+          cursor: "pointer",
+        }}
+      >
+        <input
+          type="radio"
+          value="1"
+          checked={currentLanguage === 1}
+          onChange={(e) => handleChange(e)}
+          style={{ display: "none" }}
+        />
+        DE
+      </label>
+    </motion.form>
+  ) : (
     <div
       style={{
         display: "flex",

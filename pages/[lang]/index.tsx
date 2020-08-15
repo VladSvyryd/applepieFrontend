@@ -62,10 +62,6 @@ const Page: NextPage<HomeProps> = (props) => {
   );
   const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
   const checkIfIsInverted = () => {
-    console.log(
-      "inverted: ",
-      invertedSlides.some((e: any) => e === activeCarouselIndex)
-    );
     return invertedSlides.some((e: any) => e === activeCarouselIndex);
   };
 
