@@ -16,10 +16,10 @@ const Layout: React.FC<LayoutProps> = ({
   footer,
 }) => {
   // const router = useRouter();
-  const layoutStyle = {
-    width: "100%",
-    height: "100%",
-  };
+  // const layoutStyle = {
+  //   width: "100%",
+  //   height: "100%",
+  // };
   const activeCarouselIndex = useStoreState(
     (state) => state.swiper.activeIndex
   );
@@ -27,15 +27,17 @@ const Layout: React.FC<LayoutProps> = ({
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
   );
-  // const headerBackground = () => {
-  //   console.log();
-  //   const url = router.pathname.split("/").pop();
-  //   if (url === "agb" || url === "datenschutz" || url === "impressum")
-  //     return true;
-  //   return false;
-  // };
+
   return (
-    <div style={layoutStyle} tabIndex={-1}>
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        flex: "0 0 100%",
+        flexDirection: "column",
+      }}
+      tabIndex={-1}
+    >
       <Head>
         <title>applepie Berlin</title>
         <meta charSet="utf-8" />
@@ -51,8 +53,10 @@ const Layout: React.FC<LayoutProps> = ({
           />
         </header>
       ) : (
-        <header className={layout.backgroundWhite}>
-          <nav className={`${layout.navbar}  flexColumns  alignCenter `}>
+        <header>
+          <nav
+            className={`${layout.navbar} ${layout.backgroundWhite}  flexColumns  alignCenter `}
+          >
             <Link href="/[lang]" as={`/${Language[currentLanguage]}`}>
               <img
                 src={`${navigation.logo?.url}`}
@@ -178,7 +182,7 @@ const Layout: React.FC<LayoutProps> = ({
           </div>
         </footer>
       ) : (
-        <footer className={` ${layout.footer}`}>
+        <footer className={` ${layout.footer}`} style={{ marginTop: "auto" }}>
           <div className={`content-frame  ${layout.footerContainer}`}>
             <h2 className="visuallyHidden">Applepie Footer</h2>
             <section className="flexColumns alignCenter">

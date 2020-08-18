@@ -13,7 +13,7 @@
 }
 .introServices {
   font-size: 26px;
-  @media (max-width: 1400px) {
+  @media (max-width: 1390px) {
     display: none;
   }
   ul.introServicesList {
@@ -21,7 +21,7 @@
     list-style: none;
     padding: 0;
     @media (max-width: 1530px) {
-      margin-left: 322px;
+      margin-left: 300px;
     }
     li {
       cursor: pointer;
@@ -285,12 +285,8 @@
         height: auto;
       }
       @media (max-width: 680px) {
-        max-width: 25%;
         height: auto;
         margin-right: 10px;
-      }
-      @media (max-width: 450px) {
-        max-width: 15%;
       }
     }
     .header {
@@ -317,8 +313,25 @@
       grid-template-columns: repeat(5, minmax(130px, 1fr));
       grid-gap: 70px 10px;
       justify-items: center;
-      align-items: flex-end;
+      align-items: flex-start;
       text-align: center;
+      .cardImage {
+        display: flex;
+        justify-content: center;
+        height: 159px;
+        @media (max-width: 1200px) {
+          height: 111px;
+        }
+        @media (max-width: 800px) {
+          height: auto;
+          width: 50px;
+          margin: auto;
+        }
+        @media (max-width: 680px) {
+          margin: 0;
+        }
+      }
+
       @media (max-width: 680px) {
         grid-gap: 0;
       }
@@ -351,10 +364,12 @@
           flex-direction: row;
           flex-wrap: nowrap;
           margin: auto;
-        }
-        @media (max-width: 450px) {
-          align-content: center;
-          margin: 0;
+          padding: 10px 20px;
+          background: rgba(0, 0, 0, 0.05);
+          width: 100%;
+          border-radius: 8px;
+          max-width: 350px;
+          justify-content: center;
         }
       }
       .content {
@@ -374,9 +389,6 @@
           display: flex;
           align-items: center;
         }
-        @media (max-width: 450px) {
-          align-items: flex-end;
-        }
 
         p,
         h3 {
@@ -392,6 +404,7 @@
             margin: 0;
             line-height: normal;
             text-align: left;
+            margin-bottom: -7px;
           }
         }
       }
@@ -657,4 +670,9 @@
     justify-content: center;
     font-size: 1.7rem;
   }
+}
+
+.tooltip {
+}
+.popper {
 }

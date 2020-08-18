@@ -35,6 +35,9 @@ import InteractiveForm from "../../components/InteractiveForm/InteractiveForm";
 import { ORIENTATION } from "../../model/device";
 import Link from "next/link";
 import { Service } from "../../components/FormSlider/FormSlider";
+import Tooltip from "@material-ui/core/Tooltip";
+import Zoom from "@material-ui/core/Zoom";
+import { Paper } from "@material-ui/core";
 const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
   ssr: true,
 });
@@ -190,7 +193,7 @@ const Page: NextPage<HomeProps> = (props) => {
                 data-swiper-parallax-opacity="0"
               />
 
-              {deviceWidth >= 1400 ? (
+              {deviceWidth >= 1390 ? (
                 <motion.img
                   animate={{ rotate: `${(activeServiceIndex + 1) * 12}deg` }}
                   src={`${
@@ -357,20 +360,32 @@ const Page: NextPage<HomeProps> = (props) => {
             <div className={index.cardsGrid}>
               {pageFromCMS.forth_section.cards.length > 0 &&
                 pageFromCMS.forth_section?.cards?.map((card, ind) => (
-                  <div
-                    key={card.title}
-                    data-swiper-parallax={`${(ind + 1) * 70}`}
-                    data-swiper-parallax-opacity="0"
+                  <Tooltip
+                    disableFocusListener
+                    title={<Paper>vAdddawdawdawdawdawdawdawdaw</Paper>}
+                    TransitionComponent={Zoom}
+                    classes={{
+                      popper: index.popper,
+                      tooltip: index.tooltip,
+                    }}
                   >
-                    <img
-                      src={`${card.image?.url}`}
-                      alt={card.image?.alternativeText}
-                    />
-                    <div className={index.content}>
-                      <h3 className={"indieFlower"}>{card.title}</h3>
-                      <p>{card.subtitle}</p>
+                    <div
+                      key={card.title}
+                      data-swiper-parallax={`${(ind + 1) * 70}`}
+                      data-swiper-parallax-opacity="0"
+                    >
+                      <div className={index.cardImage}>
+                        <img
+                          src={`${card.image?.url}`}
+                          alt={card.image?.alternativeText}
+                        />
+                      </div>
+                      <div className={index.content}>
+                        <h3 className={"indieFlower"}>{card.title}</h3>
+                        <p>{card.subtitle}</p>
+                      </div>
                     </div>
-                  </div>
+                  </Tooltip>
                 ))}
             </div>
             <div className={index.footer}>
@@ -579,7 +594,7 @@ const Page: NextPage<HomeProps> = (props) => {
               </Link>
               <Link
                 href={`/[lang]/datenschutz`}
-                as={`/${Language[currentLanguage]}/impressum`}
+                as={`/${Language[currentLanguage]}/datenschutz`}
               >
                 <a className={index.li} tabIndex={-1}>
                   Datenschutz
@@ -650,4 +665,12 @@ Page.getInitialProps = async (context: NextPageContext) => {
     services: responseServices.data.service.service as Service[],
   };
 };
+// const myCustomPopper: React.FC<any> = ({ children }) => {
+//   return (
+//     <Popper>
+//       <Paper>{children}</Paper>
+//     </Popper>
+//   );
+// };
+
 export default withTranslate(Page); // <- component is wrapped with a HOC

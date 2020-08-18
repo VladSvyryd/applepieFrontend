@@ -4,12 +4,22 @@ import Layout from "../../components/Layout/Layout";
 import withTranslate from "../../components/HOC/withTranslate";
 import { client } from "../_app";
 import { NextPageContext, NextPage } from "next";
-import { navigation_en, navigation_de } from "../../queries/queries";
-import { NavType } from "../../types/types";
+import {
+  navigation_en,
+  navigation_de,
+  footer_de,
+  footer_en,
+} from "../../queries/queries";
+import { NavType, Footer } from "../../types/types";
 
 const datenschutz: NextPage<any> = (props) => {
   return (
-    <Layout navigation={props.navigation} verticalFooter={true} simple_header>
+    <Layout
+      navigation={props.navigation}
+      verticalFooter={true}
+      simple_header
+      footer={props.footer}
+    >
       <div className={`${styles.section}`}>
         <div>
           <h1>Impressum</h1>
@@ -165,16 +175,20 @@ datenschutz.getInitialProps = async (context: NextPageContext) => {
       /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
     )
   );
-
   let response1;
+  let response_footer;
+
   if (context.query.lang === "de") {
     response1 = await client.query({ query: navigation_de });
+    response_footer = await client.query({ query: footer_de });
   } else {
     response1 = await client.query({ query: navigation_en });
+    response_footer = await client.query({ query: footer_en });
   }
 
   return {
     navigation: response1.data.navigation as NavType,
+    footer: response_footer.data.footer as Footer,
     isMobile,
   };
 };
