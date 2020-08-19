@@ -14,6 +14,7 @@ const Layout: React.FC<LayoutProps> = ({
   verticalFooter = false,
   simple_header = false,
   footer,
+  legal,
 }) => {
   // const router = useRouter();
   // const layoutStyle = {
@@ -50,6 +51,7 @@ const Layout: React.FC<LayoutProps> = ({
             activeCarouselIndex={activeCarouselIndex}
             invertedSlides={invertedSlides}
             social_links={footer?.social_links}
+            legal={legal}
           />
         </header>
       ) : (

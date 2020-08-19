@@ -23,6 +23,8 @@ export interface DeviceModel {
   setInterFormState: Action<DeviceModel, isOpened>;
   setDeviceOrientation: Action<DeviceModel, ORIENTATION>;
   setDeviceType: Action<DeviceModel, string>;
+  legalOpened: boolean;
+  setLegalOpened: Action<DeviceModel, boolean>;
 }
 
 const device: DeviceModel = {
@@ -32,6 +34,7 @@ const device: DeviceModel = {
   menuOpened: false,
   orientation: ORIENTATION.landscape,
   interactiveFormOpened: false,
+  legalOpened: false,
   setDeviceType: action((state, payload) => {
     state.device = payload;
   }),
@@ -47,6 +50,9 @@ const device: DeviceModel = {
   }),
   setInterFormState: action((state, payload = !state.interactiveFormOpened) => {
     state.interactiveFormOpened = payload;
+  }),
+  setLegalOpened: action((state, payload = !state.legalOpened) => {
+    state.legalOpened = payload;
   }),
 };
 

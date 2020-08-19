@@ -8,6 +8,7 @@ import {
   HomePage,
   Language,
   Footer,
+  Button,
 } from "../../types/types";
 import index from "../../pageStyles/index.module.scss";
 import { motion } from "framer-motion";
@@ -25,6 +26,8 @@ import {
   footer_en,
   services_de,
   services_en,
+  legal_links_de,
+  legal_links_en,
 } from "../../queries/queries";
 import { client } from "../_app";
 import AutoLineSwiper from "../../components/AutoLineSwiper/AutoLineSwiper";
@@ -35,15 +38,13 @@ import InteractiveForm from "../../components/InteractiveForm/InteractiveForm";
 import { ORIENTATION } from "../../model/device";
 import Link from "next/link";
 import { Service } from "../../components/FormSlider/FormSlider";
-import Tooltip from "@material-ui/core/Tooltip";
-import Zoom from "@material-ui/core/Zoom";
-import { Paper } from "@material-ui/core";
+import { LegalNavigation } from "../../components/Legal/LegalNavigation";
 const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
   ssr: true,
 });
 
 const Page: NextPage<HomeProps> = (props) => {
-  const { pageFromCMS, footer, services } = props;
+  const { pageFromCMS, footer, services, legal } = props;
   const [activeServiceIndex, setIndex] = useState(0);
   const handleServiceHover = (index: number) => {
     setIndex(index);
@@ -60,6 +61,9 @@ const Page: NextPage<HomeProps> = (props) => {
   const setInterFormState = useStoreActions(
     (actions) => actions.device.setInterFormState
   );
+  const setLegalOpened = useStoreActions(
+    (actions) => actions.device.setLegalOpened
+  );
   const activeCarouselIndex = useStoreState(
     (state) => state.swiper.activeIndex
   );
@@ -75,12 +79,26 @@ const Page: NextPage<HomeProps> = (props) => {
     },
     off: { backgroundColor: "#fff", transition: { duration: 0.3 } },
   };
+  console.log(legal);
+
   // IF for landscape mode
   return !props.isMobile ||
     (props.isMobile && orientation === ORIENTATION.portrait) ? (
-    <Layout navigation={props.navigation} horizontalFooter footer={footer}>
+    <Layout
+      navigation={props.navigation}
+      horizontalFooter
+      legal={legal}
+      footer={footer}
+    >
       <h1 className="visuallyHidden">Applepie</h1>
       <InteractiveForm />
+      <LegalNavigation links={legal} />
+      <motion.button
+        className={`button  ${index.legal}`}
+        onClick={() => setLegalOpened(true)}
+      >
+        Legal
+      </motion.button>
       <Carousel
         paginationObject={{
           pagination: pageFromCMS.pagination,
@@ -360,32 +378,22 @@ const Page: NextPage<HomeProps> = (props) => {
             <div className={index.cardsGrid}>
               {pageFromCMS.forth_section.cards.length > 0 &&
                 pageFromCMS.forth_section?.cards?.map((card, ind) => (
-                  <Tooltip
-                    disableFocusListener
-                    title={<Paper>vAdddawdawdawdawdawdawdawdaw</Paper>}
-                    TransitionComponent={Zoom}
-                    classes={{
-                      popper: index.popper,
-                      tooltip: index.tooltip,
-                    }}
+                  <div
+                    key={card.title}
+                    data-swiper-parallax={`${(ind + 1) * 70}`}
+                    data-swiper-parallax-opacity="0"
                   >
-                    <div
-                      key={card.title}
-                      data-swiper-parallax={`${(ind + 1) * 70}`}
-                      data-swiper-parallax-opacity="0"
-                    >
-                      <div className={index.cardImage}>
-                        <img
-                          src={`${card.image?.url}`}
-                          alt={card.image?.alternativeText}
-                        />
-                      </div>
-                      <div className={index.content}>
-                        <h3 className={"indieFlower"}>{card.title}</h3>
-                        <p>{card.subtitle}</p>
-                      </div>
+                    <div className={index.cardImage}>
+                      <img
+                        src={`${card.image?.url}`}
+                        alt={card.image?.alternativeText}
+                      />
                     </div>
-                  </Tooltip>
+                    <div className={index.content}>
+                      <h3 className={"indieFlower"}>{card.title}</h3>
+                      <p>{card.subtitle}</p>
+                    </div>
+                  </div>
                 ))}
             </div>
             <div className={index.footer}>
@@ -564,13 +572,6 @@ const Page: NextPage<HomeProps> = (props) => {
             >
               {pageFromCMS.eighth_section?.button.text}
             </motion.button>
-            <motion.button
-              className={`button medium ${index.legal}`}
-              // whileHover={{ scale: 0.9 }}
-              onClick={() => null}
-            >
-              Legal
-            </motion.button>
           </div>
         </motion.section>
         <section>
@@ -644,17 +645,20 @@ Page.getInitialProps = async (context: NextPageContext) => {
   let response1;
   let response_footer;
   let responseServices;
+  let responseLegal;
 
   if (context.query.lang === "de") {
     response = await client.query({ query: landing_de });
     response1 = await client.query({ query: navigation_de });
     response_footer = await client.query({ query: footer_de });
     responseServices = await client.query({ query: services_de });
+    responseLegal = await client.query({ query: legal_links_de });
   } else {
     response = await client.query({ query: landing_en });
     response1 = await client.query({ query: navigation_en });
     response_footer = await client.query({ query: footer_en });
     responseServices = await client.query({ query: services_en });
+    responseLegal = await client.query({ query: legal_links_en });
   }
 
   return {
@@ -663,6 +667,7 @@ Page.getInitialProps = async (context: NextPageContext) => {
     footer: response_footer.data.footer as Footer,
     isMobile,
     services: responseServices.data.service.service as Service[],
+    legal: responseLegal.data.legal.links as Button[],
   };
 };
 // const myCustomPopper: React.FC<any> = ({ children }) => {

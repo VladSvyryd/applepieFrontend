@@ -20,6 +20,7 @@ export type LayoutProps = {
   verticalFooter?: boolean;
   simple_header?: boolean;
   footer?: Footer;
+  legal?: Button[];
 };
 
 export type Footer = {
@@ -33,6 +34,7 @@ export type NavProps = {
   activeCarouselIndex: number;
   invertedSlides: number[];
   social_links?: Link[];
+  legal?: Button[];
 };
 export type CarouselProps = {
   children: ReactNodeArray;
@@ -48,6 +50,7 @@ export type HomeProps = {
   isMobile: boolean;
   footer?: Footer;
   services: Service[];
+  legal: Button[];
 };
 export type AboutProps = {
   pageFromCMS: HomePage;

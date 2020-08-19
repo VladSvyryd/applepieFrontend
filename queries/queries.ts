@@ -1048,3 +1048,49 @@ export const contact_form_en = gql`
     }
   }
 `;
+
+export const legal_links_de = gql`
+  query {
+    legal {
+      links {
+        text
+        function
+        type
+      }
+    }
+  }
+`;
+export const legal_links_en = gql`
+  query {
+    legal {
+      links {
+        text: text_en
+        function: function_en
+        type
+      }
+    }
+  }
+`;
+
+export const legal_links_with_text_de = gql`
+  query {
+    legal {
+      links {
+        text
+        function
+        subtext
+      }
+    }
+  }
+`;
+export const legal_links_with_text_en = gql`
+  query {
+    legal {
+      links {
+        text: text_en
+        function: function_en
+        subtext: subtext_en
+      }
+    }
+  }
+`;

@@ -562,14 +562,6 @@
     margin-right: 20px;
     position: relative;
 
-    .legal {
-      position: absolute;
-      bottom: 20px;
-      right: -63px;
-      transform: rotate(-90deg);
-      width: 100px;
-    }
-
     @media (min-width: 1020px) and(max-width: 1030px) {
       width: 100%;
       max-width: 900px;
@@ -671,8 +663,13 @@
     font-size: 1.7rem;
   }
 }
-
-.tooltip {
-}
-.popper {
+.legal {
+  position: absolute;
+  right: -15px;
+  top: calc(50% - 25px);
+  transform: rotate(-90deg);
+  width: 60px;
+  z-index: 99;
+  padding: 5px 10px !important;
+  border-radius: 8px 8px 0 0 !important;
 }
