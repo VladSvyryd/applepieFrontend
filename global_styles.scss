@@ -48,6 +48,14 @@ body {
     line-height: 24px;
   }
 }
+.carousel-root {
+  display: flex;
+  height: 100%;
+}
+.carousel .slider-wrapper {
+  display: flex;
+  height: 100%;
+}
 section {
   height: 100%;
 }
