@@ -25,7 +25,10 @@ const Navigation: React.FC<NavProps> = (props) => {
     <nav className={`${nav.navbar} flexColumns alignCenter content-frame `}>
       <div className={""}>
         {logo && (
-          <Link href="/[lang]" as={`/${Language[currentLanguage]}`}>
+          <Link
+            href={`/${Language[currentLanguage]}`}
+            as={`/${Language[currentLanguage]}`}
+          >
             <img
               src={`${
                 !invertedSlides.some((s) => s === activeCarouselIndex)
@@ -45,8 +48,8 @@ const Navigation: React.FC<NavProps> = (props) => {
           l.type === "LINK" ? (
             <Link
               key={l.text + "nav"}
-              href={`/[lang]${l.function}`}
               as={`/${Language[currentLanguage]}${l.function}`}
+              href={`/${Language[currentLanguage]}${l.function}`}
             >
               <a
                 tabIndex={-1}

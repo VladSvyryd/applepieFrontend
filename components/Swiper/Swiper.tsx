@@ -1,7 +1,13 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Mousewheel, Parallax } from "swiper";
 import { Image, DEVICE, Pagination } from "../../types/types";
-import { useState, useEffect, ReactNodeArray } from "react";
+import {
+  useState,
+  useEffect,
+  ReactNodeArray,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import car from "../Carousel/car.module.scss";
 import { useStoreState, useStoreActions } from "../../hooks";
@@ -107,17 +113,17 @@ type CarouselProps = {
     pagination: Pagination;
   };
   isMobile: boolean;
-  // selected: number;
-  // setSelected: Action<CustomSwiperModel, number>;
-  // activeIndexHistory: number[];
-  // setActiveIndexHistory: Dispatch<SetStateAction<number>>;
+  slideTo?: void;
+  swiper: SwiperCore | undefined;
+  setSwiper: Dispatch<SetStateAction<SwiperCore | undefined>>;
 };
 const MySwiper: React.FC<CarouselProps> = ({
   children,
   paginationObject,
   isMobile,
+  swiper,
+  setSwiper,
 }) => {
-  const [swiper, setSwiper] = useState<SwiperCore>();
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const invertedSlides = [3, 6, 8];
   const width = useStoreState((state) => state.device.width);

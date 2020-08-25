@@ -79,7 +79,6 @@ const Page: NextPage<HomeProps> = (props) => {
     },
     off: { backgroundColor: "#fff", transition: { duration: 0.3 } },
   };
-  console.log(legal);
 
   // IF for landscape mode
   return !props.isMobile ||

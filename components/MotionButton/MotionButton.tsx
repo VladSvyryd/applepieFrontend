@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { ButtonType } from "../../types/types";
+
 type MotionButtonProps = {
   // All other props
   text: string;

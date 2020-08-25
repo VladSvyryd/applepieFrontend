@@ -54,7 +54,11 @@ const fragments = {
       id
       text: text_en
       subtext_en
-      function_en
+      function_en: url_en
+      type
+      link_type
+      slideTo
+      button_type
     }
   `,
   button_de: gql`
@@ -62,8 +66,11 @@ const fragments = {
       id
       text
       subtext
-      function
+      function: url
       type
+      link_type
+      slideTo
+      button_type
     }
   `,
   card_en: gql`
@@ -316,12 +323,6 @@ export const landing_de = gql`
           ...Button_DE
         }
       }
-      services {
-        __typename
-        ... on ComponentLinksLink {
-          ...Link_DE
-        }
-      }
       first_section {
         title
         images {
@@ -513,7 +514,6 @@ export const landing_de = gql`
     }
   }
 
-  ${fragments.link_de}
   ${fragments.button_de}
   ${fragments.card_de}
   ${fragments.imageGrid_de}
@@ -549,12 +549,6 @@ export const landing_en = gql`
       buttons {
         ... on ComponentButtonsButton {
           ...Button_EN
-        }
-      }
-      services {
-        __typename
-        ... on ComponentLinksLink {
-          ...Link_EN
         }
       }
       first_section {
@@ -747,7 +741,6 @@ export const landing_en = gql`
     }
   }
 
-  ${fragments.link_en}
   ${fragments.button_en}
   ${fragments.card_en}
   ${fragments.imageGrid_en}
@@ -1054,7 +1047,7 @@ export const legal_links_de = gql`
     legal {
       links {
         text
-        function
+        function: url
         type
       }
     }
@@ -1065,7 +1058,7 @@ export const legal_links_en = gql`
     legal {
       links {
         text: text_en
-        function: function_en
+        function: url_en
         type
       }
     }

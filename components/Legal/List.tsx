@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ListItem } from "./ListItem";
 import nav from "./nav.module.scss";
-import { Button, Language } from "../../types/types";
+import { Button, Language, LinkType } from "../../types/types";
 import { FC } from "react";
 import Link from "next/link";
 import { useStoreState } from "easy-peasy";
@@ -36,11 +36,11 @@ export const List: FC<NavigationProps> = ({ links, inverted, toggleMenu }) => {
     <motion.ul variants={variants} className={nav.ul}>
       {links?.map((l: Button, i: number) => (
         <ListItem index={i} key={i}>
-          {l.type === "LINK" ? (
+          {l.link_type === LinkType.internal ? (
             <Link
               key={l.function + "nav"}
-              href={`${l.function}`}
-              as={`/${Language[currentLanguage]}/${l.function.split("/")[2]}`}
+              href={`/${Language[currentLanguage]}/${l.function}`}
+              as={`/${Language[currentLanguage]}/${l.function}`}
             >
               <a
                 className={`${nav.navLink}`}
@@ -51,13 +51,21 @@ export const List: FC<NavigationProps> = ({ links, inverted, toggleMenu }) => {
               </a>
             </Link>
           ) : (
-            <span
-              className={`${nav.navLink}`}
-              style={inverted ? { color: "#403d55" } : { color: "#fff" }}
-              onClick={handleClickOnButton}
+            <Link
+              key={l.function + "nav"}
+              href={`/${Language[currentLanguage]}/${l.function}`}
+              passHref
             >
-              {l.text}
-            </span>
+              <a
+                className={`${nav.navLink}`}
+                style={inverted ? { color: "#403d55" } : {}}
+                href={`/${Language[currentLanguage]}/${l.function}`}
+                target="_blank"
+                onClick={toggleMenu}
+              >
+                {l.text}
+              </a>
+            </Link>
           )}
         </ListItem>
       ))}

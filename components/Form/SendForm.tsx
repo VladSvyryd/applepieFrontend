@@ -4,6 +4,7 @@ import formStyles from "./form.module.scss";
 import { motion } from "framer-motion";
 import { useStoreState } from "../../hooks";
 import { SendFormProps, Language } from "../../types/types";
+import ButtonOrLink from "../ButtonOrLink/ButtonOrLink";
 
 interface Person {
   name: string;
@@ -193,6 +194,7 @@ const SendForm: React.FC<SendFormProps> = ({ button }) => {
   useEffect(() => {
     // console.log(response);
   }, [response]);
+
   return (
     <Formik
       initialValues={{ email: "", name: "", message: "" }}
@@ -233,17 +235,13 @@ const SendForm: React.FC<SendFormProps> = ({ button }) => {
             />
             <ErrorMessage name="message" component={Error} />
           </div>
-          <motion.button
+          <ButtonOrLink
+            buttonType={button?.type}
+            title={button?.text}
             className={`button ${formStyles.button}`}
-            data-swiper-parallax="1100"
-            data-swiper-parallax-opacity="0"
-            // whileHover={{ scale: 0.9 }}
-            whileTap={{ scale: `${isSubmitting && 0.9}` }}
             type="submit"
             disabled={isSubmitting}
-          >
-            {!button ? "Button" : button?.text}
-          </motion.button>
+          />
         </Form>
       )}
     </Formik>

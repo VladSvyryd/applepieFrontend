@@ -170,11 +170,23 @@ export interface Image {
   image: Picture;
   image_alternative: Picture;
 }
+
+export enum LinkType {
+  internal = "internal",
+  external = "external",
+}
+export enum ButtonFunction {
+  slider = "slider",
+  start_project = "start_project",
+}
 export interface Button {
   text: string;
   function: string;
   subtext: string;
-  type: any;
+  type: ButtonType;
+  link_type: LinkType;
+  slideTo: number;
+  button_type: ButtonFunction;
 }
 export interface NavigationLinkBlock {
   pages: Link;
