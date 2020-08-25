@@ -5,7 +5,6 @@ import { Button, Language, LinkType } from "../../types/types";
 import { FC } from "react";
 import Link from "next/link";
 import { useStoreState } from "easy-peasy";
-import { useStoreActions } from "../../hooks";
 
 const variants = {
   open: {
@@ -25,13 +24,7 @@ export const List: FC<NavigationProps> = ({ links, inverted, toggleMenu }) => {
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
   );
-  const setLegalOpened = useStoreActions(
-    (actions) => actions.device.setLegalOpened
-  );
-  const handleClickOnButton = () => {
-    toggleMenu();
-    setLegalOpened(true);
-  };
+
   return (
     <motion.ul variants={variants} className={nav.ul}>
       {links?.map((l: Button, i: number) => (

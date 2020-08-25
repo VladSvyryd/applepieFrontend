@@ -32,11 +32,9 @@ import {
 import { client } from "../_app";
 import AutoLineSwiper from "../../components/AutoLineSwiper/AutoLineSwiper";
 // import { ORIENTATION } from "../../model/device";
-import MotionButton from "../../components/MotionButton/MotionButton";
 import { useStoreActions } from "../../hooks";
 import InteractiveForm from "../../components/InteractiveForm/InteractiveForm";
 import { ORIENTATION } from "../../model/device";
-import Link from "next/link";
 import { Service } from "../../components/FormSlider/FormSlider";
 import { LegalNavigation } from "../../components/Legal/LegalNavigation";
 const Carousel = dynamic(() => import("../../components/Swiper/Swiper"), {
@@ -60,9 +58,7 @@ const Page: NextPage<HomeProps> = (props) => {
   );
   const deviceWidth = useStoreState((state) => state.device.width);
   const orientation = useStoreState((state) => state.device.orientation);
-  const setInterFormState = useStoreActions(
-    (actions) => actions.device.setInterFormState
-  );
+
   const setLegalOpened = useStoreActions(
     (actions) => actions.device.setLegalOpened
   );
