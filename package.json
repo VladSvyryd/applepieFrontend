@@ -51,7 +51,7 @@
     "react-responsive-carousel": "^3.2.9",
     "sass": "^1.26.5",
     "showdown": "^1.9.1",
-    "swiper": "^5.4.0"
+    "swiper": "^6.1.2"
   },
   "devDependencies": {
     "@types/material-ui": "^0.21.7",
