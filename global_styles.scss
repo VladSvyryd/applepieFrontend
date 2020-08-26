@@ -48,6 +48,9 @@ body {
     line-height: 24px;
   }
 }
+a:-webkit-any-link:focus {
+  outline: none;
+}
 .carousel-root {
   display: flex;
   height: 100%;

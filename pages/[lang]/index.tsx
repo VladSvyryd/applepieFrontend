@@ -30,18 +30,18 @@ import {
   legal_links_en,
 } from "../../queries/queries";
 import { client } from "../_app";
-import AutoLineSwiper from "../../components/AutoLineSwiper/AutoLineSwiper";
 // import { ORIENTATION } from "../../model/device";
-import MotionButton from "../../components/MotionButton/MotionButton";
 import { useStoreActions } from "../../hooks";
 import InteractiveForm from "../../components/InteractiveForm/InteractiveForm";
 import { ORIENTATION } from "../../model/device";
-import Link from "next/link";
 import { Service } from "../../components/FormSlider/FormSlider";
 import { LegalNavigation } from "../../components/Legal/LegalNavigation";
-const Carousel = dynamic(() => import("../../components/Carousel/Carousel"), {
+const Carousel = dynamic(() => import("../../components/Swiper/Swiper"), {
   ssr: true,
 });
+import SwiperCore from "swiper";
+import ButtonOrLink from "../../components/ButtonOrLink/ButtonOrLink";
+import LineSwiper from "../../components/AutoLineSwiper/LineSwiper";
 
 const Page: NextPage<HomeProps> = (props) => {
   const { pageFromCMS, footer, services, legal } = props;
@@ -58,15 +58,15 @@ const Page: NextPage<HomeProps> = (props) => {
   );
   const deviceWidth = useStoreState((state) => state.device.width);
   const orientation = useStoreState((state) => state.device.orientation);
-  const setInterFormState = useStoreActions(
-    (actions) => actions.device.setInterFormState
-  );
+
   const setLegalOpened = useStoreActions(
     (actions) => actions.device.setLegalOpened
   );
+
   const activeCarouselIndex = useStoreState(
     (state) => state.swiper.activeIndex
   );
+
   const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
   const checkIfIsInverted = () => {
     return invertedSlides.some((e: any) => e === activeCarouselIndex);
@@ -79,6 +79,8 @@ const Page: NextPage<HomeProps> = (props) => {
     },
     off: { backgroundColor: "#fff", transition: { duration: 0.3 } },
   };
+  console.log(legal);
+  const [swiper, setSwiper] = useState<SwiperCore | undefined>();
 
   // IF for landscape mode
   return !props.isMobile ||
@@ -103,10 +105,11 @@ const Page: NextPage<HomeProps> = (props) => {
           pagination: pageFromCMS.pagination,
         }}
         isMobile={props.isMobile}
+        swiper={swiper}
+        setSwiper={setSwiper}
       >
         <section
           className={`flexColumns alignCenter ${index.intro}`}
-          data-swiper-parallax="1500"
           style={{
             backgroundImage: `url(${
               pageFromCMS.intro.pictures && pageFromCMS.intro.pictures[7]?.url
@@ -174,14 +177,11 @@ const Page: NextPage<HomeProps> = (props) => {
                   }}
                   data-swiper-parallax-opacity="0"
                 />
-                <MotionButton
-                  text={pageFromCMS.buttons[0].text}
+                <ButtonOrLink
                   buttonType={pageFromCMS.buttons[0].type}
-                  className={`medium button ${index.introButton}`}
-                  data-swiper-parallax="1100"
-                  data-swiper-parallax-opacity="0"
-                  // link={pageFromCMS.buttons[0].function}
-                  onClick={() => setInterFormState(true)}
+                  title={pageFromCMS.buttons[0].text}
+                  button_type={pageFromCMS.buttons[0].button_type}
+                  className="medium button"
                 />
               </div>
             </div>
@@ -331,7 +331,7 @@ const Page: NextPage<HomeProps> = (props) => {
               {pageFromCMS.third_section?.title}
             </h2>
             <div className={index.imagesGrid}>
-              <AutoLineSwiper>
+              <LineSwiper>
                 {pageFromCMS.third_section?.images
                   ?.filter((_v, i, arr) => i < arr.length / 2)
                   .map((img) => (
@@ -339,8 +339,8 @@ const Page: NextPage<HomeProps> = (props) => {
                       <img src={`${img.url}`} alt={img.alternativeText} />
                     </div>
                   ))}
-              </AutoLineSwiper>
-              <AutoLineSwiper rtl="rtl">
+              </LineSwiper>
+              <LineSwiper rtl>
                 {pageFromCMS.third_section?.images
                   ?.filter((_v, i, arr) => i >= arr.length / 2)
                   .map((img) => (
@@ -348,7 +348,7 @@ const Page: NextPage<HomeProps> = (props) => {
                       <img src={`${img.url}`} alt={img.alternativeText} />
                     </div>
                   ))}
-              </AutoLineSwiper>
+              </LineSwiper>
             </div>
           </div>
         </motion.section>
@@ -407,15 +407,17 @@ const Page: NextPage<HomeProps> = (props) => {
                   alt={pageFromCMS.forth_section?.images[0]?.alternativeText}
                 />
               </div>
-              <motion.button
-                className={`medium button`}
-                data-swiper-parallax="1100"
-                data-swiper-parallax-opacity="0"
-                // whileHover={{ scale: 0.9 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                {pageFromCMS.forth_section.button.text}
-              </motion.button>
+              <ButtonOrLink
+                className="medium button"
+                buttonType={pageFromCMS.forth_section.button.type}
+                swiperSlideTo={pageFromCMS.forth_section.button.slideTo}
+                title={pageFromCMS.forth_section.button.text}
+                linkType={pageFromCMS.forth_section.button.link_type}
+                functionOrUrl={pageFromCMS.forth_section.button.function}
+                linkLanguage={Language[currentLanguage]}
+                swiper={swiper}
+                button_type={pageFromCMS.forth_section.button.button_type}
+              />
             </div>
           </div>
         </section>
@@ -573,36 +575,6 @@ const Page: NextPage<HomeProps> = (props) => {
             </motion.button>
           </div>
         </motion.section>
-        <section>
-          <div className={index.last + " frameBottomTop"}>
-            <ul className={index.ul}>
-              <Link
-                href={`/[lang]/agb`}
-                as={`/${Language[currentLanguage]}/agb`}
-              >
-                <a className={index.li} tabIndex={-1}>
-                  AGB
-                </a>
-              </Link>
-              <Link
-                href={`/[lang]/impressum`}
-                as={`/${Language[currentLanguage]}/impressum`}
-              >
-                <a className={index.li} tabIndex={-1}>
-                  Impressum
-                </a>
-              </Link>
-              <Link
-                href={`/[lang]/datenschutz`}
-                as={`/${Language[currentLanguage]}/datenschutz`}
-              >
-                <a className={index.li} tabIndex={-1}>
-                  Datenschutz
-                </a>
-              </Link>
-            </ul>
-          </div>
-        </section>
       </Carousel>
     </Layout>
   ) : (
@@ -669,12 +641,5 @@ Page.getInitialProps = async (context: NextPageContext) => {
     legal: responseLegal.data.legal.links as Button[],
   };
 };
-// const myCustomPopper: React.FC<any> = ({ children }) => {
-//   return (
-//     <Popper>
-//       <Paper>{children}</Paper>
-//     </Popper>
-//   );
-// };
 
 export default withTranslate(Page); // <- component is wrapped with a HOC

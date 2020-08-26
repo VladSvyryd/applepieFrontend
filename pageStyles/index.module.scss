@@ -664,7 +664,7 @@
   }
 }
 .legal {
-  position: absolute;
+  position: fixed;
   right: -15px;
   top: calc(50% - 25px);
   transform: rotate(-90deg);

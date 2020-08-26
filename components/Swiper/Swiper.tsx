@@ -229,6 +229,7 @@ const MySwiper: React.FC<CarouselProps> = ({
         roundLengths
         parallax
         centeredSlides
+        preloadImages={false}
         direction="horizontal"
         className="myCustomSwiper"
         onSlideChange={(swiper: SwiperCore) =>

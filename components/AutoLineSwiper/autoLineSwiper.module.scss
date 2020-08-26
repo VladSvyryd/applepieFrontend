@@ -13,3 +13,11 @@
     margin: 25px 0;
   }
 }
+.reverse {
+  transform: rotate(180deg);
+}
+
+.slide {
+  display: flex;
+  justify-content: center;
+}
