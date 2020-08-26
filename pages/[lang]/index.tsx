@@ -30,7 +30,6 @@ import {
   legal_links_en,
 } from "../../queries/queries";
 import { client } from "../_app";
-// import { ORIENTATION } from "../../model/device";
 import { useStoreActions } from "../../hooks";
 import InteractiveForm from "../../components/InteractiveForm/InteractiveForm";
 import { ORIENTATION } from "../../model/device";
