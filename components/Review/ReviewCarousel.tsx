@@ -1,6 +1,7 @@
 // import { ReviewProps } from "../../types/types";
 import review from "./review.module.scss";
-import Swiper, { SwiperInstance } from "react-id-swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore from "swiper";
 import { useState, useEffect } from "react";
 import { useStoreActions } from "../../hooks";
 import React from "react";
@@ -13,23 +14,8 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
   img,
   buttonImg,
 }) => {
-  const [swiper, setSwiper] = useState<SwiperInstance>(null);
+  const [swiper, setSwiper] = useState<SwiperCore>();
   const [activeIndex, setActive] = useState<number>(0);
-  const params: any = {
-    direction: "vertical",
-    spaceBetween: 30,
-    speed: 800,
-    roundLengths: true,
-    allowTouchMove: false,
-    containerClass: `${review.verticalCarousel}`,
-    getSwiper: setSwiper,
-    breakpoints: {
-      320: {
-        slidesPerView: 1,
-        spaceBetween: 50,
-      },
-    },
-  };
   const setReviewActiveIndex = useStoreActions(
     (actions) => actions.swiper.setReviewIndex
   );
@@ -44,7 +30,7 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
   const updateCarouselState = () => {
     // swiper && setCarouselState(swiper.isBeginning);
 
-    if (swiper !== null) {
+    if (swiper) {
       setReviewActiveIndex(swiper.activeIndex);
       setActive(swiper.activeIndex);
     }
@@ -57,15 +43,33 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
     off: { opacity: 0.3 },
   };
   return (
-    <div
-      className={review.swiper}
-    >
-      <div className={review.semi}><img src={`${img.url}`} alt={`${img.caption}`}/></div>
-      <Swiper {...params}>
+    <div className={review.swiper}>
+      <div className={review.semi}>
+        <img src={`${img.url}`} alt={`${img.caption}`} />
+      </div>
+      <Swiper
+        centeredSlides
+        slidesPerGroup={1}
+        direction="vertical"
+        spaceBetween={30}
+        speed={800}
+        roundLengths
+        className={`${review.verticalCarousel}`}
+        onSwiper={(swiper: SwiperCore) => setSwiper(swiper)}
+        allowTouchMove={false}
+        breakpoints={{
+          320: {
+            slidesPerView: 1,
+            spaceBetween: 50,
+          },
+        }}
+      >
         {reviews.map((review, index) => (
-          <div key={"review-" + index}>
-            <Review review={review} index={index} count={reviews.length} />
-          </div>
+          <SwiperSlide>
+            <div key={"review-" + index}>
+              <Review review={review} index={index} count={reviews.length} />
+            </div>
+          </SwiperSlide>
         ))}
       </Swiper>
       {reviews.length > 1 && (

@@ -55,8 +55,7 @@ export const Navigation: FC<NavigationProps> = ({
         as={`/${Language[currentLanguage]}${link.function}`}
       >
         <a
-          className={`${nav.navLink}`}
-          style={inverted ? { color: "#403d55" } : {}}
+          className={`${nav.navLink} ${inverted && nav.inverted}`}
           onClick={toggleMenu}
         >
           {link.text}

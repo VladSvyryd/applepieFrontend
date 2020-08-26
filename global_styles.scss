@@ -51,6 +51,10 @@ body {
 a:-webkit-any-link:focus {
   outline: none;
 }
+input {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0px;
+}
 .carousel-root {
   display: flex;
   height: 100%;

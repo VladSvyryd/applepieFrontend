@@ -21,7 +21,7 @@
   width: 90%;
   height: 100%;
   background: $accent-color;
-  box-shadow: -3px -1px 10px #403d55;
+  box-shadow: -3px -1px 10px #2e2c41;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,6 +48,9 @@
 }
 a.navLink {
   color: white;
+  &.inverted {
+    color: $accent-color;
+  }
 }
 
 .button {

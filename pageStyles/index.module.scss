@@ -259,7 +259,7 @@
   padding-left: 20px;
   padding-right: 20px;
   @media (max-width: 680px) {
-    padding-bottom: 100px;
+    padding-bottom: 100px !important;
   }
   h3 {
     font-size: 25px;
@@ -275,7 +275,6 @@
       // margin: 20px auto auto auto;
       display: flex;
       flex-direction: column;
-      height: 90%;
       justify-content: space-around;
     }
 
@@ -363,7 +362,7 @@
           display: flex;
           flex-direction: row;
           flex-wrap: nowrap;
-          margin: auto;
+          margin: 5px auto;
           padding: 10px 20px;
           background: rgba(0, 0, 0, 0.05);
           width: 100%;
