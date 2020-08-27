@@ -396,7 +396,11 @@ const Page: NextPage<HomeProps> = (props) => {
                       aria-describedby={
                         Boolean(anchorEl) ? `pie-method${ind}` : undefined
                       }
-                      onClick={handlePopoverOpen(ind)}
+                      onClick={
+                        props.isMobile
+                          ? handlePopoverOpen(ind)
+                          : handlePopoverClose
+                      }
                     >
                       <div className={index.cardImage}>
                         <img
@@ -413,7 +417,6 @@ const Page: NextPage<HomeProps> = (props) => {
                       id={
                         openPopoverID === ind ? `pie-method${ind}` : undefined
                       }
-                      marginThreshold={20}
                       open={openPopoverID === ind}
                       anchorEl={anchorEl}
                       onClose={handlePopoverClose}
@@ -601,15 +604,17 @@ const Page: NextPage<HomeProps> = (props) => {
                 <time>{pageFromCMS.contact?.time_till.slice(0, 5)}</time>
               </div>
             </div>
-            <motion.button
+            <ButtonOrLink
               className={`button medium ${index.introButton}`}
-              data-swiper-parallax="1100"
-              data-swiper-parallax-opacity="0"
-              // whileHover={{ scale: 0.9 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              {pageFromCMS.eighth_section?.button.text}
-            </motion.button>
+              buttonType={pageFromCMS.eighth_section.button.type}
+              swiperSlideTo={pageFromCMS.eighth_section.button.slideTo}
+              title={pageFromCMS.eighth_section?.button.text}
+              linkType={pageFromCMS.eighth_section.button.link_type}
+              functionOrUrl={pageFromCMS.eighth_section.button.function}
+              linkLanguage={Language[currentLanguage]}
+              swiper={swiper}
+              button_type={pageFromCMS.eighth_section.button.button_type}
+            />
           </div>
         </motion.section>
       </Carousel>

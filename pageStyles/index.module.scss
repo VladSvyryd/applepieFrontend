@@ -553,7 +553,7 @@
 .eightSection {
   color: white;
   @media (max-width: 768px) {
-    padding: 60px 0 88px 0;
+    padding: 60px 0 88px 0 !important;
   }
   .right {
     max-width: 650px;
@@ -609,7 +609,6 @@
     .introButton {
       margin-top: 26px;
       background-color: white;
-      box-shadow: 0px 2px 15px rgba(252, 244, 243, 0.62);
       color: $accent-color;
       @media (max-width: 1024px) {
         margin-top: 16px;
