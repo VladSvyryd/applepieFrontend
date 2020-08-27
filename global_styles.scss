@@ -51,7 +51,8 @@ body {
 a:-webkit-any-link:focus {
   outline: none;
 }
-input {
+input,
+textarea {
   -webkit-appearance: none;
   -webkit-border-radius: 0px;
 }

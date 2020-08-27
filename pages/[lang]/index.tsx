@@ -41,6 +41,7 @@ const Carousel = dynamic(() => import("../../components/Swiper/Swiper"), {
 import SwiperCore from "swiper";
 import ButtonOrLink from "../../components/ButtonOrLink/ButtonOrLink";
 import LineSwiper from "../../components/AutoLineSwiper/LineSwiper";
+import Popover from "@material-ui/core/Popover";
 
 const Page: NextPage<HomeProps> = (props) => {
   const { pageFromCMS, footer, services, legal } = props;
@@ -78,8 +79,19 @@ const Page: NextPage<HomeProps> = (props) => {
     },
     off: { backgroundColor: "#fff", transition: { duration: 0.3 } },
   };
-  console.log(legal);
   const [swiper, setSwiper] = useState<SwiperCore | undefined>();
+  const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
+  const [openPopoverID, setOpenPopoverID] = useState<number | null>();
+  const handlePopoverOpen = (popoverId: number) => (
+    event: React.MouseEvent<HTMLDivElement>
+  ) => {
+    setAnchorEl(event.currentTarget);
+    setOpenPopoverID(popoverId);
+  };
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+    setOpenPopoverID(null);
+  };
 
   // IF for landscape mode
   return !props.isMobile ||
@@ -376,24 +388,50 @@ const Page: NextPage<HomeProps> = (props) => {
             <div className={index.cardsGrid}>
               {pageFromCMS.forth_section.cards.length > 0 &&
                 pageFromCMS.forth_section?.cards?.map((card, ind) => (
-                  <div
-                    key={card.title}
-                    data-swiper-parallax={`${(ind + 1) * 70}`}
-                    data-swiper-parallax-opacity="0"
-                  >
-                    <div className={index.cardImage}>
-                      <img
-                        src={`${card.image?.url}`}
-                        alt={card.image?.alternativeText}
-                      />
+                  <>
+                    <div
+                      key={card.title}
+                      data-swiper-parallax={`${(ind + 1) * 70}`}
+                      data-swiper-parallax-opacity="0"
+                      aria-describedby={
+                        Boolean(anchorEl) ? `pie-method${ind}` : undefined
+                      }
+                      onClick={handlePopoverOpen(ind)}
+                    >
+                      <div className={index.cardImage}>
+                        <img
+                          src={`${card.image?.url}`}
+                          alt={card.image?.alternativeText}
+                        />
+                      </div>
+                      <div className={index.content}>
+                        <h3 className={"indieFlower"}>{card.title}</h3>
+                        <p>{card.subtitle}</p>
+                      </div>
                     </div>
-                    <div className={index.content}>
-                      <h3 className={"indieFlower"}>{card.title}</h3>
-                      <p>{card.subtitle}</p>
-                    </div>
-                  </div>
+                    <Popover
+                      id={
+                        openPopoverID === ind ? `pie-method${ind}` : undefined
+                      }
+                      marginThreshold={20}
+                      open={openPopoverID === ind}
+                      anchorEl={anchorEl}
+                      onClose={handlePopoverClose}
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "center",
+                      }}
+                      transformOrigin={{
+                        vertical: "top",
+                        horizontal: "center",
+                      }}
+                    >
+                      <p className={index.popover}>{card.subtitle}</p>
+                    </Popover>
+                  </>
                 ))}
             </div>
+
             <div className={index.footer}>
               <div className={index.zebraContainer}>
                 <div className={index.zebra + " indieFlower"}>

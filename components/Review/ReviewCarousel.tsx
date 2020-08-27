@@ -65,8 +65,8 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
         }}
       >
         {reviews.map((review, index) => (
-          <SwiperSlide>
-            <div key={"review-" + index}>
+          <SwiperSlide key={"review-" + index}>
+            <div>
               <Review review={review} index={index} count={reviews.length} />
             </div>
           </SwiperSlide>

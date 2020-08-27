@@ -9,7 +9,7 @@ import {
   SetStateAction,
 } from "react";
 import { motion, AnimateSharedLayout } from "framer-motion";
-import car from "../Carousel/car.module.scss";
+import car from "./car.module.scss";
 import { useStoreState, useStoreActions } from "../../hooks";
 import React from "react";
 
@@ -160,7 +160,6 @@ const MySwiper: React.FC<CarouselProps> = ({
   };
 
   const handleBulletHover = (i: number) => {
-    console.log(activeIndexHistory);
     setHoveredIndex(i);
   };
   const handleBulletHoverOut = () => {
@@ -346,4 +345,4 @@ const MySwiper: React.FC<CarouselProps> = ({
     </div>
   );
 };
-export default React.memo(MySwiper);
+export default MySwiper;
