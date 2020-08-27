@@ -398,7 +398,7 @@ const Page: NextPage<HomeProps> = (props) => {
                         Boolean(anchorEl) ? `pie-method${ind}` : undefined
                       }
                       onClick={
-                        !props.isMobile
+                        props.isMobile
                           ? handlePopoverOpen(ind)
                           : handlePopoverClose
                       }
@@ -415,6 +415,7 @@ const Page: NextPage<HomeProps> = (props) => {
                       </div>
                     </div>
                     <Popover
+                      key={card.title + ind}
                       id={
                         openPopoverID === ind ? `pie-method${ind}` : undefined
                       }
