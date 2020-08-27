@@ -270,6 +270,7 @@
   }
   .instructions {
     margin: auto;
+    z-index: 1;
 
     @media (max-width: 680px) {
       margin: 5px 0;
