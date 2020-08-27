@@ -42,6 +42,7 @@ import SwiperCore from "swiper";
 import ButtonOrLink from "../../components/ButtonOrLink/ButtonOrLink";
 import LineSwiper from "../../components/AutoLineSwiper/LineSwiper";
 import Popover from "@material-ui/core/Popover";
+import GoogleMaps from "../../components/Gmap/Gmap";
 
 const Page: NextPage<HomeProps> = (props) => {
   const { pageFromCMS, footer, services, legal } = props;
@@ -397,7 +398,7 @@ const Page: NextPage<HomeProps> = (props) => {
                         Boolean(anchorEl) ? `pie-method${ind}` : undefined
                       }
                       onClick={
-                        props.isMobile
+                        !props.isMobile
                           ? handlePopoverOpen(ind)
                           : handlePopoverClose
                       }
@@ -570,14 +571,22 @@ const Page: NextPage<HomeProps> = (props) => {
           variants={backgroundAnim}
         >
           <div className={index.left}>
-            <img
+            {/* <img
               src={
+              }
+              alt={pageFromCMS.eighth_section?.images[0]?.alternativeText}
+              className="responsiveImg"
+            /> */}
+            <GoogleMaps
+              apiKey={String(process.env.GOOGLE_MAPS_API_KEY)}
+              location={{ lat: 52.4819721, lng: 13.3450566 }}
+              defaultZoom={8}
+              maxZoom={20}
+              frameImgUrl={
                 pageFromCMS.eighth_section?.images[0]?.url
                   ? `${pageFromCMS.eighth_section?.images[0]?.url}`
                   : ""
               }
-              alt={pageFromCMS.eighth_section?.images[0]?.alternativeText}
-              className="responsiveImg"
             />
           </div>
           <div className={index.right + " " + index.verticalMargin}>

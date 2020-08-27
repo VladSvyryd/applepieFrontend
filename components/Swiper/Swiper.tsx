@@ -224,7 +224,6 @@ const MySwiper: React.FC<CarouselProps> = ({
     <div className="responsiveSlide">
       <Swiper
         spaceBetween={0}
-        mousewheel
         roundLengths
         parallax
         centeredSlides
@@ -236,6 +235,7 @@ const MySwiper: React.FC<CarouselProps> = ({
         }
         slidesPerView={1}
         onSwiper={(swiper: SwiperCore) => setSwiper(swiper)}
+        mousewheel={{ releaseOnEdges: true }}
       >
         {children &&
           children.map((one: any, index: number) => (
