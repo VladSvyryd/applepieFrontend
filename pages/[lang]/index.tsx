@@ -86,16 +86,12 @@ const Page: NextPage<HomeProps> = (props) => {
   const handlePopoverOpen = (popoverId: number) => (
     event: React.MouseEvent<HTMLDivElement>
   ) => {
-    alert("clicked handlePopoverOpen");
     setAnchorEl(event.currentTarget);
     setOpenPopoverID(popoverId);
-    alert(props.isMobile);
   };
   const handlePopoverClose = () => {
-    alert("clicked handlePopoverClose");
     setAnchorEl(null);
     setOpenPopoverID(null);
-    alert(props.isMobile);
   };
 
   // IF for landscape mode
@@ -401,11 +397,14 @@ const Page: NextPage<HomeProps> = (props) => {
                       aria-describedby={
                         Boolean(anchorEl) ? `pie-method${ind}` : undefined
                       }
-                      onClick={
-                        props.isMobile
-                          ? handlePopoverOpen(ind)
-                          : handlePopoverClose
+                      style={
+                        !props.isMobile
+                          ? {
+                              pointerEvents: "none",
+                            }
+                          : {}
                       }
+                      onClick={handlePopoverOpen(ind)}
                     >
                       <div className={index.cardImage}>
                         <img
