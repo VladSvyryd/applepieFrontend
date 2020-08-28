@@ -13,7 +13,6 @@ export const getLanguage = (langFromUrl?: string): Language => {
     } else {
       // the language setting of the browser
       const [browserSetting] = navigator.language.split("-");
-
       const currentLanguage = isLocale(browserSetting);
       return currentLanguage;
     }
@@ -22,7 +21,7 @@ export const getLanguage = (langFromUrl?: string): Language => {
 
 export function isLocale(tested: string): Language {
   const curLang = locales.findIndex((locale) => Language[locale] === tested);
-  if (typeof curLang !== "undefined") {
+  if (typeof curLang !== "undefined" && curLang >= 0) {
     return curLang;
   }
 
