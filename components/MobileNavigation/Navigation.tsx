@@ -42,17 +42,19 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
   const [inverted, setInverted] = useState(false);
   const menuOpened = useStoreState((state) => state.device.menuOpened);
   const tOpen = useStoreActions((actions) => actions.device.setMenuState);
-  const [currentWindow, setCurrentWindow] = useState({
-    width: width,
-    height: height,
-  });
+
   const onClick = () => {
     tOpen(!menuOpened);
   };
-
+  const defineRadiusOfCircle = () => {
+    if (width >= 1024) return height + width / 2;
+    else {
+      return height + width / 4;
+    }
+  };
   const sidebar = {
-    open: (custom: { width: number; height: number }) => ({
-      clipPath: `circle(${custom.height + 700}px at calc(100% - 52px) 40px)`,
+    open: (_custom: { width: number; height: number }) => ({
+      clipPath: `circle(${defineRadiusOfCircle()}px at calc(100% - 52px) 40px)`,
       transition: {
         type: "spring",
         stiffness: 20,
@@ -70,11 +72,6 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
     }),
   };
 
-  // const mobileMenuRef = useRef<HTMLElement>(null);
-  // useOnClickOutside(mobileMenuRef, () => menuOpened && tOpen(false));
-  useEffect(() => {
-    setCurrentWindow({ width: width, height: height });
-  }, [width, height]);
   useEffect(() => {
     invertedSlidesArray.some((s: number) => s === activeIndex)
       ? setInverted(true)
@@ -101,7 +98,6 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
           variants={sidebar}
           className={nav.background}
           style={inverted ? { background: "white" } : {}}
-          custom={currentWindow}
           onClick={(e) => prevDef(e)}
         >
           <Navigation
