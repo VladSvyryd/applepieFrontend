@@ -15,6 +15,11 @@ export const getLanguage = (langFromUrl?: string): Language => {
       const [browserSetting] = navigator.language.split("-");
       console.log(browserSetting);
       console.log(isLocale(browserSetting));
+      alert(
+        `browserSetting:${browserSetting}, isLocale(browserSetting): ${isLocale(
+          browserSetting
+        )}`
+      );
       const currentLanguage = isLocale(browserSetting);
       return currentLanguage;
     }
