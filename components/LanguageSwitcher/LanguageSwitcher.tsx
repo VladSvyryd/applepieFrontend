@@ -51,7 +51,6 @@ export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({
     console.log("def Lang in switcher" + String(router?.query?.lang));
     const myLang = getLanguage(String(router?.query?.lang));
     setCurrentLanguage(myLang);
-    console.log({ myLang });
   }, []);
 
   return !compact ? (
