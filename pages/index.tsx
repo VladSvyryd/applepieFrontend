@@ -15,12 +15,13 @@ const Index: React.FC = () => {
     const myLang = getLanguage();
     setCurrentLanguage(myLang);
     console.log("page_language", Language[myLang]);
+    alert(navigator.language);
     // window.location.replace(`/${Language[myLang]}`);
     router.push(`/${Language[myLang]}`);
   }, []);
   return (
     <Head>
-      <meta name="robots" content="noindex, nofollow" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </Head>
   );
 };
