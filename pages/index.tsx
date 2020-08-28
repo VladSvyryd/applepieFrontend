@@ -15,11 +15,7 @@ const Index: React.FC = () => {
     const myLang = getLanguage();
     setCurrentLanguage(myLang);
     console.log("page_language", Language[myLang]);
-    alert(
-      `Your default language is: ${navigator.language.split(
-        "-"
-      )}, from getLanguage: ${Language[myLang]},myLang ${myLang} `
-    );
+
     // window.location.replace(`/${Language[myLang]}`);
     router.push(`/${Language[myLang]}`);
   }, []);
