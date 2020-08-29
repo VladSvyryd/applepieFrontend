@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Mousewheel, Parallax } from "swiper";
+import SwiperCore, { Mousewheel, Parallax, Lazy } from "swiper";
 import { Image, DEVICE, Pagination } from "../../types/types";
 import {
   useState,
@@ -106,7 +106,7 @@ const captionAnim = {
     opacity: 0,
   }),
 };
-SwiperCore.use([Mousewheel, Parallax]);
+SwiperCore.use([Mousewheel, Parallax, Lazy]);
 type CarouselProps = {
   children: ReactNodeArray;
   paginationObject: {
@@ -227,7 +227,6 @@ const MySwiper: React.FC<CarouselProps> = ({
         roundLengths
         parallax
         centeredSlides
-        preloadImages={false}
         direction="horizontal"
         className="myCustomSwiper"
         onSlideChange={(swiper: SwiperCore) =>
@@ -236,6 +235,9 @@ const MySwiper: React.FC<CarouselProps> = ({
         slidesPerView={1}
         onSwiper={(swiper: SwiperCore) => setSwiper(swiper)}
         mousewheel={{ releaseOnEdges: true }}
+        preloadImages={false}
+        watchSlidesVisibility
+        lazy={true}
       >
         {children &&
           children.map((one: any, index: number) => (

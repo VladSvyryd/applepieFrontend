@@ -47,6 +47,9 @@ import GoogleMaps from "../../components/Gmap/Gmap";
 const Page: NextPage<HomeProps> = (props) => {
   const { pageFromCMS, footer, services, legal } = props;
   const [activeServiceIndex, setIndex] = useState(0);
+  const interactiveFormIsOpen = useStoreState(
+    (state) => state.device.interactiveFormOpened
+  );
   const handleServiceHover = (index: number) => {
     setIndex(index);
   };
@@ -104,8 +107,8 @@ const Page: NextPage<HomeProps> = (props) => {
       footer={footer}
     >
       <h1 className="visuallyHidden">Applepie</h1>
-      <InteractiveForm />
-      <LegalNavigation links={legal} />
+      {interactiveFormIsOpen && <InteractiveForm />}
+      {interactiveFormIsOpen && <LegalNavigation links={legal} />}
       <motion.button
         className={`button  ${index.legal}`}
         onClick={() => setLegalOpened(true)}
@@ -155,45 +158,56 @@ const Page: NextPage<HomeProps> = (props) => {
               <div
                 className={`${index.introDescription} + ${index.verticalMargin}`}
               >
-                <h2 data-swiper-parallax="500" data-swiper-parallax-opacity="0">
-                  {pageFromCMS.intro.title}
-                </h2>
-                <h3
-                  data-swiper-parallax="800"
-                  data-swiper-parallax-opacity="0"
-                  className={index.descriptionDesktop}
-                >
-                  {pageFromCMS.intro.description}
-                </h3>
-
+                <div>
+                  <h2
+                    data-swiper-parallax="500"
+                    data-swiper-parallax-opacity="0"
+                  >
+                    {pageFromCMS.intro.title}
+                  </h2>
+                  <h3
+                    data-swiper-parallax="800"
+                    data-swiper-parallax-opacity="0"
+                    className={index.descriptionDesktop}
+                  >
+                    {pageFromCMS.intro.description}
+                  </h3>
+                  <ButtonOrLink
+                    buttonType={pageFromCMS.buttons[0].type}
+                    title={pageFromCMS.buttons[0].text}
+                    button_type={pageFromCMS.buttons[0].button_type}
+                    className={`medium button ${index.descriptionDesktop}`}
+                  />
+                </div>
                 <img
                   src={`${
-                    deviceWidth <= 719
-                      ? pageFromCMS.intro.pictures &&
-                        pageFromCMS.intro.pictures[8]?.url
-                      : pageFromCMS.intro.pictures &&
-                        pageFromCMS.intro.pictures[0]?.url
+                    pageFromCMS.intro.pictures &&
+                    pageFromCMS.intro.pictures[0]?.url
                   }`}
                   alt={
                     pageFromCMS.intro.pictures &&
                     pageFromCMS.intro.pictures[0]?.alternativeText
                   }
-                  className={index.leftPie}
-                  style={{
-                    marginTop: `-${
-                      deviceWidth <= 719
-                        ? 0
-                        : pageFromCMS.intro.pictures &&
-                          pageFromCMS.intro.pictures[0]?.height / 2
-                    }px`,
-                  }}
+                  className={`${index.leftPie} ${index.leftPieDesktop}`}
+                  data-swiper-parallax-opacity="0"
+                />
+                <img
+                  src={`${
+                    pageFromCMS.intro.pictures &&
+                    pageFromCMS.intro.pictures[8]?.url
+                  }`}
+                  alt={
+                    pageFromCMS.intro.pictures &&
+                    pageFromCMS.intro.pictures[8]?.alternativeText
+                  }
+                  className={`${index.leftPie} ${index.leftPieMobile}`}
                   data-swiper-parallax-opacity="0"
                 />
                 <ButtonOrLink
                   buttonType={pageFromCMS.buttons[0].type}
                   title={pageFromCMS.buttons[0].text}
                   button_type={pageFromCMS.buttons[0].button_type}
-                  className="medium button"
+                  className={`medium button ${index.buttonMobile}`}
                 />
               </div>
             </div>

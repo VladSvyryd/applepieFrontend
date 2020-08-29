@@ -21,6 +21,8 @@ const Navigation: React.FC<NavProps> = (props) => {
   const setInterFormState = useStoreActions(
     (actions) => actions.device.setInterFormState
   );
+  const width = useStoreState((state) => state.device.width);
+
   return (
     <nav className={`${nav.navbar} flexColumns alignCenter content-frame `}>
       <div className={""}>
@@ -103,10 +105,12 @@ const Navigation: React.FC<NavProps> = (props) => {
         )}
         <LanguageSwitcher className={nav.onlyDesktop} />
       </div>
-      <MobileNavigation
-        links={typeof links !== "undefined" ? links : []}
-        social_links={social_links}
-      />
+      {width <= 1400 && (
+        <MobileNavigation
+          links={typeof links !== "undefined" ? links : []}
+          social_links={social_links}
+        />
+      )}
     </nav>
   );
 };
