@@ -30,12 +30,12 @@ const Services: NextPage<ServicesProps> = (props) => {
   const { navigation, footer } = props;
 
   const orientation = useStoreState((state) => state.device.orientation);
-
   // IF for landscape mode
   return !props.isMobile ||
     (props.isMobile && orientation === ORIENTATION.portrait) ? (
     <Layout navigation={navigation} verticalFooter footer={footer}>
       <h1 className="visuallyHidden">Applepie</h1>
+
       <div className={`${styles.container} ${styles.frame}`}>
         <Grid container spacing={2}>
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((value) => (
