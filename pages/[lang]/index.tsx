@@ -47,7 +47,6 @@ import GoogleMaps from "../../components/Gmap/Gmap";
 const Page: NextPage<HomeProps> = (props) => {
   const { pageFromCMS, footer, services, legal } = props;
   const [activeServiceIndex, setIndex] = useState(0);
-  const legalOpened = useStoreState((state) => state.device.legalOpened);
   const handleServiceHover = (index: number) => {
     setIndex(index);
   };
