@@ -1,5 +1,15 @@
 @import "../global_variables.scss";
 
+.legal {
+  position: fixed;
+  right: -15px;
+  top: calc(50% - 25px);
+  transform: rotate(-90deg);
+  width: 64px;
+  z-index: 99;
+  padding: 5px 10px !important;
+  border-radius: 8px 8px 0 0 !important;
+}
 .introDescription {
   display: flex;
   align-items: center;
@@ -36,9 +46,6 @@
 }
 .verticalMargin {
   margin: auto 0;
-  // @media (max-width: 1400px) and (max-height: 800px) {
-  //   margin: 5px 0;
-  // }
 }
 .height100 {
   display: flex;
@@ -683,16 +690,6 @@
     justify-content: center;
     font-size: 1.7rem;
   }
-}
-.legal {
-  position: fixed;
-  right: -15px;
-  top: calc(50% - 25px);
-  transform: rotate(-90deg);
-  // width: 60px;
-  z-index: 99;
-  padding: 5px 10px !important;
-  border-radius: 8px 8px 0 0 !important;
 }
 
 .popover {

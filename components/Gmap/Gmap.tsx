@@ -56,7 +56,12 @@ const GoogleMaps: FC<GoogleMapsProps> = ({
           pointerEvents: "none",
         }}
       >
-        <img ref={ImgRef} src={frameImgUrl} style={{ width: "100%" }} />
+        <img
+          ref={ImgRef}
+          src={frameImgUrl}
+          alt={"frame"}
+          style={{ width: "100%" }}
+        />
       </div>
     </div>
   );

@@ -89,11 +89,7 @@ const Layout: React.FC<LayoutProps> = ({
                   >
                     {footer?.known_by[0].name}
                   </span>
-                  <a
-                    href=""
-                    className={`${layout.horizontalSpan}`}
-                    tabIndex={-1}
-                  >
+                  <span className={`${layout.horizontalSpan}`}>
                     <img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
@@ -102,21 +98,7 @@ const Layout: React.FC<LayoutProps> = ({
                       }`}
                       alt=""
                     />
-                  </a>
-                  <a
-                    href=""
-                    className={`${layout.horizontalSpan}`}
-                    tabIndex={-1}
-                  >
-                    <img
-                      src={`${
-                        invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? footer?.known_by[2]?.image_alternative?.url
-                          : footer?.known_by[2]?.image?.url
-                      }`}
-                      alt=""
-                    />
-                  </a>
+                  </span>
                 </div>
               </div>
               <div className="smallitem flexColumns flexEnd alignCenter">

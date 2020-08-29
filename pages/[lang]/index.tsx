@@ -47,9 +47,7 @@ import GoogleMaps from "../../components/Gmap/Gmap";
 const Page: NextPage<HomeProps> = (props) => {
   const { pageFromCMS, footer, services, legal } = props;
   const [activeServiceIndex, setIndex] = useState(0);
-  const interactiveFormIsOpen = useStoreState(
-    (state) => state.device.interactiveFormOpened
-  );
+  const legalOpened = useStoreState((state) => state.device.legalOpened);
   const handleServiceHover = (index: number) => {
     setIndex(index);
   };
@@ -107,8 +105,8 @@ const Page: NextPage<HomeProps> = (props) => {
       footer={footer}
     >
       <h1 className="visuallyHidden">Applepie</h1>
-      {interactiveFormIsOpen && <InteractiveForm />}
-      {interactiveFormIsOpen && <LegalNavigation links={legal} />}
+      <InteractiveForm />
+      <LegalNavigation links={legal} />
       <motion.button
         className={`button  ${index.legal}`}
         onClick={() => setLegalOpened(true)}
