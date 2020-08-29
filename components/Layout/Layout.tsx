@@ -1,4 +1,5 @@
 import Head from "next/head";
+
 import { LayoutProps, Language } from "../../types/types";
 import Navigation from "../Navigation/Navigation";
 import layout from "./layout.module.scss";
