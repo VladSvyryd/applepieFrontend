@@ -20,18 +20,14 @@
     grid-template-areas: "avatar " "content_text " "name " "company ";
     grid-template-rows: min-content min-content min-content min-content;
   }
-  background: green;
 }
 
 .avatar {
   grid-area: avatar;
   display: flex;
   align-items: flex-start;
-  background: red;
 
   .frame {
-    background: brown;
-
     width: 100%;
     max-width: 134px;
     margin: 20px;
