@@ -35,6 +35,9 @@
     width: 100%;
     max-width: 134px;
     margin: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inherit;
     @media (max-width: 800px) {
       margin: 0px;
       display: flex;
@@ -43,7 +46,6 @@
       max-width: 100px;
     }
     img {
-      border-radius: 50%;
       width: 100%;
       height: auto;
     }
