@@ -50,7 +50,7 @@ export const Navigation: FC<NavigationProps> = ({
     }
     return link.link_type === LinkType.internal ? (
       <Link
-        key={link.function + "nav"}
+        key={link.function + "nav1"}
         href={`/${Language[currentLanguage]}${link.function}`}
         as={`/${Language[currentLanguage]}${link.function}`}
       >
@@ -63,7 +63,7 @@ export const Navigation: FC<NavigationProps> = ({
       </Link>
     ) : (
       <Link
-        key={link.function + "nav"}
+        key={link.function + "nav2"}
         href={`/${Language[currentLanguage]}${link.function}`}
         passHref
       >
@@ -82,7 +82,7 @@ export const Navigation: FC<NavigationProps> = ({
   return (
     <motion.ul variants={variants} className={nav.ul}>
       {links?.map((l: Button, i: number) => (
-        <MenuItem index={i} key={i}>
+        <MenuItem index={i} key={"menu-item" + i}>
           {renderMenuItem(l)}
         </MenuItem>
       ))}

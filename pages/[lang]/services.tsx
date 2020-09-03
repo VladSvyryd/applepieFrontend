@@ -39,7 +39,7 @@ const Services: NextPage<ServicesProps> = (props) => {
       <div className={`${styles.container} ${styles.frame}`}>
         <Grid container spacing={2}>
           {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((value) => (
-            <Grid key={value} item>
+            <Grid key={"service-grid" + value} item>
               <Card className={styles.root}>
                 <CardActionArea>
                   <CardHeader

@@ -278,6 +278,8 @@ const fragments = {
       day
       time_from
       time_till
+      lat
+      lng
     }
   `,
   address_en: gql`
@@ -290,6 +292,8 @@ const fragments = {
       day: day_en
       time_from: time_from_en
       time_till: time_till_en
+      lat
+      lng
     }
   `,
 };

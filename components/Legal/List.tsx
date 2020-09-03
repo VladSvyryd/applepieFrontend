@@ -28,10 +28,10 @@ export const List: FC<NavigationProps> = ({ links, inverted, toggleMenu }) => {
   return (
     <motion.ul variants={variants} className={nav.ul}>
       {links?.map((l: Button, i: number) => (
-        <ListItem index={i} key={i}>
+        <ListItem index={i} key={"legalLink-" + i}>
           {l.link_type === LinkType.internal ? (
             <Link
-              key={l.function + "nav"}
+              key={l.function + "legal1"}
               href={`/${Language[currentLanguage]}/${l.function}`}
               as={`/${Language[currentLanguage]}/${l.function}`}
             >
@@ -45,7 +45,7 @@ export const List: FC<NavigationProps> = ({ links, inverted, toggleMenu }) => {
             </Link>
           ) : (
             <Link
-              key={l.function + "nav"}
+              key={l.function + "legal2"}
               href={`/${Language[currentLanguage]}/${l.function}`}
               passHref
             >

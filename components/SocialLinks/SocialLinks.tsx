@@ -40,7 +40,7 @@ export const SocialLinks: FC<SocialLinksProps> = ({ links, inverted }) => {
           href="https://www.instagram.com/?hl=de"
           className={link.linkWithBorder}
           variants={variantsOfLink}
-          key={value.name}
+          key={"social-link" + value.name}
         >
           <img
             src={`${

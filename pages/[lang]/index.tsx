@@ -268,7 +268,7 @@ const Page: NextPage<HomeProps> = (props) => {
                       <li
                         onMouseOver={() => handleServiceHover(i)}
                         onMouseLeave={() => handleServiceLeave()}
-                        key={"service_" + i}
+                        key={"service_input" + i}
                         data-swiper-parallax={-i * 100 + 500}
                         data-swiper-parallax-opacity="0"
                         data-middle={
@@ -358,7 +358,10 @@ const Page: NextPage<HomeProps> = (props) => {
                 {pageFromCMS.third_section?.images
                   ?.filter((_v, i, arr) => i < arr.length / 2)
                   .map((img, ind) => (
-                    <div key={img.name + ind} className={index.gridImage}>
+                    <div
+                      key={"autoSlide-1-" + img.name + ind}
+                      className={index.gridImage}
+                    >
                       <img src={`${img.url}`} alt={img.alternativeText} />
                     </div>
                   ))}
@@ -367,7 +370,10 @@ const Page: NextPage<HomeProps> = (props) => {
                 {pageFromCMS.third_section?.images
                   ?.filter((_v, i, arr) => i >= arr.length / 2)
                   .map((img, ind) => (
-                    <div key={ind + img.name} className={index.gridImage}>
+                    <div
+                      key={"autoSlide-2-" + ind + img.name}
+                      className={index.gridImage}
+                    >
                       <img src={`${img.url}`} alt={img.alternativeText} />
                     </div>
                   ))}
@@ -402,7 +408,7 @@ const Page: NextPage<HomeProps> = (props) => {
                 pageFromCMS.forth_section?.cards?.map((card, ind) => (
                   <>
                     <div
-                      key={card.title}
+                      key={"card_" + card.title}
                       data-swiper-parallax={`${(ind + 1) * 70}`}
                       data-swiper-parallax-opacity="0"
                       aria-describedby={
@@ -429,7 +435,7 @@ const Page: NextPage<HomeProps> = (props) => {
                       </div>
                     </div>
                     <Popover
-                      key={card.title + ind}
+                      key={"card-popover" + card.title + ind}
                       id={
                         openPopoverID === ind ? `pie-method${ind}` : undefined
                       }
@@ -594,7 +600,10 @@ const Page: NextPage<HomeProps> = (props) => {
             /> */}
             <GoogleMaps
               apiKey={String(process.env.GOOGLE_MAPS_API_KEY)}
-              location={{ lat: 52.4819721, lng: 13.3450566 }}
+              location={{
+                lat: pageFromCMS.contact.lat || 52.4819721,
+                lng: pageFromCMS.contact.lng || 13.3450566,
+              }}
               defaultZoom={8}
               maxZoom={20}
               frameImgUrl={

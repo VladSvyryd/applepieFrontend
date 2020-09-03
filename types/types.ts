@@ -138,6 +138,8 @@ export interface Address {
   time_from: string;
   time_till: string;
   day: string;
+  lat: number;
+  lng: number;
 }
 export interface Image_Grid {
   title: string;

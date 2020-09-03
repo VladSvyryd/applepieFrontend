@@ -241,7 +241,17 @@ const MySwiper: React.FC<CarouselProps> = ({
       >
         {children &&
           children.map((one: any, index: number) => (
-            <SwiperSlide key={"main-slide" + index}>{one}</SwiperSlide>
+            <SwiperSlide key={"main-slide" + index}>
+              {({ isVisible, isNext, isPrev }: any) =>
+                index == children.length - 1 ||
+                isNext ||
+                isPrev ||
+                index == 0 ||
+                isVisible
+                  ? one
+                  : null
+              }
+            </SwiperSlide>
           ))}
       </Swiper>
       <AnimateSharedLayout>

@@ -49,7 +49,7 @@ const Navigation: React.FC<NavProps> = (props) => {
         {links?.map((l: Button, index: number) =>
           l.type === "LINK" ? (
             <Link
-              key={l.text + "nav"}
+              key={l.text + "desk_nav"}
               as={`/${Language[currentLanguage]}${l.function}`}
               href={`/${Language[currentLanguage]}${l.function}`}
             >
@@ -77,7 +77,7 @@ const Navigation: React.FC<NavProps> = (props) => {
             </Link>
           ) : (
             <span
-              key={l.text + "nav"}
+              key={l.text + "nav_button"}
               tabIndex={-1}
               className={`${nav.navLink} ${nav.planeLink} ${
                 invertedSlides.some((s) => s === activeCarouselIndex)
