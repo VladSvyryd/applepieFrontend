@@ -29,7 +29,7 @@
   }
 }
 .onlyDesktop {
-  &:nth-child(4) {
+  &:last-child {
     @media (max-width: 1400px) {
       display: none !important;
     }
