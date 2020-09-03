@@ -46,13 +46,15 @@
     "recompose": "^0.30.0",
     "sass": "^1.26.5",
     "showdown": "^1.9.1",
-    "swiper": "^6.1.2"
+    "swiper": "^6.1.2",
+    "ua-parser-js": "^0.7.21"
   },
   "devDependencies": {
     "@types/google-map-react": "^1.1.8",
     "@types/material-ui": "^0.21.7",
     "@types/node": "^13.13.5",
     "@types/recompose": "^0.30.7",
+    "@types/ua-parser-js": "^0.7.33",
     "typescript": "^3.8.3"
   }
 }
