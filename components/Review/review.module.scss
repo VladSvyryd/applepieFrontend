@@ -28,7 +28,6 @@
   display: flex;
   align-items: flex-start;
   background: red;
-  height: 130px;
 
   .frame {
     background: brown;
@@ -36,10 +35,9 @@
     width: 100%;
     max-width: 134px;
     margin: 20px;
-    // border-radius: 50%;
+    border-radius: 50%;
     overflow: hidden;
-    // display: inherit;
-    padding: 10px 0;
+    line-height: 0;
     @media (max-width: 800px) {
       margin: 0px;
       // display: flex;
