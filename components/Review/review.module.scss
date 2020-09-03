@@ -30,14 +30,16 @@
   background: red;
 
   .frame {
-    background: orange;
+    background: brown;
 
     width: 100%;
     max-width: 134px;
     margin: 20px;
-    border-radius: 50%;
+    // border-radius: 50%;
     overflow: hidden;
     display: inherit;
+    height: 100%;
+    padding: 10px 0;
     @media (max-width: 800px) {
       margin: 0px;
       display: flex;
