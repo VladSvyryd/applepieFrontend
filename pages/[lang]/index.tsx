@@ -93,10 +93,9 @@ const Page: NextPage<HomeProps> = (props) => {
     setAnchorEl(null);
     setOpenPopoverID(null);
   };
-
+  console.log("is Mobile", props.isMobile);
   // IF for landscape mode
-  return !props.isMobile ||
-    (props.isMobile && orientation === ORIENTATION.portrait) ? (
+  return !(orientation === ORIENTATION.portrait && deviceWidth < 1024) ? (
     <Layout
       navigation={props.navigation}
       horizontalFooter

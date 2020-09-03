@@ -46,8 +46,7 @@
     "recompose": "^0.30.0",
     "sass": "^1.26.5",
     "showdown": "^1.9.1",
-    "swiper": "^6.1.2",
-    "ua-parser-js": "^0.7.21"
+    "swiper": "^6.1.2"
   },
   "devDependencies": {
     "@types/google-map-react": "^1.1.8",
