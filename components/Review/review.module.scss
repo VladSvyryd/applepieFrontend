@@ -38,11 +38,11 @@
     margin: 20px;
     // border-radius: 50%;
     overflow: hidden;
-    display: inherit;
+    // display: inherit;
     padding: 10px 0;
     @media (max-width: 800px) {
       margin: 0px;
-      display: flex;
+      // display: flex;
     }
     @media (max-width: 450px) {
       max-width: 100px;
