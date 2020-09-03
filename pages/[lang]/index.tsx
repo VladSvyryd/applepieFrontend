@@ -95,7 +95,7 @@ const Page: NextPage<HomeProps> = (props) => {
   };
   console.log("is Mobile", props.isMobile);
   // IF for landscape mode
-  return !(orientation === ORIENTATION.portrait && deviceWidth < 1024) ? (
+  return deviceWidth <= 1024 && orientation === ORIENTATION.portrait ? (
     <Layout
       navigation={props.navigation}
       horizontalFooter
