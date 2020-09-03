@@ -38,6 +38,7 @@ const GoogleMaps: FC<GoogleMapsProps> = ({
         position: "relative",
         height: `${height}px`,
         overflow: "hidden",
+        margin: "auto",
       }}
     >
       <MapWithAMarker

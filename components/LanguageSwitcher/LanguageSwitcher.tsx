@@ -44,8 +44,8 @@ export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({
   const invertedSlides = useStoreState((state) => state.swiper.invertedSlides);
 
   const langAnim = {
-    in: { opacity: 0, y: 25 },
-    out: { opacity: 1, y: 0 },
+    in: { opacity: 0, y: 25, display: "none" },
+    out: { opacity: 1, y: 0, display: "flex" },
   };
   useEffect(() => {
     console.log("def Lang in switcher" + String(router?.query?.lang));
@@ -71,6 +71,7 @@ export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({
       <label
         style={{
           cursor: "pointer",
+          textDecoration: currentLanguage == 0 ? `underline` : "none",
         }}
       >
         <input
@@ -78,14 +79,16 @@ export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({
           value="0"
           checked={currentLanguage === 0}
           onChange={(e) => handleChange(e)}
-          style={{ display: "none" }}
+          style={{
+            display: "none",
+          }}
         />
         EN
       </label>
       <span style={{ margin: "0 5px" }}>|</span>
       <label
         style={{
-          textDecoration: currentLanguage ? `underline` : "none",
+          textDecoration: currentLanguage == 1 ? `underline` : "none",
           cursor: "pointer",
         }}
       >

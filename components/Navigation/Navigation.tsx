@@ -78,7 +78,6 @@ const Navigation: React.FC<NavProps> = (props) => {
           ) : (
             <span
               key={l.text + "nav_button"}
-              tabIndex={-1}
               className={`${nav.navLink} ${nav.planeLink} ${
                 invertedSlides.some((s) => s === activeCarouselIndex)
                   ? "invertedTextColorBySlide invertedBorderColorBySlide"
