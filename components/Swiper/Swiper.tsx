@@ -7,11 +7,11 @@ import {
   ReactNodeArray,
   Dispatch,
   SetStateAction,
+  memo,
 } from "react";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import car from "./car.module.scss";
 import { useStoreState, useStoreActions } from "../../hooks";
-import React from "react";
 
 export const screens = [
   {
@@ -208,7 +208,8 @@ const MySwiper: React.FC<CarouselProps> = ({
   useEffect(() => {
     defineBulletPositions();
   }, [width]);
-
+  console.log(swiper);
+  // alert(swiper.activeIndex);
   const returnAnimateClass = (i: number) => {
     if (activeIndexHistory.findIndex((li) => li == i) != -1) {
       if (!isMobile && i === hoveredIndex) return "visibleAndHovered";
@@ -357,4 +358,4 @@ const MySwiper: React.FC<CarouselProps> = ({
     </div>
   );
 };
-export default MySwiper;
+export default memo(MySwiper);

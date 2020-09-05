@@ -407,7 +407,10 @@ const Page: NextPage<HomeProps> = (props) => {
               {pageFromCMS.forth_section.cards.length > 0 &&
                 pageFromCMS.forth_section?.cards?.map((card, ind) => (
                   <Fragment key={"test" + ind}>
-                    <ButtonBase style={{ width: "100%" }}>
+                    <ButtonBase
+                      className={index.cardBase}
+                      disabled={!props.isMobile ? true : false}
+                    >
                       <div
                         key={"card_" + card.title}
                         data-swiper-parallax={`${(ind + 1) * 70}`}
@@ -415,7 +418,7 @@ const Page: NextPage<HomeProps> = (props) => {
                         aria-describedby={
                           Boolean(anchorEl) ? `pie-method${ind}` : undefined
                         }
-                        className={index.cardBase}
+                        className={index.card}
                         style={
                           !props.isMobile
                             ? {
