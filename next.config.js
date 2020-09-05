@@ -1,6 +1,9 @@
 // next.config.js
 const withFonts = require('next-fonts');
 require('dotenv').config(); // setup to use API keys from .env on frontend
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true'
+})
 
 const configs = {
   typescript: {
@@ -16,4 +19,4 @@ const configs = {
 
   },
 }
-module.exports = withFonts(configs)
+module.exports = withFonts(withBundleAnalyzer(configs))
