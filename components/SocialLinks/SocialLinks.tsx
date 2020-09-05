@@ -37,7 +37,7 @@ export const SocialLinks: FC<SocialLinksProps> = ({ links, inverted }) => {
       {links?.map((value: Link) => (
         <motion.a
           target="_blank"
-          href="https://www.instagram.com/?hl=de"
+          href={value.url}
           className={link.linkWithBorder}
           variants={variantsOfLink}
           key={"social-link" + value.name}

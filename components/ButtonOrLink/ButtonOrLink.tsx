@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import { ButtonType, LinkType, ButtonFunction } from "../../types/types";
 import { motion } from "framer-motion";
 import SwiperCore from "swiper";
@@ -9,7 +9,7 @@ export type ButtonOrLinkProps = {
   buttonType: ButtonType;
   linkType?: LinkType;
   swiperSlideTo?: number;
-  title: string;
+  title: string | ReactNode;
   functionOrUrl?: string;
   customOnClick?: any;
   swiper?: SwiperCore | undefined;

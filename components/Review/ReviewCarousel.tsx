@@ -42,10 +42,11 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
     on: { opacity: 1 },
     off: { opacity: 0.3 },
   };
+  console.log({ reviews });
   return (
     <div className={review.swiper}>
       <div className={review.semi}>
-        <img src={`${img.url}`} alt={`${img.caption}`} />
+        <img src={`${img?.url}`} alt={`${img?.caption}`} />
       </div>
       <Swiper
         centeredSlides

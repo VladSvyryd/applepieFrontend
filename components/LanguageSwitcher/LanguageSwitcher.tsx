@@ -60,7 +60,7 @@ export const LanguageSwitcher: FC<LanguageSwitcherProps> = ({
         flexDirection: "row",
         alignItems: "center",
         lineHeight: "1",
-        fontSize: "1.5rem",
+        fontSize: "1rem",
       }}
       className={`${
         !invertedSlides.some((s) => s === activeCarouselIndex)

@@ -40,7 +40,6 @@ const Review: React.FC<ReviewProps> = (props) => {
   };
 
   const reviewIndex = useStoreState((state) => state.swiper.reviewIndex);
-
   return (
     <motion.div
       initial={"hidden"}
@@ -52,7 +51,9 @@ const Review: React.FC<ReviewProps> = (props) => {
       <motion.div className={review.avatar}>
         <motion.div className={review.frame} variants={imgAnim}>
           <motion.img
-            src={`${props.review?.avatar?.url}`}
+            src={`${
+              props.review?.avatar?.url ? props.review?.avatar?.url : ""
+            }`}
             alt={props.review?.avatar?.alternativeText}
           />
         </motion.div>

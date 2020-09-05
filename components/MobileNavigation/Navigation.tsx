@@ -108,6 +108,7 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
           <motion.div
             variants={variants}
             animate={menuOpened ? "open" : "closed"}
+            className={nav.languageSwitcher}
           >
             <LanguageSwitcher compact={false} />
           </motion.div>
