@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import withTranslate from "../../components/HOC/withTranslate";
 import Layout from "../../components/Layout/Layout";
 import { NextPage, NextPageContext } from "next";
@@ -43,6 +43,7 @@ import ButtonOrLink from "../../components/ButtonOrLink/ButtonOrLink";
 import LineSwiper from "../../components/AutoLineSwiper/LineSwiper";
 import Popover from "@material-ui/core/Popover";
 import GoogleMaps from "../../components/Gmap/Gmap";
+import { ButtonBase } from "@material-ui/core";
 
 const Page: NextPage<HomeProps> = (props) => {
   const { pageFromCMS, footer, services, legal } = props;
@@ -97,21 +98,20 @@ const Page: NextPage<HomeProps> = (props) => {
   // IF for landscape mode
   return !props.isMobile ||
     (props.isMobile && orientation === ORIENTATION.portrait) ? (
-    <Layout
-      navigation={props.navigation}
-      horizontalFooter
-      legal={legal}
-      footer={footer}
-    >
+    <Layout navigation={props.navigation} horizontalFooter footer={footer}>
       <h1 className="visuallyHidden">Applepie</h1>
       <InteractiveForm />
-      <LegalNavigation links={legal} />
-      <motion.button
-        className={`button  ${index.legal}`}
-        onClick={() => setLegalOpened(true)}
-      >
-        Legal
-      </motion.button>
+      {activeCarouselIndex == 8 && <LegalNavigation links={legal} />}
+      {activeCarouselIndex == 8 && (
+        <motion.button
+          className={`button  ${index.legal}`}
+          onClick={() => setLegalOpened(true)}
+          initial={{ x: +100, rotate: -90 }}
+          animate={{ x: 0, rotate: -90 }}
+        >
+          Legal
+        </motion.button>
+      )}
       <Carousel
         paginationObject={{
           pagination: pageFromCMS.pagination,
@@ -406,34 +406,37 @@ const Page: NextPage<HomeProps> = (props) => {
             <div className={index.cardsGrid}>
               {pageFromCMS.forth_section.cards.length > 0 &&
                 pageFromCMS.forth_section?.cards?.map((card, ind) => (
-                  <>
-                    <div
-                      key={"card_" + card.title}
-                      data-swiper-parallax={`${(ind + 1) * 70}`}
-                      data-swiper-parallax-opacity="0"
-                      aria-describedby={
-                        Boolean(anchorEl) ? `pie-method${ind}` : undefined
-                      }
-                      style={
-                        !props.isMobile
-                          ? {
-                              pointerEvents: "none",
-                            }
-                          : {}
-                      }
-                      onClick={handlePopoverOpen(ind)}
-                    >
-                      <div className={index.cardImage}>
-                        <img
-                          src={`${card.image?.url}`}
-                          alt={card.image?.alternativeText}
-                        />
+                  <Fragment key={"test" + ind}>
+                    <ButtonBase style={{ width: "100%" }}>
+                      <div
+                        key={"card_" + card.title}
+                        data-swiper-parallax={`${(ind + 1) * 70}`}
+                        data-swiper-parallax-opacity="0"
+                        aria-describedby={
+                          Boolean(anchorEl) ? `pie-method${ind}` : undefined
+                        }
+                        className={index.cardBase}
+                        style={
+                          !props.isMobile
+                            ? {
+                                pointerEvents: "none",
+                              }
+                            : {}
+                        }
+                        onClick={handlePopoverOpen(ind)}
+                      >
+                        <div className={index.cardImage}>
+                          <img
+                            src={`${card.image?.url}`}
+                            alt={card.image?.alternativeText}
+                          />
+                        </div>
+                        <div className={index.content}>
+                          <h3 className={"indieFlower"}>{card.title}</h3>
+                          <p>{card.subtitle}</p>
+                        </div>
                       </div>
-                      <div className={index.content}>
-                        <h3 className={"indieFlower"}>{card.title}</h3>
-                        <p>{card.subtitle}</p>
-                      </div>
-                    </div>
+                    </ButtonBase>
                     <Popover
                       key={"card-popover" + card.title + ind}
                       id={
@@ -453,7 +456,7 @@ const Page: NextPage<HomeProps> = (props) => {
                     >
                       <p className={index.popover}>{card.subtitle}</p>
                     </Popover>
-                  </>
+                  </Fragment>
                 ))}
             </div>
 
