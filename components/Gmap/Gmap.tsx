@@ -22,7 +22,7 @@ const GoogleMaps: FC<GoogleMapsProps> = ({
   defaultZoom,
   frameImgUrl,
 }) => {
-  const [height, setHeight] = useState(387);
+  const [height, setHeight] = useState(386);
   const width = useStoreState((state) => state.device.width);
   const wheight = useStoreState((state) => state.device.height);
   const ImgRef = useRef<any>();
@@ -36,7 +36,7 @@ const GoogleMaps: FC<GoogleMapsProps> = ({
         width: "100%",
         maxWidth: 624,
         position: "relative",
-        height: `${height}px`,
+        height: `${height - 1}px`,
         overflow: "hidden",
         margin: "auto",
       }}
