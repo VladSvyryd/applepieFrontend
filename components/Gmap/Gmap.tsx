@@ -53,7 +53,7 @@ const GoogleMaps: FC<GoogleMapsProps> = ({
       <div
         style={{
           position: "absolute",
-          top: 0,
+          top: "-1px",
           pointerEvents: "none",
         }}
       >
