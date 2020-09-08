@@ -136,6 +136,11 @@
     margin: 0;
     color: white;
   }
+  &.inverted {
+    h4 {
+      color: $accent-color;
+    }
+  }
 }
 .input {
   width: 100%;

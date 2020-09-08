@@ -102,7 +102,6 @@ const FormSlider = forwardRef<any>((props, ref) => {
     };
 
     fetchServices();
-    console.log({ contactForm });
   }, []);
 
   const setInterFormState = useStoreActions(
@@ -290,7 +289,6 @@ const FormSlider = forwardRef<any>((props, ref) => {
   };
 
   const isRequiredMessage = (value: any) => {
-    console.log({ value });
     let errorMessage;
     if (value.length <= 0) {
       errorMessage = contactForm && contactForm.message_error;
@@ -314,6 +312,7 @@ const FormSlider = forwardRef<any>((props, ref) => {
     },
   }));
   const [currentSlider, setCurrentSlide] = useState(0);
+  const [currentSliderHistory, setCurrentSlideHistory] = useState([0]);
   const reveal = {
     active: {
       scale: 1,
@@ -366,6 +365,7 @@ const FormSlider = forwardRef<any>((props, ref) => {
     if (canIGoNext() && currentSlider >= 0 && currentSlider < 3) {
       setCurrentSlide(currentSlider + 1);
       console.log(currentSlider + 1);
+      setCurrentSlideHistory((old) => [...old, currentSlider + 1]);
       switch (currentSlider + 1) {
         case 1:
           nameRef.current.focus();
@@ -443,12 +443,23 @@ const FormSlider = forwardRef<any>((props, ref) => {
               className={`${formSlider.bulletContainer}`}
             >
               <motion.span
-                animate={currentSlider === i ? "active" : "passive"}
+                animate={
+                  currentSliderHistory.findIndex((c) => i == c) >= 0
+                    ? "active"
+                    : "passive"
+                }
                 variants={activeBullet}
+                onClick={() =>
+                  i <= currentSliderHistory[currentSliderHistory.length - 1] &&
+                  setCurrentSlide(i)
+                }
                 className={`${formSlider.bullet} ${
                   //@ts-ignore
                   props.inverted && formSlider.inverted
-                } ${currentSlider === i && formSlider.active}`}
+                } ${
+                  currentSliderHistory.findIndex((c) => i == c) >= 0 &&
+                  formSlider.active
+                }`}
               ></motion.span>
             </motion.div>
           ))}
