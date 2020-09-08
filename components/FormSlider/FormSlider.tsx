@@ -60,13 +60,21 @@ export type Service = {
 };
 export type ContactForm = {
   services_question: string;
+  service_error_message: string;
   name_question: string;
   name: string;
+  name_error_message: string;
   email_question: string;
+  email_placeholder: string;
   project_question: string;
+  budget_error_message: string;
   budget_title: string;
+  budget_placeholder: string;
   date_title: string;
   message_title: string;
+  message_error: string;
+  message_placeholder: string;
+  email_question_error_en: string;
 };
 const FormSlider = forwardRef<any>((props, ref) => {
   const [myservices, setServices] = useState<any>(null);
@@ -94,6 +102,7 @@ const FormSlider = forwardRef<any>((props, ref) => {
     };
 
     fetchServices();
+    console.log({ contactForm });
   }, []);
 
   const setInterFormState = useStoreActions(
@@ -250,8 +259,7 @@ const FormSlider = forwardRef<any>((props, ref) => {
   const validate = (value: any) => {
     let errorMessage;
     if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,6}$/i.test(value)) {
-      errorMessage =
-        currentLanguage !== Language.de ? "Oops mistyped?" : "Ups vertippt?";
+      errorMessage = contactForm && contactForm.email_question_error;
       setFormObject((prev) => ({ ...prev, email: "" }));
     } else {
       setFormObject((prev) => ({ ...prev, email: value }));
@@ -261,10 +269,8 @@ const FormSlider = forwardRef<any>((props, ref) => {
   const isRequiredName = (value: any) => {
     let errorMessage;
     if (value.length <= 0) {
-      errorMessage =
-        currentLanguage !== Language.de
-          ? "No name, no game."
-          : "Ohne Namen läuft nichts.";
+      errorMessage = contactForm && contactForm.name_error_message;
+
       setFormObject((prev) => ({ ...prev, name: "" }));
     } else {
       setFormObject((prev) => ({ ...prev, name: value }));
@@ -275,10 +281,7 @@ const FormSlider = forwardRef<any>((props, ref) => {
     console.log(value);
     let errorMessage;
     if (value.length <= 0) {
-      errorMessage =
-        currentLanguage !== Language.de
-          ? "No money, no honey."
-          : "Ohne Geld läuft nichts.";
+      errorMessage = contactForm && contactForm.budget_error_message;
       setFormObject((prev) => ({ ...prev, value: "" }));
     } else {
       setFormObject((prev) => ({ ...prev, value }));
@@ -287,12 +290,10 @@ const FormSlider = forwardRef<any>((props, ref) => {
   };
 
   const isRequiredMessage = (value: any) => {
+    console.log({ value });
     let errorMessage;
     if (value.length <= 0) {
-      errorMessage =
-        currentLanguage !== Language.de
-          ? "Keep calm and tell your story."
-          : "Erzähl uns ruhig worum es geht.";
+      errorMessage = contactForm && contactForm.message_error;
       setFormObject((prev) => ({ ...prev, message: "" }));
     } else {
       setFormObject((prev) => ({ ...prev, message: value }));
@@ -495,9 +496,7 @@ const FormSlider = forwardRef<any>((props, ref) => {
                           props.inverted
                         }
                       >
-                        {currentLanguage !== Language.de
-                          ? "Please pick one or more categories"
-                          : "Wofür interessierst Du dich? Hacke ein oder mehr."}
+                        {contactForm && contactForm.service_error_message}
                       </Error>
                     )}
                   </div>
@@ -560,7 +559,7 @@ const FormSlider = forwardRef<any>((props, ref) => {
                     <Field
                       type="email"
                       name="email"
-                      placeholder="E-mail"
+                      placeholder={contactForm && contactForm.email_placeholder}
                       validate={validate}
                       className={`${formSlider.input} ${
                         //@ts-ignore
@@ -621,7 +620,9 @@ const FormSlider = forwardRef<any>((props, ref) => {
                         props.inverted && formSlider.inverted
                       }`}
                       innerRef={geldRef}
-                      placeholder="3000"
+                      placeholder={
+                        contactForm && contactForm.budget_placeholder
+                      }
                     />
                     <span className={formSlider.euro}>€</span>
                     <ErrorMessage
@@ -640,13 +641,15 @@ const FormSlider = forwardRef<any>((props, ref) => {
                   </div>
 
                   <div
-                    className={`${formSlider.textareaRow} ${
-                      formSlider.fieldRowMultiple
-                    } ${
+                    className={` ${formSlider.fieldRowMultiple} ${
                       //@ts-ignore
                       props.inverted && formSlider.inverted
                     }`}
-                    style={{ marginBottom: 20 }}
+                    style={{
+                      marginBottom: 20,
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
                   >
                     <h4>{contactForm && contactForm.date_title}</h4>
                     <DatePicker
@@ -663,19 +666,6 @@ const FormSlider = forwardRef<any>((props, ref) => {
                       }
                       onChange={(date) => setStartDate(date)}
                     />
-                    <ErrorMessage
-                      name="date"
-                      render={(msg) => (
-                        <Error
-                          inverted={
-                            //@ts-ignore
-                            props.inverted
-                          }
-                        >
-                          {msg}
-                        </Error>
-                      )}
-                    />
                   </div>
                   <div
                     className={`${formSlider.textareaRow} ${
@@ -683,44 +673,45 @@ const FormSlider = forwardRef<any>((props, ref) => {
                       props.inverted && formSlider.inverted
                     }`}
                   >
-                    <h4>
-                      {currentLanguage === 0
-                        ? "About project"
-                        : "Projektbeschreibung"}
-                    </h4>
+                    <h4>{contactForm && contactForm.message_title}</h4>
                     <Field
-                      type="text"
                       name="message"
                       validate={isRequiredMessage}
                       as="div"
                       className={`${formSlider.input} `}
-                    >
-                      {({ form: { setFieldValue } }: any) => (
-                        <TextareaAutosize
-                          aria-label="minimum height"
-                          rowsMin={3}
-                          rowsMax={11}
-                          onChange={(event) =>
-                            setFieldValue("message", event.target.value)
-                          }
-                          className={`${formSlider.textfield} ${
-                            //@ts-ignore
-                            props.inverted && formSlider.inverted
-                          }`}
-                        />
-                      )}
-                    </Field>
-                    <ErrorMessage
-                      name="message"
-                      render={(msg) => (
-                        <Error
-                          inverted={
-                            //@ts-ignore
-                            props.inverted
-                          }
-                        >
-                          {msg}
-                        </Error>
+                      render={({
+                        field,
+                        form: { setFieldValue, touched, errors },
+                      }: any) => (
+                        <>
+                          <TextareaAutosize
+                            aria-label="minimum height"
+                            {...field}
+                            rowsMin={6}
+                            rowsMax={9}
+                            onChange={(event) =>
+                              setFieldValue("message", event.target.value)
+                            }
+                            className={`${formSlider.textfield} ${
+                              //@ts-ignore
+                              props.inverted && formSlider.inverted
+                            }`}
+                            placeholder={
+                              contactForm && contactForm.message_placeholder
+                            }
+                          />
+
+                          {touched[field.name] && errors[field.name] && (
+                            <Error
+                              inverted={
+                                //@ts-ignore
+                                props.inverted
+                              }
+                            >
+                              {errors[field.name]}
+                            </Error>
+                          )}
+                        </>
                       )}
                     />
                   </div>

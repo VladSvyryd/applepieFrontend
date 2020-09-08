@@ -165,7 +165,8 @@
     }
   }
 }
-.input::placeholder {
+.input::placeholder,
+.textareaRow::placeholder {
   font-style: "Roboto", sans-serif !important;
 }
 .date_input {
@@ -173,6 +174,7 @@
 }
 .textareaRow {
   max-width: 510px;
+  min-height: 130px;
   display: flex;
   flex-direction: column;
   h4 {
@@ -188,11 +190,18 @@
   color: white;
   border: none;
   border-bottom: 1px solid white;
-  min-height: 53px;
+  // min-height: 53px;
   max-width: 510px;
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+  }
   &.inverted {
     color: $accent-color;
     border-bottom: 1px solid $accent-color;
+
+    &::placeholder {
+      color: rgba(46, 44, 65, 0.4);
+    }
   }
   &:focus {
     outline: 0;

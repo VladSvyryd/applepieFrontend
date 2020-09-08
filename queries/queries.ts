@@ -1020,13 +1020,21 @@ export const contact_form_de = gql`
   query {
     contact {
       services_question
+      service_error_message
       name_question
       name
+      name_error_message
       email_question
+      email_placeholder
+      email_question_error
       project_question
+      budget_error_message
       budget_title
+      budget_placeholder
       date_title
       message_title
+      message_placeholder
+      message_error
     }
   }
 `;
@@ -1035,13 +1043,21 @@ export const contact_form_en = gql`
   query {
     contact {
       services_question: services_question_en
-      name_question: name_question_en
+      service_error_message: service_error_message
+      name_question: name_question
       name: name_en
+      name_error_message: name_error_message_en
       email_question: email_question_en
+      email_placeholder: email_placeholder_en
+      email_question_error: email_question_error_en
       project_question: project_question_en
+      budget_error_message: budget_error_message_en
       budget_title: budget_title_en
+      budget_placeholder: budget_placeholder_en
       date_title: date_title_en
       message_title: message_title_en
+      message_placeholder: message_placeholder_en
+      message_error: message_error_en
     }
   }
 `;

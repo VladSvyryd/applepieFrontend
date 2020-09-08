@@ -98,13 +98,7 @@ export type HomePage = {
   seventh_section: Idea;
   eighth_section: Idea;
   contact: Address;
-  social_links: Link[];
-  services: Link[];
-  known_by: Link[];
-  navigation_links: Link[];
   buttons: Button[];
-  known_by_title: string;
-  pagination: Pagination;
   reviews: Review[];
 };
 export enum DEVICE {
