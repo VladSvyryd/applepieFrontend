@@ -97,6 +97,7 @@ export type HomePage = {
   sixth_section: Idea;
   seventh_section: Idea;
   eighth_section: Idea;
+  pagination: Pagination;
   contact: Address;
   buttons: Button[];
   reviews: Review[];

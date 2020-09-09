@@ -45,7 +45,7 @@ const InteractiveForm: FC<InteractiveFormProps> = (props) => {
       clipPath: `circle(${defineRadiusOfCircle()}px at calc(100% - 52px) 40px)`,
       transition: {
         type: "spring",
-        stiffness: 20,
+        stiffness: 30,
         restDelta: 2,
       },
     }),

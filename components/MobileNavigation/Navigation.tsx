@@ -57,14 +57,14 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
       clipPath: `circle(${defineRadiusOfCircle()}px at calc(100% - 52px) 40px)`,
       transition: {
         type: "spring",
-        stiffness: 20,
-        restDelta: 2,
+        stiffness: 30,
+        restDelta: 0.5,
       },
     }),
     closed: (_custom: { width: number; height: number }) => ({
       clipPath: `circle(0px at calc(100% - 52px)  35px)`,
       transition: {
-        delay: 0.3,
+        delay: 0.2,
         type: "spring",
         stiffness: 400,
         damping: 40,
