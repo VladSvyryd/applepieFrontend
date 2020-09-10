@@ -470,7 +470,11 @@ const FormSlider = forwardRef<any>((props, ref) => {
         <Formik initialValues={initialFormikState} onSubmit={handleSubmit}>
           {({ isSubmitting, handleSubmit }) => (
             <>
-              <Form className={`${formSlider.form}  themeForm`}>
+              <Form
+                className={`${formSlider.form} ${
+                  currentSlider === 3 && formSlider.minHeight
+                }  themeForm`}
+              >
                 <motion.div
                   className={`${formSlider.slide}`}
                   animate={currentSlider === 0 ? "active" : "passive"}
