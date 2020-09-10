@@ -139,6 +139,7 @@ const MySwiper: React.FC<CarouselProps> = ({
   const activeIndexHistory = useStoreState(
     (state) => state.swiper.activeIndexHistory
   );
+
   function updateCarouselState(swiperIndex: number) {
     setSelected(swiperIndex);
     updateActiveIndexHistory(swiperIndex);
@@ -203,13 +204,11 @@ const MySwiper: React.FC<CarouselProps> = ({
       });
     }
   };
-  // const responsiveScreens = useMemo(() => defineBulletPositions, [width]);
 
   useEffect(() => {
     defineBulletPositions();
   }, [width]);
-  console.log(swiper);
-  // alert(swiper.activeIndex);
+
   const returnAnimateClass = (i: number) => {
     if (activeIndexHistory.findIndex((li) => li == i) != -1) {
       if (!isMobile && i === hoveredIndex) return "visibleAndHovered";
@@ -221,6 +220,7 @@ const MySwiper: React.FC<CarouselProps> = ({
 
     return "hidden";
   };
+
   return (
     <div className="responsiveSlide">
       <Swiper
@@ -235,10 +235,11 @@ const MySwiper: React.FC<CarouselProps> = ({
         }
         slidesPerView={1}
         onSwiper={(swiper: SwiperCore) => setSwiper(swiper)}
-        mousewheel={{ releaseOnEdges: true }}
+        mousewheel={{ releaseOnEdges: true, sensitivity: 2 }}
         preloadImages={false}
         watchSlidesVisibility
         lazy={true}
+        preventInteractionOnTransition={true}
       >
         {children &&
           children.map((one: any, index: number) => (
