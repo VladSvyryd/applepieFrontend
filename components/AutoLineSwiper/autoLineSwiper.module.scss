@@ -12,9 +12,12 @@
   @media (max-width: 600px) {
     margin: 25px 0;
   }
+  .reverse {
+    transform: rotate(180deg);
+  }
 }
 .reverse {
-  transform: rotate(180deg);
+  transform: rotate(-180deg);
 }
 
 .slide {

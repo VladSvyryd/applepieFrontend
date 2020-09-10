@@ -78,7 +78,7 @@ const ButtonOrLink: FC<ButtonOrLinkProps> = ({
           <a style={{ color: "inherit" }}>{title}</a>
         </Link>
       ) : (
-        <Link href={functionOrUrl || ""} passHref>
+        <Link prefetch={false} href={functionOrUrl || ""} passHref>
           <a target="_blank" href={functionOrUrl} style={{ color: "inherit" }}>
             {title}
           </a>

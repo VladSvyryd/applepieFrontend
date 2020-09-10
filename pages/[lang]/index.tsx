@@ -42,8 +42,10 @@ import SwiperCore from "swiper";
 import ButtonOrLink from "../../components/ButtonOrLink/ButtonOrLink";
 import LineSwiper from "../../components/AutoLineSwiper/LineSwiper";
 import Popover from "@material-ui/core/Popover";
-import GoogleMaps from "../../components/Gmap/Gmap";
 import { ButtonBase } from "@material-ui/core";
+const GoogleMaps = dynamic(() => import("../../components/Gmap/Gmap"), {
+  ssr: false,
+});
 
 const Page: NextPage<HomeProps> = (props) => {
   const { pageFromCMS, footer, services, legal } = props;
@@ -598,12 +600,6 @@ const Page: NextPage<HomeProps> = (props) => {
           variants={backgroundAnim}
         >
           <div className={index.left}>
-            {/* <img
-              src={
-              }
-              alt={pageFromCMS.eighth_section?.images[0]?.alternativeText}
-              className="responsiveImg"
-            /> */}
             <GoogleMaps
               apiKey={String(process.env.GOOGLE_MAPS_API_KEY)}
               location={{
