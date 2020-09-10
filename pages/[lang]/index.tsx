@@ -100,7 +100,12 @@ const Page: NextPage<HomeProps> = (props) => {
   // IF for landscape mode
   return !props.isMobile ||
     (props.isMobile && orientation === ORIENTATION.portrait) ? (
-    <Layout navigation={props.navigation} horizontalFooter footer={footer}>
+    <Layout
+      navigation={props.navigation}
+      horizontalFooter
+      footer={footer}
+      meta={pageFromCMS.meta}
+    >
       <h1 className="visuallyHidden">Applepie</h1>
       <InteractiveForm />
       {activeCarouselIndex == 8 && <LegalNavigation links={legal} />}

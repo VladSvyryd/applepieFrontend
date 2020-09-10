@@ -515,6 +515,20 @@ export const landing_de = gql`
           ...Review
         }
       }
+
+      meta {
+        title
+        description
+        image {
+          url
+          name
+          alternativeText
+          caption
+          width
+          height
+          id
+        }
+      }
     }
   }
 
@@ -740,6 +754,19 @@ export const landing_en = gql`
       reviews {
         ... on Review {
           ...Review
+        }
+      }
+      meta {
+        title: title_en
+        description: description_en
+        image {
+          url
+          name
+          alternativeText
+          caption
+          width
+          height
+          id
         }
       }
     }

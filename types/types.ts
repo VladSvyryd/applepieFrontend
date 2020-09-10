@@ -12,7 +12,11 @@ export enum ButtonType {
 export const locales = [Language.en, Language.de] as const;
 
 export const defaultLocale = Language.de;
-
+export type Meta = {
+  title: string;
+  description: string;
+  image: Image;
+};
 export type LayoutProps = {
   navigation: NavType;
   children: ReactNode;
@@ -21,6 +25,7 @@ export type LayoutProps = {
   simple_header?: boolean;
   footer?: Footer;
   legal?: Button[];
+  meta?: Meta;
 };
 
 export type Footer = {
@@ -101,6 +106,7 @@ export type HomePage = {
   contact: Address;
   buttons: Button[];
   reviews: Review[];
+  meta: Meta;
 };
 export enum DEVICE {
   MOBILE,

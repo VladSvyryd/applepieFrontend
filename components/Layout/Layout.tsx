@@ -4,7 +4,7 @@ import { LayoutProps, Language } from "../../types/types";
 import Navigation from "../Navigation/Navigation";
 import layout from "./layout.module.scss";
 import { useStoreState } from "../../hooks";
-// import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import React from "react";
 
@@ -15,12 +15,10 @@ const Layout: React.FC<LayoutProps> = ({
   verticalFooter = false,
   simple_header = false,
   footer,
+  meta,
 }) => {
-  // const router = useRouter();
-  // const layoutStyle = {
-  //   width: "100%",
-  //   height: "100%",
-  // };
+  const router = useRouter();
+
   const activeCarouselIndex = useStoreState(
     (state) => state.swiper.activeIndex
   );
@@ -28,7 +26,7 @@ const Layout: React.FC<LayoutProps> = ({
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
   );
-
+  console.log(router);
   return (
     <div
       style={{
@@ -40,9 +38,50 @@ const Layout: React.FC<LayoutProps> = ({
       tabIndex={-1}
     >
       <Head>
-        <title>applepie Berlin</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+        <title>{(meta && meta.title) || "applepie Berlin"}</title>
+        <meta
+          name="title"
+          content={(meta && meta.title) || "applepie Berlin"}
+        />
+        <meta
+          name="description"
+          content={(meta && meta.description) || "applepie Berlin"}
+        />
+
+        {/* <!-- Open Graph / Facebook --> */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://applepie.berlin" />
+        <meta
+          property="og:title"
+          content={(meta && meta.title) || "applepie Berlin"}
+        />
+        <meta
+          property="og:description"
+          content={(meta && meta.description) || "applepie Berlin"}
+        />
+        <meta
+          property="og:image"
+          content={(meta && meta.image?.image?.url) || ""}
+        />
+
+        {/* <!-- Twitter --> */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://applepie.berlin" />
+        <meta
+          property="twitter:title"
+          content={(meta && meta.title) || "applepie Berlin"}
+        />
+        <meta
+          property="twitter:description"
+          content={(meta && meta.description) || "applepie Berlin"}
+        />
+        <meta
+          property="twitter:image"
+          content={(meta && meta.image?.image?.url) || ""}
+        />
       </Head>
       {!simple_header ? (
         <header className={`${layout.header}`}>
