@@ -63,28 +63,33 @@ const ButtonOrLink: FC<ButtonOrLinkProps> = ({
       </motion.button>
     );
   }
-  return (
-    <motion.button
-      className={`${className}`}
-      data-swiper-parallax="1100"
-      data-swiper-parallax-opacity="0"
-      whileTap={{ scale: 0.9 }}
+  return linkType === LinkType.internal ? (
+    <Link
+      href={`/${linkLanguage}/${functionOrUrl}`}
+      as={`/${linkLanguage}/${functionOrUrl}`}
     >
-      {linkType === LinkType.internal ? (
-        <Link
-          href={`/${linkLanguage}/${functionOrUrl}`}
-          as={`/${linkLanguage}/${functionOrUrl}`}
-        >
-          <a style={{ color: "inherit" }}>{title}</a>
-        </Link>
-      ) : (
-        <Link prefetch={false} href={functionOrUrl || ""} passHref>
-          <a target="_blank" href={functionOrUrl} style={{ color: "inherit" }}>
-            {title}
-          </a>
-        </Link>
-      )}
-    </motion.button>
+      <motion.a
+        className={`${className}`}
+        data-swiper-parallax="1100"
+        data-swiper-parallax-opacity="0"
+        whileTap={{ scale: 0.9 }}
+      >
+        {title}
+      </motion.a>
+    </Link>
+  ) : (
+    <Link prefetch={false} href={functionOrUrl || ""} passHref>
+      <motion.a
+        className={`${className}`}
+        data-swiper-parallax="1100"
+        data-swiper-parallax-opacity="0"
+        whileTap={{ scale: 0.9 }}
+        target="_blank"
+        href={functionOrUrl}
+      >
+        {title}
+      </motion.a>
+    </Link>
   );
 };
 
