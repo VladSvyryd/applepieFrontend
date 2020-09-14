@@ -10,6 +10,12 @@
     height: 80px;
   }
 
+  .logo {
+    max-height: 50px;
+    @media (max-width: 768px) {
+      max-width: 126px;
+    }
+  }
   .linkSection {
     @media (max-width: 1400px) {
       margin-bottom: 20px;
@@ -75,11 +81,5 @@
 .mobile {
   @media (max-width: 1400px) {
     display: none !important;
-  }
-}
-
-.logo {
-  @media (max-width: 768px) {
-    max-width: 116px;
   }
 }

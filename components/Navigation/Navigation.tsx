@@ -25,7 +25,7 @@ const Navigation: React.FC<NavProps> = (props) => {
 
   return (
     <nav className={`${nav.navbar} flexColumns alignCenter content-frame `}>
-      <div className={""}>
+      <div className={nav.logoContainer}>
         {logo && (
           <Link
             href={`/${Language[currentLanguage]}`}
