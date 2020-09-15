@@ -129,7 +129,7 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
                 buttonClassName={nav.tooltipButtonFrame}
                 clickableElement={service.name}
                 popOverElement={
-                  <div style={{ padding: "0 13px" }}>
+                  <div style={{ padding: "0 13px", maxWidth: 350 }}>
                     <p>{service.description}</p>
                   </div>
                 }
