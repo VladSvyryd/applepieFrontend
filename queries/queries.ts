@@ -1022,6 +1022,7 @@ export const services_de = gql`
           group
           name
           pipedrive_id
+          description
         }
       }
     }
@@ -1037,6 +1038,7 @@ export const services_en = gql`
           group
           name: name_en
           pipedrive_id
+          description: description_en
         }
       }
     }

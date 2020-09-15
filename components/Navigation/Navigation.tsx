@@ -14,7 +14,7 @@ const Navigation: React.FC<NavProps> = (props) => {
     plane,
     plane_inverted,
   } = props.navigation;
-  const { activeCarouselIndex, invertedSlides, social_links } = props;
+  const { activeCarouselIndex, invertedSlides, social_links, services } = props;
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
   );
@@ -108,6 +108,7 @@ const Navigation: React.FC<NavProps> = (props) => {
         <MobileNavigation
           links={typeof links !== "undefined" ? links : []}
           social_links={social_links}
+          services={services}
         />
       )}
     </nav>

@@ -105,6 +105,7 @@ const Page: NextPage<HomeProps> = (props) => {
       horizontalFooter
       footer={footer}
       meta={pageFromCMS.meta}
+      services={services}
     >
       <h1 className="visuallyHidden">Applepie</h1>
       <InteractiveForm />

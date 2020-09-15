@@ -19,6 +19,7 @@
   top: 0;
   right: 0;
   width: 90%;
+  max-width: 240px;
   height: 100%;
   background: $accent-color;
   box-shadow: -3px -1px 10px #2e2c41;
@@ -79,4 +80,27 @@ a.navLink {
 .languageSwitcher {
   position: absolute;
   bottom: 8%;
+}
+.tooltipButtonFrame {
+  border-radius: 8px;
+  font-family: "Rubik", sans-serif;
+  font-size: 16px;
+  color: white;
+  padding: 10px;
+  margin: 5px 0;
+  width: 200px;
+  justify-content: center;
+  &.inverted {
+    color: $accent-color;
+  }
+}
+.start_project {
+  position: absolute;
+  bottom: 15%;
+  .start_project_button {
+    width: 200px !important;
+    font-size: 16px !important;
+    padding: 10px 0 !important;
+    font-weight: bold;
+  }
 }

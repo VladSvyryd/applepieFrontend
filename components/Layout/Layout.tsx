@@ -4,7 +4,6 @@ import { LayoutProps, Language } from "../../types/types";
 import Navigation from "../Navigation/Navigation";
 import layout from "./layout.module.scss";
 import { useStoreState } from "../../hooks";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import React from "react";
 
@@ -16,9 +15,8 @@ const Layout: React.FC<LayoutProps> = ({
   simple_header = false,
   footer,
   meta,
+  services,
 }) => {
-  const router = useRouter();
-
   const activeCarouselIndex = useStoreState(
     (state) => state.swiper.activeIndex
   );
@@ -26,7 +24,6 @@ const Layout: React.FC<LayoutProps> = ({
   const currentLanguage = useStoreState(
     (state) => state.language.currentLanguage
   );
-  console.log(router);
   return (
     <div
       style={{
@@ -90,6 +87,7 @@ const Layout: React.FC<LayoutProps> = ({
             activeCarouselIndex={activeCarouselIndex}
             invertedSlides={invertedSlides}
             social_links={footer?.social_links}
+            services={services}
           />
         </header>
       ) : (

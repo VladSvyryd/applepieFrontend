@@ -57,6 +57,7 @@ export type Service = {
   group: string;
   name: string;
   pipedrive_id: string;
+  description: string;
 };
 export type ContactForm = {
   services_question: string;

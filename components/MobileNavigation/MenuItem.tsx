@@ -26,7 +26,7 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
   return (
     <motion.li
       variants={variants}
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       className={nav.li}
     >

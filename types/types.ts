@@ -26,6 +26,7 @@ export type LayoutProps = {
   footer?: Footer;
   legal?: Button[];
   meta?: Meta;
+  services?: Service[];
 };
 
 export type Footer = {
@@ -40,6 +41,7 @@ export type NavProps = {
   invertedSlides: number[];
   social_links?: Link[];
   legal?: Button[];
+  services?: Service[];
 };
 export type CarouselProps = {
   children: ReactNodeArray;
@@ -54,7 +56,7 @@ export type HomeProps = {
   navigation: NavType;
   isMobile: boolean;
   footer?: Footer;
-  services: Service[];
+  services?: Service[];
   legal: Button[];
 };
 export type AboutProps = {
@@ -84,6 +86,7 @@ export type NavType = {
   logo_inverted?: Picture;
   plane?: Picture;
   plane_inverted?: Picture;
+  services?: Service[];
 };
 
 export interface NavLink {
