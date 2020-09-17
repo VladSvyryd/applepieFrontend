@@ -22,7 +22,6 @@ const Tooltip: FC<TooltipProps> = ({
   inverted = false,
   tagName,
   buttonClassInvertedName,
-  withBackground = true,
 }) => {
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
   const [openPopoverID, setOpenPopoverID] = useState<number | null>();
