@@ -28,6 +28,9 @@
   @media (max-width: 1390px) {
     display: none;
   }
+  button {
+    font-size: inherit;
+  }
   ul.introServicesList {
     margin-left: 342px;
     list-style: none;
@@ -38,7 +41,12 @@
     li {
       cursor: pointer;
       padding: 4px 0;
+      .tooltip {
+        padding: 0px 6px;
+        border-radius: 8px;
+      }
       &:hover {
+        button,
         a {
           color: white;
         }

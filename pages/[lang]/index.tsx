@@ -41,6 +41,7 @@ const Carousel = dynamic(() => import("../../components/Swiper/Swiper"), {
 import SwiperCore from "swiper";
 import ButtonOrLink from "../../components/ButtonOrLink/ButtonOrLink";
 import LineSwiper from "../../components/AutoLineSwiper/LineSwiper";
+import Tooltip from "../../components/Tooltip/Tooltip";
 import Popover from "@material-ui/core/Popover";
 import { ButtonBase } from "@material-ui/core";
 const GoogleMaps = dynamic(() => import("../../components/Gmap/Gmap"), {
@@ -270,7 +271,7 @@ const Page: NextPage<HomeProps> = (props) => {
               <div
                 className={`${index.introServices} + ${index.verticalMargin}`}
               >
-                <ul className={`${index.introServicesList} indieFlower`}>
+                <ul className={`${index.introServicesList} `}>
                   {services &&
                     services.map((service, i) => (
                       <li
@@ -290,7 +291,19 @@ const Page: NextPage<HomeProps> = (props) => {
                           }px`,
                         }}
                       >
-                        <a>{service.name}</a>
+                        {/* <a>{service.name}</a> */}
+                        <Tooltip
+                          buttonClassName={`${index.tooltip} indieFlower`}
+                          clickableElement={service.name}
+                          popOverElement={
+                            <div style={{ padding: "0 13px", maxWidth: 350 }}>
+                              <p>{service.description}</p>
+                            </div>
+                          }
+                          index={i}
+                          tagName="service-home-"
+                          inverted={true}
+                        />
                       </li>
                     ))}
                 </ul>
