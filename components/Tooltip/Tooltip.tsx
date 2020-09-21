@@ -40,26 +40,24 @@ const Tooltip: FC<TooltipProps> = ({
   return (
     <>
       <ButtonBase disabled={disabled}>
-        {
-          <span
-            aria-describedby={
-              Boolean(anchorEl) ? `${tagName}-${index}` : undefined
-            }
-            className={`${buttonClassName} ${
-              inverted && buttonClassInvertedName
-            }`}
-            onClick={handlePopoverOpen(index)}
-            style={{
-              display: "flex",
-              flex: "0 0 100%",
-              background: `${
-                inverted ? "rgba(0, 0,0, 0.05)" : "rgba(255, 255,255, 0.05)"
-              }`,
-            }}
-          >
-            {clickableElement}
-          </span>
-        }
+        <span
+          aria-describedby={
+            Boolean(anchorEl) ? `${tagName}-${index}` : undefined
+          }
+          className={`${buttonClassName} ${
+            inverted && buttonClassInvertedName
+          }`}
+          onClick={handlePopoverOpen(index)}
+          style={{
+            display: "flex",
+            flex: "0 0 100%",
+            background: `${
+              inverted ? "rgba(0, 0,0, 0.05)" : "rgba(255, 255,255, 0.05)"
+            }`,
+          }}
+        >
+          {clickableElement}
+        </span>
       </ButtonBase>
       <Popover
         id={openPopoverID === index ? `${tagName}-${index}` : undefined}

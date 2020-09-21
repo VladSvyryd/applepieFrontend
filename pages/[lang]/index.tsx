@@ -41,7 +41,6 @@ const Carousel = dynamic(() => import("../../components/Swiper/Swiper"), {
 import SwiperCore from "swiper";
 import ButtonOrLink from "../../components/ButtonOrLink/ButtonOrLink";
 import LineSwiper from "../../components/AutoLineSwiper/LineSwiper";
-import Tooltip from "../../components/Tooltip/Tooltip";
 import Popover from "@material-ui/core/Popover";
 import { ButtonBase } from "@material-ui/core";
 const GoogleMaps = dynamic(() => import("../../components/Gmap/Gmap"), {
@@ -273,38 +272,57 @@ const Page: NextPage<HomeProps> = (props) => {
               >
                 <ul className={`${index.introServicesList} `}>
                   {services &&
-                    services.map((service, i) => (
-                      <li
-                        onMouseOver={() => handleServiceHover(i)}
-                        onMouseLeave={() => handleServiceLeave()}
-                        key={"service_input" + i}
-                        data-swiper-parallax={-i * 100 + 500}
-                        data-swiper-parallax-opacity="0"
-                        data-middle={
-                          i <= Math.floor(services.length / 2) && true
-                        }
-                        style={{
-                          paddingLeft: `${
-                            i <= Math.floor(services.length / 2) - 1
-                              ? i * 15
-                              : (services.length - i - 1) * 15
-                          }px`,
-                        }}
-                      >
-                        {/* <a>{service.name}</a> */}
-                        <Tooltip
-                          buttonClassName={`${index.tooltip} indieFlower`}
-                          clickableElement={service.name}
-                          popOverElement={
-                            <div style={{ padding: "0 13px", maxWidth: 350 }}>
-                              <p>{service.description}</p>
-                            </div>
+                    services.map((service, ind) => (
+                      <Fragment key={"service-fragment" + ind}>
+                        <ButtonBase
+                          style={{
+                            marginLeft: `${
+                              ind <= Math.floor(services.length / 2) - 1
+                                ? ind * 15
+                                : (services.length - ind - 1) * 15
+                            }px`,
+                            padding: "10px 0",
+                          }}
+                          onMouseOver={() => handleServiceHover(ind)}
+                          onMouseLeave={() => handleServiceLeave()}
+                        >
+                          <div
+                            data-swiper-parallax={`${(ind + 1) * 70}`}
+                            data-swiper-parallax-opacity="0"
+                            aria-describedby={
+                              Boolean(anchorEl)
+                                ? `service-home-${ind}`
+                                : undefined
+                            }
+                            className={`${index.tooltip} indieFlower`}
+                            onClick={handlePopoverOpen(ind)}
+                          >
+                            {service.name}
+                          </div>
+                        </ButtonBase>
+                        <Popover
+                          id={
+                            openPopoverID === ind
+                              ? `service-home-${ind}`
+                              : undefined
                           }
-                          index={i}
-                          tagName="service-home-"
-                          inverted={true}
-                        />
-                      </li>
+                          open={openPopoverID === ind}
+                          anchorEl={anchorEl}
+                          onClose={handlePopoverClose}
+                          anchorOrigin={{
+                            vertical: "bottom",
+                            horizontal: "center",
+                          }}
+                          transformOrigin={{
+                            vertical: "top",
+                            horizontal: "center",
+                          }}
+                        >
+                          <div style={{ padding: "0 13px", maxWidth: 350 }}>
+                            <p>{service.description}</p>
+                          </div>
+                        </Popover>
+                      </Fragment>
                     ))}
                 </ul>
               </div>

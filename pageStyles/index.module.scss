@@ -35,21 +35,19 @@
     margin-left: 342px;
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     @media (max-width: 1530px) {
       margin-left: 300px;
     }
-    li {
-      cursor: pointer;
-      padding: 4px 0;
-      .tooltip {
-        padding: 0px 6px;
-        border-radius: 8px;
-      }
+    .tooltip {
+      padding: 0px 6px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.05);
       &:hover {
-        button,
-        a {
-          color: white;
-        }
+        background: rgba(255, 255, 255, 0.06);
       }
     }
   }
@@ -390,7 +388,7 @@
       @media (max-height: 700px) and(max-width: 450px) {
         height: 100%;
       }
-      .cardBase {
+      .toolbar {
         @media (max-width: 680px) {
           width: 100%;
           max-width: 350px;
