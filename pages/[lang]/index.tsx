@@ -96,7 +96,6 @@ const Page: NextPage<HomeProps> = (props) => {
     setAnchorEl(null);
     setOpenPopoverID(null);
   };
-
   // IF for landscape mode
   return !props.isMobile ||
     (props.isMobile && orientation === ORIENTATION.portrait) ? (
@@ -274,32 +273,37 @@ const Page: NextPage<HomeProps> = (props) => {
                   {services &&
                     services.map((service, ind) => (
                       <Fragment key={"service-fragment" + ind}>
-                        <ButtonBase
-                          style={{
-                            marginLeft: `${
-                              ind <= Math.floor(services.length / 2) - 1
-                                ? ind * 15
-                                : (services.length - ind - 1) * 15
-                            }px`,
-                            padding: "10px 0",
-                          }}
-                          onMouseOver={() => handleServiceHover(ind)}
-                          onMouseLeave={() => handleServiceLeave()}
-                        >
-                          <div
-                            data-swiper-parallax={`${(ind + 1) * 70}`}
-                            data-swiper-parallax-opacity="0"
-                            aria-describedby={
-                              Boolean(anchorEl)
-                                ? `service-home-${ind}`
-                                : undefined
-                            }
-                            className={`${index.tooltip} indieFlower`}
-                            onClick={handlePopoverOpen(ind)}
+                        <span onClick={handlePopoverOpen(ind)}>
+                          <ButtonBase
+                            style={{
+                              marginLeft: `${
+                                ind <= Math.floor(services.length / 2) - 1
+                                  ? ind * 15
+                                  : (services.length - ind - 1) * 15
+                              }px`,
+                              margin: "10px 0",
+                            }}
+                            onMouseOver={() => handleServiceHover(ind)}
+                            onMouseLeave={() => handleServiceLeave()}
                           >
-                            {service.name}
-                          </div>
-                        </ButtonBase>
+                            <div
+                              ref={myRef}
+                              data-swiper-parallax={`${(ind + 1) * 70}`}
+                              data-swiper-parallax-opacity="0"
+                              aria-describedby={
+                                Boolean(anchorEl)
+                                  ? `service-home-${ind}`
+                                  : undefined
+                              }
+                              className={`${index.tooltip} indieFlower`}
+                              style={{
+                                pointerEvents: "none",
+                              }}
+                            >
+                              {service.name}
+                            </div>
+                          </ButtonBase>
+                        </span>
                         <Popover
                           id={
                             openPopoverID === ind
