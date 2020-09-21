@@ -287,7 +287,6 @@ const Page: NextPage<HomeProps> = (props) => {
                             onMouseLeave={() => handleServiceLeave()}
                           >
                             <div
-                              ref={myRef}
                               data-swiper-parallax={`${(ind + 1) * 70}`}
                               data-swiper-parallax-opacity="0"
                               aria-describedby={
