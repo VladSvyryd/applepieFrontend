@@ -25,7 +25,6 @@
   box-shadow: -3px -1px 10px #2e2c41;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
 .ul,
@@ -36,6 +35,10 @@
 
 .ul {
   align-self: center;
+  margin-top: 70%;
+  @media (max-width: 720px) {
+    margin-top: 40%;
+  }
 }
 
 .li {

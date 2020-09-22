@@ -273,7 +273,11 @@ const Page: NextPage<HomeProps> = (props) => {
                   {services &&
                     services.map((service, ind) => (
                       <Fragment key={"service-fragment" + ind}>
-                        <span onClick={handlePopoverOpen(ind)}>
+                        <span
+                          onClick={handlePopoverOpen(ind)}
+                          onMouseOver={() => handleServiceHover(ind)}
+                          onMouseLeave={() => handleServiceLeave()}
+                        >
                           <ButtonBase
                             style={{
                               marginLeft: `${
@@ -281,10 +285,10 @@ const Page: NextPage<HomeProps> = (props) => {
                                   ? ind * 15
                                   : (services.length - ind - 1) * 15
                               }px`,
-                              margin: "10px 0",
+                              marginTop: "10px",
+                              marginBottom: "10px",
+                              borderRadius: 8,
                             }}
-                            onMouseOver={() => handleServiceHover(ind)}
-                            onMouseLeave={() => handleServiceLeave()}
                           >
                             <div
                               data-swiper-parallax={`${(ind + 1) * 70}`}
@@ -450,7 +454,7 @@ const Page: NextPage<HomeProps> = (props) => {
                 pageFromCMS.forth_section?.cards?.map((card, ind) => (
                   <Fragment key={"test" + ind}>
                     <ButtonBase
-                      className={index.cardBase}
+                      className={index.toolbar}
                       disabled={!props.isMobile ? true : false}
                     >
                       <div
