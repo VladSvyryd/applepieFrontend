@@ -453,7 +453,7 @@ const Page: NextPage<HomeProps> = (props) => {
                     >
                       <div
                         key={"card_" + card.title}
-                        data-swiper-parallax={`${(ind + 50 + 1) * 70}`}
+                        data-swiper-parallax={`${ind * 70}`}
                         data-swiper-parallax-opacity="0"
                         aria-describedby={
                           Boolean(anchorEl)
