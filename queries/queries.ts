@@ -1119,7 +1119,7 @@ export const legal_links_with_text_de = gql`
     legal {
       links {
         text
-        function
+        function: url
         subtext
       }
     }
@@ -1130,7 +1130,7 @@ export const legal_links_with_text_en = gql`
     legal {
       links {
         text: text_en
-        function: function_en
+        function: url_en
         subtext: subtext_en
       }
     }
