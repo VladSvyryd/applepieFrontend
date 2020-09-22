@@ -117,6 +117,7 @@ type CarouselProps = {
   swiper: SwiperCore | undefined;
   setSwiper: Dispatch<SetStateAction<SwiperCore | undefined>>;
 };
+
 const MySwiper: React.FC<CarouselProps> = ({
   children,
   paginationObject,
@@ -140,9 +141,9 @@ const MySwiper: React.FC<CarouselProps> = ({
     (state) => state.swiper.activeIndexHistory
   );
 
-  function updateCarouselState(swiperIndex: number) {
-    setSelected(swiperIndex);
-    updateActiveIndexHistory(swiperIndex);
+  function updateCarouselState(swiperIndex: SwiperCore) {
+    setSelected(swiperIndex.activeIndex);
+    updateActiveIndexHistory(swiperIndex.activeIndex);
   }
 
   const [paginationImg, setPaginationImg] = useState({
@@ -230,12 +231,10 @@ const MySwiper: React.FC<CarouselProps> = ({
         centeredSlides
         direction="horizontal"
         className="myCustomSwiper"
-        onSlideChange={(swiper: SwiperCore) =>
-          updateCarouselState(swiper.activeIndex)
-        }
+        onSlideChange={(swiper: SwiperCore) => updateCarouselState(swiper)}
         slidesPerView={1}
         onSwiper={(swiper: SwiperCore) => setSwiper(swiper)}
-        mousewheel={{ releaseOnEdges: true, sensitivity: 0.1 }}
+        mousewheel={{ releaseOnEdges: false, sensitivity: 1 }}
         preloadImages={false}
         watchSlidesVisibility
         lazy={true}

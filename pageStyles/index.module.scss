@@ -25,17 +25,23 @@
 }
 .introServices {
   font-size: 26px;
-  @media (max-width: 1390px) {
+  @media (max-width: 1380px) {
     display: none;
   }
   span {
     cursor: pointer;
+    padding: 5px 0;
   }
   button {
     font-size: inherit;
   }
+  .withHover {
+    &:hover {
+      color: white;
+    }
+  }
   ul.introServicesList {
-    margin-left: 342px;
+    margin-left: 332px;
     list-style: none;
     padding: 0;
     display: flex;
@@ -48,10 +54,7 @@
     .tooltip {
       padding: 0px 6px;
       border-radius: 8px;
-      background: rgba(0, 0, 0, 0.05);
-      &:hover {
-        background: rgba(255, 255, 255, 0.06);
-      }
+      color: white;
     }
   }
 }
@@ -176,6 +179,9 @@
     position: absolute;
     left: 1;
     top: 49.7%;
+    @media (max-width: 1380px) {
+      display: none;
+    }
   }
 }
 

@@ -96,6 +96,7 @@ const Page: NextPage<HomeProps> = (props) => {
     setAnchorEl(null);
     setOpenPopoverID(null);
   };
+
   // IF for landscape mode
   return !props.isMobile ||
     (props.isMobile && orientation === ORIENTATION.portrait) ? (
@@ -240,32 +241,30 @@ const Page: NextPage<HomeProps> = (props) => {
                 data-swiper-parallax-opacity="0"
               />
 
-              {deviceWidth >= 1390 ? (
-                <motion.img
-                  animate={{ rotate: `${(activeServiceIndex + 1) * 12}deg` }}
-                  src={`${
+              <motion.img
+                animate={{ rotate: `${(activeServiceIndex + 1) * 12}deg` }}
+                src={`${
+                  pageFromCMS.intro.pictures &&
+                  pageFromCMS.intro?.pictures[6]?.url
+                }`}
+                alt={
+                  pageFromCMS.intro.pictures &&
+                  pageFromCMS.intro?.pictures[6]?.alternativeText
+                }
+                className={index.orbit}
+                style={{
+                  marginTop: `-${
                     pageFromCMS.intro.pictures &&
-                    pageFromCMS.intro?.pictures[6]?.url
-                  }`}
-                  alt={
+                    pageFromCMS?.intro?.pictures[6]?.height / 2
+                  }px`,
+                  left: `-${
                     pageFromCMS.intro.pictures &&
-                    pageFromCMS.intro?.pictures[6]?.alternativeText
-                  }
-                  className={index.orbit}
-                  style={{
-                    marginTop: `-${
-                      pageFromCMS.intro.pictures &&
-                      pageFromCMS?.intro?.pictures[6]?.height / 2
-                    }px`,
-                    left: `-${
-                      pageFromCMS.intro.pictures &&
-                      pageFromCMS?.intro?.pictures[6]?.width / 2
-                    }px`,
-                  }}
-                  data-swiper-parallax-opacity="0"
-                  transition={{ type: "spring", damping: 300 }}
-                />
-              ) : null}
+                    pageFromCMS?.intro?.pictures[6]?.width / 2
+                  }px`,
+                }}
+                data-swiper-parallax-opacity="0"
+                transition={{ type: "spring", damping: 300 }}
+              />
               <div
                 className={`${index.introServices} + ${index.verticalMargin}`}
               >
@@ -277,35 +276,30 @@ const Page: NextPage<HomeProps> = (props) => {
                           onClick={handlePopoverOpen(ind)}
                           onMouseOver={() => handleServiceHover(ind)}
                           onMouseLeave={() => handleServiceLeave()}
+                          style={{
+                            marginLeft: `${
+                              ind <= Math.floor(services.length / 2) - 1
+                                ? ind * 15
+                                : (services.length - ind - 1) * 15
+                            }px`,
+                            borderRadius: 8,
+                          }}
                         >
-                          <ButtonBase
+                          <div
+                            data-swiper-parallax={`${(ind + 1) * 70}`}
+                            data-swiper-parallax-opacity="0"
+                            aria-describedby={
+                              Boolean(anchorEl)
+                                ? `service-home-${ind}`
+                                : undefined
+                            }
+                            className={`${index.tooltip} indieFlower`}
                             style={{
-                              marginLeft: `${
-                                ind <= Math.floor(services.length / 2) - 1
-                                  ? ind * 15
-                                  : (services.length - ind - 1) * 15
-                              }px`,
-                              marginTop: "10px",
-                              marginBottom: "10px",
-                              borderRadius: 8,
+                              pointerEvents: "none",
                             }}
                           >
-                            <div
-                              data-swiper-parallax={`${(ind + 1) * 70}`}
-                              data-swiper-parallax-opacity="0"
-                              aria-describedby={
-                                Boolean(anchorEl)
-                                  ? `service-home-${ind}`
-                                  : undefined
-                              }
-                              className={`${index.tooltip} indieFlower`}
-                              style={{
-                                pointerEvents: "none",
-                              }}
-                            >
-                              {service.name}
-                            </div>
-                          </ButtonBase>
+                            {service.name}
+                          </div>
                         </span>
                         <Popover
                           id={
