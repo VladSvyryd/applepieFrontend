@@ -240,6 +240,7 @@ const MySwiper: React.FC<CarouselProps> = ({
         watchSlidesVisibility
         lazy={true}
         preventInteractionOnTransition={true}
+        freeModeMomentum={false}
       >
         {children &&
           children.map((one: any, index: number) => (
