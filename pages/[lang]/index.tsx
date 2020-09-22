@@ -452,17 +452,19 @@ const Page: NextPage<HomeProps> = (props) => {
             <div className={index.cardsGrid}>
               {pageFromCMS.forth_section.cards.length > 0 &&
                 pageFromCMS.forth_section?.cards?.map((card, ind) => (
-                  <Fragment key={"test" + ind}>
+                  <Fragment key={"test" + ind * 10}>
                     <ButtonBase
                       className={index.toolbar}
                       disabled={!props.isMobile ? true : false}
                     >
                       <div
                         key={"card_" + card.title}
-                        data-swiper-parallax={`${(ind + 1) * 70}`}
+                        data-swiper-parallax={`${(ind * 10 + 1) * 70}`}
                         data-swiper-parallax-opacity="0"
                         aria-describedby={
-                          Boolean(anchorEl) ? `pie-method${ind}` : undefined
+                          Boolean(anchorEl)
+                            ? `pie-method${ind * 10}`
+                            : undefined
                         }
                         className={index.card}
                         style={
@@ -472,7 +474,7 @@ const Page: NextPage<HomeProps> = (props) => {
                               }
                             : {}
                         }
-                        onClick={handlePopoverOpen(ind)}
+                        onClick={handlePopoverOpen(ind * 10)}
                       >
                         <div className={index.cardImage}>
                           <img
@@ -487,11 +489,13 @@ const Page: NextPage<HomeProps> = (props) => {
                       </div>
                     </ButtonBase>
                     <Popover
-                      key={"card-popover" + card.title + ind}
+                      key={"card-popover" + card.title + ind * 10}
                       id={
-                        openPopoverID === ind ? `pie-method${ind}` : undefined
+                        openPopoverID === ind * 10
+                          ? `pie-method${ind * 10}`
+                          : undefined
                       }
-                      open={openPopoverID === ind}
+                      open={openPopoverID === ind * 10}
                       anchorEl={anchorEl}
                       onClose={handlePopoverClose}
                       anchorOrigin={{

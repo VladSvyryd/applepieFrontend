@@ -235,12 +235,11 @@ const MySwiper: React.FC<CarouselProps> = ({
         }
         slidesPerView={1}
         onSwiper={(swiper: SwiperCore) => setSwiper(swiper)}
-        mousewheel={{ releaseOnEdges: true, sensitivity: 2 }}
+        mousewheel={{ releaseOnEdges: true, sensitivity: 0.1 }}
         preloadImages={false}
         watchSlidesVisibility
         lazy={true}
         preventInteractionOnTransition={true}
-        freeModeMomentum={false}
       >
         {children &&
           children.map((one: any, index: number) => (
