@@ -665,6 +665,7 @@ const FormSlider = forwardRef<any>((props, ref) => {
                       marginBottom: 20,
                       display: "flex",
                       flexDirection: "column",
+                      maxWidth: 510,
                     }}
                   >
                     <h4>{contactForm && contactForm.date_title}</h4>
