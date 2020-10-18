@@ -1,0 +1,47 @@
+
+      <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+          
+                      <url>
+                          <loc>https://applepie.berlin/de/about</loc>
+                      </url>
+                      <url>
+                         <loc>https://applepie.berlin/en/about</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>https://applepie.berlin/de/agb</loc>
+                      </url>
+                      <url>
+                         <loc>https://applepie.berlin/en/agb</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>https://applepie.berlin/de/datenschutz</loc>
+                      </url>
+                      <url>
+                         <loc>https://applepie.berlin/en/datenschutz</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>https://applepie.berlin/de/impressum</loc>
+                      </url>
+                      <url>
+                         <loc>https://applepie.berlin/en/impressum</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>https://applepie.berlin/de/index</loc>
+                      </url>
+                      <url>
+                         <loc>https://applepie.berlin/en/index</loc>
+                      </url>
+                  
+                      <url>
+                          <loc>https://applepie.berlin/de/services</loc>
+                      </url>
+                      <url>
+                         <loc>https://applepie.berlin/en/services</loc>
+                      </url>
+                  
+      </urlset>
+  
