@@ -13,8 +13,13 @@ const configs = {
     PIPEDRIVE_API_ACCESS_KEY: process.env.PIPEDRIVE_API_ACCESS_KEY,
     BACKEND_STRAPI_CMS: process.env.BACKEND_STRAPI_CMS,
     GOOGLE_MAPS_API_KEY: process.env.GOOGLE_MAPS_API_KEY
-
-
   },
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      require('./util/generateSiteMap')
+    }
+
+    return config
+  }
 }
 module.exports = withFonts(configs)

@@ -15,7 +15,7 @@ import {
 import { NavType, Footer, Button } from "../../types/types";
 import ReactMarkdown from "react-markdown";
 
-const impressum: NextPage<any> = (props) => {
+const Impressum: NextPage<any> = (props) => {
   return (
     <Layout
       navigation={props.navigation}
@@ -30,7 +30,7 @@ const impressum: NextPage<any> = (props) => {
   );
 };
 
-impressum.getInitialProps = async (context: NextPageContext) => {
+Impressum.getInitialProps = async (context: NextPageContext) => {
   let userAgent;
   if (context.req) {
     // if you are on the server and you get a 'req' property from your context
@@ -66,4 +66,4 @@ impressum.getInitialProps = async (context: NextPageContext) => {
     isMobile,
   };
 };
-export default withTranslate(impressum);
+export default withTranslate(Impressum);

@@ -14,13 +14,14 @@ class MyDocument extends Document<{
   static async getInitialProps(ctx: DocumentContext) {
     const initialProps = await Document.getInitialProps(ctx);
     const { query } = ctx;
+    console.log(query);
     return { ...initialProps, language: query.lang };
   }
   render() {
     const { language } = this.props;
     console.log("language", language);
     return (
-      <Html lang={language}>
+      <Html lang={language || "de"}>
         <Head />
         <Main />
         <NextScript />
