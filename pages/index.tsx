@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 
 const Index: React.FC = () => {
   const router = useRouter();
-
   const setCurrentLanguage = useStoreActions(
     (actions) => actions.language.setCurrentLanguage
   );
