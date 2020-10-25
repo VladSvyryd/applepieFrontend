@@ -16,7 +16,7 @@ const Index: React.FC = () => {
     setCurrentLanguage(myLang);
     console.log("page_language", Language[myLang]);
     // window.location.replace(`/${Language[myLang]}`);
-    router.push(`/${Language[myLang]}`);
+    router.push(`/de`);
   }, []);
   return (
     <Head>
