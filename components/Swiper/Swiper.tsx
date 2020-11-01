@@ -126,7 +126,7 @@ const MySwiper: React.FC<CarouselProps> = ({
   setSwiper,
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState(-1);
-  const invertedSlides = [3, 6, 8];
+  const invertedSlides = [3, 4, 8];
   const width = useStoreState((state) => state.device.width);
   const [respScreens, setRespScreens] = useState<any>(null);
 
@@ -234,7 +234,7 @@ const MySwiper: React.FC<CarouselProps> = ({
         onSlideChange={(swiper: SwiperCore) => updateCarouselState(swiper)}
         slidesPerView={1}
         onSwiper={(swiper: SwiperCore) => setSwiper(swiper)}
-        mousewheel={{ releaseOnEdges: false, sensitivity: 1 }}
+        mousewheel={{ releaseOnEdges: false, sensitivity: 0.2 }}
         preloadImages={false}
         watchSlidesVisibility
         lazy={true}

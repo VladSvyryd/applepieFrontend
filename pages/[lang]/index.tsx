@@ -96,7 +96,7 @@ const Page: NextPage<HomeProps> = (props) => {
     setAnchorEl(null);
     setOpenPopoverID(null);
   };
-
+  console.log({pageFromCMS})
   // IF for landscape mode
   //  return !props.isMobile ||
   //     (props.isMobile && orientation === ORIENTATION.portrait) ? (
@@ -183,6 +183,12 @@ const Page: NextPage<HomeProps> = (props) => {
                     title={pageFromCMS.buttons[0].text}
                     button_type={pageFromCMS.buttons[0].button_type}
                     className={`medium button ${index.descriptionDesktop}`}
+                    swiper={swiper}
+                    swiperSlideTo={pageFromCMS.buttons[0].slideTo}
+                    linkType={pageFromCMS.buttons[0].link_type}
+                    functionOrUrl={pageFromCMS.buttons[0].function}
+                    linkLanguage={Language[currentLanguage]}
+
                   />
                 </div>
                 <img
@@ -214,6 +220,11 @@ const Page: NextPage<HomeProps> = (props) => {
                   title={pageFromCMS.buttons[0].text}
                   button_type={pageFromCMS.buttons[0].button_type}
                   className={`medium button ${index.buttonMobile}`}
+                  swiperSlideTo={pageFromCMS.buttons[0].slideTo}
+                  linkType={pageFromCMS.buttons[0].link_type}
+                  functionOrUrl={pageFromCMS.buttons[0].function}
+                  linkLanguage={Language[currentLanguage]}
+                  swiper={swiper}
                 />
               </div>
             </div>
@@ -422,6 +433,72 @@ const Page: NextPage<HomeProps> = (props) => {
             </div>
           </div>
         </motion.section>
+        <motion.section
+          className={
+            index.thirdSection + " frameBottomTop " + index.sixthSection
+          }
+          animate={checkIfIsInverted() ? "on" : "off"}
+          variants={backgroundAnim}
+        >
+          <div
+            className={`content-frame  ${index.backgroundLayer}`}
+            style={{
+              backgroundImage: `url(${
+                pageFromCMS.sixth_section?.images[2]?.url || ""
+              }),url(${pageFromCMS.sixth_section?.images[3]?.url || ""})`,
+              backgroundRepeat: "no-repeat",
+              width: "100%",
+              display: "flex",
+              backgroundPosition: "top 30% left 0%, bottom 30% right 0%",
+            }}
+          >
+            <div className={index.clients + " " + index.verticalMargin}>
+              <h2
+                data-swiper-parallax="500"
+                data-swiper-parallax-opacity="0"
+                className={index.header}
+              >
+                {pageFromCMS.sixth_section?.title}
+              </h2>
+              <ReviewCarousel
+                reviews={pageFromCMS.reviews}
+                img={pageFromCMS.sixth_section?.images[1]}
+                buttonImg={pageFromCMS.sixth_section?.images[0]}
+              />
+            </div>
+          </div>
+        </motion.section>
+
+
+        <section
+          className={
+            index.firstSection +
+            " " +
+            index.grid +
+            " frameBottomTop " +
+            index.fifthSection
+          }
+        >
+          <div className={index.left}>
+            <img
+              src={`${pageFromCMS.fifth_section?.images[0]?.url}`}
+              alt={pageFromCMS.fifth_section?.images[0]?.alternativeText}
+              className="responsiveImg"
+            />
+          </div>
+          <div className={index.right + " " + index.verticalMargin}>
+            <h2
+              data-swiper-parallax="500"
+              data-swiper-parallax-opacity="0"
+              className="title"
+            >
+              {pageFromCMS.fifth_section?.title}
+            </h2>
+            <div className={index.ul}>
+              <ReactMarkdown source={pageFromCMS.fifth_section?.content_text} />
+            </div>
+          </div>
+        </section>
         <section
           className={
             index.thirdSection + " frameBottomTop " + index.forthSection
@@ -540,70 +617,6 @@ const Page: NextPage<HomeProps> = (props) => {
             " " +
             index.grid +
             " frameBottomTop " +
-            index.fifthSection
-          }
-        >
-          <div className={index.left}>
-            <img
-              src={`${pageFromCMS.fifth_section?.images[0]?.url}`}
-              alt={pageFromCMS.fifth_section?.images[0]?.alternativeText}
-              className="responsiveImg"
-            />
-          </div>
-          <div className={index.right + " " + index.verticalMargin}>
-            <h2
-              data-swiper-parallax="500"
-              data-swiper-parallax-opacity="0"
-              className="title"
-            >
-              {pageFromCMS.fifth_section?.title}
-            </h2>
-            <div className={index.ul}>
-              <ReactMarkdown source={pageFromCMS.fifth_section?.content_text} />
-            </div>
-          </div>
-        </section>
-        <motion.section
-          className={
-            index.thirdSection + " frameBottomTop " + index.sixthSection
-          }
-          animate={checkIfIsInverted() ? "on" : "off"}
-          variants={backgroundAnim}
-        >
-          <div
-            className={`content-frame  ${index.backgroundLayer}`}
-            style={{
-              backgroundImage: `url(${
-                pageFromCMS.sixth_section?.images[2]?.url || ""
-              }),url(${pageFromCMS.sixth_section?.images[3]?.url || ""})`,
-              backgroundRepeat: "no-repeat",
-              width: "100%",
-              display: "flex",
-              backgroundPosition: "top 30% left 0%, bottom 30% right 0%",
-            }}
-          >
-            <div className={index.clients + " " + index.verticalMargin}>
-              <h2
-                data-swiper-parallax="500"
-                data-swiper-parallax-opacity="0"
-                className={index.header}
-              >
-                {pageFromCMS.sixth_section?.title}
-              </h2>
-              <ReviewCarousel
-                reviews={pageFromCMS.reviews}
-                img={pageFromCMS.sixth_section?.images[1]}
-                buttonImg={pageFromCMS.sixth_section?.images[0]}
-              />
-            </div>
-          </div>
-        </motion.section>
-        <section
-          className={
-            index.firstSection +
-            " " +
-            index.grid +
-            " frameBottomTop " +
             index.seventhSection
           }
         >
@@ -673,7 +686,7 @@ const Page: NextPage<HomeProps> = (props) => {
                 <br />
                 {pageFromCMS.contact?.city}
                 <br />
-                {pageFromCMS.contact?.t_number}
+                <a style={{color:"white"}} href={`tel:${pageFromCMS.contact?.t_number}`}>{pageFromCMS.contact?.t_number}</a>
               </address>
               <div>
                 <h3>{pageFromCMS.contact?.content}</h3>

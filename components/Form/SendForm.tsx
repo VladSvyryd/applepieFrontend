@@ -206,7 +206,9 @@ const SendForm: React.FC<SendFormProps> = ({ button }) => {
             <Field
               type="text"
               name="name"
-              placeholder="Name"
+              placeholder={`${
+                currentLanguage === 0 ? "What's your name?" : "Wie heißt du?"
+              }`}
               validate={isRequiredName}
               className={formStyles.input}
             />
@@ -230,7 +232,7 @@ const SendForm: React.FC<SendFormProps> = ({ button }) => {
               as="textarea"
               className={`${formStyles.input} ${formStyles.textfield}`}
               placeholder={`${
-                currentLanguage === 0 ? "About project" : "Projektbeschreibung"
+                currentLanguage === 0 ? "What's it about?" : "Worum geht's?"
               }`}
             />
             <ErrorMessage name="message" component={Error} />

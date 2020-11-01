@@ -46,13 +46,13 @@ export const List: FC<NavigationProps> = ({ links, inverted, toggleMenu }) => {
           ) : (
             <Link
               key={l.function + "legal2"}
-              href={`/${Language[currentLanguage]}/${l.function}`}
+              href={`${l.function}`}
               passHref
             >
               <a
                 className={`${nav.navLink}`}
                 style={inverted ? { color: "#403d55" } : {}}
-                href={`/${Language[currentLanguage]}/${l.function}`}
+                href={`${l.function}`}
                 target="_blank"
                 onClick={toggleMenu}
               >

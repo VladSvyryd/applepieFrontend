@@ -15,7 +15,7 @@ export interface CustomSwiperModel {
 const swiper: CustomSwiperModel = {
   activeIndex: 0,
   reviewIndex: 0,
-  invertedSlides: [3, 6, 8],
+  invertedSlides: [3, 4, 8],
   activeIndexHistory: [0],
   swipeTo: null,
   setActiveIndex: action((state, payload) => {

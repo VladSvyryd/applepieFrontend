@@ -165,76 +165,42 @@ const Layout: React.FC<LayoutProps> = ({
                     {footer?.known_by[0].name}
                   </span>
                   <span className={`${layout.horizontalSpan}`}>
-                    <img
+                    {
+                    footer?.known_by.map((img)=>img.url &&<img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? footer?.known_by[1]?.image_alternative?.url
-                          : footer?.known_by[1]?.image?.url
+                          ? img.image_alternative?.url
+                          : img.image?.url
                       }`}
                       alt=""
-                    />
+                    />)
+                    }
+
                   </span>
                 </div>
               </div>
               <div className="smallitem flexColumns flexEnd alignCenter">
                 <div>
+                {footer?.social_links.map((link,index)=>
+                <Link
+                  key={index + "nav2"}
+                  href={`${link.url}`}
+                  passHref
+                >
                   <a
-                    href="https://www.instagram.com/?hl=de"
+                    target="_blank"
+                    href={`${link.url}`}
                     className={layout.linkWithBorder}
-                    tabIndex={-1}
                   >
-                    <img
+                      <img
                       src={`${
-                        invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? footer?.social_links[0]?.image_alternative?.url
-                          : footer?.social_links[0]?.image?.url
+                        invertedSlides.some((e) => e === activeCarouselIndex) ? link?.image_alternative?.url : link?.image?.url
                       }`}
-                      alt="instagram"
-                      style={{ color: "white" }}
+                      alt={link?.name}
                     />
                   </a>
-                  <a
-                    href="https://www.facebook.com/"
-                    className={layout.linkWithBorder}
-                    tabIndex={-1}
-                  >
-                    <img
-                      src={`${
-                        invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? footer?.social_links[1]?.image_alternative?.url
-                          : footer?.social_links[1]?.image?.url
-                      }`}
-                      alt="facebook"
-                    />
-                  </a>
-                  <a
-                    href="https://www.instagram.com/?hl=de"
-                    className={layout.linkWithBorder}
-                    tabIndex={-1}
-                  >
-                    <img
-                      src={`${
-                        invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? footer?.social_links[2]?.image_alternative?.url
-                          : footer?.social_links[2]?.image?.url
-                      }`}
-                      alt="linkedIn"
-                    />
-                  </a>
-                  <a
-                    href="https://slack.com/intl/en-de/?eu_nc=1"
-                    className={layout.linkWithBorder}
-                    tabIndex={-1}
-                  >
-                    <img
-                      src={`${
-                        invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? footer?.social_links[3]?.image_alternative?.url
-                          : footer?.social_links[3]?.image?.url
-                      }`}
-                      alt="slack"
-                    />
-                  </a>
+                </Link>)}
+                
                 </div>
               </div>
             </section>
@@ -256,95 +222,39 @@ const Layout: React.FC<LayoutProps> = ({
                   >
                     {footer?.known_by[0].name}
                   </span>
-                  <a
-                    href=""
-                    className={`${layout.horizontalSpan}`}
-                    tabIndex={-1}
-                  >
-                    <img
+                  {
+                    footer?.known_by.map((img)=>img.url &&<img
                       src={`${
                         invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? footer?.known_by[1]?.image_alternative?.url
-                          : footer?.known_by[1]?.image?.url
+                          ? img.image_alternative?.url
+                          : img.image?.url
                       }`}
                       alt=""
-                    />
-                  </a>
-                  <a
-                    href=""
-                    className={`${layout.horizontalSpan}`}
-                    tabIndex={-1}
-                  >
-                    <img
-                      src={`${
-                        invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? footer?.known_by[2]?.image_alternative?.url
-                          : footer?.known_by[2]?.image?.url
-                      }`}
-                      alt=""
-                    />
-                  </a>
+                    />)
+                    }
                 </div>
               </div>
               <div className="smallitem flexColumns flexEnd alignCenter">
                 <div>
+                {footer?.social_links.map((link,index)=>
+                <Link
+                  key={index + "nav2"}
+                  href={`${link.url}`}
+                  passHref
+                >
                   <a
-                    href="https://www.instagram.com/?hl=de"
+                    target="_blank"
+                    href={`${link.url}`}
                     className={layout.linkWithBorder}
-                    tabIndex={-1}
                   >
-                    <img
+                      <img
                       src={`${
-                        invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? footer?.social_links[0]?.image_alternative?.url
-                          : footer?.social_links[0]?.image?.url
+                        invertedSlides.some((e) => e === activeCarouselIndex) ? link?.image_alternative?.url : link?.image?.url
                       }`}
-                      alt="instagram"
-                      style={{ color: "white" }}
+                      alt={link?.name}
                     />
                   </a>
-                  <a
-                    href="https://www.facebook.com/"
-                    className={layout.linkWithBorder}
-                    tabIndex={-1}
-                  >
-                    <img
-                      src={`${
-                        invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? footer?.social_links[1]?.image_alternative?.url
-                          : footer?.social_links[1]?.image?.url
-                      }`}
-                      alt="facebook"
-                    />
-                  </a>
-                  <a
-                    href="https://www.instagram.com/?hl=de"
-                    className={layout.linkWithBorder}
-                    tabIndex={-1}
-                  >
-                    <img
-                      src={`${
-                        invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? footer?.social_links[2]?.image_alternative?.url
-                          : footer?.social_links[2]?.image?.url
-                      }`}
-                      alt="linkedIn"
-                    />
-                  </a>
-                  <a
-                    href="https://slack.com/intl/en-de/?eu_nc=1"
-                    className={layout.linkWithBorder}
-                    tabIndex={-1}
-                  >
-                    <img
-                      src={`${
-                        invertedSlides.some((e) => e === activeCarouselIndex)
-                          ? footer?.social_links[3]?.image_alternative?.url
-                          : footer?.social_links[3]?.image?.url
-                      }`}
-                      alt="slack"
-                    />
-                  </a>
+                </Link>)}
                 </div>
               </div>
             </section>

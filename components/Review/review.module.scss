@@ -48,13 +48,16 @@
 }
 
 .content_text {
-  margin: 100px 10px 40px 0px;
+  margin: 100px 10px 0px 0px;
   grid-area: content_text;
   overflow-y: auto;
+  max-height:180px;
 
   @media (max-width: 800px) {
     margin: 10px 0;
     max-width: 90%;
+    max-height: 150px;
+
   }
   @media (max-width: 450px) {
     max-width: 100%;

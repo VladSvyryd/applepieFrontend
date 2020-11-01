@@ -3,7 +3,7 @@ import { NextPage, NextPageContext } from "next";
 import Error from "next/error";
 import { Language } from "../../types/types";
 
-export default (WrappedPage: NextPage<any>) => {
+const  WithTranslate= (WrappedPage: NextPage<any>) => {
   const WithLocale: NextPage<any> = ({ locale, ...pageProps }) => {
     // Pull out actions from our store
     if (!locale) {
@@ -34,3 +34,4 @@ export default (WrappedPage: NextPage<any>) => {
 
   return WithLocale;
 };
+export default WithTranslate;

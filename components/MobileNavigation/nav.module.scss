@@ -69,11 +69,16 @@ a.navLink {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
+  transition: margin-right ease-in-out 0.3s;
   @media (max-width: 768px) {
     top: 11px;
   }
+ 
 }
-
+.close{
+  margin-right: -40px
+}
 .onMobile {
   @media (min-width: 1400px) {
     display: none;

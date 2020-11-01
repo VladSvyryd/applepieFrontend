@@ -165,7 +165,7 @@ export const MobileNavigation: FC<MobileNavigationProps> = ({
         </motion.div>
       </motion.nav>
       <MenuToggle
-        className={nav.button + " " + nav.onMobile}
+        className={`${nav.button} ${menuOpened && nav.close} ${nav.onMobile}`}
         toggle={() => onClick()}
         isOpen={menuOpened}
         inverted={inverted}

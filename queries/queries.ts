@@ -79,6 +79,12 @@ const fragments = {
       subtitle: subtitle_en
       image: image_en {
         id
+        url
+        name
+        alternativeText
+        caption
+        width
+        height
       }
     }
   `,
@@ -99,8 +105,8 @@ const fragments = {
   `,
   imageGrid_en: gql`
     fragment ImageGrid_EN on ComponentSectionsImagesGrid {
-      title_en
-      images_en {
+      title:title_en
+      images:images_en {
         url
         name
         alternativeText
@@ -641,7 +647,7 @@ export const landing_en = gql`
           height
           id
         }
-        content_text
+        content_text: content_text_en
         cards {
           ... on ComponentSectionsCard {
             ...Card_EN

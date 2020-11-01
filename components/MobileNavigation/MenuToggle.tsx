@@ -7,7 +7,7 @@ const Path = (props: any) => (
     strokeWidth="2"
     stroke={
       (!props.isOpen && !props.inverted) || (props.isOpen && props.inverted)
-        ? "#403d55"
+        ? "#2e2c41"
         : "#fff"
     }
     strokeLinecap="round"
