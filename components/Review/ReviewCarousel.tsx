@@ -58,6 +58,7 @@ const ReviewCarousel: React.FC<ReviewCarouselProps> = ({
         className={`${review.verticalCarousel}`}
         onSwiper={(swiper: SwiperCore) => setSwiper(swiper)}
         allowTouchMove={false}
+        mousewheel={false}
         breakpoints={{
           320: {
             slidesPerView: 1,

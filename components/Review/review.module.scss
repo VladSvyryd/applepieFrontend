@@ -51,11 +51,13 @@
   margin: 100px 10px 0px 0px;
   grid-area: content_text;
   overflow-y: auto;
+  height:100%;
   max-height:180px;
 
   @media (max-width: 800px) {
     margin: 10px 0;
     max-width: 90%;
+  height:100%;
     max-height: 150px;
 
   }

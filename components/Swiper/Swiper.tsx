@@ -239,6 +239,7 @@ const MySwiper: React.FC<CarouselProps> = ({
         watchSlidesVisibility
         lazy={true}
         preventInteractionOnTransition={true}
+        noSwipingClass="swiper-no-swiping"
       >
         {children &&
           children.map((one: any, index: number) => (

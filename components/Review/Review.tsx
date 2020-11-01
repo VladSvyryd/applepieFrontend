@@ -58,7 +58,7 @@ const Review: React.FC<ReviewProps> = (props) => {
           />
         </motion.div>
       </motion.div>
-      <motion.div className={review.content_text}>
+      <motion.div className={review.content_text +" swiper-no-swiping"}>
         {props.review.content_text}
       </motion.div>
       <motion.div className={review.name}>{props.review.name}</motion.div>
